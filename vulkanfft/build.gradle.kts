@@ -47,6 +47,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        viewBinding = true
+    }
     dependencies {
         // Testes unitários (JUnit 4)
         testImplementation(libs.junit)
@@ -67,4 +70,11 @@ android {
         // Task Library (opcional, não essencial no seu caso, mas mantido)
         implementation(libs.tensorflow.lite.task.core)
     }
+}
+dependencies {
+    implementation(libs.material)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 }

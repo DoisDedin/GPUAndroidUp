@@ -11,6 +11,9 @@ appcompat = "1.7.0"
 material = "1.12.0"
 tensorflowLiteSelectTfOps = "2.14.0"
 tensorflowLiteTaskCore = "0.4.4"
+constraintlayout = "2.2.1"
+navigationFragmentKtx = "2.8.9"
+navigationUiKtx = "2.8.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +29,9 @@ tensorflow-lite-gpu = { module = "org.tensorflow:tensorflow-lite-gpu", version.r
 tensorflow-lite-select-tf-ops = { module = "org.tensorflow:tensorflow-lite-select-tf-ops", version.ref = "tensorflowLiteSelectTfOps" }
 tensorflow-lite-support = { module = "org.tensorflow:tensorflow-lite-support", version.ref = "tensorflowLiteTaskCore" }
 tensorflow-lite-task-core = { module = "org.tensorflow:tensorflow-lite-task-core", version.ref = "tensorflowLiteTaskCore" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
