@@ -13,7 +13,6 @@ import com.seuprojeto.vkfftlib.databinding.ActivityMainModuleBinding
 
 class MainActivityModule : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainModuleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +21,6 @@ class MainActivityModule : AppCompatActivity() {
         binding = ActivityMainModuleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
@@ -33,11 +28,5 @@ class MainActivityModule : AppCompatActivity() {
         }
 
         Log.d("MainActivityModule", "OPEN")
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
     }
 }
