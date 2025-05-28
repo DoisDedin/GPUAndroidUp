@@ -2,6 +2,7 @@ package com.example.vulkanfft.util
 
 import android.content.Context
 import android.util.Log
+import org.tensorflow.lite.Delegate
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.GpuDelegate
 import java.io.FileInputStream
@@ -13,7 +14,7 @@ class FFTProcessorGPU(context: Context) {
 
     private val tag = "DistanceProcessorGPU"
     private var interpreter: Interpreter
-    private var gpuDelegate: GpuDelegate
+    private var gpuDelegate: Delegate
 
     init {
         gpuDelegate = GpuDelegate()

@@ -3,9 +3,8 @@
 
     <application>
         <activity
-            android:name="com.example.vulkanfft.view.MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.VulkanFFT" />
+            android:name="com.example.vulkanfft.view.MainActivityModule"
+            android:exported="true">
+        </activity>
     </application>
-
 </manifest>

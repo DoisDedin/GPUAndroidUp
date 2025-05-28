@@ -5,19 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import com.example.vulkanfft.util.SumProcessorGPU
 import com.example.vulkanfft.viewmodels.FirstViewModel
-import com.seuprojeto.vkfftlib.databinding.FragmentFirstBinding
+import com.seuprojeto.vkfftlib.databinding.FragmentFirstModuleBinding
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragmentModule : Fragment() {
 
     private lateinit var viewModel: FirstViewModel
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: FragmentFirstModuleBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,7 +27,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = FragmentFirstModuleBinding.inflate(inflater, container, false)
         return binding.root
 
     }

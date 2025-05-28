@@ -58,17 +58,8 @@ android {
         androidTestImplementation(libs.androidx.junit.v115)
         androidTestImplementation(libs.androidx.espresso.core.v351)
 
-
-        // TensorFlow Lite Core (obrigatório)
-        implementation(libs.tensorflow.lite)
-        // Delegate GPU (opcional, recomendado se for usar aceleração na GPU)
-        implementation(libs.tensorflow.lite.gpu)
-        // Delegate NNAPI (opcional, usa aceleradores nativos)
-        implementation(libs.tensorflow.lite.select.tf.ops)
-        // Suporte (facilita manipulação de tensores, pré e pós-processamento)
-        implementation(libs.tensorflow.lite.support)
-        // Task Library (opcional, não essencial no seu caso, mas mantido)
-        implementation(libs.tensorflow.lite.task.core)
+        implementation("com.google.ai.edge.litert:litert:1.3.0")
+        implementation("io.github.google-ai-edge:litert-gpu-delegate-plugin:0.1.0")
     }
 }
 dependencies {
@@ -77,4 +68,5 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.litert.gpu)
 }
