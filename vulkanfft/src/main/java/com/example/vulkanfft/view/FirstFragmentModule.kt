@@ -1,6 +1,7 @@
 package com.example.vulkanfft.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,13 @@ class FirstFragmentModule : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = androidx.lifecycle.ViewModelProvider(this)[FirstViewModel::class.java]
+
+        binding.buttonZiro.setOnClickListener {
+            this.context?.let { it1 ->
+                Log.d("MAD" , "IN")
+                viewModel.runCPU(it1)
+            }
+        }
 
         binding.buttonFirst.setOnClickListener {
             this.context?.let { it1 ->
