@@ -11,14 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VulkanFFT"
-        tools:targetApi="31">
+        tools:targetApi="35">
         <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.VulkanFFT">
-        </activity>
-        <activity
-            android:name=".view.MainActivityModule"
             android:exported="true"
             android:theme="@style/Theme.VulkanFFT">
             <intent-filter>
