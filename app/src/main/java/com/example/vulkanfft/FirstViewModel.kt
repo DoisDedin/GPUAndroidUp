@@ -1,4 +1,4 @@
-package com.example.vulkanfft.viewmodels
+package com.example.vulkanfft
 
 import android.content.Context
 import android.util.Log
@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.vulkanfft.util.BenchmarkProcessor
 import com.example.vulkanfft.util.BenchmarkProcessor2
+import com.example.vulkanfft.util.DelegateType
 import com.example.vulkanfft.util.StatModelProcessor
 import com.example.vulkanfft.util.SumProcessorGPU
 import kotlinx.coroutines.launch
@@ -32,7 +32,7 @@ class FirstViewModel : ViewModel() {
         inputData = arrayOf(timestamps, x, y, z)
     }
 
-    fun runBenchmark(context: Context, delegateType: SumProcessorGPU.DelegateType) {
+    fun runBenchmark(context: Context, delegateType: DelegateType) {
         if (inputData.isEmpty()) generateInputData()
         viewModelScope.launch {
             benchmarkProcessor = BenchmarkProcessor2(
@@ -90,7 +90,7 @@ class FirstViewModel : ViewModel() {
     )
 
 
-    private fun getMAD(readings: List<AccelerometerSample>): MADResult{
+    private fun getMAD(readings: List<AccelerometerSample>): MADResult {
 
         val magnitudeByTime = readings.map {
             val magnitude = sqrt((it.x * it.x + it.y * it.y + it.z * it.z).toDouble())

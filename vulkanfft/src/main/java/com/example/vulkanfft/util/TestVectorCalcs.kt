@@ -7,11 +7,10 @@ import org.tensorflow.lite.gpu.GpuDelegate
 import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
-import java.util.Vector
 
 class StatModelProcessor(
     context: Context,
-    val delegateType: SumProcessorGPU.DelegateType,
+    val delegateType: DelegateType,
     private val sizeVector: Int
 ) {
     private val tag = "StatModelProcessor"
@@ -23,7 +22,7 @@ class StatModelProcessor(
         val options = Interpreter.Options()
 
         when (delegateType) {
-            SumProcessorGPU.DelegateType.GPU -> {
+            DelegateType.GPU -> {
                 try {
                     gpuDelegate = GpuDelegate()
                     options.addDelegate(gpuDelegate)
@@ -33,7 +32,7 @@ class StatModelProcessor(
                 }
             }
 
-            SumProcessorGPU.DelegateType.NNAPI -> {
+            DelegateType.NNAPI -> {
                 try {
                     nnapiDelegate = org.tensorflow.lite.nnapi.NnApiDelegate()
                     options.addDelegate(nnapiDelegate)
@@ -43,7 +42,7 @@ class StatModelProcessor(
                 }
             }
 
-            SumProcessorGPU.DelegateType.CPU -> {
+            DelegateType.CPU -> {
                 options.setUseXNNPACK(true)
                 Log.d(tag, "✅ Usando CPU com XNNPACK")
             }

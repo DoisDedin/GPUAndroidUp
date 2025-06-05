@@ -19,10 +19,6 @@ class SumProcessorGPU(
     private var gpuDelegate: GpuDelegate? = null
     private var nnapiDelegate: NnApiDelegate? = null
 
-    enum class DelegateType {
-        GPU, NNAPI, CPU
-    }
-
     init {
         val options = Interpreter.Options()
 

@@ -1,19 +1,21 @@
-package com.example.vulkanfft
+package com.example.vulkanfft.view
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import com.example.vulkanfft.FirstViewModel
 import com.example.vulkanfft.databinding.FragmentFirstBinding
-import com.example.vulkanfft.view.MainActivityModule
+import com.example.vulkanfft.util.DelegateType
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class FirstFragment : Fragment() {
+
+    private lateinit var viewModel: FirstViewModel
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -34,9 +36,44 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonStartActivity.setOnClickListener {
-            val intent = Intent(requireContext(), MainActivityModule::class.java)
-            startActivity(intent)
+        viewModel = androidx.lifecycle.ViewModelProvider(this)[FirstViewModel::class.java]
+
+        binding.buttonZiro.setOnClickListener {
+            this.context?.let { it1 ->
+                Log.d("MAD" , "IN")
+                viewModel.runCPU(it1)
+            }
+        }
+
+        binding.buttonFirst.setOnClickListener {
+            this.context?.let { it1 ->
+                viewModel.runBenchmark(
+                    it1,
+                    delegateType = DelegateType.CPU
+                )
+            }
+        }
+
+        binding.buttonGpu.setOnClickListener {
+            this.context?.let { it1 ->
+                viewModel.runBenchmark(
+                    it1,
+                    delegateType = DelegateType.GPU
+                )
+            }
+        }
+
+        binding.buttonNp.setOnClickListener {
+            this.context?.let { it1 ->
+                viewModel.runBenchmark(
+                    it1,
+                    delegateType = DelegateType.NNAPI
+                )
+            }
+        }
+
+        viewModel.result.observe(viewLifecycleOwner) { result ->
+            println(result)
         }
     }
 

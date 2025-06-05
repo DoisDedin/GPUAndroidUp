@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat
+import java.util.Date
+
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -10,6 +13,7 @@ android {
     defaultConfig {
         minSdk = 31
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         // Aqui definimos os parâmetros do NDK
         externalNativeBuild {
             cmake {
@@ -63,10 +67,31 @@ android {
     }
 }
 dependencies {
-    implementation(libs.material)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.litert.gpu)
+}
+
+
+val libVersion = "1.1.1"
+
+tasks.register("buildAarWithVersion") {
+    group = "build"
+    description = "Gera o .aar com nome contendo a versão."
+
+    dependsOn("assembleRelease") // ✅ Depende da task padrão de build do módulo
+
+    doLast {
+        val buildType = "release"
+        val moduleName = "vulkanfft"
+        val originalAar = file("$buildDir/outputs/aar/$moduleName-$buildType.aar")
+        val renamedAar = file("$buildDir/outputs/aar/$moduleName-v$libVersion.aar")
+
+        if (originalAar.exists()) {
+            originalAar.copyTo(renamedAar, overwrite = true)
+            println("✅ Arquivo .aar gerado com sucesso:")
+            println("📍 Caminho: ${renamedAar.absolutePath}")
+            println("🔗 Link: file://${renamedAar.absolutePath}")
+        } else {
+            println("❌ Arquivo .aar não encontrado. Certifique-se de que a compilação foi realizada com sucesso.")
+        }
+    }
 }

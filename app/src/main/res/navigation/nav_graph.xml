@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.vulkanfft.FirstFragment"
+        android:name="com.example.vulkanfft.view.FirstFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first_module">
+        tools:layout="@layout/fragment_first">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
