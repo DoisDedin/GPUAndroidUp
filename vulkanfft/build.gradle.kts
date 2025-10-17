@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.Date
-
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
@@ -9,6 +6,7 @@ plugins {
 android {
     namespace = "com.seuprojeto.vkfftlib" // ajuste conforme seu package
     compileSdk = 35
+    ndkVersion = "26.1.10909125" // série 26.1 (ago/2023) já compatível com páginas de 16 KB
 
     defaultConfig {
         minSdk = 31
@@ -23,7 +21,6 @@ android {
 
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a")
-
         }
     }
 
@@ -54,24 +51,21 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    dependencies {
-        // Testes unitários (JUnit 4)
-        testImplementation(libs.junit)
-
-        // Testes instrumentados (AndroidJUnitRunner + JUnit 4 + assertEquals, etc)
-        androidTestImplementation(libs.androidx.junit.v115)
-        androidTestImplementation(libs.androidx.espresso.core.v351)
-
-        implementation("com.google.ai.edge.litert:litert:1.3.0")
-        implementation("io.github.google-ai-edge:litert-gpu-delegate-plugin:0.1.0")
-    }
 }
+
 dependencies {
-    implementation(libs.litert.gpu)
+    // Testes unitários (JUnit 4)
+    testImplementation(libs.junit)
+
+    // Testes instrumentados (AndroidJUnitRunner + JUnit 4 + assertEquals, etc)
+    androidTestImplementation(libs.androidx.junit.v115)
+    androidTestImplementation(libs.androidx.espresso.core.v351)
+
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.gpu)
 }
 
-
-val libVersion = "1.1.1"
+val libVersion = "1.1.4"
 
 tasks.register("buildAarWithVersion") {
     group = "build"
