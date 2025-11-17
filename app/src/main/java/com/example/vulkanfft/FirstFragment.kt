@@ -39,10 +39,8 @@ class FirstFragment : Fragment() {
         viewModel = androidx.lifecycle.ViewModelProvider(this)[FirstViewModel::class.java]
 
         binding.buttonZiro.setOnClickListener {
-            this.context?.let { it1 ->
-                Log.d("MAD" , "IN")
-                viewModel.runCPU(it1)
-            }
+            Log.d("MAD" , "IN")
+            viewModel.runCPU()
         }
 
         binding.buttonFirst.setOnClickListener {
@@ -69,6 +67,28 @@ class FirstFragment : Fragment() {
                     it1,
                     delegateType = DelegateType.NNAPI
                 )
+            }
+        }
+
+        binding.buttonFftCpu.setOnClickListener {
+            viewModel.runFftCpu()
+        }
+
+        binding.buttonFftCpuDelegate.setOnClickListener {
+            this.context?.let { context ->
+                viewModel.runFftTflite(context, DelegateType.CPU)
+            }
+        }
+
+        binding.buttonFftGpu.setOnClickListener {
+            this.context?.let { context ->
+                viewModel.runFftTflite(context, DelegateType.GPU)
+            }
+        }
+
+        binding.buttonFftNnapi.setOnClickListener {
+            this.context?.let { context ->
+                viewModel.runFftTflite(context, DelegateType.NNAPI)
             }
         }
 

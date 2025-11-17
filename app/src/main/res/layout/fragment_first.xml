@@ -48,6 +48,43 @@
             app:layout_constraintTop_toBottomOf="@id/button_gpu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_fft_cpu"/>
+
+        <Button
+            android:id="@+id/button_fft_cpu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFT CPU (10×4096)"
+            app:layout_constraintTop_toBottomOf="@id/button_np"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/button_fft_cpu_delegate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFT Lite CPU"
+            app:layout_constraintTop_toBottomOf="@id/button_fft_cpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/button_fft_gpu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFT Lite GPU"
+            app:layout_constraintTop_toBottomOf="@id/button_fft_cpu_delegate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/button_fft_nnapi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FFT Lite NNAPI"
+            app:layout_constraintTop_toBottomOf="@id/button_fft_gpu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

@@ -48,7 +48,27 @@ class StatModelProcessor(
             }
         }
         val modelBuffer = loadModelFile(context, "mad_model.tflite")
-        interpreter = Interpreter(modelBuffer, options)
+        interpreter = try {
+            Interpreter(modelBuffer, options)
+        } catch (e: IllegalArgumentException) {
+            when (delegateType) {
+                DelegateType.GPU -> {
+                    Log.w(tag, "GPU delegate falhou (${e.message}). Revertendo para CPU/XNNPACK.")
+                    gpuDelegate?.close()
+                    gpuDelegate = null
+                    Interpreter(modelBuffer, Interpreter.Options().apply { setUseXNNPACK(true) })
+                }
+
+                DelegateType.NNAPI -> {
+                    Log.w(tag, "NNAPI delegate falhou (${e.message}). Revertendo para CPU/XNNPACK.")
+                    nnapiDelegate?.close()
+                    nnapiDelegate = null
+                    Interpreter(modelBuffer, Interpreter.Options().apply { setUseXNNPACK(true) })
+                }
+
+                else -> throw e
+            }
+        }
 
         // ⬇️ Configure o shape aqu
         interpreter.resizeInput(0, intArrayOf(4, sizeVector))

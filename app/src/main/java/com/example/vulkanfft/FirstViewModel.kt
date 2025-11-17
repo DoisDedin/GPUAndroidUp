@@ -6,10 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vulkanfft.util.AccelerometerBatchGenerator
 import com.example.vulkanfft.util.BenchmarkProcessor2
 import com.example.vulkanfft.util.DelegateType
+import com.example.vulkanfft.util.FftCpuProcessor
+import com.example.vulkanfft.util.FftInputBuilder
+import com.example.vulkanfft.util.FftResult
+import com.example.vulkanfft.util.FftTfliteProcessor
 import com.example.vulkanfft.util.StatModelProcessor
-import com.example.vulkanfft.util.SumProcessorGPU
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.math.sqrt
@@ -21,33 +25,30 @@ class FirstViewModel : ViewModel() {
 
     private var benchmarkProcessor: BenchmarkProcessor2? = null
 
-    private var inputData: Array<IntArray> = arrayOf()
-
-    private fun generateInputData() {
-        val N = 4096
-        val timestamps = IntArray(N) { it * 20 }
-        val x = IntArray(N) { (0..9).random() }
-        val y = IntArray(N) { (0..9).random() }
-        val z = IntArray(N) { (0..9).random() }
-        inputData = arrayOf(timestamps, x, y, z)
-    }
+    private var accelerometerBatch: AccelerometerBatchGenerator.AccelerometerBatch? = null
+    private var madInput: Array<IntArray>? = null
+    private var fftInput: FftInputBuilder.FftProcessorInput? = null
+    private val fftCpuProcessor = FftCpuProcessor(
+        numSensors = FFT_NUM_SENSORS,
+        signalLength = FFT_SIGNAL_LENGTH
+    )
 
     fun runBenchmark(context: Context, delegateType: DelegateType) {
-        if (inputData.isEmpty()) generateInputData()
+        val input = ensureMadInput()
         viewModelScope.launch {
             benchmarkProcessor = BenchmarkProcessor2(
                 processorFactory = {
                     StatModelProcessor(
                         context = context,
                         delegateType = delegateType,
-                        sizeVector = 4096
+                        sizeVector = MAD_VECTOR_LENGTH
                     )
                 }
             )
             val processor = benchmarkProcessor ?: return@launch
 
             // Chamada do modelo
-            val result = processor.runBenchmark(inputData)
+            val result = processor.runBenchmark(input)
             result.let {
                 _result.postValue(
                     "Benchmark (${it.mean}ms média | ${it.stdDev}ms desv.)\nMin: ${it.min}ms | Max: ${it.max}ms"
@@ -58,16 +59,19 @@ class FirstViewModel : ViewModel() {
         }
     }
 
-    fun runCPU(context: Context) {
-        if (inputData.isEmpty()) generateInputData()
+    fun runCPU() {
+        val input = ensureMadInput()
         viewModelScope.launch {
-
-            val readings = inputData.indices.map { i ->
+            val timestamps = input[0]
+            val x = input[1]
+            val y = input[2]
+            val z = input[3]
+            val readings = timestamps.indices.map { i ->
                 AccelerometerSample(
-                    timestamp = inputData[0][i].toLong(),
-                    x = inputData[1][i],
-                    y = inputData[2][i],
-                    z = inputData[3][i]
+                    timestamp = timestamps[i].toLong(),
+                    x = x[i],
+                    y = y[i],
+                    z = z[i]
                 )
             }
 
@@ -132,5 +136,94 @@ class FirstViewModel : ViewModel() {
 
     fun closeProcessor() {
         benchmarkProcessor = null
+    }
+
+    fun runFftCpu() {
+        viewModelScope.launch {
+            val input = ensureFftInput()
+
+            val start = System.nanoTime()
+            val result = fftCpuProcessor.process(input.samples, input.weights)
+            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+
+            _result.postValue(formatFftSummary("FFT CPU", durationMs, result))
+        }
+    }
+
+    fun runFftTflite(context: Context, delegateType: DelegateType) {
+        viewModelScope.launch {
+            val input = ensureFftInput()
+
+            val processor = FftTfliteProcessor(
+                context = context,
+                delegateType = delegateType,
+                numSensors = FFT_NUM_SENSORS,
+                signalLength = FFT_SIGNAL_LENGTH
+            )
+
+            val start = System.nanoTime()
+            val result = processor.process(input.samples, input.weights)
+            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+            processor.close()
+
+            _result.postValue(
+                formatFftSummary("FFT TFLite (${delegateType.name})", durationMs, result)
+            )
+        }
+    }
+
+    private fun formatFftSummary(
+        label: String,
+        durationMs: Double,
+        result: FftResult
+    ): String {
+        val totals = result.weightedMagnitudes.mapIndexed { index, weights ->
+            "S$index=${"%.2f".format(weights.sum())}"
+        }.take(4) // mantemos a string curta
+        val snippet = totals.joinToString(" | ")
+        val firstSensorBins = result.weightedMagnitudes.firstOrNull()
+            ?.take(3)
+            ?.joinToString(", ") { "%.2f".format(it) }
+            ?: "-"
+
+        return buildString {
+            appendLine("$label -> ${"%.3f".format(durationMs)} ms")
+            appendLine("Σ pesos (4 primeiros): $snippet")
+            append("S0 bins[0..2]: $firstSensorBins")
+        }
+    }
+
+    companion object {
+        private const val FFT_NUM_SENSORS = 10
+        private const val FFT_SIGNAL_LENGTH = 4096
+        private const val MAD_VECTOR_LENGTH = 4096
+    }
+
+    private fun ensureAccelerometerBatch(): AccelerometerBatchGenerator.AccelerometerBatch {
+        if (accelerometerBatch == null) {
+            accelerometerBatch = AccelerometerBatchGenerator.generate(
+                numSensors = FFT_NUM_SENSORS,
+                samplesPerSensor = MAD_VECTOR_LENGTH
+            )
+            madInput = null
+            fftInput = null
+        }
+        return accelerometerBatch!!
+    }
+
+    private fun ensureMadInput(): Array<IntArray> {
+        if (madInput == null) {
+            val batch = ensureAccelerometerBatch()
+            madInput = batch.sensors.first().asMadInput()
+        }
+        return madInput!!
+    }
+
+    private fun ensureFftInput(): FftInputBuilder.FftProcessorInput {
+        if (fftInput == null) {
+            val batch = ensureAccelerometerBatch()
+            fftInput = FftInputBuilder.fromAccelerometer(batch, FFT_SIGNAL_LENGTH)
+        }
+        return fftInput!!
     }
 }
