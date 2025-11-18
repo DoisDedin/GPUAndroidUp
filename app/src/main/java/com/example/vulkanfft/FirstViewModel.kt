@@ -6,6 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.vulkanfft.logging.BenchmarkEntry
+import com.example.vulkanfft.logging.BenchmarkReporter
+import com.example.vulkanfft.logging.DeviceInfoProvider
+import com.example.vulkanfft.logging.ResultLogger
 import com.example.vulkanfft.util.AccelerometerBatchGenerator
 import com.example.vulkanfft.util.BenchmarkProcessor2
 import com.example.vulkanfft.util.DelegateType
@@ -14,6 +18,7 @@ import com.example.vulkanfft.util.FftInputBuilder
 import com.example.vulkanfft.util.FftResult
 import com.example.vulkanfft.util.FftTfliteProcessor
 import com.example.vulkanfft.util.StatModelProcessor
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 import kotlin.math.sqrt
@@ -23,7 +28,8 @@ class FirstViewModel : ViewModel() {
     private val _result = MutableLiveData<String>()
     val result: LiveData<String> = _result
 
-    private var benchmarkProcessor: BenchmarkProcessor2? = null
+    private val _progress = MutableLiveData<BenchmarkProgress>()
+    val progress: LiveData<BenchmarkProgress> = _progress
 
     private var accelerometerBatch: AccelerometerBatchGenerator.AccelerometerBatch? = null
     private var madInput: Array<IntArray>? = null
@@ -33,56 +39,35 @@ class FirstViewModel : ViewModel() {
         signalLength = FFT_SIGNAL_LENGTH
     )
 
-    fun runBenchmark(context: Context, delegateType: DelegateType) {
-        val input = ensureMadInput()
-        viewModelScope.launch {
-            benchmarkProcessor = BenchmarkProcessor2(
-                processorFactory = {
-                    StatModelProcessor(
-                        context = context,
-                        delegateType = delegateType,
-                        sizeVector = MAD_VECTOR_LENGTH
-                    )
-                }
-            )
-            val processor = benchmarkProcessor ?: return@launch
-
-            // Chamada do modelo
-            val result = processor.runBenchmark(input)
-            result.let {
-                _result.postValue(
-                    "Benchmark (${it.mean}ms média | ${it.stdDev}ms desv.)\nMin: ${it.min}ms | Max: ${it.max}ms"
-                )
-            } ?: run {
-                _result.postValue("Benchmark não inicializado.")
-            }
+    fun runMadBenchmark(
+        context: Context,
+        delegateType: DelegateType,
+        repetitions: Int = DEFAULT_BENCH_REPETITIONS
+    ) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeMadBenchmark(context, delegateType, repetitions)
+            _result.postValue(summary)
         }
     }
 
-    fun runCPU() {
-        val input = ensureMadInput()
-        viewModelScope.launch {
-            val timestamps = input[0]
-            val x = input[1]
-            val y = input[2]
-            val z = input[3]
-            val readings = timestamps.indices.map { i ->
-                AccelerometerSample(
-                    timestamp = timestamps[i].toLong(),
-                    x = x[i],
-                    y = y[i],
-                    z = z[i]
-                )
-            }
+    fun runMadCpuSingle(context: Context) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeMadCpuSingle(context)
+            _result.postValue(summary)
+        }
+    }
 
-            val result = getMAD(readings)
+    fun runMadCpuBatch(context: Context, iterations: Int = 10) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeMadCpuBatch(context, iterations)
+            _result.postValue(summary)
+        }
+    }
 
-            Log.d("MAD" , "SEND")
-            result.let {
-                _result.postValue(
-                    "Benchmark Mad: (${it.mean}  média | ${it.stdDev}ms desv.)\nMin: ${it.min}ms | Max: ${it.max}ms"
-                )
-            }
+    fun runMadDelegateSingle(context: Context, delegateType: DelegateType) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeMadDelegateSingle(context, delegateType)
+            _result.postValue(summary)
         }
     }
 
@@ -134,40 +119,343 @@ class FirstViewModel : ViewModel() {
         val z: Int
     )
 
-    fun closeProcessor() {
-        benchmarkProcessor = null
+    data class BenchmarkProgress(
+        val total: Int,
+        val current: Int,
+        val running: Boolean,
+        val message: String
+    )
+
+    fun runFftCpu(context: Context) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeFftCpu(context)
+            _result.postValue(summary)
+        }
     }
 
-    fun runFftCpu() {
-        viewModelScope.launch {
-            val input = ensureFftInput()
+    private fun buildMadReadings(input: Array<IntArray>): List<AccelerometerSample> {
+        val timestamps = input[0]
+        val x = input[1]
+        val y = input[2]
+        val z = input[3]
+        return timestamps.indices.map { i ->
+            AccelerometerSample(
+                timestamp = timestamps[i].toLong(),
+                x = x[i],
+                y = y[i],
+                z = z[i]
+            )
+        }
+    }
 
+    private suspend fun executeMadCpuSingle(context: Context): String {
+        val input = ensureMadInput()
+        val readings = buildMadReadings(input)
+        val start = System.nanoTime()
+        val result = getMAD(readings)
+        val durationMs = (System.nanoTime() - start) / 1_000_000.0
+        val summary =
+            "MAD CPU -> (${result.mean} média | ${result.stdDev} desv.)\nMin: ${result.min} | Max: ${result.max}"
+        ResultLogger.append(
+            context,
+            "mad_cpu.txt",
+            listOf(summary, "Tamanho janela: $MAD_VECTOR_LENGTH")
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "MAD CPU Kotlin",
+                processingMode = "Kotlin",
+                delegate = "CPU",
+                dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
+                inputSize = MAD_VECTOR_LENGTH,
+                durationMs = durationMs,
+                throughput = computeThroughput(MAD_VECTOR_LENGTH.toDouble(), durationMs),
+                estimatedEnergyImpact = "Alta (CPU dedicada)",
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = summary
+            )
+        )
+        return summary
+    }
+
+    private suspend fun executeMadCpuBatch(context: Context, iterations: Int): String {
+        val input = ensureMadInput()
+        val readings = buildMadReadings(input)
+        val durations = mutableListOf<Double>()
+        repeat(iterations) {
             val start = System.nanoTime()
-            val result = fftCpuProcessor.process(input.samples, input.weights)
-            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+            getMAD(readings)
+            durations += (System.nanoTime() - start) / 1_000_000.0
+        }
+        val mean = durations.average()
+        val summary =
+            "MAD CPU x$iterations -> média ${"%.3f".format(mean)} ms | min ${"%.3f".format(durations.minOrNull() ?: 0.0)} | max ${"%.3f".format(durations.maxOrNull() ?: 0.0)}"
+        ResultLogger.append(
+            context,
+            "mad_cpu_batch.txt",
+            listOf(summary, "Execuções: ${durations.joinToString()}")
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "MAD CPU Kotlin x$iterations",
+                processingMode = "Kotlin",
+                delegate = "CPU",
+                dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
+                inputSize = MAD_VECTOR_LENGTH * iterations,
+                durationMs = mean,
+                throughput = computeThroughput(MAD_VECTOR_LENGTH.toDouble() * iterations, mean),
+                estimatedEnergyImpact = "Alta (CPU dedicada)",
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = "Execuções: ${durations.joinToString()}"
+            )
+        )
+        return summary
+    }
 
-            _result.postValue(formatFftSummary("FFT CPU", durationMs, result))
+    private suspend fun executeMadDelegateSingle(
+        context: Context,
+        delegateType: DelegateType
+    ): String {
+        val input = ensureMadInput()
+        val processor = StatModelProcessor(
+            context = context,
+            delegateType = delegateType,
+            sizeVector = MAD_VECTOR_LENGTH
+        )
+        val start = System.nanoTime()
+        val output = processor.process(input)
+        val durationMs = (System.nanoTime() - start) / 1_000_000.0
+        processor.close()
+        val stats =
+            "Mean=${output.getOrNull(0)}, Std=${output.getOrNull(1)}, Min=${output.getOrNull(2)}, Max=${output.getOrNull(3)}"
+        val summary =
+            "MAD TFLite (${delegateType.name}) -> ${"%.3f".format(durationMs)} ms\n$stats"
+        ResultLogger.append(
+            context,
+            "mad_single.txt",
+            listOf("Delegate: ${delegateType.name}", summary)
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "MAD TFLite (${delegateType.name})",
+                processingMode = "TFLite",
+                delegate = delegateType.name,
+                dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
+                inputSize = MAD_VECTOR_LENGTH,
+                durationMs = durationMs,
+                throughput = computeThroughput(MAD_VECTOR_LENGTH.toDouble(), durationMs),
+                estimatedEnergyImpact = estimateEnergy(delegateType),
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = stats
+            )
+        )
+        return summary
+    }
+
+    private suspend fun executeMadBenchmark(
+        context: Context,
+        delegateType: DelegateType,
+        repetitions: Int
+    ): String {
+        val input = ensureMadInput()
+        val processor = BenchmarkProcessor2(
+            processorFactory = {
+                StatModelProcessor(
+                    context = context,
+                    delegateType = delegateType,
+                    sizeVector = MAD_VECTOR_LENGTH
+                )
+            },
+            repetitions = repetitions
+        )
+        val result = processor.runBenchmark(input)
+        val summary =
+            "Benchmark ${delegateType.name} (${result.mean}ms média | ${result.stdDev}ms desv.)\nMin: ${result.min}ms | Max: ${result.max}ms"
+        ResultLogger.append(
+            context,
+            "mad_benchmark.txt",
+            listOf(
+                "Delegate: ${delegateType.name}",
+                "Média: ${result.mean}",
+                "Desvio padrão: ${result.stdDev}",
+                "Min/Max: ${result.min} / ${result.max}",
+                "Amostras: ${result.durations.joinToString()}"
+            )
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "MAD Benchmark (${delegateType.name})",
+                processingMode = "TFLite Benchmark",
+                delegate = delegateType.name,
+                dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
+                inputSize = MAD_VECTOR_LENGTH * repetitions,
+                durationMs = result.mean,
+                throughput = computeThroughput(
+                    MAD_VECTOR_LENGTH.toDouble() * repetitions,
+                    result.mean
+                ),
+                estimatedEnergyImpact = estimateEnergy(delegateType),
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = "Execuções: ${result.durations.joinToString()}"
+            )
+        )
+        return summary
+    }
+
+    private suspend fun executeFftCpu(context: Context): String {
+        val input = ensureFftInput()
+        val start = System.nanoTime()
+        val result = fftCpuProcessor.process(input.samples, input.weights)
+        val durationMs = (System.nanoTime() - start) / 1_000_000.0
+        val summary = formatFftSummary("FFT CPU", durationMs, result)
+        ResultLogger.append(
+            context,
+            "fft_cpu.txt",
+            listOf(summary)
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "FFT CPU",
+                processingMode = "Kotlin DFT",
+                delegate = "CPU",
+                dataDescription = "$FFT_NUM_SENSORS sensores × $FFT_SIGNAL_LENGTH amostras",
+                inputSize = FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH,
+                durationMs = durationMs,
+                throughput = computeThroughput(
+                    (FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH).toDouble(),
+                    durationMs
+                ),
+                estimatedEnergyImpact = "Alta (CPU)",
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = summary
+            )
+        )
+        return summary
+    }
+
+    private suspend fun executeFftTflite(
+        context: Context,
+        delegateType: DelegateType
+    ): String {
+        val input = ensureFftInput()
+        val processor = FftTfliteProcessor(
+            context = context,
+            delegateType = delegateType,
+            numSensors = FFT_NUM_SENSORS,
+            signalLength = FFT_SIGNAL_LENGTH
+        )
+        val start = System.nanoTime()
+        val result = processor.process(input.samples, input.weights)
+        val durationMs = (System.nanoTime() - start) / 1_000_000.0
+        processor.close()
+        val summary =
+            formatFftSummary("FFT TFLite (${delegateType.name})", durationMs, result)
+        ResultLogger.append(
+            context,
+            "fft_tflite.txt",
+            listOf(summary, "Delegate: ${delegateType.name}")
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "FFT TFLite (${delegateType.name})",
+                processingMode = "TFLite",
+                delegate = delegateType.name,
+                dataDescription = "$FFT_NUM_SENSORS sensores × $FFT_SIGNAL_LENGTH amostras",
+                inputSize = FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH,
+                durationMs = durationMs,
+                throughput = computeThroughput(
+                    (FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH).toDouble(),
+                    durationMs
+                ),
+                estimatedEnergyImpact = estimateEnergy(delegateType),
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = summary
+            )
+        )
+        return summary
+    }
+
+    private fun computeThroughput(operations: Double, durationMs: Double): Double {
+        if (durationMs <= 0.0) return 0.0
+        return operations / (durationMs / 1000.0)
+    }
+
+    private fun estimateEnergy(delegateType: DelegateType): String {
+        return when (delegateType) {
+            DelegateType.CPU -> "Média (CPU otimizada)"
+            DelegateType.GPU -> "Baixa (GPU paralela)"
+            DelegateType.NNAPI -> "Baixa/Média (NNAPI)"
         }
     }
 
     fun runFftTflite(context: Context, delegateType: DelegateType) {
-        viewModelScope.launch {
-            val input = ensureFftInput()
+        viewModelScope.launch(Dispatchers.Default) {
+            val summary = executeFftTflite(context, delegateType)
+            _result.postValue(summary)
+        }
+    }
 
-            val processor = FftTfliteProcessor(
-                context = context,
-                delegateType = delegateType,
-                numSensors = FFT_NUM_SENSORS,
-                signalLength = FFT_SIGNAL_LENGTH
+    fun runFullBenchmarkSuite(context: Context) {
+        viewModelScope.launch(Dispatchers.Default) {
+            val tasks = listOf(
+                TestTask("MAD CPU Kotlin") { executeMadCpuSingle(context) },
+                TestTask("MAD CPU Kotlin x10") { executeMadCpuBatch(context, 10) },
+                TestTask("MAD TFLite CPU") { executeMadDelegateSingle(context, DelegateType.CPU) },
+                TestTask("MAD TFLite GPU") { executeMadDelegateSingle(context, DelegateType.GPU) },
+                TestTask("MAD TFLite NNAPI") { executeMadDelegateSingle(context, DelegateType.NNAPI) },
+                TestTask("MAD Benchmark CPU") {
+                    executeMadBenchmark(context, DelegateType.CPU, DEFAULT_BENCH_REPETITIONS)
+                },
+                TestTask("MAD Benchmark GPU") {
+                    executeMadBenchmark(context, DelegateType.GPU, DEFAULT_BENCH_REPETITIONS)
+                },
+                TestTask("MAD Benchmark NNAPI") {
+                    executeMadBenchmark(context, DelegateType.NNAPI, DEFAULT_BENCH_REPETITIONS)
+                },
+                TestTask("FFT CPU") { executeFftCpu(context) },
+                TestTask("FFT TFLite CPU") { executeFftTflite(context, DelegateType.CPU) },
+                TestTask("FFT TFLite GPU") { executeFftTflite(context, DelegateType.GPU) },
+                TestTask("FFT TFLite NNAPI") { executeFftTflite(context, DelegateType.NNAPI) }
             )
-
-            val start = System.nanoTime()
-            val result = processor.process(input.samples, input.weights)
-            val durationMs = (System.nanoTime() - start) / 1_000_000.0
-            processor.close()
-
-            _result.postValue(
-                formatFftSummary("FFT TFLite (${delegateType.name})", durationMs, result)
+            _progress.postValue(
+                BenchmarkProgress(
+                    total = tasks.size,
+                    current = 0,
+                    running = true,
+                    message = "Iniciando suíte de testes"
+                )
+            )
+            tasks.forEachIndexed { index, task ->
+                val summary = task.block()
+                _result.postValue(summary)
+                _progress.postValue(
+                    BenchmarkProgress(
+                        total = tasks.size,
+                        current = index + 1,
+                        running = index + 1 < tasks.size,
+                        message = "Executado: ${task.label}"
+                    )
+                )
+            }
+            _progress.postValue(
+                BenchmarkProgress(
+                    total = tasks.size,
+                    current = tasks.size,
+                    running = false,
+                    message = "Suíte concluída"
+                )
             )
         }
     }
@@ -197,6 +485,7 @@ class FirstViewModel : ViewModel() {
         private const val FFT_NUM_SENSORS = 10
         private const val FFT_SIGNAL_LENGTH = 4096
         private const val MAD_VECTOR_LENGTH = 4096
+        private const val DEFAULT_BENCH_REPETITIONS = 10
     }
 
     private fun ensureAccelerometerBatch(): AccelerometerBatchGenerator.AccelerometerBatch {
@@ -226,4 +515,9 @@ class FirstViewModel : ViewModel() {
         }
         return fftInput!!
     }
+
+    private data class TestTask(
+        val label: String,
+        val block: suspend () -> String
+    )
 }

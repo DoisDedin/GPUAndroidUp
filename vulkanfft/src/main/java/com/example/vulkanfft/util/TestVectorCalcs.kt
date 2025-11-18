@@ -51,27 +51,16 @@ class StatModelProcessor(
         interpreter = try {
             Interpreter(modelBuffer, options)
         } catch (e: IllegalArgumentException) {
-            when (delegateType) {
-                DelegateType.GPU -> {
-                    Log.w(tag, "GPU delegate falhou (${e.message}). Revertendo para CPU/XNNPACK.")
-                    gpuDelegate?.close()
-                    gpuDelegate = null
-                    Interpreter(modelBuffer, Interpreter.Options().apply { setUseXNNPACK(true) })
-                }
-
-                DelegateType.NNAPI -> {
-                    Log.w(tag, "NNAPI delegate falhou (${e.message}). Revertendo para CPU/XNNPACK.")
-                    nnapiDelegate?.close()
-                    nnapiDelegate = null
-                    Interpreter(modelBuffer, Interpreter.Options().apply { setUseXNNPACK(true) })
-                }
-
-                else -> throw e
-            }
+            Log.w(tag, "Delegate ${delegateType.name} indisponível (${e.message}). Usando CPU/XNNPACK.")
+            gpuDelegate?.close()
+            gpuDelegate = null
+            nnapiDelegate?.close()
+            nnapiDelegate = null
+            val fallbackOptions = Interpreter.Options().apply { setUseXNNPACK(true) }
+            Interpreter(modelBuffer, fallbackOptions)
         }
 
-        // ⬇️ Configure o shape aqu
-        interpreter.resizeInput(0, intArrayOf(4, sizeVector))
+        interpreter.resizeInput(0, intArrayOf(sizeVector, 3))
         interpreter.allocateTensors()
     }
 
@@ -86,11 +75,17 @@ class StatModelProcessor(
 
     fun process(input: Array<IntArray>): FloatArray {
         Log.d(tag, "===== Início do processamento de estatísticas =====")
-        // input já é [4][N], então passamos ele diretamente
+        val floatInput = Array(sizeVector) { index ->
+            floatArrayOf(
+                input[1][index].toFloat(),
+                input[2][index].toFloat(),
+                input[3][index].toFloat()
+            )
+        }
         val outputTensor = FloatArray(4)
 
         val startTime = System.nanoTime()
-        interpreter.run(input, outputTensor)
+        interpreter.run(floatInput, outputTensor)
         val endTime = System.nanoTime()
 
         val durationMs = (endTime - startTime) / 1_000_000.0

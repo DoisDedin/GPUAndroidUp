@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="mad_cpu_color">#FFA726</color>
+    <color name="mad_tflite_cpu_color">#42A5F5</color>
+    <color name="mad_tflite_gpu_color">#66BB6A</color>
+    <color name="mad_tflite_nn_color">#AB47BC</color>
+    <color name="fft_cpu_color">#FF7043</color>
+    <color name="fft_tflite_color">#26C6DA</color>
+    <color name="logs_share_color">#78909C</color>
+    <color name="logs_clear_color">#EF5350</color>
 </resources>

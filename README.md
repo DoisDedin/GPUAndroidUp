@@ -38,6 +38,7 @@ Os arquivos são versionados em `vulkanfft/src/main/assets`, mas se quiser regen
 
 ```bash
 cd app/libs/pythonmodels
+python3 make_mad_model_float.py # cria/atualiza mad_model.tflite (versão float32 compatível com GPU/NNAPI)
 python3 make_fft_model.py      # cria/atualiza fft_model.tflite
 # scripts equivalentes para MAD podem ser adicionados aqui (ver notebooks).
 ```
@@ -64,11 +65,20 @@ Mais detalhes estão em `docs/fft_pipeline.md`.
 2. Use “Rodar na CPU-OPTIMIZE / GPU / NumPy (NNAPI)” para comparar os delegates no modelo MAD.
 3. Use “FFT CPU (10×4096)” para o baseline e “FFT Lite CPU/GPU/NNAPI” para a versão TFLite. Todos reutilizam o mesmo lote de sensores (os mesmos vetores do MAD) para comparabilidade.
 4. Inspecione os logs (`Logcat` tag `MAD`, `BenchmarkProcessor2`, `FftTfliteProcessor`) para ver os resultados completos e métricas de duração.
+5. O botão “Executar suíte completa” roda todos os cenários sequencialmente (MAD/Kotlin, MAD TFLite CPU/GPU/NNAPI, benchmarks em lote e FFT) mostrando uma barra de progresso com o passo atual.
+
+## Exportação de resultados
+
+- Cada execução grava arquivos no diretório `Android/data/com.example.vulkanfft/files/benchmarks/` (ou equivalente interno). Além dos TXT tradicionais, o app gera:
+  - `benchmark_results.csv`: tabela com timestamp, dispositivo, delegate, modo de processamento, tamanho do input, duração, throughput e estimativa de impacto energético.
+  - `benchmark_results.txt`: versão textual legível, útil para anexar diretamente no TCC.
+- O botão “Compartilhar logs” envia todos os arquivos (CSV, TXT e históricos) usando um `ACTION_SEND_MULTIPLE`. O botão “Apagar logs” limpa o diretório inteiro para iniciar uma nova bateria de testes.
 
 ## Solução de problemas
 
 - **Erro `IsPowerOfTwo(fft_length_data[1])`:** o kernel `RFFT` do TensorFlow Lite exige que o comprimento da FFT seja potência de 2. O projeto usa 4096, mas qualquer potência de 2 funciona desde que atualize `make_fft_model.py` e `FirstViewModel.FFT_SIGNAL_LENGTH`.
 - **`GpuDelegateFactory$Options` não encontrado:** garanta que o módulo `vulkanfft` dependa tanto de `org.tensorflow:tensorflow-lite-gpu` quanto de `org.tensorflow:tensorflow-lite-gpu-api` (já configurado no `build.gradle.kts`) e sincronize o projeto.
+- **Delegate GPU/NNAPI falhando no MAD:** versões antigas do `mad_model.tflite` usavam `int32` e os delegates não conseguiam aplicar. A versão atual gerada por `make_mad_model_float.py` trabalha em float32, permitindo GPU/NNAPI. Se observar o erro novamente, regenere o modelo com o script.
 
 ## Próximos passos sugeridos
 
