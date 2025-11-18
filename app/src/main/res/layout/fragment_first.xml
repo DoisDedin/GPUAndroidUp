@@ -41,6 +41,7 @@
             android:id="@+id/text_mad_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/section_mad_single"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 

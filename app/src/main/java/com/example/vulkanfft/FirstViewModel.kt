@@ -205,9 +205,9 @@ class FirstViewModel : ViewModel() {
                 processingMode = "Kotlin",
                 delegate = "CPU",
                 dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
-                inputSize = MAD_VECTOR_LENGTH * iterations,
+                inputSize = MAD_VECTOR_LENGTH,
                 durationMs = mean,
-                throughput = computeThroughput(MAD_VECTOR_LENGTH.toDouble() * iterations, mean),
+                throughput = computeThroughput(MAD_VECTOR_LENGTH.toDouble(), mean),
                 estimatedEnergyImpact = "Alta (CPU dedicada)",
                 deviceInfo = DeviceInfoProvider.collect(context),
                 extraNotes = "Execuções: ${durations.joinToString()}"
@@ -296,10 +296,10 @@ class FirstViewModel : ViewModel() {
                 processingMode = "TFLite Benchmark",
                 delegate = delegateType.name,
                 dataDescription = "1 sensor × $MAD_VECTOR_LENGTH amostras",
-                inputSize = MAD_VECTOR_LENGTH * repetitions,
+                inputSize = MAD_VECTOR_LENGTH,
                 durationMs = result.mean,
                 throughput = computeThroughput(
-                    MAD_VECTOR_LENGTH.toDouble() * repetitions,
+                    MAD_VECTOR_LENGTH.toDouble(),
                     result.mean
                 ),
                 estimatedEnergyImpact = estimateEnergy(delegateType),
@@ -387,6 +387,65 @@ class FirstViewModel : ViewModel() {
         return summary
     }
 
+    private suspend fun executeFftBenchmark(
+        context: Context,
+        delegateType: DelegateType,
+        repetitions: Int = DEFAULT_BENCH_REPETITIONS,
+        warmup: Int = 1
+    ): String {
+        val input = ensureFftInput()
+        val processor = FftTfliteProcessor(
+            context = context,
+            delegateType = delegateType,
+            numSensors = FFT_NUM_SENSORS,
+            signalLength = FFT_SIGNAL_LENGTH
+        )
+        val durations = mutableListOf<Double>()
+        val totalRuns = repetitions + warmup
+        repeat(totalRuns) { run ->
+            val start = System.nanoTime()
+            processor.process(input.samples, input.weights)
+            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+            if (run >= warmup) {
+                durations += durationMs
+            }
+        }
+        processor.close()
+        val mean = durations.average()
+        val min = durations.minOrNull() ?: mean
+        val max = durations.maxOrNull() ?: mean
+        val summary =
+            "FFT Benchmark (${delegateType.name}) -> média ${"%.3f".format(mean)} ms | min ${"%.3f".format(min)} | max ${"%.3f".format(max)}"
+        ResultLogger.append(
+            context,
+            "fft_benchmark.txt",
+            listOf(
+                summary,
+                "Execuções (${repetitions}): ${durations.joinToString()}"
+            )
+        )
+        BenchmarkReporter.append(
+            context,
+            BenchmarkEntry(
+                timestamp = System.currentTimeMillis(),
+                testName = "FFT Benchmark (${delegateType.name})",
+                processingMode = "TFLite Benchmark",
+                delegate = delegateType.name,
+                dataDescription = "$FFT_NUM_SENSORS sensores × $FFT_SIGNAL_LENGTH amostras",
+                inputSize = FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH,
+                durationMs = mean,
+                throughput = computeThroughput(
+                    (FFT_NUM_SENSORS * FFT_SIGNAL_LENGTH).toDouble(),
+                    mean
+                ),
+                estimatedEnergyImpact = estimateEnergy(delegateType),
+                deviceInfo = DeviceInfoProvider.collect(context),
+                extraNotes = "Execuções (${repetitions}): ${durations.joinToString()}"
+            )
+        )
+        return summary
+    }
+
     private fun computeThroughput(operations: Double, durationMs: Double): Double {
         if (durationMs <= 0.0) return 0.0
         return operations / (durationMs / 1000.0)
@@ -409,26 +468,35 @@ class FirstViewModel : ViewModel() {
 
     fun runFullBenchmarkSuite(context: Context) {
         viewModelScope.launch(Dispatchers.Default) {
-            val tasks = listOf(
-                TestTask("MAD CPU Kotlin") { executeMadCpuSingle(context) },
-                TestTask("MAD CPU Kotlin x10") { executeMadCpuBatch(context, 10) },
-                TestTask("MAD TFLite CPU") { executeMadDelegateSingle(context, DelegateType.CPU) },
-                TestTask("MAD TFLite GPU") { executeMadDelegateSingle(context, DelegateType.GPU) },
-                TestTask("MAD TFLite NNAPI") { executeMadDelegateSingle(context, DelegateType.NNAPI) },
-                TestTask("MAD Benchmark CPU") {
-                    executeMadBenchmark(context, DelegateType.CPU, DEFAULT_BENCH_REPETITIONS)
-                },
-                TestTask("MAD Benchmark GPU") {
-                    executeMadBenchmark(context, DelegateType.GPU, DEFAULT_BENCH_REPETITIONS)
-                },
-                TestTask("MAD Benchmark NNAPI") {
-                    executeMadBenchmark(context, DelegateType.NNAPI, DEFAULT_BENCH_REPETITIONS)
-                },
-                TestTask("FFT CPU") { executeFftCpu(context) },
-                TestTask("FFT TFLite CPU") { executeFftTflite(context, DelegateType.CPU) },
-                TestTask("FFT TFLite GPU") { executeFftTflite(context, DelegateType.GPU) },
-                TestTask("FFT TFLite NNAPI") { executeFftTflite(context, DelegateType.NNAPI) }
-            )
+        val tasks = listOf(
+            TestTask("MAD CPU Kotlin") { executeMadCpuSingle(context) },
+            TestTask("MAD CPU Kotlin x10") { executeMadCpuBatch(context, 10) },
+            TestTask("MAD TFLite CPU") { executeMadDelegateSingle(context, DelegateType.CPU) },
+            TestTask("MAD TFLite GPU") { executeMadDelegateSingle(context, DelegateType.GPU) },
+            TestTask("MAD TFLite NNAPI") { executeMadDelegateSingle(context, DelegateType.NNAPI) },
+            TestTask("MAD Benchmark CPU") {
+                executeMadBenchmark(context, DelegateType.CPU, DEFAULT_BENCH_REPETITIONS)
+            },
+            TestTask("MAD Benchmark GPU") {
+                executeMadBenchmark(context, DelegateType.GPU, DEFAULT_BENCH_REPETITIONS)
+            },
+            TestTask("MAD Benchmark NNAPI") {
+                executeMadBenchmark(context, DelegateType.NNAPI, DEFAULT_BENCH_REPETITIONS)
+            },
+            TestTask("FFT CPU") { executeFftCpu(context) },
+            TestTask("FFT TFLite CPU") { executeFftTflite(context, DelegateType.CPU) },
+            TestTask("FFT TFLite GPU") { executeFftTflite(context, DelegateType.GPU) },
+            TestTask("FFT TFLite NNAPI") { executeFftTflite(context, DelegateType.NNAPI) },
+            TestTask("FFT Benchmark CPU") {
+                executeFftBenchmark(context, DelegateType.CPU, DEFAULT_BENCH_REPETITIONS)
+            },
+            TestTask("FFT Benchmark GPU") {
+                executeFftBenchmark(context, DelegateType.GPU, DEFAULT_BENCH_REPETITIONS)
+            },
+            TestTask("FFT Benchmark NNAPI") {
+                executeFftBenchmark(context, DelegateType.NNAPI, DEFAULT_BENCH_REPETITIONS)
+            }
+        )
             _progress.postValue(
                 BenchmarkProgress(
                     total = tasks.size,
