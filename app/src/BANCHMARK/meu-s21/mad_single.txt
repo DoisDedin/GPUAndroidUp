@@ -1,0 +1,30 @@
+===== 2025-11-17 17:31:02.302 =====
+Delegate: CPU
+MAD TFLite (CPU) -> 3,789 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 17:31:03.138 =====
+Delegate: GPU
+MAD TFLite (GPU) -> 3,321 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 17:31:03.947 =====
+Delegate: NNAPI
+MAD TFLite (NNAPI) -> 8,187 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 21:18:07.408 =====
+Delegate: CPU
+MAD TFLite (CPU) -> 10,543 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 21:18:07.428 =====
+Delegate: GPU
+MAD TFLite (GPU) -> 9,861 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 21:18:07.515 =====
+Delegate: NNAPI
+MAD TFLite (NNAPI) -> 11,767 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
