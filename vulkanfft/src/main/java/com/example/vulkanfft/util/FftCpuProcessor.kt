@@ -1,5 +1,6 @@
 package com.example.vulkanfft.util
 
+import android.util.Log
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -30,6 +31,7 @@ class FftCpuProcessor(
         samples: Array<FloatArray>,
         weights: Array<FloatArray>
     ): FftResult {
+        Log.i(TAG, "Iniciando FFT CPU: ${samples.size} sensores × $signalLength amostras")
         require(samples.size == numSensors) {
             "Esperado $numSensors sensores, recebido ${samples.size}"
         }
@@ -42,7 +44,11 @@ class FftCpuProcessor(
             require(signal.size == signalLength) {
                 "Sensor #$sensorIndex deveria ter $signalLength amostras, mas tem ${signal.size}"
             }
-            computeRealDft(signal)
+            val start = System.nanoTime()
+            val spectrum = computeRealDft(signal, sensorIndex)
+            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+            Log.i(TAG, "Sensor ${sensorIndex + 1}/$numSensors finalizado em ${"%.1f".format(durationMs)} ms")
+            spectrum
         }
 
         val magnitudes = Array(numSensors) { FloatArray(freqBins) }
@@ -61,6 +67,7 @@ class FftCpuProcessor(
             }
         }
 
+        Log.i(TAG, "FFT CPU concluída para todos os sensores.")
         return FftResult(
             complexSpectrum = complexSpectra,
             magnitudes = magnitudes,
@@ -68,9 +75,10 @@ class FftCpuProcessor(
         )
     }
 
-    private fun computeRealDft(signal: FloatArray): Array<ComplexFloat> {
+    private fun computeRealDft(signal: FloatArray, sensorIndex: Int): Array<ComplexFloat> {
         val bins = Array(freqBins) { ComplexFloat(0f, 0f) }
         val twoPiByN = (2.0 * PI / signalLength).toFloat()
+        val progressStep = (freqBins / 8).coerceAtLeast(1)
 
         for (k in 0 until freqBins) {
             var real = 0.0
@@ -82,9 +90,20 @@ class FftCpuProcessor(
                 imag -= sample * sin(angle.toDouble())
             }
             bins[k] = ComplexFloat(real.toFloat(), imag.toFloat())
+            if (k % progressStep == 0 || k == freqBins - 1) {
+                val percent = ((k + 1) / freqBins.toDouble() * 100).toInt()
+                Log.d(
+                    TAG,
+                    "Sensor ${sensorIndex + 1}/$numSensors -> FFT ${percent.coerceAtMost(100)}% concluída"
+                )
+            }
         }
 
         return bins
+    }
+
+    companion object {
+        private const val TAG = "FftCpuProcessor"
     }
 }
 
