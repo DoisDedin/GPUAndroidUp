@@ -6,6 +6,7 @@ import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.GpuDelegate
 import java.io.FileInputStream
 import java.nio.ByteBuffer
+import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 
 class StatModelProcessor(
@@ -17,6 +18,11 @@ class StatModelProcessor(
     private var interpreter: Interpreter
     private var gpuDelegate: GpuDelegate? = null
     private var nnapiDelegate: org.tensorflow.lite.nnapi.NnApiDelegate? = null
+    private val inputBuffer: ByteBuffer =
+        ByteBuffer.allocateDirect(sizeVector * INPUT_AXES * FLOAT_BYTES)
+            .order(ByteOrder.nativeOrder())
+    private val inputFloatBuffer = inputBuffer.asFloatBuffer()
+    private val outputTensor = FloatArray(4)
 
     init {
         val options = Interpreter.Options()
@@ -73,32 +79,50 @@ class StatModelProcessor(
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    fun process(input: Array<IntArray>): FloatArray {
+    fun process(input: Array<IntArray>): InferenceResult<FloatArray> {
         Log.d(tag, "===== Início do processamento de estatísticas =====")
-        val floatInput = Array(sizeVector) { index ->
-            floatArrayOf(
-                input[1][index].toFloat(),
-                input[2][index].toFloat(),
-                input[3][index].toFloat()
-            )
+
+        val transferStart = System.nanoTime()
+        inputFloatBuffer.rewind()
+        val x = input[1]
+        val y = input[2]
+        val z = input[3]
+        for (i in 0 until sizeVector) {
+            inputFloatBuffer.put(x[i].toFloat())
+            inputFloatBuffer.put(y[i].toFloat())
+            inputFloatBuffer.put(z[i].toFloat())
         }
-        val outputTensor = FloatArray(4)
+        inputBuffer.rewind()
+        val transferDuration = nanosToMillis(System.nanoTime() - transferStart)
 
-        val startTime = System.nanoTime()
-        interpreter.run(floatInput, outputTensor)
-        val endTime = System.nanoTime()
+        val computeStart = System.nanoTime()
+        interpreter.run(inputBuffer, outputTensor)
+        val computeDuration = nanosToMillis(System.nanoTime() - computeStart)
 
-        val durationMs = (endTime - startTime) / 1_000_000.0
-        Log.d(tag, "Duração da inferência: $durationMs ms")
+        Log.d(tag, "Transferência: ${"%.3f".format(transferDuration)} ms")
+        Log.d(tag, "Duração da inferência: ${"%.3f".format(computeDuration)} ms")
         Log.d(tag, "MAD calculado: ${outputTensor[0]}")
         Log.d(tag, "===== Fim do processamento =====")
 
-        return outputTensor
+        return InferenceResult(
+            output = outputTensor.copyOf(),
+            timing = InferenceTiming(
+                transferMs = transferDuration,
+                computeMs = computeDuration
+            )
+        )
     }
 
     fun close() {
         interpreter.close()
         gpuDelegate?.close()
         nnapiDelegate?.close()
+    }
+
+    private fun nanosToMillis(value: Long): Double = value / 1_000_000.0
+
+    companion object {
+        private const val FLOAT_BYTES = 4
+        private const val INPUT_AXES = 3
     }
 }

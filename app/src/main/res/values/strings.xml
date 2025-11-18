@@ -5,9 +5,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="section_mad_single">MAD — Execução única</string>
-    <string name="section_mad_batch">MAD — 10 execuções</string>
-    <string name="section_fft">FFT (10 sensores × 4096 amostras)</string>
+    <string name="section_mad_single">MAD — Execução individual (10 repetições)</string>
+    <string name="section_mad_batch">MAD — Processar 10 pacotes</string>
+    <string name="section_fft">FFT — Execução individual (10 repetições)</string>
+    <string name="section_fft_batch">FFT — Processar 10 pacotes</string>
     <string name="btn_mad_cpu_single">CPU Kotlin</string>
     <string name="btn_mad_tflite_cpu_single">TFLite CPU</string>
     <string name="btn_mad_tflite_gpu_single">TFLite GPU</string>
@@ -20,6 +21,21 @@
     <string name="btn_fft_tflite_cpu">FFT TFLite CPU</string>
     <string name="btn_fft_tflite_gpu">FFT TFLite GPU</string>
     <string name="btn_fft_tflite_nn">FFT TFLite NNAPI</string>
+    <string name="btn_fft_cpu_batch">FFT CPU x10</string>
+    <string name="btn_fft_tflite_cpu_batch">FFT TFLite CPU x10</string>
+    <string name="btn_fft_tflite_gpu_batch">FFT TFLite GPU x10</string>
+    <string name="btn_fft_tflite_nn_batch">FFT TFLite NNAPI x10</string>
+    <string name="section_energy">Teste de gasto energético</string>
+    <string name="energy_note">Ative/desative o modo economia de bateria manualmente. O teste energético executa automaticamente MAD CPU puro, TFLite CPU, GPU e NNAPI (100 execuções cada) para medir a drenagem. Execute sem carregador e depois repita com o modo economia ligado para registrar ambos.</string>
+    <string name="btn_run_energy_test">Iniciar ciclo energético (4 cenários)</string>
+    <string name="btn_cancel_energy_test">Cancelar teste energético</string>
+    <string name="benchmark_output_placeholder">Aguardando execuções de benchmark.</string>
+    <string name="energy_output_placeholder">Sem dados recentes do teste energético.</string>
+    <string name="energy_status_idle">Teste energético parado.</string>
+    <string name="energy_status_running">Teste energético em execução... (posso levar alguns minutos)</string>
+    <string name="power_save_on">Economia de bateria ATIVA</string>
+    <string name="power_save_off">Economia de bateria DESATIVADA</string>
+    <string name="energy_mode_state">Estado atual: %1$s</string>
     <string name="btn_share_logs">Compartilhar logs</string>
     <string name="btn_clear_logs">Apagar logs</string>
     <string name="btn_run_all">Executar suíte completa</string>

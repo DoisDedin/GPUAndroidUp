@@ -23,6 +23,16 @@ class FftTfliteProcessor(
     private var interpreter: Interpreter
     private var gpuDelegate: Delegate? = null
     private var nnapiDelegate: Delegate? = null
+    private val weightsInputBuffer = ByteBuffer.allocateDirect(numSensors * freqBins * FLOAT_BYTES)
+        .order(ByteOrder.nativeOrder())
+    private val weightsFloatBuffer = weightsInputBuffer.asFloatBuffer()
+    private val samplesInputBuffer = ByteBuffer.allocateDirect(numSensors * signalLength * FLOAT_BYTES)
+        .order(ByteOrder.nativeOrder())
+    private val samplesFloatBuffer = samplesInputBuffer.asFloatBuffer()
+    private val outputBuffer = ByteBuffer.allocateDirect(numSensors * freqBins * OUTPUT_FIELDS * FLOAT_BYTES)
+        .order(ByteOrder.nativeOrder())
+    private val outputFloatBuffer = outputBuffer.asFloatBuffer()
+    private val outputs = hashMapOf<Int, Any>(0 to outputBuffer)
 
     init {
         val options = Interpreter.Options()
@@ -64,7 +74,7 @@ class FftTfliteProcessor(
     fun process(
         samples: Array<FloatArray>,
         weights: Array<FloatArray>
-    ): FftResult {
+    ): InferenceResult<FftResult> {
         require(samples.size == numSensors) { "Esperado $numSensors sensores" }
         require(weights.size == numSensors) { "Esperado $numSensors vetores de peso" }
 
@@ -80,20 +90,36 @@ class FftTfliteProcessor(
             }
         }
 
-        // O conversor exporta as entradas na ordem [weights, samples],
-        // então respeitamos essa convenção para evitar reshapes incorretos.
-        val inputs = arrayOf(weights, samples)
-        val floatCount = numSensors * freqBins * 4
-        val outputBuffer = ByteBuffer.allocateDirect(4 * floatCount).order(ByteOrder.nativeOrder())
-        val outputs = hashMapOf<Int, Any>(0 to outputBuffer)
+        val transferStart = System.nanoTime()
+        weightsFloatBuffer.rewind()
+        for (sensor in 0 until numSensors) {
+            val sensorWeights = weights[sensor]
+            for (bin in 0 until freqBins) {
+                weightsFloatBuffer.put(sensorWeights[bin])
+            }
+        }
+        samplesFloatBuffer.rewind()
+        for (sensor in 0 until numSensors) {
+            val sensorSamples = samples[sensor]
+            for (sample in 0 until signalLength) {
+                samplesFloatBuffer.put(sensorSamples[sample])
+            }
+        }
+        weightsInputBuffer.rewind()
+        samplesInputBuffer.rewind()
+        val transferDuration = nanosToMillis(System.nanoTime() - transferStart)
 
-        val start = System.nanoTime()
-        interpreter.runForMultipleInputsOutputs(inputs, outputs)
-        val durationMs = (System.nanoTime() - start) / 1_000_000.0
-        Log.d(tag, "Inferência FFT TFLite executada em ${"%.3f".format(durationMs)} ms")
+        val computeStart = System.nanoTime()
+        interpreter.runForMultipleInputsOutputs(
+            arrayOf(weightsInputBuffer, samplesInputBuffer),
+            outputs
+        )
+        val computeDuration = nanosToMillis(System.nanoTime() - computeStart)
+        Log.d(tag, "Transferência FFT: ${"%.3f".format(transferDuration)} ms")
+        Log.d(tag, "Processamento FFT: ${"%.3f".format(computeDuration)} ms")
 
         outputBuffer.rewind()
-        val floatBuffer = outputBuffer.asFloatBuffer()
+        outputFloatBuffer.rewind()
 
         val complexSpectrum = Array(numSensors) {
             Array(freqBins) { ComplexFloat(0f, 0f) }
@@ -103,10 +129,10 @@ class FftTfliteProcessor(
 
         for (sensor in 0 until numSensors) {
             for (bin in 0 until freqBins) {
-                val real = floatBuffer.get()
-                val imag = floatBuffer.get()
-                val magnitude = floatBuffer.get()
-                val weighted = floatBuffer.get()
+                val real = outputFloatBuffer.get()
+                val imag = outputFloatBuffer.get()
+                val magnitude = outputFloatBuffer.get()
+                val weighted = outputFloatBuffer.get()
 
                 complexSpectrum[sensor][bin] = ComplexFloat(real, imag)
                 magnitudes[sensor][bin] = magnitude
@@ -114,10 +140,18 @@ class FftTfliteProcessor(
             }
         }
 
-        return FftResult(
+        val fftResult = FftResult(
             complexSpectrum = complexSpectrum,
             magnitudes = magnitudes,
             weightedMagnitudes = weightedMagnitudes
+        )
+
+        return InferenceResult(
+            output = fftResult,
+            timing = InferenceTiming(
+                transferMs = transferDuration,
+                computeMs = computeDuration
+            )
         )
     }
 
@@ -125,5 +159,12 @@ class FftTfliteProcessor(
         interpreter.close()
         (gpuDelegate as? GpuDelegate)?.close()
         (nnapiDelegate as? NnApiDelegate)?.close()
+    }
+
+    private fun nanosToMillis(value: Long): Double = value / 1_000_000.0
+
+    companion object {
+        private const val FLOAT_BYTES = 4
+        private const val OUTPUT_FIELDS = 4
     }
 }

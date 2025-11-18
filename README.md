@@ -45,35 +45,63 @@
 
     Dica: se ocorrerem avisos do Matplotlib/fontconfig, defina `MPLCONFIGDIR=/tmp/mplcache` antes de rodar o script (já suportado no arquivo).
 
-    ## Fluxos principais
+## Suíte de testes exposta no app
 
-    ### MAD
-    - `FirstViewModel.runCPU()` → executa o MAD em Kotlin puro (verifique `getMAD`: atualmente as janelas usam timestamps em ms vs. janela em nanos, ajustar para `TimeUnit.SECONDS.toMillis(5)` torna os blocos corretos).
-    - `FirstViewModel.runBenchmark()` → instancia `StatModelProcessor` com o delegate escolhido e roda o modelo `mad_model.tflite` repetidas vezes para calcular média/desvio de latência.
+A tela principal agrupa os testes em três blocos:
 
-    ### FFT com pesos dinâmicos
-    - Gerador de dados: `AccelerometerBatchGenerator.generate()` (10 sensores × 4096 amostras). O `FftInputBuilder` converte cada sensor em magnitudes float e gera pesos dinâmicos baseados na energia da janela.
-    - CPU baseline: `FftCpuProcessor.process()` (DFT direto com pesos).
-    - TensorFlow Lite: `FftTfliteProcessor.process()` carrega `fft_model.tflite` e aplica GPU/NNAPI/CPU+XNNPACK.
-    - Interface: `FirstFragment` expõe botões para cada delegate e mostra no log/result os tempos médios + amostras dos espectros ponderados.
+| Grupo | Botões / Cenários | Descrição |
+|-------|-------------------|-----------|
+| **MAD — Execução individual (10 repetições)** | CPU Kotlin, TFLite CPU, TFLite GPU, TFLite NNAPI | Cada botão executa 10 vezes o MAD com um único pacote de 4096 amostras (1 sensor). O pipeline reutiliza o mesmo lote gerado por `AccelerometerBatchGenerator` para garantir comparabilidade. |
+| **MAD — Processar 10 pacotes** | CPU Kotlin x10, TFLite CPU x10, TFLite GPU x10, TFLite NNAPI x10 | Mesmo algoritmo dos botões anteriores, mas cada repetição processa simultaneamente 10 pacotes (10 sensores × 4096 amostras). Ideal para medir amortização do custo de transferência. |
+| **FFT — Execução individual / Processar 10 pacotes** | FFT CPU, FFT TFLite CPU/GPU/NNAPI e equivalentes `x10` | O modo individual mede 10 execuções com o lote padrão (10 sensores, 4096 amostras). O modo “x10” cria batches de 10 pacotes para simular envio em lote para o delegate. |
 
-    Mais detalhes estão em `docs/fft_pipeline.md`.
+Há ainda o botão **“Executar suíte completa”** que percorre todos os cenários acima em sequência usando as mesmas 10 repetições por cenário. O resultado mais recente aparece no texto “Benchmark” logo abaixo da barra de progresso.
 
-    ## Execução de benchmarks
+## Métricas coletadas em cada benchmark
 
-    1. Abra o app e clique em “Rodar CPU” para medir a versão Kotlin do MAD.
-    2. Use “Rodar na CPU-OPTIMIZE / GPU / NumPy (NNAPI)” para comparar os delegates no modelo MAD.
-    3. Use “FFT CPU (10×4096)” para o baseline e “FFT Lite CPU/GPU/NNAPI” para a versão TFLite. Todos reutilizam o mesmo lote de sensores (os mesmos vetores do MAD) para comparabilidade.
-    4. Inspecione os logs (`Logcat` tag `MAD`, `BenchmarkProcessor2`, `FftTfliteProcessor`) para ver os resultados completos e métricas de duração.
+A cada execução (manual ou pela suíte) são gravados:
 
-    ## Solução de problemas
+- **Tempo total (média, desvio padrão, min, max)**: tempo agregado por repetição.
+- **Tempo de transferência (média, desvio, min, max)**: medido ao copiar amostras/pesos do host para os `ByteBuffer`s de cada delegate.
+- **Tempo de processamento (média, desvio, min, max)**: tempo interno da inferência/DFT após a transferência.
+- **Throughput**: operações processadas por segundo (considerando 4096 amostras × nº de sensores × tamanho do lote).
+- **Iterações e tamanho do lote**: campo `iterations` fica em 10 para os testes normais; `batchSize` vale 1 (execução individual) ou 10 (modo “x10”).
+- **Notas**: último resultado do MAD (mean/std/min/max) ou resumo do FFT (somatório dos pesos dos quatro primeiros sensores + bins iniciais).
 
-    - **Erro `IsPowerOfTwo(fft_length_data[1])`:** o kernel `RFFT` do TensorFlow Lite exige que o comprimento da FFT seja potência de 2. O projeto usa 4096, mas qualquer potência de 2 funciona desde que atualize `make_fft_model.py` e `FirstViewModel.FFT_SIGNAL_LENGTH`.
-    - **`GpuDelegateFactory$Options` não encontrado:** garanta que o módulo `vulkanfft` dependa tanto de `org.tensorflow:tensorflow-lite-gpu` quanto de `org.tensorflow:tensorflow-lite-gpu-api` (já configurado no `build.gradle.kts`) e sincronize o projeto.
-    - **Delegate GPU/NNAPI falhando no MAD:** versões antigas do `mad_model.tflite` usavam `int32` e os delegates não conseguiam aplicar. A versão atual gerada por `make_mad_model_float.py` trabalha em float32, permitindo GPU/NNAPI. Se observar o erro novamente, regenere o modelo com o script.
+Todas essas métricas são armazenadas em `benchmark_results.csv` (para consumo em planilhas) e em `benchmark_results.txt` (versão legível). A API usa `BenchmarkReporter` para anexar os metadados de dispositivo (fabricante/modelo, hardware, SoC, SDK, estado do modo economia).
 
-    ## Próximos passos sugeridos
+## Teste energético automatizado
 
-    - Ajustar a conversão de timestamps no `getMAD` para evitar que todas as amostras caiam em um único bloco.
-    - Se quiser outros tamanhos de FFT, altere `NUM_SENSORS` e `SIGNAL_LENGTH` em `make_fft_model.py`, gere novamente o modelo e atualize as constantes em `FirstViewModel`/`FftCpuProcessor`.
-    - Adicionar testes instrumentados que validem o comparativo CPU vs. TFLite para prevenir regressões (ex.: comparar somatório de magnitudes ponderadas).
+O bloco “Teste de gasto energético” possui:
+
+1. **Botão “Iniciar ciclo energético (4 cenários)”**: dispara um job em background que executa, nessa ordem, os cenários MAD CPU Kotlin, MAD TFLite CPU, MAD TFLite GPU e MAD TFLite NNAPI. Cada cenário roda **100 execuções**. Antes e depois de cada bloco são capturados:
+   - `% de bateria`, energia em nWh (`BATTERY_PROPERTY_ENERGY_COUNTER`), carga em mAh (`BATTERY_PROPERTY_CHARGE_COUNTER`), temperatura e estado de carregamento.
+   - Modo economia de bateria (ligado/desligado) via `PowerManager`.
+2. **Botão “Cancelar teste energético”**: cancela imediatamente o job (caso esteja rodando). A UI mostra “Teste energético em execução/parado” e desabilita/habilita os botões automaticamente.
+3. **Área de status**: apresenta o texto instrutivo + estado atual, permitindo que o usuário rode uma vez sem modo economia e depois repita com o modo ativado.
+
+Saídas do teste energético:
+
+- `energy_tests.txt`: resumo textual por cenário (100 execuções) com tempo total e queda de bateria.
+- `energy_results.csv`: registro estruturado contendo todos os campos coletados (início/fim de bateria, variação, energia, temperatura, se estava carregando, notas, etc.).
+
+Esses arquivos são totalmente separados dos benchmarks normais. O botão “Apagar logs” (via `ResultLogger.clearAll`) limpa ambos os conjuntos, garantindo que o professor possa inspecionar apenas os dados mais recentes.
+
+## Fluxos internos
+
+- **Geração de dados**: `AccelerometerBatchGenerator` cria 10 sensores × 4096 amostras; `FftInputBuilder` converte para magnitudes float e produz pesos dinâmicos.
+- **MAD Kotlin**: `getMAD()` calcula magnitude, agrupa em janelas de 5 s (`TimeUnit.SECONDS.toMillis(5)`) e devolve média/desvio/mín/máx.
+- **MAD TFLite**: `StatModelProcessor` carrega `mad_model.tflite` e injeta os delegates CPU/GPU/NNAPI; os tempos são obtidos preenchendo `ByteBuffer`s diretos (transferência) e medindo `interpreter.run()` (processamento).
+- **FFT CPU**: `FftCpuProcessor.process()` roda o DFT direto e retorna `FftResult`.
+- **FFT TFLite**: `FftTfliteProcessor.process()` usa `runForMultipleInputsOutputs` com buffers diretos para mapear real/imag/magnitude/magnitude ponderada.
+- **Registro**: `BenchmarkReporter.append()` escreve CSV/TXT das execuções normais; `EnergyReporter.append()` grava as medições energéticas.
+
+Mais detalhes conceituais do pipeline FFT (geração dos pesos, ordem dos tensores, etc.) estão em `docs/fft_pipeline.md`.
+
+## Como operar os testes no app
+
+1. Abra o aplicativo e use os botões dos blocos “MAD” ou “FFT” para rodar testes individuais. Cada clique dispara 10 repetições e atualiza o texto “Benchmark”.
+2. Clique em “Executar suíte completa” para percorrer todos os cenários sequencialmente; acompanhe a barra/label de progresso.
+3. Para o teste energético, certifique-se de que o celular não está carregando, ajuste o modo economia conforme o cenário desejado e toque em “Iniciar ciclo energético”. O processo leva alguns minutos (400 execuções ao todo). Use “Cancelar” se precisar interromper.
+4. Compartilhe os resultados via “Compartilhar logs”; o app junta todos os arquivos CSV/TXT da pasta `benchmarks/`.
+5. Caso queira recomeçar, use “Apagar logs” para limpar completamente tanto os benchmarks quanto os registros energéticos.

@@ -14,7 +14,20 @@ data class BenchmarkEntry(
     val dataDescription: String,
     val inputSize: Int,
     val durationMs: Double,
+    val durationStdDev: Double,
+    val durationMin: Double,
+    val durationMax: Double,
+    val transferDurationMs: Double,
+    val transferStdDev: Double,
+    val transferMin: Double,
+    val transferMax: Double,
+    val computeDurationMs: Double,
+    val computeStdDev: Double,
+    val computeMin: Double,
+    val computeMax: Double,
     val throughput: Double,
+    val iterations: Int,
+    val batchSize: Int,
     val estimatedEnergyImpact: String,
     val deviceInfo: DeviceInfo,
     val extraNotes: String
@@ -28,7 +41,20 @@ data class BenchmarkEntry(
             dataDescription,
             inputSize.toString(),
             String.format(Locale.US, "%.6f", durationMs),
+            String.format(Locale.US, "%.6f", durationStdDev),
+            String.format(Locale.US, "%.6f", durationMin),
+            String.format(Locale.US, "%.6f", durationMax),
+            String.format(Locale.US, "%.6f", transferDurationMs),
+            String.format(Locale.US, "%.6f", transferStdDev),
+            String.format(Locale.US, "%.6f", transferMin),
+            String.format(Locale.US, "%.6f", transferMax),
+            String.format(Locale.US, "%.6f", computeDurationMs),
+            String.format(Locale.US, "%.6f", computeStdDev),
+            String.format(Locale.US, "%.6f", computeMin),
+            String.format(Locale.US, "%.6f", computeMax),
             String.format(Locale.US, "%.3f", throughput),
+            iterations.toString(),
+            batchSize.toString(),
             estimatedEnergyImpact,
             deviceInfo.manufacturer,
             deviceInfo.model,
@@ -50,7 +76,16 @@ data class BenchmarkEntry(
         builder.appendLine("Teste: $testName")
         builder.appendLine("Modo: $processingMode | Delegate: $delegate")
         builder.appendLine("Dados: $dataDescription ($inputSize amostras)")
-        builder.appendLine("Duração: ${"%.3f".format(durationMs)} ms | Throughput: ${"%.3f".format(throughput)} ops/s")
+        builder.appendLine("Iterações: $iterations | Pacotes/batch: $batchSize")
+        builder.appendLine(
+            "Total: ${"%.3f".format(durationMs)}±${"%.3f".format(durationStdDev)} ms " +
+                "(min=${"%.3f".format(durationMin)} / max=${"%.3f".format(durationMax)})"
+        )
+        builder.appendLine(
+            "Transferência: ${"%.3f".format(transferDurationMs)} ms " +
+                " | Processamento: ${"%.3f".format(computeDurationMs)} ms"
+        )
+        builder.appendLine("Throughput: ${"%.3f".format(throughput)} ops/s")
         builder.appendLine("Impacto energético estimado: $estimatedEnergyImpact")
         builder.appendLine("Dispositivo: ${deviceInfo.manufacturer} ${deviceInfo.model} (HW=${deviceInfo.hardware}, Board=${deviceInfo.board}, SDK=${deviceInfo.sdkInt})")
         builder.appendLine("Power saver ativo: ${deviceInfo.isPowerSaveMode}")
@@ -75,7 +110,20 @@ object BenchmarkReporter {
         "data_description",
         "input_size",
         "duration_ms",
+        "duration_std_ms",
+        "duration_min_ms",
+        "duration_max_ms",
+        "transfer_ms",
+        "transfer_std_ms",
+        "transfer_min_ms",
+        "transfer_max_ms",
+        "compute_ms",
+        "compute_std_ms",
+        "compute_min_ms",
+        "compute_max_ms",
         "throughput_ops_per_sec",
+        "iterations",
+        "batch_size",
         "estimated_energy",
         "manufacturer",
         "model",

@@ -14,23 +14,27 @@ class BenchmarkProcessor2(
     suspend fun runBenchmark(input: Array<IntArray>): BenchmarkResult {
         Log.d(tag, "===== Início do Benchmark Estatístico =====")
 
-        val durations = mutableListOf<Double>()
+        val timingSamples = mutableListOf<InferenceTiming>()
 
         repeat(repetitions) {
             val processor = processorFactory()
 
-            val start = System.nanoTime()
             val result = processor.process(input)
-            val end = System.nanoTime()
 
             processor.close()
 
-            val durationMs = (end - start) / 1_000_000.0
-            durations.add(durationMs)
+            val durationMs = result.timing.totalMs
+            timingSamples.add(result.timing)
 
-            Log.d(tag, "Execução ${it + 1}: $durationMs ms - Saída[0]: ${result[0]}")
+            Log.d(
+                tag,
+                "Execução ${it + 1}: total=${"%.3f".format(durationMs)} ms " +
+                    "(transfer=${"%.3f".format(result.timing.transferMs)} ms | " +
+                    "proc=${"%.3f".format(result.timing.computeMs)} ms) - Saída[0]: ${result.output[0]}"
+            )
         }
 
+        val durations = timingSamples.map { it.totalMs }
         val mean = durations.average()
         val stdDev = sqrt(durations.map { (it - mean).pow(2) }.average())
         val min = durations.minOrNull() ?: 0.0
@@ -48,7 +52,8 @@ class BenchmarkProcessor2(
             stdDev = stdDev,
             min = min,
             max = max,
-            durations = durations
+            durations = durations,
+            timings = timingSamples
         )
     }
 
@@ -57,6 +62,7 @@ class BenchmarkProcessor2(
         val stdDev: Double,
         val min: Double,
         val max: Double,
-        val durations: List<Double>
+        val durations: List<Double>,
+        val timings: List<InferenceTiming>
     )
 }

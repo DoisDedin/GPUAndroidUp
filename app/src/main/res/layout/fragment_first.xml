@@ -38,6 +38,14 @@
             android:textAppearance="?attr/textAppearanceBody2" />
 
         <TextView
+            android:id="@+id/text_benchmark_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/benchmark_output_placeholder"
+            android:textAppearance="?attr/textAppearanceBody2" />
+
+        <TextView
             android:id="@+id/text_mad_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -192,6 +200,113 @@
             android:text="@string/btn_fft_tflite_nn"
             android:textAllCaps="false"
             android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_fft_batch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/section_fft_batch"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_fft_cpu_batch"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/fft_cpu_color"
+            android:text="@string/btn_fft_cpu_batch"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_fft_tflite_cpu_batch"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/fft_tflite_color"
+            android:text="@string/btn_fft_tflite_cpu_batch"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_fft_tflite_gpu_batch"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/mad_tflite_gpu_color"
+            android:text="@string/btn_fft_tflite_gpu_batch"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_fft_tflite_nn_batch"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/mad_tflite_nn_color"
+            android:text="@string/btn_fft_tflite_nn_batch"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/text_energy_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/section_energy"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <TextView
+            android:id="@+id/text_power_save_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/energy_note"
+            android:textAppearance="?attr/textAppearanceBody2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_run_energy_test"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/fft_tflite_color"
+            android:text="@string/btn_run_energy_test"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_cancel_energy_test"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/logs_clear_color"
+            android:text="@string/btn_cancel_energy_test"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:enabled="false" />
+
+        <TextView
+            android:id="@+id/text_energy_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/energy_status_idle"
+            android:textAppearance="?attr/textAppearanceBody2" />
+
+        <TextView
+            android:id="@+id/text_energy_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/energy_output_placeholder"
+            android:textAppearance="?attr/textAppearanceBody2" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_share_logs"
