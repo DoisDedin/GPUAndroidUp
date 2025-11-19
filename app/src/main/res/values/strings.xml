@@ -26,6 +26,11 @@
     <string name="btn_fft_tflite_gpu_batch">FFT TFLite GPU x10</string>
     <string name="btn_fft_tflite_nn_batch">FFT TFLite NNAPI x10</string>
     <string name="section_energy">Teste de gasto energético</string>
+    <string name="section_mad_scale">Tamanho do vetor (MAD)</string>
+    <string name="section_fft_scale">Tamanho da janela (FFT)</string>
+    <string name="scale_label_base">Padrão (4k)</string>
+    <string name="scale_label_double">Duplo (8k)</string>
+    <string name="scale_label_quad">Máximo (16k)</string>
     <string name="energy_note">Ative/desative o modo economia de bateria manualmente. O teste energético executa automaticamente MAD CPU puro, TFLite CPU, GPU e NNAPI (100 execuções cada) para medir a drenagem. Execute sem carregador e depois repita com o modo economia ligado para registrar ambos.</string>
     <string name="btn_run_energy_test">Iniciar ciclo energético (4 cenários)</string>
     <string name="btn_cancel_energy_test">Cancelar teste energético</string>
@@ -36,8 +41,11 @@
     <string name="power_save_on">Economia de bateria ATIVA</string>
     <string name="power_save_off">Economia de bateria DESATIVADA</string>
     <string name="energy_mode_state">Estado atual: %1$s</string>
+    <string name="energy_status_permission_denied">Permita notificações para manter o serviço de teste energético em primeiro plano.</string>
     <string name="btn_share_logs">Compartilhar logs</string>
     <string name="btn_clear_logs">Apagar logs</string>
     <string name="btn_run_all">Executar suíte completa</string>
     <string name="progress_idle">Aguardando testes</string>
+    <string name="energy_test_notification_title">Testes energéticos</string>
+    <string name="energy_test_notification_desc">Executando benchmarks para medir consumo</string>
 </resources>

@@ -1,16 +1,23 @@
 package com.example.vulkanfft.view
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.vulkanfft.Algorithm
 import com.example.vulkanfft.BenchmarkScenario
+import com.example.vulkanfft.DataScale
 import com.example.vulkanfft.FirstViewModel
 import com.example.vulkanfft.R
 import com.example.vulkanfft.databinding.FragmentFirstBinding
@@ -25,6 +32,26 @@ class FirstFragment : Fragment() {
     private lateinit var viewModel: FirstViewModel
 
     private var _binding: FragmentFirstBinding? = null
+    private var pendingEnergyStart = false
+    private var pendingMadScale: DataScale = DataScale.BASE
+    private var pendingFftScale: DataScale = DataScale.BASE
+
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            val ctx = context
+            if (granted) {
+                if (pendingEnergyStart && ctx != null) {
+                    viewModel.startEnergyTest(ctx, pendingMadScale, pendingFftScale)
+                }
+            } else if (pendingEnergyStart) {
+                Toast.makeText(
+                    ctx,
+                    getString(R.string.energy_status_permission_denied),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            pendingEnergyStart = false
+        }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -66,13 +93,11 @@ class FirstFragment : Fragment() {
         binding.buttonFftTfliteGpuBatch.bindScenario(BenchmarkScenario.FFT_TFLITE_GPU_BATCH)
         binding.buttonFftTfliteNnBatch.bindScenario(BenchmarkScenario.FFT_TFLITE_NN_BATCH)
 
-        binding.buttonRunEnergyTest.setOnClickListener {
-            val context = context ?: return@setOnClickListener
-            viewModel.startEnergyTest(context)
-        }
+        binding.buttonRunEnergyTest.setOnClickListener { startEnergyTestWithPermission() }
 
         binding.buttonCancelEnergyTest.setOnClickListener {
-            viewModel.cancelEnergyTest()
+            val ctx = context ?: return@setOnClickListener
+            viewModel.cancelEnergyTest(ctx)
         }
 
         binding.buttonShareLogs.setOnClickListener {
@@ -155,7 +180,11 @@ class FirstFragment : Fragment() {
     private fun View.bindScenario(scenario: BenchmarkScenario) {
         setOnClickListener {
             this@FirstFragment.context?.let { ctx ->
-                viewModel.runScenario(ctx, scenario)
+                val scale = when (scenario.algorithm) {
+                    Algorithm.MAD -> currentMadScale()
+                    Algorithm.FFT -> currentFftScale()
+                }
+                viewModel.runScenario(ctx, scenario, scale = scale)
             }
         }
     }
@@ -176,5 +205,41 @@ class FirstFragment : Fragment() {
         }
         binding.textEnergyStatus.text =
             getString(statusRes) + "\n" + getString(R.string.energy_mode_state, powerSaveText)
+    }
+
+    private fun startEnergyTestWithPermission() {
+        val ctx = context ?: return
+        val madScale = currentMadScale()
+        val fftScale = currentFftScale()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val hasPermission = ContextCompat.checkSelfPermission(
+                ctx,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+            if (!hasPermission) {
+                pendingEnergyStart = true
+                pendingMadScale = madScale
+                pendingFftScale = fftScale
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                return
+            }
+        }
+        viewModel.startEnergyTest(ctx, madScale, fftScale)
+    }
+
+    private fun currentMadScale(): DataScale {
+        return when (binding.chipGroupMadScale.checkedChipId) {
+            binding.chipMadScaleDouble.id -> DataScale.DOUBLE
+            binding.chipMadScaleQuad.id -> DataScale.QUADRUPLE
+            else -> DataScale.BASE
+        }
+    }
+
+    private fun currentFftScale(): DataScale {
+        return when (binding.chipGroupFftScale.checkedChipId) {
+            binding.chipFftScaleDouble.id -> DataScale.DOUBLE
+            binding.chipFftScaleQuad.id -> DataScale.QUADRUPLE
+            else -> DataScale.BASE
+        }
     }
 }

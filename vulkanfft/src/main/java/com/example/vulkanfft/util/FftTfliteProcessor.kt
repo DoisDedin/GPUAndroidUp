@@ -7,6 +7,7 @@ import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.GpuDelegate
 import org.tensorflow.lite.nnapi.NnApiDelegate
 import java.io.FileInputStream
+import java.io.IOException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.channels.FileChannel
@@ -58,17 +59,30 @@ class FftTfliteProcessor(
             }
         }
 
-        val modelBuffer = loadModelFile(context, "fft_model.tflite")
-        interpreter = Interpreter(modelBuffer, options)
+        val modelBuffer = loadModelFile(context, signalLength)
+        interpreter = Interpreter(modelBuffer, options).apply {
+            resizeInput(0, intArrayOf(numSensors, freqBins))
+            resizeInput(1, intArrayOf(numSensors, signalLength))
+            allocateTensors()
+        }
     }
 
-    private fun loadModelFile(context: Context, filename: String): ByteBuffer {
-        val fileDescriptor = context.assets.openFd(filename)
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+    private fun loadModelFile(context: Context, signalLength: Int): ByteBuffer {
+        val assetManager = context.assets
+        val candidate = "fft_model_${signalLength}.tflite"
+        val descriptor = try {
+            assetManager.openFd(candidate)
+        } catch (_: IOException) {
+            assetManager.openFd("fft_model.tflite")
+        }
+        val startOffset = descriptor.startOffset
+        val declaredLength = descriptor.declaredLength
+        val inputStream = FileInputStream(descriptor.fileDescriptor)
         val fileChannel = inputStream.channel
-        val startOffset = fileDescriptor.startOffset
-        val declaredLength = fileDescriptor.declaredLength
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+        val mapped = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+        inputStream.close()
+        descriptor.close()
+        return mapped
     }
 
     fun process(

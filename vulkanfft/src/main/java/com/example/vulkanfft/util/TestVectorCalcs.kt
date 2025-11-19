@@ -5,6 +5,7 @@ import android.util.Log
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.gpu.GpuDelegate
 import java.io.FileInputStream
+import java.io.IOException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.channels.FileChannel
@@ -53,7 +54,7 @@ class StatModelProcessor(
                 Log.d(tag, "✅ Usando CPU com XNNPACK")
             }
         }
-        val modelBuffer = loadModelFile(context, "mad_model.tflite")
+        val modelBuffer = loadModelFile(context)
         interpreter = try {
             Interpreter(modelBuffer, options)
         } catch (e: IllegalArgumentException) {
@@ -70,13 +71,22 @@ class StatModelProcessor(
         interpreter.allocateTensors()
     }
 
-    private fun loadModelFile(context: Context, filename: String): ByteBuffer {
-        val fileDescriptor = context.assets.openFd(filename)
-        val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
+    private fun loadModelFile(context: Context): ByteBuffer {
+        val assetManager = context.assets
+        val assetName = "mad_model_${sizeVector}.tflite"
+        val descriptor = try {
+            assetManager.openFd(assetName)
+        } catch (_: IOException) {
+            assetManager.openFd("mad_model.tflite")
+        }
+        val startOffset = descriptor.startOffset
+        val declaredLength = descriptor.declaredLength
+        val inputStream = FileInputStream(descriptor.fileDescriptor)
         val fileChannel = inputStream.channel
-        val startOffset = fileDescriptor.startOffset
-        val declaredLength = fileDescriptor.declaredLength
-        return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+        val mapped = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
+        inputStream.close()
+        descriptor.close()
+        return mapped
     }
 
     fun process(input: Array<IntArray>): InferenceResult<FloatArray> {

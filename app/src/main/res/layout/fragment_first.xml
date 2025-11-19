@@ -53,101 +53,188 @@
             android:text="@string/section_mad_single"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_cpu_single"
-            style="@style/Widget.MaterialComponents.Button"
+        <TextView
+            android:id="@+id/text_mad_scale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_cpu_color"
-            android:text="@string/btn_mad_cpu_single"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:text="@string/section_mad_scale"
+            android:textAppearance="?attr/textAppearanceBody2" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_cpu_single"
-            style="@style/Widget.MaterialComponents.Button"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_mad_scale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_cpu_color"
-            android:text="@string/btn_mad_tflite_cpu_single"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            app:singleSelection="true"
+            app:selectionRequired="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_gpu_single"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_gpu_color"
-            android:text="@string/btn_mad_tflite_gpu_single"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_mad_scale_base"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/scale_label_base"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_nn_single"
-            style="@style/Widget.MaterialComponents.Button"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_mad_scale_double"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scale_label_double"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_mad_scale_quad"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scale_label_quad"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_nn_color"
-            android:text="@string/btn_mad_tflite_nn_single"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_cpu_single"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_cpu_single"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_cpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_cpu_single"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_cpu_single"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_cpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_gpu_single"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_gpu_single"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_gpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_nn_single"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_nn_single"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_nn_color"
+                android:textColor="@color/white" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_mad_single"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="button_mad_cpu_single,button_mad_tflite_cpu_single,button_mad_tflite_gpu_single,button_mad_tflite_nn_single"
+                app:flow_horizontalAlign="center"
+                app:flow_horizontalGap="12dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="12dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/text_mad_batch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:text="@string/section_mad_batch"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_cpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_cpu_color"
-            android:text="@string/btn_mad_cpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:layout_marginTop="12dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_cpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_cpu_color"
-            android:text="@string/btn_mad_tflite_cpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_cpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_cpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_cpu_color"
+                android:textColor="@color/white" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_gpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_gpu_color"
-            android:text="@string/btn_mad_tflite_gpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_cpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_cpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_cpu_color"
+                android:textColor="@color/white" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_mad_tflite_nn_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_nn_color"
-            android:text="@string/btn_mad_tflite_nn_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_gpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_gpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_gpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_mad_tflite_nn_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_mad_tflite_nn_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_nn_color"
+                android:textColor="@color/white" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_mad_batch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="button_mad_cpu_batch,button_mad_tflite_cpu_batch,button_mad_tflite_gpu_batch,button_mad_tflite_nn_batch"
+                app:flow_horizontalAlign="center"
+                app:flow_horizontalGap="12dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="12dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/text_fft"
@@ -157,101 +244,188 @@
             android:text="@string/section_fft"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_cpu"
-            style="@style/Widget.MaterialComponents.Button"
+        <TextView
+            android:id="@+id/text_fft_scale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="@color/fft_cpu_color"
-            android:text="@string/btn_fft_cpu"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:text="@string/section_fft_scale"
+            android:textAppearance="?attr/textAppearanceBody2" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_cpu"
-            style="@style/Widget.MaterialComponents.Button"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_fft_scale"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/fft_tflite_color"
-            android:text="@string/btn_fft_tflite_cpu"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            app:singleSelection="true"
+            app:selectionRequired="true">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_gpu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_gpu_color"
-            android:text="@string/btn_fft_tflite_gpu"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fft_scale_base"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/scale_label_base"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_nn"
-            style="@style/Widget.MaterialComponents.Button"
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fft_scale_double"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scale_label_double"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_fft_scale_quad"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scale_label_quad"
+                app:chipBackgroundColor="?attr/colorSurface"
+                app:chipIconVisible="false"
+                app:chipStrokeWidth="1dp" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_nn_color"
-            android:text="@string/btn_fft_tflite_nn"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:layout_marginTop="12dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_cpu"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_cpu"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/fft_cpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_cpu"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_cpu"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/fft_tflite_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_gpu"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_gpu"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_gpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_nn"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_nn"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_nn_color"
+                android:textColor="@color/white" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_fft_single"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="button_fft_cpu,button_fft_tflite_cpu,button_fft_tflite_gpu,button_fft_tflite_nn"
+                app:flow_horizontalAlign="center"
+                app:flow_horizontalGap="12dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="12dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/text_fft_batch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="20dp"
             android:text="@string/section_fft_batch"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_cpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/fft_cpu_color"
-            android:text="@string/btn_fft_cpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            android:layout_marginTop="12dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_cpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/fft_tflite_color"
-            android:text="@string/btn_fft_tflite_cpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_cpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_cpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/fft_cpu_color"
+                android:textColor="@color/white" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_gpu_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_gpu_color"
-            android:text="@string/btn_fft_tflite_gpu_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_cpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_cpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/fft_tflite_color"
+                android:textColor="@color/white" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_fft_tflite_nn_batch"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/mad_tflite_nn_color"
-            android:text="@string/btn_fft_tflite_nn_batch"
-            android:textAllCaps="false"
-            android:textColor="@color/white" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_gpu_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_gpu_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_gpu_color"
+                android:textColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fft_tflite_nn_batch"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:text="@string/btn_fft_tflite_nn_batch"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/mad_tflite_nn_color"
+                android:textColor="@color/white" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/flow_fft_batch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="button_fft_cpu_batch,button_fft_tflite_cpu_batch,button_fft_tflite_gpu_batch,button_fft_tflite_nn_batch"
+                app:flow_horizontalAlign="center"
+                app:flow_horizontalGap="12dp"
+                app:flow_maxElementsWrap="2"
+                app:flow_verticalGap="12dp"
+                app:flow_wrapMode="aligned"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/text_energy_header"
