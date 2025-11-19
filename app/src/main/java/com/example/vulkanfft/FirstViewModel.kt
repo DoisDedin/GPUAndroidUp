@@ -15,6 +15,8 @@ class FirstViewModel : ViewModel() {
     private val benchmarkExecutor = BenchmarkExecutor()
     private val energyLog = mutableListOf<String>()
     private var currentEnergyStatus: String? = null
+    private var benchmarkIterations = DEFAULT_ITERATIONS_OPTION
+    private var benchmarkBatchSize = DEFAULT_BATCH_OPTION
 
     private val _benchmarkResult = MutableLiveData("Aguardando execuções.")
     val benchmarkResult: LiveData<String> = _benchmarkResult
@@ -97,15 +99,17 @@ class FirstViewModel : ViewModel() {
     fun runScenario(
         context: Context,
         scenario: BenchmarkScenario,
-        iterations: Int = BenchmarkExecutor.DEFAULT_BENCH_REPETITIONS,
         scale: DataScale = DataScale.BASE
     ) {
         viewModelScope.launch(Dispatchers.Default) {
+            val iterations = benchmarkIterations
+            val batchSize = benchmarkBatchSize
             val summary = benchmarkExecutor.runScenario(
                 context = context.applicationContext,
                 scenario = scenario,
                 iterations = iterations,
-                scale = scale
+                scale = scale,
+                batchSizeOverride = batchSize
             )
             _benchmarkResult.postValue(summary.summaryText)
         }
@@ -116,6 +120,8 @@ class FirstViewModel : ViewModel() {
             val ctx = context.applicationContext
             val scenarios = BenchmarkScenario.suiteOrder
             val scales = DataScale.values()
+            val iterations = benchmarkIterations
+            val batchSize = benchmarkBatchSize
             val totalSteps = scenarios.size * scales.size
             var currentStep = 0
             _progress.postValue(
@@ -131,8 +137,9 @@ class FirstViewModel : ViewModel() {
                     val summary = benchmarkExecutor.runScenario(
                         context = ctx,
                         scenario = scenario,
-                        iterations = BenchmarkExecutor.DEFAULT_BENCH_REPETITIONS,
-                        scale = scale
+                        iterations = iterations,
+                        scale = scale,
+                        batchSizeOverride = batchSize
                     )
                     currentStep++
                     _benchmarkResult.postValue(summary.summaryText)
@@ -172,6 +179,18 @@ class FirstViewModel : ViewModel() {
     fun cancelEnergyTest(context: Context) {
         EnergyTestService.stop(context.applicationContext)
     }
+
+    fun updateBenchmarkIterations(value: Int) {
+        benchmarkIterations = value.coerceAtLeast(1)
+    }
+
+    fun currentBenchmarkIterations(): Int = benchmarkIterations
+
+    fun updateBatchSize(value: Int) {
+        benchmarkBatchSize = value.coerceAtLeast(1)
+    }
+
+    fun currentBatchSize(): Int = benchmarkBatchSize
 }
 
 data class BenchmarkProgress(
@@ -382,3 +401,6 @@ enum class BenchmarkScenario(
         val suiteOrder = values().toList()
     }
 }
+
+private const val DEFAULT_ITERATIONS_OPTION = 4
+private const val DEFAULT_BATCH_OPTION = 4

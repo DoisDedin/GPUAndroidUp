@@ -41,9 +41,10 @@ class BenchmarkExecutor {
         scenario: BenchmarkScenario,
         iterations: Int,
         scale: DataScale = DataScale.BASE,
+        batchSizeOverride: Int = DEFAULT_BATCH_SIZE,
         logResults: Boolean = true
     ): ScenarioRunSummary {
-        return executeScenario(context, scenario, iterations, scale, logResults)
+        return executeScenario(context, scenario, iterations, scale, batchSizeOverride, logResults)
     }
 
     suspend fun runEnergyTests(
@@ -73,6 +74,7 @@ class BenchmarkExecutor {
                 scenario = scenario,
                 iterations = iterations,
                 scale = scale,
+                batchSizeOverride = DEFAULT_BATCH_SIZE,
                 logResults = false
             )
             val elapsed = System.currentTimeMillis() - scenarioStart
@@ -132,11 +134,12 @@ class BenchmarkExecutor {
         scenario: BenchmarkScenario,
         iterations: Int,
         scale: DataScale,
+        batchSizeOverride: Int,
         logResults: Boolean = true
     ): ScenarioRunSummary {
         return when (scenario.algorithm) {
-            Algorithm.MAD -> runMadScenario(context, scenario, iterations, scale, logResults)
-            Algorithm.FFT -> runFftScenario(context, scenario, iterations, scale, logResults)
+            Algorithm.MAD -> runMadScenario(context, scenario, iterations, scale, batchSizeOverride, logResults)
+            Algorithm.FFT -> runFftScenario(context, scenario, iterations, scale, batchSizeOverride, logResults)
         }
     }
 
@@ -145,10 +148,11 @@ class BenchmarkExecutor {
         scenario: BenchmarkScenario,
         iterations: Int,
         scale: DataScale,
+        batchSizeOverride: Int,
         logResults: Boolean
     ): ScenarioRunSummary {
         val vectorLength = scale.madVectorLength
-        val inputs = buildMadInputs(scenario.batchMode, vectorLength)
+        val inputs = buildMadInputs(scenario.batchMode, vectorLength, batchSizeOverride)
         val readings = inputs.map { buildMadReadings(it) }
         val timingSamples = mutableListOf<InferenceTiming>()
         var lastResult = "n/d"
@@ -248,10 +252,11 @@ class BenchmarkExecutor {
         scenario: BenchmarkScenario,
         iterations: Int,
         scale: DataScale,
+        batchSizeOverride: Int,
         logResults: Boolean
     ): ScenarioRunSummary {
         val signalLength = scale.fftSignalLength
-        val inputs = buildFftInputs(scenario.batchMode, signalLength)
+        val inputs = buildFftInputs(scenario.batchMode, signalLength, batchSizeOverride)
         val timingSamples = mutableListOf<InferenceTiming>()
         var lastSummary = "-"
         var fallbackNote = ""
@@ -366,6 +371,12 @@ class BenchmarkExecutor {
         scale: DataScale,
         dataLength: Int
     ) {
+        val noteHeader = if (batchSize > 1) {
+            "Notas (média dos $batchSize pacotes): $notes"
+        } else {
+            "Notas: $notes"
+        }
+
         ResultLogger.append(
             context,
             scenario.logFileName,
@@ -376,7 +387,7 @@ class BenchmarkExecutor {
                 "Total(ms): ${formatStats(timingStats.total)}",
                 "Transfer(ms): ${formatStats(timingStats.transfer)}",
                 "Processamento(ms): ${formatStats(timingStats.compute)}",
-                "Notas: $notes"
+                noteHeader
             )
         )
 
@@ -414,25 +425,32 @@ class BenchmarkExecutor {
 
     private fun buildMadInputs(
         batchMode: BatchMode,
-        vectorLength: Int
+        vectorLength: Int,
+        packetSize: Int
     ): List<Array<IntArray>> {
+        val safePacketSize = packetSize.coerceAtLeast(1)
         return when (batchMode) {
             BatchMode.SINGLE -> listOf(ensureMadInput(vectorLength))
             BatchMode.TEN_PACKETS -> {
                 val batch = ensureAccelerometerBatch(vectorLength)
-                batch.sensors.take(BATCH_SIZE).map { it.asMadInput() }
+                val sensors = batch.sensors
+                List(safePacketSize) { index ->
+                    sensors[index % sensors.size].asMadInput()
+                }
             }
         }
     }
 
     private fun buildFftInputs(
         batchMode: BatchMode,
-        signalLength: Int
+        signalLength: Int,
+        packetSize: Int
     ): List<FftInputBuilder.FftProcessorInput> {
+        val safePacketSize = packetSize.coerceAtLeast(1)
         val input = ensureFftInput(signalLength)
         return when (batchMode) {
             BatchMode.SINGLE -> listOf(input)
-            BatchMode.TEN_PACKETS -> List(BATCH_SIZE) { input }
+            BatchMode.TEN_PACKETS -> List(safePacketSize) { input }
         }
     }
 
@@ -742,7 +760,7 @@ class BenchmarkExecutor {
     companion object {
         private const val TAG = "BenchmarkExecutor"
         const val DEFAULT_BENCH_REPETITIONS = 10
-        const val BATCH_SIZE = 10
+        const val DEFAULT_BATCH_SIZE = 10
         const val ENERGY_TEST_ITERATIONS = 100
         const val FFT_NUM_SENSORS = 10
     }

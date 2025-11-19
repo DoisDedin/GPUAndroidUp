@@ -71,6 +71,8 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = androidx.lifecycle.ViewModelProvider(this)[FirstViewModel::class.java]
+        setupIterationControls()
+        setupBatchControls()
 
         binding.buttonRunAll.setOnClickListener {
             this.context?.let { ctx -> viewModel.runFullBenchmarkSuite(ctx) }
@@ -225,6 +227,54 @@ class FirstFragment : Fragment() {
             }
         }
         viewModel.startEnergyTest(ctx, madScale, fftScale)
+    }
+
+    private fun setupIterationControls() {
+        binding.chipGroupIterations.check(iterationChipIdFor(viewModel.currentBenchmarkIterations()))
+        binding.chipGroupIterations.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            iterationValueForChip(id)?.let { viewModel.updateBenchmarkIterations(it) }
+        }
+    }
+
+    private fun setupBatchControls() {
+        binding.chipGroupBatch.check(batchChipIdFor(viewModel.currentBatchSize()))
+        binding.chipGroupBatch.setOnCheckedStateChangeListener { _, checkedIds ->
+            val id = checkedIds.firstOrNull() ?: return@setOnCheckedStateChangeListener
+            batchValueForChip(id)?.let { viewModel.updateBatchSize(it) }
+        }
+    }
+
+    private fun iterationValueForChip(id: Int): Int? = when (id) {
+        binding.chipIterations1.id -> 1
+        binding.chipIterations4.id -> 4
+        binding.chipIterations8.id -> 8
+        binding.chipIterations12.id -> 12
+        else -> null
+    }
+
+    private fun iterationChipIdFor(value: Int): Int = when (value) {
+        1 -> binding.chipIterations1.id
+        4 -> binding.chipIterations4.id
+        8 -> binding.chipIterations8.id
+        12 -> binding.chipIterations12.id
+        else -> binding.chipIterations4.id
+    }
+
+    private fun batchValueForChip(id: Int): Int? = when (id) {
+        binding.chipBatch1.id -> 1
+        binding.chipBatch4.id -> 4
+        binding.chipBatch8.id -> 8
+        binding.chipBatch12.id -> 12
+        else -> null
+    }
+
+    private fun batchChipIdFor(value: Int): Int = when (value) {
+        1 -> binding.chipBatch1.id
+        4 -> binding.chipBatch4.id
+        8 -> binding.chipBatch8.id
+        12 -> binding.chipBatch12.id
+        else -> binding.chipBatch4.id
     }
 
     private fun currentMadScale(): DataScale {

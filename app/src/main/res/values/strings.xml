@@ -9,6 +9,8 @@
     <string name="section_mad_batch">MAD — Processar 10 pacotes</string>
     <string name="section_fft">FFT — Execução individual (10 repetições)</string>
     <string name="section_fft_batch">FFT — Processar 10 pacotes</string>
+    <string name="label_iterations">Repetições por cenário</string>
+    <string name="label_batch_size">Pacotes (modo x10)</string>
     <string name="btn_mad_cpu_single">CPU Kotlin</string>
     <string name="btn_mad_tflite_cpu_single">TFLite CPU</string>
     <string name="btn_mad_tflite_gpu_single">TFLite GPU</string>
