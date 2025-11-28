@@ -1,0 +1,27 @@
+===== 2025-11-27 13:19:41.960 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 84,482±4,283 (min=78,762 | max=89,603)
+Transfer(ms): 54,863±4,638 (min=49,010 | max=59,602)
+Processamento(ms): 29,619±0,838 (min=28,242 | max=30,482)
+Notas (média dos 4 pacotes): Mean=1676.8372 | Std=686.63763 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=59,21ms/P=28,24ms, T=59,60ms/P=30,00ms, T=51,63ms/P=30,48ms, T=49,01ms/P=29,75ms
+
+===== 2025-11-27 13:48:52.304 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 81,946±0,403 (min=81,424 | max=82,455)
+Transfer(ms): 37,540±0,671 (min=36,907 | max=38,664)
+Processamento(ms): 44,406±0,431 (min=43,791 | max=44,820)
+Notas (média dos 4 pacotes): Mean=1676.8733 | Std=686.5617 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=38,66ms/P=43,79ms, T=37,21ms/P=44,21ms, T=37,38ms/P=44,82ms, T=36,91ms/P=44,80ms
+
+===== 2025-11-27 14:50:58.134 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 83,242±4,766 (min=78,562 | max=91,180)
+Transfer(ms): 28,396±0,132 (min=28,200 | max=28,569)
+Processamento(ms): 54,846±4,691 (min=50,133 | max=62,611)
+Notas (média dos 4 pacotes): Mean=1676.891 | Std=686.5076 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=28,57ms/P=62,61ms, T=28,43ms/P=50,13ms, T=28,39ms/P=52,66ms, T=28,20ms/P=53,98ms
+

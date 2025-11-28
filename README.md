@@ -105,3 +105,45 @@ Mais detalhes conceituais do pipeline FFT (geração dos pesos, ordem dos tensor
 3. Para o teste energético, certifique-se de que o celular não está carregando, ajuste o modo economia conforme o cenário desejado e toque em “Iniciar ciclo energético”. O processo leva alguns minutos (400 execuções ao todo). Use “Cancelar” se precisar interromper.
 4. Compartilhe os resultados via “Compartilhar logs”; o app junta todos os arquivos CSV/TXT da pasta `benchmarks/`.
 5. Caso queira recomeçar, use “Apagar logs” para limpar completamente tanto os benchmarks quanto os registros energéticos.
+
+## Testes automatizados e tolerâncias
+
+### Unit tests (Gradle)
+
+Rode `./gradlew :app:testDebugUnitTest` para validar:
+
+| Arquivo | O que valida |
+|---------|--------------|
+| `FftValidationUnitTest` | FFT CPU vs DFT manual, aplicação de pesos e todos os modos de normalização (`NONE`, `/N`, `/√N`). |
+| `FftInputBuilderTest` | Conversão de sensores para magnitudes/weights e validação de erros quando faltam amostras. |
+| `MadValidationUnitTest` | `BenchmarkExecutor.getMAD` contra uma implementação manual com janelas de 5 s e determinismo por semente. |
+
+Todos esses testes rodam em JVM pura; logs do `FftCpuProcessor` caem no console (fallback de `println`) para evitar dependência de `android.util.Log`.
+
+### Instrumented tests (device)
+
+`./gradlew :app:connectedAndroidTest` executa `TfliteDelegatesInstrumentedTest`, que compara FFT CPU × FFT TFLite com métricas detalhadas:
+
+- **Métricas logadas**: `maxRelativeDiff`, `meanRelativeDiff`, `maxAbsoluteDiff`, `meanAbsoluteDiff` e `rmse`, além dos oito primeiros bins e suas razões.
+- **Tolerâncias**:
+  - CPU vs CPU: 1,5 %
+  - GPU: 4 % (aceita FP16/FPmix)
+  - NNAPI: 3 %
+
+Os logs aparecem na tag `FFT_TEST`; use qualquer leitor de logcat ou `adb logcat | grep FFT_TEST` para capturá-los e anexar aos relatórios.
+
+#### Reduzindo o tempo dos testes
+
+As execuções FFT CPU podem ser demoradas em dispositivos mais lentos. Por padrão, os testes instrumentados usam 4 sensores e apenas o tamanho 4096. Para rodar a suíte completa (10 sensores e tamanhos 4096/8192/16384), passe o argumento `fftExtended=true`:
+
+```bash
+# Via Gradle
+./gradlew :app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.fftExtended=true
+
+# Ou direto via adb
+adb shell am instrument -w \
+  -e fftExtended true \
+  com.example.vulkanfft.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+A primeira execução do teste imprime a configuração escolhida em `FFT_TEST`. Documente nos relatórios qual modo foi utilizado.

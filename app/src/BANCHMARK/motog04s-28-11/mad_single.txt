@@ -1,0 +1,15 @@
+===== 2025-11-17 22:23:44.489 =====
+Delegate: CPU
+MAD TFLite (CPU) -> 19,310 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 22:23:44.529 =====
+Delegate: GPU
+MAD TFLite (GPU) -> 18,115 ms
+Mean=1751.6404, Std=771.8863, Min=0.0, Max=2502.3801
+
+===== 2025-11-17 22:23:45.132 =====
+Delegate: NNAPI
+MAD TFLite (NNAPI) -> 24,687 ms
+Mean=1751.6404, Std=771.88635, Min=0.0, Max=2502.3801
+

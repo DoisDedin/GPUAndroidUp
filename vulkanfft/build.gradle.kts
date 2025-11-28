@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.tensorflow.lite)
     implementation(libs.tensorflow.lite.gpu)
     implementation(libs.tensorflow.lite.gpu.api)
+    implementation(libs.jtransforms)
 }
 
 val libVersion = "1.1.4"

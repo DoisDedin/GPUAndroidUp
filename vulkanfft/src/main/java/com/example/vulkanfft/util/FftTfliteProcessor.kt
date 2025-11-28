@@ -10,6 +10,7 @@ import java.io.FileInputStream
 import java.io.IOException
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import java.nio.FloatBuffer
 import java.nio.channels.FileChannel
 
 class FftTfliteProcessor(
@@ -21,22 +22,26 @@ class FftTfliteProcessor(
 
     private val tag = "FftTfliteProcessor"
     private val freqBins = signalLength / 2 + 1
-    private var interpreter: Interpreter
-    private var gpuDelegate: Delegate? = null
-    private var nnapiDelegate: Delegate? = null
-    private val weightsInputBuffer = ByteBuffer.allocateDirect(numSensors * freqBins * FLOAT_BYTES)
-        .order(ByteOrder.nativeOrder())
-    private val weightsFloatBuffer = weightsInputBuffer.asFloatBuffer()
-    private val samplesInputBuffer = ByteBuffer.allocateDirect(numSensors * signalLength * FLOAT_BYTES)
-        .order(ByteOrder.nativeOrder())
-    private val samplesFloatBuffer = samplesInputBuffer.asFloatBuffer()
-    private val outputBuffer = ByteBuffer.allocateDirect(numSensors * freqBins * OUTPUT_FIELDS * FLOAT_BYTES)
-        .order(ByteOrder.nativeOrder())
-    private val outputFloatBuffer = outputBuffer.asFloatBuffer()
-    private val outputs = hashMapOf<Int, Any>(0 to outputBuffer)
+    private val interpreter: Interpreter
+    private val gpuDelegate: Delegate?
+    private val nnapiDelegate: Delegate?
+    private val modelVariant: ModelVariant
+    private val samplesInputIndex: Int
+    private val weightsInputIndex: Int?
+    private val inputTensorCount: Int
+    private val weightsInputBuffer: ByteBuffer?
+    private val weightsFloatBuffer: FloatBuffer?
+    private val samplesInputBuffer: ByteBuffer
+    private val samplesFloatBuffer: FloatBuffer
+    private val outputBuffer: ByteBuffer
+    private val outputFloatBuffer: FloatBuffer
+    private val outputs: MutableMap<Int, Any>
+    private val inputArray: Array<Any>
 
     init {
         val options = Interpreter.Options()
+        var localGpuDelegate: Delegate? = null
+        var localNnapiDelegate: Delegate? = null
 
         when (delegateType) {
             DelegateType.GPU -> {
@@ -44,12 +49,12 @@ class FftTfliteProcessor(
                     setPrecisionLossAllowed(false)
                     setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED)
                 }
-                gpuDelegate = GpuDelegate(gpuOptions).also { options.addDelegate(it) }
+                localGpuDelegate = GpuDelegate(gpuOptions).also { options.addDelegate(it) }
                 Log.d(tag, "Usando delegate GPU (full precision)")
             }
 
             DelegateType.NNAPI -> {
-                nnapiDelegate = NnApiDelegate().also { options.addDelegate(it) }
+                localNnapiDelegate = NnApiDelegate().also { options.addDelegate(it) }
                 Log.d(tag, "Usando delegate NNAPI")
             }
 
@@ -58,13 +63,73 @@ class FftTfliteProcessor(
                 Log.d(tag, "Usando delegate CPU (XNNPACK)")
             }
         }
+        gpuDelegate = localGpuDelegate
+        nnapiDelegate = localNnapiDelegate
 
         val modelBuffer = loadModelFile(context, signalLength)
-        interpreter = Interpreter(modelBuffer, options).apply {
-            resizeInput(0, intArrayOf(numSensors, freqBins))
-            resizeInput(1, intArrayOf(numSensors, signalLength))
-            allocateTensors()
+        val createdInterpreter = Interpreter(modelBuffer, options)
+        createdInterpreter.allocateTensors()
+
+        inputTensorCount = createdInterpreter.inputTensorCount
+        require(inputTensorCount in 1..2) {
+            "Modelo FFT TFLite com quantidade inválida de inputs ($inputTensorCount)"
         }
+
+        if (inputTensorCount == 2) {
+            val shape0 = createdInterpreter.getInputTensor(0).shape()
+            val shape1 = createdInterpreter.getInputTensor(1).shape()
+            val (samplesIdx, weightsIdx) = when {
+                shape0.lastOrNull() == signalLength && shape1.lastOrNull() == freqBins -> 0 to 1
+                shape1.lastOrNull() == signalLength && shape0.lastOrNull() == freqBins -> 1 to 0
+                shape0.lastOrNull() == signalLength -> 0 to 1
+                shape1.lastOrNull() == signalLength -> 1 to 0
+                else -> 0 to 1
+            }
+            samplesInputIndex = samplesIdx
+            weightsInputIndex = weightsIdx
+            modelVariant = ModelVariant.STACKED_OUTPUT_WITH_WEIGHTS
+        } else {
+            samplesInputIndex = 0
+            weightsInputIndex = null
+            modelVariant = ModelVariant.MAGNITUDE_ONLY
+        }
+
+        weightsInputBuffer = if (weightsInputIndex != null) {
+            ByteBuffer.allocateDirect(numSensors * freqBins * FLOAT_BYTES).order(ByteOrder.nativeOrder())
+        } else {
+            null
+        }
+        weightsFloatBuffer = weightsInputBuffer?.asFloatBuffer()
+        samplesInputBuffer =
+            ByteBuffer.allocateDirect(numSensors * signalLength * FLOAT_BYTES).order(ByteOrder.nativeOrder())
+        samplesFloatBuffer = samplesInputBuffer.asFloatBuffer()
+
+        val outputFieldCount = if (modelVariant == ModelVariant.STACKED_OUTPUT_WITH_WEIGHTS) OUTPUT_FIELDS else 1
+        outputBuffer = ByteBuffer.allocateDirect(numSensors * freqBins * outputFieldCount * FLOAT_BYTES)
+            .order(ByteOrder.nativeOrder())
+        outputFloatBuffer = outputBuffer.asFloatBuffer()
+
+        createdInterpreter.resizeInput(samplesInputIndex, intArrayOf(numSensors, signalLength))
+        weightsInputIndex?.let {
+            createdInterpreter.resizeInput(it, intArrayOf(numSensors, freqBins))
+        }
+        createdInterpreter.allocateTensors()
+        outputs = hashMapOf(0 to outputBuffer)
+        interpreter = createdInterpreter
+
+        inputArray = if (weightsInputIndex != null) {
+            Array<Any>(inputTensorCount) { samplesInputBuffer }.apply {
+                this[samplesInputIndex] = samplesInputBuffer
+                this[weightsInputIndex!!] = weightsInputBuffer!!
+            }
+        } else {
+            arrayOf(samplesInputBuffer as Any)
+        }
+
+        Log.d(
+            tag,
+            "FFT model variant: $modelVariant (inputs=$inputTensorCount, samplesIndex=$samplesInputIndex, weightsIndex=$weightsInputIndex)"
+        )
     }
 
     private fun loadModelFile(context: Context, signalLength: Int): ByteBuffer {
@@ -105,12 +170,15 @@ class FftTfliteProcessor(
         }
 
         val transferStart = System.nanoTime()
-        weightsFloatBuffer.rewind()
-        for (sensor in 0 until numSensors) {
-            val sensorWeights = weights[sensor]
-            for (bin in 0 until freqBins) {
-                weightsFloatBuffer.put(sensorWeights[bin])
+        weightsFloatBuffer?.let { buffer ->
+            buffer.rewind()
+            for (sensor in 0 until numSensors) {
+                val sensorWeights = weights[sensor]
+                for (bin in 0 until freqBins) {
+                    buffer.put(sensorWeights[bin])
+                }
             }
+            weightsInputBuffer?.rewind()
         }
         samplesFloatBuffer.rewind()
         for (sensor in 0 until numSensors) {
@@ -119,15 +187,11 @@ class FftTfliteProcessor(
                 samplesFloatBuffer.put(sensorSamples[sample])
             }
         }
-        weightsInputBuffer.rewind()
         samplesInputBuffer.rewind()
         val transferDuration = nanosToMillis(System.nanoTime() - transferStart)
 
         val computeStart = System.nanoTime()
-        interpreter.runForMultipleInputsOutputs(
-            arrayOf(weightsInputBuffer, samplesInputBuffer),
-            outputs
-        )
+        interpreter.runForMultipleInputsOutputs(inputArray, outputs)
         val computeDuration = nanosToMillis(System.nanoTime() - computeStart)
         Log.d(tag, "Transferência FFT: ${"%.3f".format(transferDuration)} ms")
         Log.d(tag, "Processamento FFT: ${"%.3f".format(computeDuration)} ms")
@@ -135,22 +199,35 @@ class FftTfliteProcessor(
         outputBuffer.rewind()
         outputFloatBuffer.rewind()
 
-        val complexSpectrum = Array(numSensors) {
-            Array(freqBins) { ComplexFloat(0f, 0f) }
-        }
+        val complexSpectrum = Array(numSensors) { Array(freqBins) { ComplexFloat(0f, 0f) } }
         val magnitudes = Array(numSensors) { FloatArray(freqBins) }
         val weightedMagnitudes = Array(numSensors) { FloatArray(freqBins) }
 
-        for (sensor in 0 until numSensors) {
-            for (bin in 0 until freqBins) {
-                val real = outputFloatBuffer.get()
-                val imag = outputFloatBuffer.get()
-                val magnitude = outputFloatBuffer.get()
-                val weighted = outputFloatBuffer.get()
+        when (modelVariant) {
+            ModelVariant.STACKED_OUTPUT_WITH_WEIGHTS -> {
+                for (sensor in 0 until numSensors) {
+                    for (bin in 0 until freqBins) {
+                        val real = outputFloatBuffer.get()
+                        val imag = outputFloatBuffer.get()
+                        val magnitude = outputFloatBuffer.get()
+                        val weighted = outputFloatBuffer.get()
 
-                complexSpectrum[sensor][bin] = ComplexFloat(real, imag)
-                magnitudes[sensor][bin] = magnitude
-                weightedMagnitudes[sensor][bin] = weighted
+                        complexSpectrum[sensor][bin] = ComplexFloat(real, imag)
+                        magnitudes[sensor][bin] = magnitude
+                        weightedMagnitudes[sensor][bin] = weighted
+                    }
+                }
+            }
+
+            ModelVariant.MAGNITUDE_ONLY -> {
+                for (sensor in 0 until numSensors) {
+                    val currentWeights = weights[sensor]
+                    for (bin in 0 until freqBins) {
+                        val magnitude = outputFloatBuffer.get()
+                        magnitudes[sensor][bin] = magnitude
+                        weightedMagnitudes[sensor][bin] = magnitude * currentWeights[bin]
+                    }
+                }
             }
         }
 
@@ -180,5 +257,10 @@ class FftTfliteProcessor(
     companion object {
         private const val FLOAT_BYTES = 4
         private const val OUTPUT_FIELDS = 4
+    }
+
+    private enum class ModelVariant {
+        STACKED_OUTPUT_WITH_WEIGHTS,
+        MAGNITUDE_ONLY
     }
 }

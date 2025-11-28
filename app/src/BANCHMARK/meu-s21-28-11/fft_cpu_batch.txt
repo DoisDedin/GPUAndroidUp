@@ -1,0 +1,33 @@
+===== 2025-11-27 15:20:31.110 =====
+Cenário: FFT CPU x10
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 45090,248±1759,439 (min=42234,958 | max=46738,555)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 45090,248±1759,439 (min=42234,958 | max=46738,555)
+Notas (média dos 4 pacotes): FFT CPU -> 10091,760 ms
+Σ pesos (4 primeiros): S0=30395710,00 | S1=26603362,00 | S2=20665138,00 | S3=14945800,00
+S0 bins[0..2]: 7300396,50, 1869043,63, 830449,56 | Escala 1x | Tempos: T=0,00ms/P=42234,96ms, T=0,00ms/P=45067,44ms, T=0,00ms/P=46320,04ms, T=0,00ms/P=46738,56ms
+
+===== 2025-11-27 15:37:33.286 =====
+Cenário: FFT CPU x10
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 204346,165±4317,029 (min=201699,842 | max=211816,655)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 204346,165±4317,029 (min=201699,842 | max=211816,655)
+Notas (média dos 4 pacotes): FFT CPU -> 50489,301 ms
+Σ pesos (4 primeiros): S0=81702600,00 | S1=70017080,00 | S2=52407164,00 | S3=35567188,00
+S0 bins[0..2]: 14602056,00, 3737649,50, 1660674,75 | Escala 2x | Tempos: T=0,00ms/P=201699,84ms, T=0,00ms/P=202157,04ms, T=0,00ms/P=211816,65ms, T=0,00ms/P=201711,12ms
+
+===== 2025-11-27 17:12:30.633 =====
+Cenário: FFT CPU x10
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 1219446,839±547418,254 (min=817601,159 | max=2156016,939)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1219446,839±547418,254 (min=817601,159 | max=2156016,939)
+Notas (média dos 4 pacotes): FFT CPU -> 1131686,355 ms
+Σ pesos (4 primeiros): S0=243291088,00 | S1=204428064,00 | S2=147445744,00 | S3=93324952,00
+S0 bins[0..2]: 29205378,00, 7474794,00, 3321052,00 | Escala 4x | Tempos: T=0,00ms/P=817601,16ms, T=0,00ms/P=1044438,23ms, T=0,00ms/P=859731,03ms, T=0,00ms/P=2156016,94ms
+

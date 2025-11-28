@@ -1,26 +1,28 @@
 package com.example.vulkanfft.util
 
 import android.util.Log
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
+import org.jtransforms.fft.FloatFFT_1D
 import kotlin.math.sqrt
 
 /**
- * CPU-only pipeline that mirrors the MAD processor architecture but executes
- * a weighted FFT per sensor channel. The implementation keeps the
- * transformation simple (direct DFT) so that we have a deterministic baseline
- * to benchmark against the TensorFlow Lite implementation.
+ * Implementação CPU que replica o pipeline do TFLite: calcula FFT real (via JTransforms)
+ * por sensor, aplica a mesma normalização escolhida e depois multiplica pelos pesos
+ * de frequência. Serve como baseline determinístico para os testes instrumentados.
  *
- * @param numSensors Number of sensor channels that will arrive simultaneously.
- * @param signalLength Number of samples per sensor (for this prototype we use 10).
+ * @param numSensors Número de sensores processados simultaneamente.
+ * @param signalLength Comprimento da janela por sensor.
+ * @param normalization Convenção de normalização para alinhar com tf.signal.rfft.
  */
 class FftCpuProcessor(
     private val numSensors: Int,
-    private val signalLength: Int
+    private val signalLength: Int,
+    private val normalization: FftNormalization = FftNormalization.NONE
 ) {
 
     private val freqBins = signalLength / 2 + 1
+    private val fft = FloatFFT_1D(signalLength.toLong())
+    // tf.signal.rfft não aplica normalização; mantemos o mesmo padrão em NONE.
+    private val normalizationFactor = normalization.factor(signalLength)
 
     init {
         require(signalLength > 1) { "signalLength precisa ser > 1" }
@@ -31,7 +33,7 @@ class FftCpuProcessor(
         samples: Array<FloatArray>,
         weights: Array<FloatArray>
     ): FftResult {
-        Log.i(TAG, "Iniciando FFT CPU: ${samples.size} sensores × $signalLength amostras")
+        logInfo("Iniciando FFT CPU: ${samples.size} sensores × $signalLength amostras")
         require(samples.size == numSensors) {
             "Esperado $numSensors sensores, recebido ${samples.size}"
         }
@@ -39,71 +41,59 @@ class FftCpuProcessor(
             "Esperado vetor de pesos por sensor ($numSensors), recebido ${weights.size}"
         }
 
-        val complexSpectra = Array(numSensors) { sensorIndex ->
-            val signal = samples[sensorIndex]
-            require(signal.size == signalLength) {
-                "Sensor #$sensorIndex deveria ter $signalLength amostras, mas tem ${signal.size}"
-            }
-            val start = System.nanoTime()
-            val spectrum = computeRealDft(signal, sensorIndex)
-            val durationMs = (System.nanoTime() - start) / 1_000_000.0
-            Log.i(TAG, "Sensor ${sensorIndex + 1}/$numSensors finalizado em ${"%.1f".format(durationMs)} ms")
-            spectrum
-        }
+        val complexSpectra = Array(numSensors) { Array(freqBins) { ComplexFloat(0f, 0f) } }
 
         val magnitudes = Array(numSensors) { FloatArray(freqBins) }
         val weightedMagnitudes = Array(numSensors) { FloatArray(freqBins) }
 
-        complexSpectra.forEachIndexed { sensorIndex, bins ->
+        samples.forEachIndexed { sensorIndex, signal ->
+            require(signal.size == signalLength) {
+                "Sensor #$sensorIndex deveria ter $signalLength amostras, mas tem ${signal.size}"
+            }
+
+            val scratch = FloatArray(2 * signalLength)
+            System.arraycopy(signal, 0, scratch, 0, signalLength)
+            val start = System.nanoTime()
+            fft.realForwardFull(scratch)
+            val durationMs = (System.nanoTime() - start) / 1_000_000.0
+            logInfo("Sensor ${sensorIndex + 1}/$numSensors finalizado em ${"%.1f".format(durationMs)} ms")
+
+            for (bin in 0 until freqBins) {
+                val real = scratch[bin * 2] * normalizationFactor
+                val imag = scratch[bin * 2 + 1] * normalizationFactor
+                val magnitude = sqrt(real * real + imag * imag)
+
+                complexSpectra[sensorIndex][bin] = ComplexFloat(real, imag)
+                magnitudes[sensorIndex][bin] = magnitude
+            }
+        }
+
+        complexSpectra.forEachIndexed { sensorIndex, _ ->
             val weightVector = weights[sensorIndex]
             require(weightVector.size == freqBins) {
                 "Vetor de pesos do sensor #$sensorIndex deveria ter $freqBins posições"
             }
 
-            bins.forEachIndexed { binIndex, complex ->
-                val magnitude = complex.magnitude()
-                magnitudes[sensorIndex][binIndex] = magnitude
+            for (binIndex in 0 until freqBins) {
+                val magnitude = magnitudes[sensorIndex][binIndex]
                 weightedMagnitudes[sensorIndex][binIndex] = magnitude * weightVector[binIndex]
             }
         }
 
-        Log.i(TAG, "FFT CPU concluída para todos os sensores.")
+        logInfo("FFT CPU concluída para todos os sensores.")
         return FftResult(
             complexSpectrum = complexSpectra,
             magnitudes = magnitudes,
             weightedMagnitudes = weightedMagnitudes
         )
     }
-
-    private fun computeRealDft(signal: FloatArray, sensorIndex: Int): Array<ComplexFloat> {
-        val bins = Array(freqBins) { ComplexFloat(0f, 0f) }
-        val twoPiByN = (2.0 * PI / signalLength).toFloat()
-        val progressStep = (freqBins / 8).coerceAtLeast(1)
-
-        for (k in 0 until freqBins) {
-            var real = 0.0
-            var imag = 0.0
-            for (n in 0 until signalLength) {
-                val angle = twoPiByN * k * n
-                val sample = signal[n].toDouble()
-                real += sample * cos(angle.toDouble())
-                imag -= sample * sin(angle.toDouble())
-            }
-            bins[k] = ComplexFloat(real.toFloat(), imag.toFloat())
-            if (k % progressStep == 0 || k == freqBins - 1) {
-                val percent = ((k + 1) / freqBins.toDouble() * 100).toInt()
-                Log.d(
-                    TAG,
-                    "Sensor ${sensorIndex + 1}/$numSensors -> FFT ${percent.coerceAtMost(100)}% concluída"
-                )
-            }
-        }
-
-        return bins
-    }
-
     companion object {
         private const val TAG = "FftCpuProcessor"
+        private fun logInfo(message: String) {
+            runCatching { Log.i(TAG, message) }.getOrElse {
+                println("[$TAG] $message")
+            }
+        }
     }
 }
 
@@ -119,3 +109,15 @@ data class FftResult(
     val magnitudes: Array<FloatArray>,
     val weightedMagnitudes: Array<FloatArray>
 )
+
+enum class FftNormalization {
+    NONE,
+    BY_SIGNAL_LENGTH,
+    BY_SQRT_SIGNAL_LENGTH;
+
+    fun factor(signalLength: Int): Float = when (this) {
+        NONE -> 1f
+        BY_SIGNAL_LENGTH -> 1f / signalLength.toFloat()
+        BY_SQRT_SIGNAL_LENGTH -> 1f / sqrt(signalLength.toFloat())
+    }
+}
