@@ -1,0 +1,54 @@
+===== 2025-11-19 13:31:05.618 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 1x (4096 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 4,486±0,000 (min=4,486 | max=4,486)
+Transfer(ms): 0,848±0,000 (min=0,848 | max=0,848)
+Processamento(ms): 3,638±0,000 (min=3,638 | max=3,638)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,85ms/P=3,64ms
+
+===== 2025-11-19 13:31:25.599 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 2x (8192 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 5,104±0,000 (min=5,104 | max=5,104)
+Transfer(ms): 2,212±0,000 (min=2,212 | max=2,212)
+Processamento(ms): 2,892±0,000 (min=2,892 | max=2,892)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=2,21ms/P=2,89ms
+
+===== 2025-11-19 13:33:03.533 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 4x (16384 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 7,620±0,000 (min=7,620 | max=7,620)
+Transfer(ms): 4,028±0,000 (min=4,028 | max=4,028)
+Processamento(ms): 3,592±0,000 (min=3,592 | max=3,592)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=4,03ms/P=3,59ms
+
+===== 2025-11-26 17:36:05.060 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 8,815±0,626 (min=7,826 | max=9,561)
+Transfer(ms): 2,640±0,230 (min=2,393 | max=3,014)
+Processamento(ms): 6,175±0,436 (min=5,433 | max=6,548)
+Notas (média dos 4 pacotes): Mean=1676.8372 | Std=686.6377 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=2,39ms/P=5,43ms, T=2,53ms/P=6,38ms, T=2,62ms/P=6,34ms, T=3,01ms/P=6,55ms
+
+===== 2025-11-26 17:39:49.740 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 26,470±8,591 (min=17,668 | max=38,349)
+Transfer(ms): 13,215±5,835 (min=7,211 | max=20,536)
+Processamento(ms): 13,254±2,877 (min=10,457 | max=17,812)
+Notas (média dos 4 pacotes): Mean=1676.8733 | Std=686.5617 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=17,34ms/P=13,59ms, T=20,54ms/P=17,81ms, T=7,21ms/P=10,46ms, T=7,78ms/P=11,16ms
+
+===== 2025-11-26 17:57:03.855 =====
+Cenário: MAD TFLite NNAPI x10
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 23,996±1,983 (min=22,530 | max=27,411)
+Transfer(ms): 16,996±1,739 (min=15,888 | max=20,001)
+Processamento(ms): 6,999±0,318 (min=6,635 | max=7,410)
+Notas (média dos 4 pacotes): Mean=1676.891 | Std=686.5076 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=20,00ms/P=7,41ms, T=16,20ms/P=6,75ms, T=15,89ms/P=7,20ms, T=15,89ms/P=6,64ms
+

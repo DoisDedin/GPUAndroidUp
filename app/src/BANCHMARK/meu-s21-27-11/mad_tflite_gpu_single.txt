@@ -1,0 +1,54 @@
+===== 2025-11-19 13:31:05.526 =====
+Cenário: MAD TFLite GPU
+Escala: 1x (4096 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 4,079±0,000 (min=4,079 | max=4,079)
+Transfer(ms): 3,925±0,000 (min=3,925 | max=3,925)
+Processamento(ms): 0,154±0,000 (min=0,154 | max=0,154)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=3,93ms/P=0,15ms
+
+===== 2025-11-19 13:31:25.486 =====
+Cenário: MAD TFLite GPU
+Escala: 2x (8192 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 2,198±0,000 (min=2,198 | max=2,198)
+Transfer(ms): 1,829±0,000 (min=1,829 | max=1,829)
+Processamento(ms): 0,369±0,000 (min=0,369 | max=0,369)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,83ms/P=0,37ms
+
+===== 2025-11-19 13:33:03.389 =====
+Cenário: MAD TFLite GPU
+Escala: 4x (16384 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 4,421±0,000 (min=4,421 | max=4,421)
+Transfer(ms): 3,992±0,000 (min=3,992 | max=3,992)
+Processamento(ms): 0,428±0,000 (min=0,428 | max=0,428)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,99ms/P=0,43ms
+
+===== 2025-11-26 17:36:04.657 =====
+Cenário: MAD TFLite GPU
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 0,901±0,281 (min=0,647 | max=1,345)
+Transfer(ms): 0,796±0,256 (min=0,560 | max=1,195)
+Processamento(ms): 0,105±0,026 (min=0,086 | max=0,150)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=1,19ms/P=0,15ms, T=0,85ms/P=0,09ms, T=0,56ms/P=0,09ms, T=0,58ms/P=0,09ms
+
+===== 2025-11-26 17:39:49.224 =====
+Cenário: MAD TFLite GPU
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 2,300±0,123 (min=2,189 | max=2,505)
+Transfer(ms): 2,029±0,044 (min=1,976 | max=2,094)
+Processamento(ms): 0,271±0,082 (min=0,213 | max=0,411)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=2,09ms/P=0,41ms, T=2,04ms/P=0,25ms, T=1,98ms/P=0,21ms, T=2,01ms/P=0,21ms
+
+===== 2025-11-26 17:57:02.997 =====
+Cenário: MAD TFLite GPU
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 4,399±0,061 (min=4,349 | max=4,503)
+Transfer(ms): 3,992±0,030 (min=3,973 | max=4,044)
+Processamento(ms): 0,407±0,032 (min=0,375 | max=0,459)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=4,04ms/P=0,46ms, T=3,98ms/P=0,39ms, T=3,97ms/P=0,38ms, T=3,97ms/P=0,40ms
+

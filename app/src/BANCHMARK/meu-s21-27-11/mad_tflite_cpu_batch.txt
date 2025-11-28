@@ -1,0 +1,54 @@
+===== 2025-11-19 13:31:05.595 =====
+Cenário: MAD TFLite CPU x10
+Escala: 1x (4096 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 3,709±0,000 (min=3,709 | max=3,709)
+Transfer(ms): 3,568±0,000 (min=3,568 | max=3,568)
+Processamento(ms): 0,141±0,000 (min=0,141 | max=0,141)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=3,57ms/P=0,14ms
+
+===== 2025-11-19 13:31:25.561 =====
+Cenário: MAD TFLite CPU x10
+Escala: 2x (8192 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 2,748±0,000 (min=2,748 | max=2,748)
+Transfer(ms): 2,270±0,000 (min=2,270 | max=2,270)
+Processamento(ms): 0,478±0,000 (min=0,478 | max=0,478)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=2,27ms/P=0,48ms
+
+===== 2025-11-19 13:33:03.471 =====
+Cenário: MAD TFLite CPU x10
+Escala: 4x (16384 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 4,458±0,000 (min=4,458 | max=4,458)
+Transfer(ms): 4,002±0,000 (min=4,002 | max=4,002)
+Processamento(ms): 0,456±0,000 (min=0,456 | max=0,456)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=4,00ms/P=0,46ms
+
+===== 2025-11-26 17:36:04.987 =====
+Cenário: MAD TFLite CPU x10
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 2,573±0,069 (min=2,514 | max=2,690)
+Transfer(ms): 2,234±0,018 (min=2,219 | max=2,263)
+Processamento(ms): 0,338±0,052 (min=0,295 | max=0,427)
+Notas (média dos 4 pacotes): Mean=1676.8372 | Std=686.6377 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=2,26ms/P=0,43ms, T=2,22ms/P=0,32ms, T=2,24ms/P=0,31ms, T=2,22ms/P=0,30ms
+
+===== 2025-11-26 17:39:49.528 =====
+Cenário: MAD TFLite CPU x10
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 9,000±0,183 (min=8,839 | max=9,307)
+Transfer(ms): 8,015±0,070 (min=7,940 | max=8,124)
+Processamento(ms): 0,985±0,115 (min=0,900 | max=1,183)
+Notas (média dos 4 pacotes): Mean=1676.8733 | Std=686.5617 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=8,12ms/P=1,18ms, T=7,94ms/P=0,90ms, T=7,97ms/P=0,92ms, T=8,03ms/P=0,94ms
+
+===== 2025-11-26 17:57:03.654 =====
+Cenário: MAD TFLite CPU x10
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 15,211±0,148 (min=15,117 | max=15,467)
+Transfer(ms): 13,882±0,098 (min=13,820 | max=14,052)
+Processamento(ms): 1,329±0,050 (min=1,291 | max=1,415)
+Notas (média dos 4 pacotes): Mean=1676.891 | Std=686.5076 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=14,05ms/P=1,41ms, T=13,83ms/P=1,31ms, T=13,82ms/P=1,30ms, T=13,83ms/P=1,29ms
+

@@ -1,0 +1,54 @@
+===== 2025-11-19 13:31:05.568 =====
+Cenário: MAD TFLite NNAPI
+Escala: 1x (4096 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 6,399±0,000 (min=6,399 | max=6,399)
+Transfer(ms): 3,796±0,000 (min=3,796 | max=3,796)
+Processamento(ms): 2,603±0,000 (min=2,603 | max=2,603)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=3,80ms/P=2,60ms
+
+===== 2025-11-19 13:31:25.518 =====
+Cenário: MAD TFLite NNAPI
+Escala: 2x (8192 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 5,728±0,000 (min=5,728 | max=5,728)
+Transfer(ms): 2,336±0,000 (min=2,336 | max=2,336)
+Processamento(ms): 3,392±0,000 (min=3,392 | max=3,392)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=2,34ms/P=3,39ms
+
+===== 2025-11-19 13:33:03.413 =====
+Cenário: MAD TFLite NNAPI
+Escala: 4x (16384 pts)
+Execuções: 1 | Pacotes: 1
+Total(ms): 7,425±0,000 (min=7,425 | max=7,425)
+Transfer(ms): 4,200±0,000 (min=4,200 | max=4,200)
+Processamento(ms): 3,225±0,000 (min=3,225 | max=3,225)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=4,20ms/P=3,23ms
+
+===== 2025-11-26 17:36:04.885 =====
+Cenário: MAD TFLite NNAPI
+Escala: 1x (4096 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 6,153±3,131 (min=3,308 | max=11,338)
+Transfer(ms): 1,308±0,152 (min=1,056 | max=1,452)
+Processamento(ms): 4,845±3,087 (min=2,252 | max=10,009)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=1,33ms/P=10,01ms, T=1,06ms/P=2,25ms, T=1,45ms/P=4,40ms, T=1,40ms/P=2,72ms
+
+===== 2025-11-26 17:39:49.275 =====
+Cenário: MAD TFLite NNAPI
+Escala: 2x (8192 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 5,050±0,485 (min=4,357 | max=5,606)
+Transfer(ms): 2,080±0,038 (min=2,034 | max=2,128)
+Processamento(ms): 2,970±0,453 (min=2,304 | max=3,478)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=2,13ms/P=3,48ms, T=2,11ms/P=3,28ms, T=2,05ms/P=2,30ms, T=2,03ms/P=2,82ms
+
+===== 2025-11-26 17:57:03.043 =====
+Cenário: MAD TFLite NNAPI
+Escala: 4x (16384 pts)
+Execuções: 4 | Pacotes: 1
+Total(ms): 6,005±0,298 (min=5,608 | max=6,447)
+Transfer(ms): 3,881±0,194 (min=3,546 | max=4,013)
+Processamento(ms): 2,124±0,336 (min=1,620 | max=2,435)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,55ms/P=2,42ms, T=3,99ms/P=1,62ms, T=3,98ms/P=2,02ms, T=4,01ms/P=2,43ms
+
