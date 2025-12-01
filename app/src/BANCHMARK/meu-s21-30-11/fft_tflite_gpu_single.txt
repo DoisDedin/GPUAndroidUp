@@ -1,0 +1,33 @@
+===== 2025-11-30 20:37:53.822 =====
+Cenário: FFT TFLite GPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,460±0,038 (min=2,422 | max=2,566)
+Transfer(ms): 1,910±0,017 (min=1,893 | max=1,945)
+Processamento(ms): 0,550±0,031 (min=0,528 | max=0,637)
+Notas: FFT TFLite (TFLite GPU) -> 2,450 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=1,93ms/P=0,64ms, T=1,89ms/P=0,59ms, T=1,95ms/P=0,54ms, T=1,92ms/P=0,53ms, T=1,89ms/P=0,53ms, T=1,90ms/P=0,53ms, T=1,90ms/P=0,53ms, T=1,90ms/P=0,55ms, T=1,90ms/P=0,55ms, T=1,90ms/P=0,53ms, T=1,93ms/P=0,54ms, T=1,92ms/P=0,53ms
+
+===== 2025-11-30 20:37:58.974 =====
+Cenário: FFT TFLite GPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,270±0,248 (min=4,968 | max=5,614)
+Transfer(ms): 4,109±0,211 (min=3,842 | max=4,397)
+Processamento(ms): 1,161±0,056 (min=1,049 | max=1,220)
+Notas: FFT TFLite (TFLite GPU) -> 5,507 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=3,84ms/P=1,13ms, T=4,09ms/P=1,17ms, T=4,34ms/P=1,19ms, T=3,99ms/P=1,09ms, T=4,40ms/P=1,22ms, T=4,34ms/P=1,20ms, T=3,91ms/P=1,08ms, T=3,91ms/P=1,20ms, T=4,35ms/P=1,19ms, T=3,92ms/P=1,05ms, T=3,90ms/P=1,22ms, T=4,30ms/P=1,20ms
+
+===== 2025-11-30 20:38:10.342 =====
+Cenário: FFT TFLite GPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 10,941±0,613 (min=9,897 | max=12,100)
+Transfer(ms): 8,490±0,531 (min=7,453 | max=9,440)
+Processamento(ms): 2,452±0,131 (min=2,167 | max=2,660)
+Notas: FFT TFLite (TFLite GPU) -> 11,080 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=8,32ms/P=2,27ms, T=8,67ms/P=2,45ms, T=8,65ms/P=2,44ms, T=8,63ms/P=2,43ms, T=7,90ms/P=2,57ms, T=8,82ms/P=2,61ms, T=8,94ms/P=2,54ms, T=7,45ms/P=2,45ms, T=9,44ms/P=2,66ms, T=7,73ms/P=2,17ms, T=8,67ms/P=2,41ms, T=8,64ms/P=2,44ms
+

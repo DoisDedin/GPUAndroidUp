@@ -1,0 +1,33 @@
+===== 2025-11-30 20:41:04.885 =====
+Cenário: FFT CPU x10
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 230,785±127,473 (min=156,966 | max=559,845)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 230,785±127,473 (min=156,966 | max=559,845)
+Notas (média dos 12 pacotes): FFT CPU -> 12,985 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=559,84ms, T=0,00ms/P=422,73ms, T=0,00ms/P=318,56ms, T=0,00ms/P=192,29ms, T=0,00ms/P=159,90ms, T=0,00ms/P=156,97ms, T=0,00ms/P=157,16ms, T=0,00ms/P=162,88ms, T=0,00ms/P=160,29ms, T=0,00ms/P=158,92ms, T=0,00ms/P=157,84ms, T=0,00ms/P=162,04ms
+
+===== 2025-11-30 20:41:39.423 =====
+Cenário: FFT CPU x10
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 591,866±17,119 (min=560,781 | max=620,215)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 591,866±17,119 (min=560,781 | max=620,215)
+Notas (média dos 12 pacotes): FFT CPU -> 50,127 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=572,86ms, T=0,00ms/P=577,47ms, T=0,00ms/P=604,46ms, T=0,00ms/P=600,52ms, T=0,00ms/P=594,80ms, T=0,00ms/P=620,21ms, T=0,00ms/P=591,04ms, T=0,00ms/P=587,19ms, T=0,00ms/P=598,20ms, T=0,00ms/P=577,28ms, T=0,00ms/P=560,78ms, T=0,00ms/P=617,57ms
+
+===== 2025-11-30 20:42:30.229 =====
+Cenário: FFT CPU x10
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 606,771±5,283 (min=599,021 | max=616,093)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 606,771±5,283 (min=599,021 | max=616,093)
+Notas (média dos 12 pacotes): FFT CPU -> 49,460 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=616,09ms, T=0,00ms/P=607,83ms, T=0,00ms/P=612,36ms, T=0,00ms/P=606,90ms, T=0,00ms/P=601,60ms, T=0,00ms/P=613,39ms, T=0,00ms/P=605,62ms, T=0,00ms/P=601,52ms, T=0,00ms/P=602,61ms, T=0,00ms/P=602,76ms, T=0,00ms/P=599,02ms, T=0,00ms/P=611,54ms
+

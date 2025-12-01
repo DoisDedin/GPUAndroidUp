@@ -14,9 +14,19 @@ from __future__ import annotations
 
 import argparse
 import shutil
+import os
 from pathlib import Path
 from typing import Dict, Iterable, List, Tuple
 
+BASE_DIR = Path(__file__).parent
+MPL_CACHE = BASE_DIR / ".matplotlib"
+# Mantém cache local do Matplotlib para evitar tentativas de escrita em ~/.matplotlib.
+os.environ.setdefault("MPLCONFIGDIR", str(MPL_CACHE))
+MPL_CACHE.mkdir(parents=True, exist_ok=True)
+
+import matplotlib
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns

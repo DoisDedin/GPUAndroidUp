@@ -1,0 +1,33 @@
+===== 2025-11-30 20:41:15.993 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 162,533±4,653 (min=154,950 | max=171,173)
+Transfer(ms): 73,075±4,155 (min=70,623 | max=83,104)
+Processamento(ms): 89,458±7,532 (min=75,678 | max=100,550)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 13,368 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=79,27ms/P=75,68ms, T=83,10ms/P=77,03ms, T=77,59ms/P=83,41ms, T=70,82ms/P=97,48ms, T=70,68ms/P=89,76ms, T=70,93ms/P=87,62ms, T=70,77ms/P=93,99ms, T=70,67ms/P=97,91ms, T=70,62ms/P=100,55ms, T=70,83ms/P=92,51ms, T=70,76ms/P=90,64ms, T=70,85ms/P=86,92ms
+
+===== 2025-11-30 20:41:55.425 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 285,896±5,485 (min=276,405 | max=293,324)
+Transfer(ms): 145,206±6,621 (min=141,604 | max=160,855)
+Processamento(ms): 140,689±10,688 (min=115,551 | max=151,526)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 23,801 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=160,85ms/P=115,55ms, T=159,00ms/P=122,17ms, T=141,74ms/P=142,55ms, T=143,24ms/P=144,96ms, T=141,60ms/P=148,03ms, T=142,08ms/P=140,33ms, T=141,61ms/P=138,03ms, T=143,28ms/P=148,80ms, T=142,11ms/P=147,83ms, T=141,80ms/P=151,53ms, T=143,05ms/P=149,42ms, T=142,11ms/P=139,06ms
+
+===== 2025-11-30 20:42:56.633 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 518,550±11,730 (min=490,755 | max=529,580)
+Transfer(ms): 286,749±8,574 (min=282,110 | max=314,338)
+Processamento(ms): 231,801±15,414 (min=200,218 | max=247,289)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 41,981 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=314,34ms/P=200,22ms, T=289,91ms/P=234,40ms, T=282,82ms/P=243,26ms, T=283,02ms/P=236,88ms, T=285,04ms/P=234,86ms, T=282,29ms/P=247,29ms, T=285,79ms/P=204,96ms, T=283,57ms/P=213,80ms, T=285,19ms/P=241,07ms, T=282,11ms/P=238,18ms, T=284,52ms/P=242,16ms, T=282,40ms/P=244,53ms
+

@@ -1,0 +1,27 @@
+===== 2025-11-30 20:46:01.403 =====
+Cenário: MAD TFLite NNAPI
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,017±0,045 (min=0,976 | max=1,121)
+Transfer(ms): 0,864±0,034 (min=0,843 | max=0,953)
+Processamento(ms): 0,153±0,023 (min=0,132 | max=0,218)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,88ms/P=0,22ms, T=0,85ms/P=0,15ms, T=0,85ms/P=0,14ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,14ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,17ms, T=0,84ms/P=0,15ms, T=0,91ms/P=0,14ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,14ms, T=0,95ms/P=0,17ms
+
+===== 2025-11-30 20:46:06.940 =====
+Cenário: MAD TFLite NNAPI
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,959±0,051 (min=1,900 | max=2,073)
+Transfer(ms): 1,716±0,036 (min=1,676 | max=1,776)
+Processamento(ms): 0,243±0,027 (min=0,218 | max=0,300)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,77ms/P=0,30ms, T=1,69ms/P=0,23ms, T=1,78ms/P=0,24ms, T=1,69ms/P=0,22ms, T=1,72ms/P=0,23ms, T=1,68ms/P=0,30ms, T=1,68ms/P=0,23ms, T=1,72ms/P=0,23ms, T=1,69ms/P=0,24ms, T=1,77ms/P=0,25ms, T=1,68ms/P=0,22ms, T=1,73ms/P=0,22ms
+
+===== 2025-11-30 20:46:18.213 =====
+Cenário: MAD TFLite NNAPI
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,810±0,115 (min=3,734 | max=4,158)
+Transfer(ms): 3,428±0,072 (min=3,370 | max=3,622)
+Processamento(ms): 0,381±0,057 (min=0,342 | max=0,536)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,62ms/P=0,54ms, T=3,37ms/P=0,47ms, T=3,39ms/P=0,35ms, T=3,41ms/P=0,35ms, T=3,38ms/P=0,38ms, T=3,40ms/P=0,37ms, T=3,39ms/P=0,34ms, T=3,45ms/P=0,36ms, T=3,38ms/P=0,38ms, T=3,54ms/P=0,37ms, T=3,40ms/P=0,35ms, T=3,41ms/P=0,34ms
+

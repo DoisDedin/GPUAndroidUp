@@ -1,0 +1,33 @@
+===== 2025-11-30 20:41:11.708 =====
+Cenário: FFT TFLite GPU x10
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 97,641±4,421 (min=94,408 | max=106,358)
+Transfer(ms): 73,077±3,416 (min=70,744 | max=78,964)
+Processamento(ms): 24,564±1,204 (min=23,664 | max=27,474)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite GPU) -> 7,868 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=73,31ms/P=25,95ms, T=78,96ms/P=26,03ms, T=78,88ms/P=27,47ms, T=78,78ms/P=24,55ms, T=71,02ms/P=24,62ms, T=70,89ms/P=23,96ms, T=70,82ms/P=23,72ms, T=70,86ms/P=23,67ms, T=70,75ms/P=23,71ms, T=70,74ms/P=23,66ms, T=70,77ms/P=23,69ms, T=71,14ms/P=23,73ms
+
+===== 2025-11-30 20:41:49.332 =====
+Cenário: FFT TFLite GPU x10
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 192,380±6,878 (min=187,847 | max=208,388)
+Transfer(ms): 144,510±4,517 (min=141,482 | max=156,461)
+Processamento(ms): 47,870±2,515 (min=46,170 | max=53,711)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite GPU) -> 15,678 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=147,86ms/P=50,57ms, T=150,54ms/P=53,71ms, T=156,46ms/P=51,93ms, T=141,87ms/P=46,22ms, T=141,68ms/P=46,17ms, T=143,29ms/P=46,52ms, T=141,66ms/P=46,33ms, T=142,33ms/P=46,57ms, T=141,82ms/P=46,57ms, T=143,31ms/P=46,93ms, T=141,82ms/P=46,51ms, T=141,48ms/P=46,41ms
+
+===== 2025-11-30 20:42:46.614 =====
+Cenário: FFT TFLite GPU x10
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 383,137±11,224 (min=375,672 | max=412,341)
+Transfer(ms): 287,431±7,383 (min=282,243 | max=306,567)
+Processamento(ms): 95,706±3,856 (min=93,429 | max=105,774)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite GPU) -> 31,419 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=306,57ms/P=105,77ms, T=300,55ms/P=102,60ms, T=285,35ms/P=94,05ms, T=283,37ms/P=94,21ms, T=285,38ms/P=94,44ms, T=283,13ms/P=93,92ms, T=284,87ms/P=94,21ms, T=283,46ms/P=94,04ms, T=283,76ms/P=93,74ms, T=285,04ms/P=94,13ms, T=282,24ms/P=93,43ms, T=285,45ms/P=93,94ms
+

@@ -1,0 +1,720 @@
+===== 2025-11-30 20:46:01 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 4,118±0,459 ms (min=3,744 / max=5,476)
+Transferência: 0,000 ms  | Processamento: 4,118 ms
+Throughput: 994718,573 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=5,48ms, T=0,00ms/P=4,30ms, T=0,00ms/P=4,34ms, T=0,00ms/P=3,74ms, T=0,00ms/P=4,27ms, T=0,00ms/P=3,80ms, T=0,00ms/P=4,07ms, T=0,00ms/P=4,06ms, T=0,00ms/P=3,95ms, T=0,00ms/P=3,83ms, T=0,00ms/P=3,76ms, T=0,00ms/P=3,81ms
+
+===== 2025-11-30 20:46:01 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,012±0,039 ms (min=0,970 / max=1,124)
+Transferência: 0,857 ms  | Processamento: 0,155 ms
+Throughput: 4046489,515 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,90ms/P=0,23ms, T=0,85ms/P=0,16ms, T=0,85ms/P=0,17ms, T=0,87ms/P=0,15ms, T=0,85ms/P=0,13ms, T=0,85ms/P=0,13ms, T=0,87ms/P=0,15ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,15ms, T=0,87ms/P=0,16ms, T=0,85ms/P=0,16ms, T=0,85ms/P=0,12ms
+
+===== 2025-11-30 20:46:01 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,022±0,082 ms (min=0,964 / max=1,283)
+Transferência: 0,864 ms  | Processamento: 0,157 ms
+Throughput: 4008675,023 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=1,01ms/P=0,28ms, T=0,85ms/P=0,16ms, T=0,85ms/P=0,17ms, T=0,85ms/P=0,16ms, T=0,84ms/P=0,14ms, T=0,84ms/P=0,12ms, T=0,87ms/P=0,14ms, T=0,84ms/P=0,14ms, T=0,85ms/P=0,15ms, T=0,89ms/P=0,17ms, T=0,84ms/P=0,14ms, T=0,84ms/P=0,12ms
+
+===== 2025-11-30 20:46:01 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,017±0,045 ms (min=0,976 / max=1,121)
+Transferência: 0,864 ms  | Processamento: 0,153 ms
+Throughput: 4027768,593 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,88ms/P=0,22ms, T=0,85ms/P=0,15ms, T=0,85ms/P=0,14ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,14ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,17ms, T=0,84ms/P=0,15ms, T=0,91ms/P=0,14ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,14ms, T=0,95ms/P=0,17ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 49,118±2,396 ms (min=46,496 / max=55,887)
+Transferência: 0,000 ms  | Processamento: 49,118 ms
+Throughput: 1000687,722 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1843,158 | Std=699,326 | Min=182,759 | Max=2495,836 | Escala 1x | Tempos: T=0,00ms/P=49,31ms, T=0,00ms/P=48,79ms, T=0,00ms/P=50,54ms, T=0,00ms/P=50,64ms, T=0,00ms/P=55,89ms, T=0,00ms/P=47,87ms, T=0,00ms/P=46,61ms, T=0,00ms/P=47,64ms, T=0,00ms/P=46,50ms, T=0,00ms/P=47,99ms, T=0,00ms/P=49,14ms, T=0,00ms/P=48,51ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 11,924±0,119 ms (min=11,787 / max=12,217)
+Transferência: 10,247 ms  | Processamento: 1,677 ms
+Throughput: 4122006,800 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=10,28ms/P=1,93ms, T=10,33ms/P=1,73ms, T=10,20ms/P=1,69ms, T=10,29ms/P=1,60ms, T=10,25ms/P=1,69ms, T=10,17ms/P=1,64ms, T=10,39ms/P=1,63ms, T=10,20ms/P=1,75ms, T=10,20ms/P=1,69ms, T=10,20ms/P=1,61ms, T=10,21ms/P=1,58ms, T=10,24ms/P=1,58ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 11,959±0,124 ms (min=11,821 / max=12,316)
+Transferência: 10,298 ms  | Processamento: 1,661 ms
+Throughput: 4110095,573 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=10,45ms/P=1,87ms, T=10,25ms/P=1,71ms, T=10,32ms/P=1,64ms, T=10,33ms/P=1,65ms, T=10,24ms/P=1,65ms, T=10,36ms/P=1,68ms, T=10,22ms/P=1,60ms, T=10,40ms/P=1,60ms, T=10,25ms/P=1,65ms, T=10,27ms/P=1,63ms, T=10,21ms/P=1,65ms, T=10,27ms/P=1,61ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 11,982±0,153 ms (min=11,795 / max=12,402)
+Transferência: 10,271 ms  | Processamento: 1,711 ms
+Throughput: 4102300,450 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=10,31ms/P=1,80ms, T=10,29ms/P=1,65ms, T=10,29ms/P=1,65ms, T=10,26ms/P=1,64ms, T=10,39ms/P=2,01ms, T=10,33ms/P=1,77ms, T=10,21ms/P=1,71ms, T=10,18ms/P=1,72ms, T=10,34ms/P=1,66ms, T=10,22ms/P=1,65ms, T=10,23ms/P=1,66ms, T=10,19ms/P=1,61ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 7,952±1,871 ms (min=6,039 / max=12,013)
+Transferência: 0,000 ms  | Processamento: 7,952 ms
+Throughput: 5151070,722 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 6,948 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=11,35ms, T=0,00ms/P=12,01ms, T=0,00ms/P=9,47ms, T=0,00ms/P=6,04ms, T=0,00ms/P=7,77ms, T=0,00ms/P=7,48ms, T=0,00ms/P=6,88ms, T=0,00ms/P=7,22ms, T=0,00ms/P=7,41ms, T=0,00ms/P=6,22ms, T=0,00ms/P=6,63ms, T=0,00ms/P=6,95ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,911±0,059 ms (min=3,842 / max=4,070)
+Transferência: 2,874 ms  | Processamento: 1,037 ms
+Throughput: 10472251,187 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 3,842 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=2,96ms/P=1,11ms, T=2,83ms/P=1,10ms, T=2,89ms/P=1,03ms, T=2,84ms/P=1,03ms, T=2,86ms/P=0,99ms, T=2,90ms/P=1,01ms, T=2,90ms/P=1,01ms, T=2,96ms/P=1,02ms, T=2,82ms/P=1,08ms, T=2,87ms/P=1,01ms, T=2,82ms/P=1,07ms, T=2,84ms/P=1,00ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,899±0,066 ms (min=3,826 / max=4,094)
+Transferência: 2,867 ms  | Processamento: 1,033 ms
+Throughput: 10503931,634 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 3,899 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=2,98ms/P=1,11ms, T=2,86ms/P=1,03ms, T=2,85ms/P=1,03ms, T=2,91ms/P=1,01ms, T=2,83ms/P=1,00ms, T=2,87ms/P=1,01ms, T=2,82ms/P=1,06ms, T=2,85ms/P=1,00ms, T=2,82ms/P=1,03ms, T=2,94ms/P=1,01ms, T=2,81ms/P=1,09ms, T=2,87ms/P=1,03ms
+
+===== 2025-11-30 20:46:02 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,881±0,055 ms (min=3,821 / max=4,014)
+Transferência: 2,857 ms  | Processamento: 1,024 ms
+Throughput: 10553926,772 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 3,889 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=2,93ms/P=1,09ms, T=2,85ms/P=1,01ms, T=2,85ms/P=1,00ms, T=2,97ms/P=1,00ms, T=2,82ms/P=1,00ms, T=2,85ms/P=1,00ms, T=2,80ms/P=1,06ms, T=2,84ms/P=1,00ms, T=2,82ms/P=1,09ms, T=2,85ms/P=0,99ms, T=2,83ms/P=1,04ms, T=2,89ms/P=1,00ms
+
+===== 2025-11-30 20:46:03 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 86,298±3,031 ms (min=82,438 / max=91,920)
+Transferência: 0,000 ms  | Processamento: 86,298 ms
+Throughput: 5695643,324 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 5,864 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=91,92ms, T=0,00ms/P=84,90ms, T=0,00ms/P=83,71ms, T=0,00ms/P=91,07ms, T=0,00ms/P=85,11ms, T=0,00ms/P=84,18ms, T=0,00ms/P=89,17ms, T=0,00ms/P=85,18ms, T=0,00ms/P=83,78ms, T=0,00ms/P=89,22ms, T=0,00ms/P=82,44ms, T=0,00ms/P=84,89ms
+
+===== 2025-11-30 20:46:04 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 46,746±0,367 ms (min=46,382 / max=47,479)
+Transferência: 34,470 ms  | Processamento: 12,277 ms
+Throughput: 10514610,727 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 3,863 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=34,87ms/P=12,53ms, T=34,39ms/P=12,31ms, T=35,05ms/P=12,43ms, T=34,30ms/P=12,24ms, T=34,42ms/P=12,14ms, T=34,32ms/P=12,16ms, T=34,40ms/P=12,18ms, T=34,25ms/P=12,13ms, T=34,40ms/P=12,19ms, T=34,74ms/P=12,47ms, T=34,31ms/P=12,28ms, T=34,19ms/P=12,27ms
+
+===== 2025-11-30 20:46:05 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 46,644±0,172 ms (min=46,439 / max=47,024)
+Transferência: 34,418 ms  | Processamento: 12,226 ms
+Throughput: 10537682,355 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 3,863 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=34,37ms/P=12,27ms, T=34,18ms/P=12,29ms, T=34,38ms/P=12,17ms, T=34,73ms/P=12,24ms, T=34,43ms/P=12,13ms, T=34,26ms/P=12,18ms, T=34,50ms/P=12,13ms, T=34,37ms/P=12,23ms, T=34,37ms/P=12,18ms, T=34,42ms/P=12,25ms, T=34,61ms/P=12,41ms, T=34,40ms/P=12,23ms
+
+===== 2025-11-30 20:46:06 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 46,836±0,680 ms (min=46,289 / max=48,934)
+Transferência: 34,629 ms  | Processamento: 12,207 ms
+Throughput: 10494587,226 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 3,890 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=34,48ms/P=12,30ms, T=34,34ms/P=12,19ms, T=34,46ms/P=12,08ms, T=34,27ms/P=12,26ms, T=35,01ms/P=12,29ms, T=34,31ms/P=12,22ms, T=36,58ms/P=12,35ms, T=34,28ms/P=12,01ms, T=34,37ms/P=12,24ms, T=34,25ms/P=12,21ms, T=34,73ms/P=12,21ms, T=34,47ms/P=12,11ms
+
+===== 2025-11-30 20:46:06 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 11,004±0,198 ms (min=10,749 / max=11,446)
+Transferência: 0,000 ms  | Processamento: 11,004 ms
+Throughput: 744434,146 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=11,45ms, T=0,00ms/P=10,82ms, T=0,00ms/P=10,84ms, T=0,00ms/P=10,91ms, T=0,00ms/P=10,75ms, T=0,00ms/P=11,00ms, T=0,00ms/P=11,23ms, T=0,00ms/P=11,06ms, T=0,00ms/P=11,01ms, T=0,00ms/P=10,78ms, T=0,00ms/P=11,20ms, T=0,00ms/P=11,01ms
+
+===== 2025-11-30 20:46:06 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,959±0,091 ms (min=1,879 / max=2,197)
+Transferência: 1,719 ms  | Processamento: 0,241 ms
+Throughput: 4181202,275 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,76ms/P=0,44ms, T=1,72ms/P=0,25ms, T=1,69ms/P=0,25ms, T=1,69ms/P=0,22ms, T=1,85ms/P=0,26ms, T=1,69ms/P=0,21ms, T=1,74ms/P=0,21ms, T=1,69ms/P=0,19ms, T=1,72ms/P=0,20ms, T=1,68ms/P=0,21ms, T=1,72ms/P=0,22ms, T=1,69ms/P=0,22ms
+
+===== 2025-11-30 20:46:06 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,940±0,067 ms (min=1,872 / max=2,135)
+Transferência: 1,707 ms  | Processamento: 0,233 ms
+Throughput: 4223710,214 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,73ms/P=0,41ms, T=1,69ms/P=0,24ms, T=1,71ms/P=0,24ms, T=1,68ms/P=0,21ms, T=1,74ms/P=0,22ms, T=1,68ms/P=0,19ms, T=1,77ms/P=0,21ms, T=1,68ms/P=0,20ms, T=1,72ms/P=0,21ms, T=1,68ms/P=0,21ms, T=1,68ms/P=0,24ms, T=1,73ms/P=0,22ms
+
+===== 2025-11-30 20:46:06 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,959±0,051 ms (min=1,900 / max=2,073)
+Transferência: 1,716 ms  | Processamento: 0,243 ms
+Throughput: 4181786,386 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,77ms/P=0,30ms, T=1,69ms/P=0,23ms, T=1,78ms/P=0,24ms, T=1,69ms/P=0,22ms, T=1,72ms/P=0,23ms, T=1,68ms/P=0,30ms, T=1,68ms/P=0,23ms, T=1,72ms/P=0,23ms, T=1,69ms/P=0,24ms, T=1,77ms/P=0,25ms, T=1,68ms/P=0,22ms, T=1,73ms/P=0,22ms
+
+===== 2025-11-30 20:46:08 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 135,005±2,562 ms (min=132,184 / max=140,964)
+Transferência: 0,000 ms  | Processamento: 135,005 ms
+Throughput: 728149,686 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1839,703 | Std=711,480 | Min=91,072 | Max=2500,821 | Escala 2x | Tempos: T=0,00ms/P=132,18ms, T=0,00ms/P=132,35ms, T=0,00ms/P=140,96ms, T=0,00ms/P=134,38ms, T=0,00ms/P=135,83ms, T=0,00ms/P=134,13ms, T=0,00ms/P=139,43ms, T=0,00ms/P=133,60ms, T=0,00ms/P=134,99ms, T=0,00ms/P=133,56ms, T=0,00ms/P=133,39ms, T=0,00ms/P=135,26ms
+
+===== 2025-11-30 20:46:08 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 23,032±0,117 ms (min=22,894 / max=23,351)
+Transferência: 20,585 ms  | Processamento: 2,447 ms
+Throughput: 4268160,507 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=20,79ms/P=2,56ms, T=20,53ms/P=2,53ms, T=20,62ms/P=2,39ms, T=20,66ms/P=2,47ms, T=20,58ms/P=2,42ms, T=20,56ms/P=2,39ms, T=20,48ms/P=2,41ms, T=20,48ms/P=2,44ms, T=20,67ms/P=2,33ms, T=20,55ms/P=2,53ms, T=20,55ms/P=2,39ms, T=20,55ms/P=2,50ms
+
+===== 2025-11-30 20:46:09 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 23,102±0,327 ms (min=22,921 / max=24,152)
+Transferência: 20,605 ms  | Processamento: 2,497 ms
+Throughput: 4255223,811 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=21,04ms/P=3,11ms, T=20,53ms/P=2,42ms, T=20,68ms/P=2,54ms, T=20,59ms/P=2,41ms, T=20,42ms/P=2,51ms, T=20,57ms/P=2,37ms, T=20,56ms/P=2,54ms, T=20,53ms/P=2,39ms, T=20,64ms/P=2,42ms, T=20,54ms/P=2,41ms, T=20,51ms/P=2,48ms, T=20,66ms/P=2,37ms
+
+===== 2025-11-30 20:46:09 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 23,027±0,113 ms (min=22,874 / max=23,257)
+Transferência: 20,529 ms  | Processamento: 2,497 ms
+Throughput: 4269121,968 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=20,68ms/P=2,57ms, T=20,59ms/P=2,41ms, T=20,40ms/P=2,47ms, T=20,58ms/P=2,56ms, T=20,44ms/P=2,51ms, T=20,41ms/P=2,48ms, T=20,54ms/P=2,53ms, T=20,61ms/P=2,51ms, T=20,53ms/P=2,47ms, T=20,47ms/P=2,50ms, T=20,63ms/P=2,50ms, T=20,46ms/P=2,44ms
+
+===== 2025-11-30 20:46:09 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 14,865±0,328 ms (min=14,104 / max=15,307)
+Transferência: 0,000 ms  | Processamento: 14,865 ms
+Throughput: 5510963,849 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 14,509 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=15,02ms, T=0,00ms/P=14,10ms, T=0,00ms/P=15,22ms, T=0,00ms/P=15,31ms, T=0,00ms/P=14,71ms, T=0,00ms/P=14,99ms, T=0,00ms/P=14,87ms, T=0,00ms/P=14,88ms, T=0,00ms/P=15,17ms, T=0,00ms/P=14,58ms, T=0,00ms/P=15,02ms, T=0,00ms/P=14,51ms
+
+===== 2025-11-30 20:46:09 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 7,839±0,180 ms (min=7,701 / max=8,334)
+Transferência: 5,800 ms  | Processamento: 2,039 ms
+Throughput: 10449997,933 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 7,740 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=5,87ms/P=2,47ms, T=5,78ms/P=1,99ms, T=5,75ms/P=1,99ms, T=5,78ms/P=1,99ms, T=5,74ms/P=2,00ms, T=5,72ms/P=1,98ms, T=5,78ms/P=1,98ms, T=5,78ms/P=2,00ms, T=5,75ms/P=1,99ms, T=5,82ms/P=2,09ms, T=6,08ms/P=2,01ms, T=5,76ms/P=1,98ms
+
+===== 2025-11-30 20:46:10 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 7,770±0,079 ms (min=7,699 / max=8,018)
+Transferência: 5,747 ms  | Processamento: 2,023 ms
+Throughput: 10542861,261 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 7,786 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=5,90ms/P=2,11ms, T=5,78ms/P=2,00ms, T=5,74ms/P=1,99ms, T=5,74ms/P=2,02ms, T=5,73ms/P=2,00ms, T=5,76ms/P=1,99ms, T=5,77ms/P=1,98ms, T=5,74ms/P=1,99ms, T=5,73ms/P=1,99ms, T=5,65ms/P=2,13ms, T=5,67ms/P=2,03ms, T=5,74ms/P=2,04ms
+
+===== 2025-11-30 20:46:10 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 7,738±0,071 ms (min=7,676 / max=7,944)
+Transferência: 5,721 ms  | Processamento: 2,017 ms
+Throughput: 10586989,120 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 7,693 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=5,84ms/P=2,10ms, T=5,74ms/P=1,99ms, T=5,69ms/P=1,99ms, T=5,74ms/P=2,01ms, T=5,73ms/P=1,99ms, T=5,83ms/P=1,98ms, T=5,74ms/P=2,01ms, T=5,67ms/P=2,02ms, T=5,66ms/P=2,04ms, T=5,68ms/P=2,02ms, T=5,66ms/P=2,05ms, T=5,68ms/P=2,02ms
+
+===== 2025-11-30 20:46:12 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 182,077±3,315 ms (min=176,123 / max=187,125)
+Transferência: 0,000 ms  | Processamento: 182,077 ms
+Throughput: 5399030,096 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 15,329 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=186,66ms, T=0,00ms/P=180,68ms, T=0,00ms/P=182,80ms, T=0,00ms/P=184,64ms, T=0,00ms/P=184,91ms, T=0,00ms/P=183,25ms, T=0,00ms/P=176,12ms, T=0,00ms/P=178,98ms, T=0,00ms/P=179,65ms, T=0,00ms/P=178,08ms, T=0,00ms/P=187,12ms, T=0,00ms/P=182,02ms
+
+===== 2025-11-30 20:46:14 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 93,630±1,764 ms (min=92,490 / max=98,673)
+Transferência: 69,138 ms  | Processamento: 24,492 ms
+Throughput: 10499187,593 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 7,665 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=69,16ms/P=24,84ms, T=69,32ms/P=23,98ms, T=72,27ms/P=26,40ms, T=71,34ms/P=24,43ms, T=68,31ms/P=24,73ms, T=68,47ms/P=24,09ms, T=68,62ms/P=24,51ms, T=68,50ms/P=23,99ms, T=68,35ms/P=24,26ms, T=68,58ms/P=24,40ms, T=68,46ms/P=24,03ms, T=68,27ms/P=24,23ms
+
+===== 2025-11-30 20:46:15 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 92,801±0,372 ms (min=92,420 / max=93,516)
+Transferência: 68,575 ms  | Processamento: 24,226 ms
+Throughput: 10592960,306 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 7,685 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=68,88ms/P=24,63ms, T=68,21ms/P=24,41ms, T=68,56ms/P=24,04ms, T=68,39ms/P=24,15ms, T=69,17ms/P=24,00ms, T=68,40ms/P=24,29ms, T=68,41ms/P=24,01ms, T=68,97ms/P=24,53ms, T=68,33ms/P=24,23ms, T=68,30ms/P=24,33ms, T=68,76ms/P=24,15ms, T=68,51ms/P=23,95ms
+
+===== 2025-11-30 20:46:17 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 92,708±0,272 ms (min=92,428 / max=93,146)
+Transferência: 68,507 ms  | Processamento: 24,201 ms
+Throughput: 10603594,570 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 7,717 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=68,54ms/P=24,59ms, T=68,82ms/P=24,15ms, T=68,51ms/P=24,05ms, T=68,46ms/P=24,02ms, T=68,75ms/P=24,40ms, T=68,34ms/P=24,30ms, T=68,44ms/P=24,02ms, T=68,32ms/P=24,10ms, T=68,73ms/P=23,86ms, T=68,27ms/P=24,24ms, T=68,29ms/P=24,21ms, T=68,61ms/P=24,46ms
+
+===== 2025-11-30 20:46:18 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 35,731±0,687 ms (min=34,665 / max=37,072)
+Transferência: 0,000 ms  | Processamento: 35,731 ms
+Throughput: 458543,667 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=37,07ms, T=0,00ms/P=35,20ms, T=0,00ms/P=36,73ms, T=0,00ms/P=35,08ms, T=0,00ms/P=34,67ms, T=0,00ms/P=35,15ms, T=0,00ms/P=36,41ms, T=0,00ms/P=35,86ms, T=0,00ms/P=35,86ms, T=0,00ms/P=35,46ms, T=0,00ms/P=35,86ms, T=0,00ms/P=35,42ms
+
+===== 2025-11-30 20:46:18 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,808±0,157 ms (min=3,729 / max=4,324)
+Transferência: 3,408 ms  | Processamento: 0,400 ms
+Throughput: 4302463,104 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,46ms/P=0,86ms, T=3,39ms/P=0,37ms, T=3,40ms/P=0,37ms, T=3,38ms/P=0,35ms, T=3,41ms/P=0,35ms, T=3,44ms/P=0,33ms, T=3,41ms/P=0,37ms, T=3,38ms/P=0,36ms, T=3,41ms/P=0,35ms, T=3,40ms/P=0,34ms, T=3,43ms/P=0,37ms, T=3,38ms/P=0,37ms
+
+===== 2025-11-30 20:46:18 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,911±0,231 ms (min=3,734 / max=4,558)
+Transferência: 3,535 ms  | Processamento: 0,376 ms
+Throughput: 4189416,214 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,99ms/P=0,57ms, T=3,66ms/P=0,37ms, T=3,65ms/P=0,38ms, T=3,65ms/P=0,38ms, T=3,63ms/P=0,36ms, T=3,40ms/P=0,34ms, T=3,42ms/P=0,36ms, T=3,38ms/P=0,35ms, T=3,42ms/P=0,34ms, T=3,44ms/P=0,34ms, T=3,41ms/P=0,35ms, T=3,38ms/P=0,35ms
+
+===== 2025-11-30 20:46:18 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,810±0,115 ms (min=3,734 / max=4,158)
+Transferência: 3,428 ms  | Processamento: 0,381 ms
+Throughput: 4300482,853 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,62ms/P=0,54ms, T=3,37ms/P=0,47ms, T=3,39ms/P=0,35ms, T=3,41ms/P=0,35ms, T=3,38ms/P=0,38ms, T=3,40ms/P=0,37ms, T=3,39ms/P=0,34ms, T=3,45ms/P=0,36ms, T=3,38ms/P=0,38ms, T=3,54ms/P=0,37ms, T=3,40ms/P=0,35ms, T=3,41ms/P=0,34ms
+
+===== 2025-11-30 20:46:23 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 440,809±6,161 ms (min=430,161 / max=450,502)
+Transferência: 0,000 ms  | Processamento: 440,809 ms
+Throughput: 446016,094 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1839,596 | Std=711,908 | Min=45,134 | Max=2501,912 | Escala 4x | Tempos: T=0,00ms/P=445,96ms, T=0,00ms/P=431,88ms, T=0,00ms/P=434,14ms, T=0,00ms/P=430,16ms, T=0,00ms/P=443,58ms, T=0,00ms/P=442,58ms, T=0,00ms/P=439,21ms, T=0,00ms/P=450,50ms, T=0,00ms/P=443,62ms, T=0,00ms/P=440,53ms, T=0,00ms/P=438,36ms, T=0,00ms/P=449,18ms
+
+===== 2025-11-30 20:46:24 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 45,096±0,242 ms (min=44,552 / max=45,469)
+Transferência: 40,444 ms  | Processamento: 4,651 ms
+Throughput: 4359786,111 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=40,54ms/P=4,93ms, T=40,55ms/P=4,64ms, T=40,37ms/P=4,67ms, T=40,40ms/P=4,66ms, T=40,34ms/P=4,93ms, T=40,37ms/P=4,97ms, T=40,65ms/P=4,46ms, T=40,46ms/P=4,73ms, T=40,44ms/P=4,60ms, T=40,43ms/P=4,75ms, T=40,38ms/P=4,34ms, T=40,41ms/P=4,14ms
+
+===== 2025-11-30 20:46:24 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 45,200±0,120 ms (min=44,938 / max=45,308)
+Transferência: 40,695 ms  | Processamento: 4,504 ms
+Throughput: 4349771,740 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=40,60ms/P=4,71ms, T=40,48ms/P=4,81ms, T=40,49ms/P=4,80ms, T=40,47ms/P=4,82ms, T=40,52ms/P=4,70ms, T=40,50ms/P=4,79ms, T=40,49ms/P=4,45ms, T=40,77ms/P=4,20ms, T=40,96ms/P=4,22ms, T=41,11ms/P=4,15ms, T=40,95ms/P=4,24ms, T=41,01ms/P=4,16ms
+
+===== 2025-11-30 20:46:25 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 45,138±0,108 ms (min=44,989 / max=45,417)
+Transferência: 40,946 ms  | Processamento: 4,192 ms
+Throughput: 4355699,179 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=41,03ms/P=4,39ms, T=40,92ms/P=4,17ms, T=41,06ms/P=4,19ms, T=40,92ms/P=4,18ms, T=40,97ms/P=4,23ms, T=41,02ms/P=4,12ms, T=40,82ms/P=4,17ms, T=40,96ms/P=4,12ms, T=40,91ms/P=4,25ms, T=40,98ms/P=4,14ms, T=40,92ms/P=4,15ms, T=40,83ms/P=4,21ms
+
+===== 2025-11-30 20:46:25 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 46,355±5,442 ms (min=35,065 / max=55,674)
+Transferência: 0,000 ms  | Processamento: 46,355 ms
+Throughput: 3534500,038 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 46,735 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=43,59ms, T=0,00ms/P=46,68ms, T=0,00ms/P=51,39ms, T=0,00ms/P=55,67ms, T=0,00ms/P=50,83ms, T=0,00ms/P=42,46ms, T=0,00ms/P=35,07ms, T=0,00ms/P=40,11ms, T=0,00ms/P=43,87ms, T=0,00ms/P=50,88ms, T=0,00ms/P=48,96ms, T=0,00ms/P=46,73ms
+
+===== 2025-11-30 20:46:26 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 16,747±1,485 ms (min=15,422 / max=21,469)
+Transferência: 11,716 ms  | Processamento: 5,032 ms
+Throughput: 9783191,211 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 16,589 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=15,59ms/P=5,88ms, T=11,32ms/P=4,52ms, T=11,34ms/P=4,62ms, T=11,35ms/P=5,05ms, T=11,32ms/P=4,84ms, T=11,35ms/P=4,95ms, T=11,36ms/P=5,40ms, T=11,42ms/P=5,06ms, T=11,40ms/P=5,06ms, T=11,49ms/P=5,62ms, T=11,31ms/P=4,11ms, T=11,33ms/P=5,26ms
+
+===== 2025-11-30 20:46:26 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 16,517±0,938 ms (min=15,355 / max=17,821)
+Transferência: 11,548 ms  | Processamento: 4,969 ms
+Throughput: 9919338,175 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 16,547 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=11,72ms/P=6,10ms, T=13,25ms/P=4,18ms, T=11,36ms/P=4,06ms, T=11,39ms/P=5,44ms, T=11,36ms/P=6,31ms, T=11,40ms/P=4,06ms, T=11,37ms/P=5,74ms, T=11,37ms/P=4,36ms, T=11,32ms/P=4,03ms, T=11,29ms/P=6,11ms, T=11,38ms/P=4,05ms, T=11,37ms/P=5,18ms
+
+===== 2025-11-30 20:46:26 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 16,505±0,489 ms (min=15,415 / max=17,207)
+Transferência: 11,462 ms  | Processamento: 5,043 ms
+Throughput: 9926642,071 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 16,008 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=11,70ms/P=5,38ms, T=11,36ms/P=5,48ms, T=11,45ms/P=5,39ms, T=11,34ms/P=4,07ms, T=11,43ms/P=4,77ms, T=11,34ms/P=5,51ms, T=11,33ms/P=5,07ms, T=11,42ms/P=5,26ms, T=11,38ms/P=4,98ms, T=11,49ms/P=5,72ms, T=11,37ms/P=4,81ms, T=11,93ms/P=4,08ms
+
+===== 2025-11-30 20:46:34 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 644,082±244,210 ms (min=320,755 / max=937,630)
+Transferência: 0,000 ms  | Processamento: 644,082 ms
+Throughput: 3052532,530 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT CPU -> 77,274 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=473,96ms, T=0,00ms/P=416,50ms, T=0,00ms/P=345,20ms, T=0,00ms/P=320,75ms, T=0,00ms/P=332,23ms, T=0,00ms/P=579,15ms, T=0,00ms/P=915,32ms, T=0,00ms/P=824,79ms, T=0,00ms/P=811,09ms, T=0,00ms/P=937,63ms, T=0,00ms/P=918,42ms, T=0,00ms/P=853,94ms
+
+===== 2025-11-30 20:46:38 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 196,791±1,177 ms (min=194,434 / max=198,698)
+Transferência: 137,143 ms  | Processamento: 59,649 ms
+Throughput: 9990686,575 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite CPU) -> 16,484 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=137,08ms/P=59,14ms, T=137,77ms/P=60,93ms, T=136,71ms/P=59,90ms, T=137,67ms/P=59,92ms, T=137,01ms/P=60,85ms, T=136,91ms/P=59,99ms, T=136,73ms/P=60,65ms, T=137,69ms/P=58,54ms, T=137,10ms/P=57,72ms, T=136,54ms/P=60,94ms, T=137,60ms/P=59,69ms, T=136,90ms/P=57,53ms
+
+===== 2025-11-30 20:46:41 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 196,335±1,416 ms (min=192,498 / max=198,070)
+Transferência: 137,176 ms  | Processamento: 59,159 ms
+Throughput: 10013891,323 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite GPU) -> 16,360 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=136,68ms/P=60,59ms, T=137,70ms/P=58,47ms, T=136,50ms/P=58,69ms, T=137,19ms/P=55,30ms, T=137,56ms/P=59,15ms, T=136,56ms/P=60,53ms, T=137,02ms/P=59,57ms, T=138,58ms/P=59,49ms, T=136,71ms/P=58,45ms, T=137,04ms/P=59,73ms, T=136,91ms/P=60,55ms, T=137,65ms/P=59,39ms
+
+===== 2025-11-30 20:46:45 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 196,179±2,314 ms (min=189,826 / max=199,635)
+Transferência: 137,192 ms  | Processamento: 58,987 ms
+Throughput: 10021845,324 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g84 5G (HW=qcom, Board=bangkk, SDK=34)
+Power saver ativo: false
+SoC: QTI SM6375
+Notas: FFT TFLite (TFLite NNAPI) -> 16,443 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=137,59ms/P=58,21ms, T=136,61ms/P=63,02ms, T=138,68ms/P=58,66ms, T=137,24ms/P=60,53ms, T=136,54ms/P=60,09ms, T=137,86ms/P=58,20ms, T=136,39ms/P=59,60ms, T=137,12ms/P=57,62ms, T=137,94ms/P=60,57ms, T=136,59ms/P=59,28ms, T=137,12ms/P=58,85ms, T=136,61ms/P=53,21ms
+

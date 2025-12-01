@@ -1,0 +1,720 @@
+===== 2025-11-30 20:37:52 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,703±0,330 ms (min=2,549 / max=3,792)
+Transferência: 0,000 ms  | Processamento: 2,703 ms
+Throughput: 1515204,154 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=3,79ms, T=0,00ms/P=2,62ms, T=0,00ms/P=2,57ms, T=0,00ms/P=2,60ms, T=0,00ms/P=2,68ms, T=0,00ms/P=2,55ms, T=0,00ms/P=2,58ms, T=0,00ms/P=2,66ms, T=0,00ms/P=2,60ms, T=0,00ms/P=2,63ms, T=0,00ms/P=2,56ms, T=0,00ms/P=2,61ms
+
+===== 2025-11-30 20:37:52 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 0,635±0,023 ms (min=0,618 / max=0,703)
+Transferência: 0,566 ms  | Processamento: 0,069 ms
+Throughput: 6455246,996 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,57ms/P=0,13ms, T=0,56ms/P=0,07ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,58ms/P=0,07ms, T=0,57ms/P=0,07ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,59ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms
+
+===== 2025-11-30 20:37:52 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 0,636±0,030 ms (min=0,614 / max=0,720)
+Transferência: 0,564 ms  | Processamento: 0,072 ms
+Throughput: 6437656,940 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,59ms/P=0,13ms, T=0,56ms/P=0,07ms, T=0,57ms/P=0,07ms, T=0,57ms/P=0,11ms, T=0,57ms/P=0,07ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,56ms/P=0,06ms, T=0,58ms/P=0,06ms, T=0,55ms/P=0,06ms, T=0,56ms/P=0,06ms
+
+===== 2025-11-30 20:37:52 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,526±0,472 ms (min=2,155 / max=3,741)
+Transferência: 0,710 ms  | Processamento: 1,816 ms
+Throughput: 1621568,979 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,67ms/P=2,08ms, T=0,67ms/P=2,56ms, T=0,59ms/P=1,59ms, T=0,56ms/P=1,61ms, T=0,56ms/P=1,59ms, T=0,66ms/P=1,56ms, T=0,66ms/P=1,69ms, T=1,04ms/P=2,70ms, T=0,74ms/P=1,64ms, T=0,71ms/P=1,87ms, T=0,85ms/P=1,45ms, T=0,80ms/P=1,47ms
+
+===== 2025-11-30 20:37:52 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 25,498±2,258 ms (min=23,817 / max=31,650)
+Transferência: 0,000 ms  | Processamento: 25,498 ms
+Throughput: 1927654,930 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1843,158 | Std=699,326 | Min=182,759 | Max=2495,836 | Escala 1x | Tempos: T=0,00ms/P=31,65ms, T=0,00ms/P=23,97ms, T=0,00ms/P=23,85ms, T=0,00ms/P=28,54ms, T=0,00ms/P=23,82ms, T=0,00ms/P=23,98ms, T=0,00ms/P=23,83ms, T=0,00ms/P=25,12ms, T=0,00ms/P=24,56ms, T=0,00ms/P=25,74ms, T=0,00ms/P=25,45ms, T=0,00ms/P=25,48ms
+
+===== 2025-11-30 20:37:52 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 7,546±0,120 ms (min=7,473 / max=7,933)
+Transferência: 6,788 ms  | Processamento: 0,758 ms
+Throughput: 6513530,497 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=7,08ms/P=0,85ms, T=6,78ms/P=0,78ms, T=6,75ms/P=0,73ms, T=6,77ms/P=0,74ms, T=6,75ms/P=0,72ms, T=6,74ms/P=0,76ms, T=6,76ms/P=0,77ms, T=6,75ms/P=0,76ms, T=6,81ms/P=0,75ms, T=6,76ms/P=0,74ms, T=6,77ms/P=0,76ms, T=6,74ms/P=0,74ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 7,611±0,134 ms (min=7,488 / max=7,991)
+Transferência: 6,853 ms  | Processamento: 0,758 ms
+Throughput: 6457837,022 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=7,15ms/P=0,84ms, T=6,83ms/P=0,74ms, T=6,83ms/P=0,75ms, T=6,99ms/P=0,76ms, T=6,80ms/P=0,75ms, T=6,91ms/P=0,77ms, T=6,78ms/P=0,74ms, T=6,77ms/P=0,72ms, T=6,82ms/P=0,75ms, T=6,79ms/P=0,73ms, T=6,78ms/P=0,77ms, T=6,80ms/P=0,78ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 45,155±6,788 ms (min=32,031 / max=60,682)
+Transferência: 14,832 ms  | Processamento: 30,323 ms
+Throughput: 1088515,077 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=11,67ms/P=20,36ms, T=11,15ms/P=27,78ms, T=15,19ms/P=45,49ms, T=11,95ms/P=35,25ms, T=13,03ms/P=24,76ms, T=14,75ms/P=28,18ms, T=16,41ms/P=31,03ms, T=18,23ms/P=32,23ms, T=15,64ms/P=29,83ms, T=16,24ms/P=30,27ms, T=16,51ms/P=29,75ms, T=17,21ms/P=28,93ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 4,091±1,251 ms (min=3,154 / max=6,747)
+Transferência: 0,000 ms  | Processamento: 4,091 ms
+Throughput: 10012426,107 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 3,154 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=6,75ms, T=0,00ms/P=6,29ms, T=0,00ms/P=5,57ms, T=0,00ms/P=3,69ms, T=0,00ms/P=3,43ms, T=0,00ms/P=3,40ms, T=0,00ms/P=3,42ms, T=0,00ms/P=3,49ms, T=0,00ms/P=3,46ms, T=0,00ms/P=3,20ms, T=0,00ms/P=3,23ms, T=0,00ms/P=3,15ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,463±0,053 ms (min=2,393 / max=2,601)
+Transferência: 1,914 ms  | Processamento: 0,549 ms
+Throughput: 16632874,936 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 2,476 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=1,92ms/P=0,68ms, T=1,92ms/P=0,54ms, T=1,93ms/P=0,54ms, T=1,95ms/P=0,54ms, T=1,96ms/P=0,55ms, T=1,89ms/P=0,54ms, T=1,91ms/P=0,54ms, T=1,91ms/P=0,53ms, T=1,86ms/P=0,54ms, T=1,87ms/P=0,52ms, T=1,91ms/P=0,53ms, T=1,92ms/P=0,55ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,460±0,038 ms (min=2,422 / max=2,566)
+Transferência: 1,910 ms  | Processamento: 0,550 ms
+Throughput: 16652468,319 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 2,450 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=1,93ms/P=0,64ms, T=1,89ms/P=0,59ms, T=1,95ms/P=0,54ms, T=1,92ms/P=0,53ms, T=1,89ms/P=0,53ms, T=1,90ms/P=0,53ms, T=1,90ms/P=0,53ms, T=1,90ms/P=0,55ms, T=1,90ms/P=0,55ms, T=1,90ms/P=0,53ms, T=1,93ms/P=0,54ms, T=1,92ms/P=0,53ms
+
+===== 2025-11-30 20:37:53 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,458±0,111 ms (min=2,382 / max=2,742)
+Transferência: 1,919 ms  | Processamento: 0,540 ms
+Throughput: 16662825,163 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 2,395 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=2,12ms/P=0,62ms, T=2,11ms/P=0,55ms, T=1,88ms/P=0,53ms, T=1,89ms/P=0,54ms, T=1,87ms/P=0,53ms, T=1,89ms/P=0,53ms, T=1,92ms/P=0,54ms, T=1,87ms/P=0,52ms, T=1,86ms/P=0,52ms, T=1,87ms/P=0,52ms, T=1,88ms/P=0,54ms, T=1,86ms/P=0,53ms
+
+===== 2025-11-30 20:37:54 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 33,226±1,781 ms (min=31,462 / max=38,535)
+Transferência: 0,000 ms  | Processamento: 33,226 ms
+Throughput: 14793185,944 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 2,548 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=32,16ms, T=0,00ms/P=34,16ms, T=0,00ms/P=31,46ms, T=0,00ms/P=32,16ms, T=0,00ms/P=33,62ms, T=0,00ms/P=33,39ms, T=0,00ms/P=32,40ms, T=0,00ms/P=38,54ms, T=0,00ms/P=32,10ms, T=0,00ms/P=32,40ms, T=0,00ms/P=33,80ms, T=0,00ms/P=32,52ms
+
+===== 2025-11-30 20:37:54 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 31,430±0,456 ms (min=30,745 / max=32,076)
+Transferência: 24,541 ms  | Processamento: 6,889 ms
+Throughput: 15638651,156 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 2,721 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=25,06ms/P=7,01ms, T=23,95ms/P=6,79ms, T=24,12ms/P=6,75ms, T=24,78ms/P=6,96ms, T=24,41ms/P=6,86ms, T=24,71ms/P=6,78ms, T=24,28ms/P=6,87ms, T=24,64ms/P=7,11ms, T=24,95ms/P=6,90ms, T=23,94ms/P=6,81ms, T=25,16ms/P=6,87ms, T=24,49ms/P=6,94ms
+
+===== 2025-11-30 20:37:55 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 32,450±1,671 ms (min=31,054 / max=37,736)
+Transferência: 25,438 ms  | Processamento: 7,012 ms
+Throughput: 15147150,817 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 2,601 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=31,06ms/P=6,68ms, T=24,28ms/P=6,78ms, T=25,15ms/P=6,96ms, T=24,93ms/P=6,97ms, T=25,67ms/P=7,23ms, T=24,83ms/P=6,98ms, T=24,96ms/P=7,09ms, T=24,94ms/P=6,90ms, T=24,36ms/P=6,80ms, T=25,41ms/P=7,16ms, T=24,94ms/P=7,51ms, T=24,72ms/P=7,09ms
+
+===== 2025-11-30 20:37:56 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 32,344±0,759 ms (min=31,463 / max=34,549)
+Transferência: 25,237 ms  | Processamento: 7,107 ms
+Throughput: 15196458,797 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 2,719 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=24,63ms/P=6,83ms, T=24,63ms/P=7,09ms, T=25,15ms/P=7,07ms, T=24,86ms/P=7,04ms, T=25,44ms/P=7,13ms, T=26,84ms/P=7,70ms, T=24,90ms/P=6,94ms, T=25,42ms/P=7,16ms, T=24,88ms/P=6,99ms, T=25,39ms/P=7,20ms, T=25,46ms/P=7,08ms, T=25,25ms/P=7,05ms
+
+===== 2025-11-30 20:37:56 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 6,694±0,501 ms (min=5,821 / max=7,575)
+Transferência: 0,000 ms  | Processamento: 6,694 ms
+Throughput: 1223825,852 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=6,16ms, T=0,00ms/P=5,82ms, T=0,00ms/P=6,54ms, T=0,00ms/P=7,09ms, T=0,00ms/P=7,05ms, T=0,00ms/P=7,26ms, T=0,00ms/P=6,57ms, T=0,00ms/P=6,22ms, T=0,00ms/P=7,00ms, T=0,00ms/P=7,57ms, T=0,00ms/P=6,82ms, T=0,00ms/P=6,22ms
+
+===== 2025-11-30 20:37:56 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,293±0,085 ms (min=1,217 / max=1,439)
+Transferência: 1,172 ms  | Processamento: 0,121 ms
+Throughput: 6333785,958 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,15ms/P=0,22ms, T=1,13ms/P=0,12ms, T=1,14ms/P=0,11ms, T=1,12ms/P=0,11ms, T=1,12ms/P=0,11ms, T=1,13ms/P=0,11ms, T=1,11ms/P=0,10ms, T=1,12ms/P=0,11ms, T=1,14ms/P=0,10ms, T=1,28ms/P=0,12ms, T=1,30ms/P=0,12ms, T=1,32ms/P=0,12ms
+
+===== 2025-11-30 20:37:56 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 1,313±0,104 ms (min=1,227 / max=1,513)
+Transferência: 1,195 ms  | Processamento: 0,118 ms
+Throughput: 6240929,435 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,25ms/P=0,17ms, T=1,16ms/P=0,12ms, T=1,13ms/P=0,11ms, T=1,13ms/P=0,11ms, T=1,13ms/P=0,11ms, T=1,13ms/P=0,11ms, T=1,14ms/P=0,10ms, T=1,12ms/P=0,10ms, T=1,13ms/P=0,11ms, T=1,30ms/P=0,13ms, T=1,38ms/P=0,13ms, T=1,33ms/P=0,13ms
+
+===== 2025-11-30 20:37:56 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 3,282±0,728 ms (min=2,589 / max=4,908)
+Transferência: 1,432 ms  | Processamento: 1,850 ms
+Throughput: 2496168,106 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,15ms/P=3,05ms, T=1,14ms/P=3,12ms, T=1,29ms/P=3,62ms, T=1,51ms/P=1,49ms, T=1,49ms/P=1,16ms, T=1,44ms/P=1,15ms, T=1,44ms/P=1,43ms, T=1,46ms/P=1,52ms, T=1,59ms/P=1,89ms, T=1,57ms/P=1,38ms, T=1,55ms/P=1,21ms, T=1,56ms/P=1,18ms
+
+===== 2025-11-30 20:37:57 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 84,724±3,122 ms (min=81,436 / max=91,234)
+Transferência: 0,000 ms  | Processamento: 84,724 ms
+Throughput: 1160283,363 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1839,703 | Std=711,480 | Min=91,072 | Max=2500,821 | Escala 2x | Tempos: T=0,00ms/P=88,09ms, T=0,00ms/P=83,58ms, T=0,00ms/P=81,44ms, T=0,00ms/P=81,71ms, T=0,00ms/P=90,05ms, T=0,00ms/P=82,74ms, T=0,00ms/P=82,70ms, T=0,00ms/P=84,13ms, T=0,00ms/P=91,23ms, T=0,00ms/P=83,98ms, T=0,00ms/P=84,48ms, T=0,00ms/P=82,55ms
+
+===== 2025-11-30 20:37:57 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 16,611±0,539 ms (min=15,333 / max=17,207)
+Transferência: 15,138 ms  | Processamento: 1,472 ms
+Throughput: 5918171,841 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=14,98ms/P=1,95ms, T=15,29ms/P=1,45ms, T=15,11ms/P=1,39ms, T=14,76ms/P=1,33ms, T=15,71ms/P=1,45ms, T=15,75ms/P=1,46ms, T=14,03ms/P=1,30ms, T=15,66ms/P=1,43ms, T=14,80ms/P=1,71ms, T=14,85ms/P=1,38ms, T=15,74ms/P=1,45ms, T=14,97ms/P=1,37ms
+
+===== 2025-11-30 20:37:58 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 16,737±0,689 ms (min=15,898 / max=18,619)
+Transferência: 15,335 ms  | Processamento: 1,402 ms
+Throughput: 5873410,129 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=17,05ms/P=1,56ms, T=15,61ms/P=1,43ms, T=15,09ms/P=1,39ms, T=14,56ms/P=1,34ms, T=15,20ms/P=1,37ms, T=15,46ms/P=1,44ms, T=14,72ms/P=1,37ms, T=15,19ms/P=1,39ms, T=15,79ms/P=1,45ms, T=14,85ms/P=1,35ms, T=14,94ms/P=1,35ms, T=15,57ms/P=1,39ms
+
+===== 2025-11-30 20:37:58 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 46,038±5,731 ms (min=35,926 / max=54,533)
+Transferência: 23,395 ms  | Processamento: 22,643 ms
+Throughput: 2135283,610 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=14,87ms/P=28,05ms, T=18,63ms/P=17,30ms, T=20,91ms/P=18,06ms, T=21,58ms/P=17,61ms, T=23,03ms/P=20,59ms, T=24,07ms/P=22,31ms, T=26,66ms/P=27,87ms, T=27,23ms/P=24,90ms, T=27,22ms/P=24,13ms, T=25,78ms/P=20,64ms, T=25,96ms/P=25,52ms, T=24,80ms/P=24,73ms
+
+===== 2025-11-30 20:37:58 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 8,472±2,950 ms (min=6,119 / max=16,773)
+Transferência: 0,000 ms  | Processamento: 8,472 ms
+Throughput: 9669733,415 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 7,726 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=16,77ms, T=0,00ms/P=12,11ms, T=0,00ms/P=8,24ms, T=0,00ms/P=8,51ms, T=0,00ms/P=6,59ms, T=0,00ms/P=7,27ms, T=0,00ms/P=6,73ms, T=0,00ms/P=6,12ms, T=0,00ms/P=8,65ms, T=0,00ms/P=6,28ms, T=0,00ms/P=6,66ms, T=0,00ms/P=7,73ms
+
+===== 2025-11-30 20:37:58 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 5,123±0,257 ms (min=4,862 / max=5,520)
+Transferência: 3,986 ms  | Processamento: 1,138 ms
+Throughput: 15989561,242 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 5,513 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=3,95ms/P=1,41ms, T=3,87ms/P=1,06ms, T=3,86ms/P=1,06ms, T=3,86ms/P=1,06ms, T=3,90ms/P=1,08ms, T=3,81ms/P=1,05ms, T=3,88ms/P=1,19ms, T=4,32ms/P=1,20ms, T=3,81ms/P=1,09ms, T=3,80ms/P=1,17ms, T=4,34ms/P=1,17ms, T=4,41ms/P=1,10ms
+
+===== 2025-11-30 20:37:58 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 5,270±0,248 ms (min=4,968 / max=5,614)
+Transferência: 4,109 ms  | Processamento: 1,161 ms
+Throughput: 15543911,431 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 5,507 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=3,84ms/P=1,13ms, T=4,09ms/P=1,17ms, T=4,34ms/P=1,19ms, T=3,99ms/P=1,09ms, T=4,40ms/P=1,22ms, T=4,34ms/P=1,20ms, T=3,91ms/P=1,08ms, T=3,91ms/P=1,20ms, T=4,35ms/P=1,19ms, T=3,92ms/P=1,05ms, T=3,90ms/P=1,22ms, T=4,30ms/P=1,20ms
+
+===== 2025-11-30 20:37:59 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 5,496±0,559 ms (min=4,888 / max=7,083)
+Transferência: 4,187 ms  | Processamento: 1,309 ms
+Throughput: 14904707,529 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 5,188 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=4,67ms/P=1,29ms, T=3,80ms/P=1,09ms, T=3,90ms/P=1,20ms, T=4,36ms/P=1,19ms, T=4,21ms/P=1,25ms, T=4,30ms/P=1,18ms, T=4,30ms/P=2,78ms, T=3,90ms/P=1,06ms, T=4,33ms/P=1,22ms, T=4,36ms/P=1,20ms, T=4,11ms/P=1,07ms, T=4,01ms/P=1,18ms
+
+===== 2025-11-30 20:38:00 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 79,274±5,561 ms (min=75,200 / max=96,518)
+Transferência: 0,000 ms  | Processamento: 79,274 ms
+Throughput: 12400561,942 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 6,747 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=96,52ms, T=0,00ms/P=79,00ms, T=0,00ms/P=77,19ms, T=0,00ms/P=77,79ms, T=0,00ms/P=78,07ms, T=0,00ms/P=75,58ms, T=0,00ms/P=79,23ms, T=0,00ms/P=75,20ms, T=0,00ms/P=75,97ms, T=0,00ms/P=82,77ms, T=0,00ms/P=76,03ms, T=0,00ms/P=77,95ms
+
+===== 2025-11-30 20:38:01 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 66,178±1,340 ms (min=64,313 / max=69,039)
+Transferência: 51,839 ms  | Processamento: 14,339 ms
+Throughput: 14854544,455 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 5,678 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=50,51ms/P=14,21ms, T=50,18ms/P=14,14ms, T=51,61ms/P=14,22ms, T=54,47ms/P=14,57ms, T=50,80ms/P=14,01ms, T=50,62ms/P=14,02ms, T=52,13ms/P=14,74ms, T=52,73ms/P=14,49ms, T=52,32ms/P=14,60ms, T=51,86ms/P=14,39ms, T=52,95ms/P=14,35ms, T=51,89ms/P=14,34ms
+
+===== 2025-11-30 20:38:02 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 65,837±1,353 ms (min=63,617 / max=68,872)
+Transferência: 51,563 ms  | Processamento: 14,274 ms
+Throughput: 14931518,061 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 6,343 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=51,13ms/P=14,28ms, T=52,35ms/P=14,38ms, T=52,05ms/P=14,82ms, T=52,11ms/P=14,17ms, T=51,70ms/P=14,41ms, T=52,21ms/P=14,48ms, T=49,82ms/P=13,80ms, T=51,03ms/P=14,07ms, T=50,15ms/P=13,85ms, T=51,06ms/P=14,08ms, T=51,06ms/P=14,17ms, T=54,09ms/P=14,79ms
+
+===== 2025-11-30 20:38:04 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 66,546±2,150 ms (min=64,057 / max=72,120)
+Transferência: 51,929 ms  | Processamento: 14,618 ms
+Throughput: 14772239,037 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 5,415 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=56,14ms/P=15,98ms, T=52,36ms/P=14,06ms, T=52,25ms/P=15,91ms, T=50,59ms/P=14,05ms, T=51,96ms/P=14,89ms, T=52,15ms/P=14,66ms, T=53,43ms/P=15,03ms, T=51,30ms/P=14,05ms, T=51,62ms/P=14,55ms, T=50,45ms/P=14,15ms, T=50,88ms/P=14,03ms, T=50,00ms/P=14,06ms
+
+===== 2025-11-30 20:38:04 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 24,562±2,573 ms (min=22,031 / max=31,611)
+Transferência: 0,000 ms  | Processamento: 24,562 ms
+Throughput: 667058,847 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=22,22ms, T=0,00ms/P=25,25ms, T=0,00ms/P=22,38ms, T=0,00ms/P=25,16ms, T=0,00ms/P=23,02ms, T=0,00ms/P=24,55ms, T=0,00ms/P=22,03ms, T=0,00ms/P=26,34ms, T=0,00ms/P=22,39ms, T=0,00ms/P=31,61ms, T=0,00ms/P=23,96ms, T=0,00ms/P=25,83ms
+
+===== 2025-11-30 20:38:04 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 12,288±4,633 ms (min=2,538 / max=15,434)
+Transferência: 11,592 ms  | Processamento: 0,695 ms
+Throughput: 1333353,480 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=13,90ms/P=1,30ms, T=13,97ms/P=0,88ms, T=14,58ms/P=0,85ms, T=14,51ms/P=0,86ms, T=14,29ms/P=0,84ms, T=14,51ms/P=0,88ms, T=14,25ms/P=0,95ms, T=13,89ms/P=0,85ms, T=11,24ms/P=0,26ms, T=2,85ms/P=0,25ms, T=8,77ms/P=0,24ms, T=2,34ms/P=0,20ms
+
+===== 2025-11-30 20:38:04 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 2,562±0,126 ms (min=2,415 / max=2,755)
+Transferência: 2,353 ms  | Processamento: 0,209 ms
+Throughput: 6394796,318 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=2,28ms/P=0,25ms, T=2,32ms/P=0,20ms, T=2,27ms/P=0,19ms, T=2,23ms/P=0,19ms, T=2,46ms/P=0,20ms, T=2,25ms/P=0,19ms, T=2,22ms/P=0,19ms, T=2,26ms/P=0,19ms, T=2,38ms/P=0,25ms, T=2,52ms/P=0,21ms, T=2,52ms/P=0,21ms, T=2,54ms/P=0,21ms
+
+===== 2025-11-30 20:38:04 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 5,683±0,482 ms (min=4,766 / max=6,560)
+Transferência: 2,603 ms  | Processamento: 3,080 ms
+Throughput: 2882951,830 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=2,31ms/P=2,94ms, T=2,29ms/P=4,28ms, T=2,45ms/P=3,42ms, T=2,35ms/P=3,49ms, T=2,40ms/P=3,68ms, T=2,47ms/P=3,01ms, T=2,35ms/P=2,42ms, T=2,70ms/P=3,16ms, T=2,64ms/P=2,44ms, T=2,68ms/P=2,95ms, T=2,90ms/P=3,34ms, T=3,70ms/P=1,85ms
+
+===== 2025-11-30 20:38:07 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 271,779±3,850 ms (min=265,252 / max=277,321)
+Transferência: 0,000 ms  | Processamento: 271,779 ms
+Throughput: 723410,509 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1839,596 | Std=711,908 | Min=45,134 | Max=2501,912 | Escala 4x | Tempos: T=0,00ms/P=275,37ms, T=0,00ms/P=275,58ms, T=0,00ms/P=277,32ms, T=0,00ms/P=268,68ms, T=0,00ms/P=275,39ms, T=0,00ms/P=268,72ms, T=0,00ms/P=265,25ms, T=0,00ms/P=276,38ms, T=0,00ms/P=268,69ms, T=0,00ms/P=269,47ms, T=0,00ms/P=271,72ms, T=0,00ms/P=268,77ms
+
+===== 2025-11-30 20:38:08 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 32,879±0,825 ms (min=31,689 / max=35,168)
+Transferência: 30,276 ms  | Processamento: 2,603 ms
+Throughput: 5979779,087 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=32,04ms/P=3,13ms, T=29,87ms/P=2,51ms, T=30,90ms/P=2,58ms, T=30,39ms/P=2,54ms, T=30,26ms/P=2,61ms, T=30,28ms/P=2,55ms, T=30,03ms/P=2,58ms, T=30,37ms/P=2,55ms, T=29,93ms/P=2,54ms, T=30,40ms/P=2,69ms, T=29,22ms/P=2,47ms, T=29,62ms/P=2,49ms
+
+===== 2025-11-30 20:38:08 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 32,470±0,476 ms (min=31,574 / max=33,043)
+Transferência: 29,938 ms  | Processamento: 2,532 ms
+Throughput: 6055103,092 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=30,40ms/P=2,64ms, T=30,22ms/P=2,58ms, T=29,20ms/P=2,49ms, T=29,70ms/P=2,48ms, T=30,27ms/P=2,57ms, T=29,84ms/P=2,55ms, T=30,48ms/P=2,54ms, T=29,83ms/P=2,51ms, T=30,26ms/P=2,53ms, T=30,30ms/P=2,53ms, T=29,65ms/P=2,50ms, T=29,12ms/P=2,46ms
+
+===== 2025-11-30 20:38:09 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 69,380±6,011 ms (min=63,761 / max=86,823)
+Transferência: 41,245 ms  | Processamento: 28,135 ms
+Throughput: 2833766,079 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=50,08ms/P=36,74ms, T=39,09ms/P=28,67ms, T=40,83ms/P=26,87ms, T=40,14ms/P=24,74ms, T=38,94ms/P=24,82ms, T=40,49ms/P=28,84ms, T=40,33ms/P=25,91ms, T=42,32ms/P=32,34ms, T=40,26ms/P=24,65ms, T=40,92ms/P=26,76ms, T=39,76ms/P=27,28ms, T=41,79ms/P=30,01ms
+
+===== 2025-11-30 20:38:09 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 13,324±1,945 ms (min=11,218 / max=18,680)
+Transferência: 0,000 ms  | Processamento: 13,324 ms
+Throughput: 12296524,719 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 11,218 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=18,68ms, T=0,00ms/P=15,04ms, T=0,00ms/P=12,92ms, T=0,00ms/P=12,69ms, T=0,00ms/P=13,31ms, T=0,00ms/P=11,46ms, T=0,00ms/P=13,88ms, T=0,00ms/P=13,75ms, T=0,00ms/P=11,37ms, T=0,00ms/P=12,35ms, T=0,00ms/P=13,22ms, T=0,00ms/P=11,22ms
+
+===== 2025-11-30 20:38:10 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 10,925±0,539 ms (min=9,887 / max=11,530)
+Transferência: 8,450 ms  | Processamento: 2,475 ms
+Throughput: 14996739,257 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 11,530 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=7,99ms/P=2,70ms, T=8,32ms/P=2,57ms, T=8,77ms/P=2,60ms, T=7,67ms/P=2,22ms, T=8,89ms/P=2,52ms, T=8,28ms/P=2,21ms, T=8,86ms/P=2,54ms, T=8,90ms/P=2,53ms, T=8,30ms/P=2,23ms, T=8,74ms/P=2,57ms, T=7,70ms/P=2,47ms, T=9,01ms/P=2,52ms
+
+===== 2025-11-30 20:38:10 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 10,941±0,613 ms (min=9,897 / max=12,100)
+Transferência: 8,490 ms  | Processamento: 2,452 ms
+Throughput: 14974185,319 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 11,080 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=8,32ms/P=2,27ms, T=8,67ms/P=2,45ms, T=8,65ms/P=2,44ms, T=8,63ms/P=2,43ms, T=7,90ms/P=2,57ms, T=8,82ms/P=2,61ms, T=8,94ms/P=2,54ms, T=7,45ms/P=2,45ms, T=9,44ms/P=2,66ms, T=7,73ms/P=2,17ms, T=8,67ms/P=2,41ms, T=8,64ms/P=2,44ms
+
+===== 2025-11-30 20:38:10 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 11,117±0,700 ms (min=9,845 / max=12,241)
+Transferência: 8,643 ms  | Processamento: 2,474 ms
+Throughput: 14738154,211 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 9,845 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=8,51ms/P=2,50ms, T=8,76ms/P=2,58ms, T=8,98ms/P=2,56ms, T=9,00ms/P=2,54ms, T=8,16ms/P=2,19ms, T=9,03ms/P=2,50ms, T=9,52ms/P=2,72ms, T=8,79ms/P=2,58ms, T=7,62ms/P=2,23ms, T=8,90ms/P=2,53ms, T=8,82ms/P=2,55ms, T=7,64ms/P=2,20ms
+
+===== 2025-11-30 20:38:12 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 146,360±4,263 ms (min=139,877 / max=154,684)
+Transferência: 0,000 ms  | Processamento: 146,360 ms
+Throughput: 13433173,768 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT CPU -> 12,767 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=154,68ms, T=0,00ms/P=150,71ms, T=0,00ms/P=139,88ms, T=0,00ms/P=145,82ms, T=0,00ms/P=151,15ms, T=0,00ms/P=147,95ms, T=0,00ms/P=141,99ms, T=0,00ms/P=146,85ms, T=0,00ms/P=141,49ms, T=0,00ms/P=144,41ms, T=0,00ms/P=143,02ms, T=0,00ms/P=148,38ms
+
+===== 2025-11-30 20:38:14 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 132,292±1,231 ms (min=130,744 / max=135,198)
+Transferência: 102,997 ms  | Processamento: 29,296 ms
+Throughput: 14861661,364 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite CPU) -> 10,561 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=103,87ms/P=29,35ms, T=102,87ms/P=29,16ms, T=102,61ms/P=29,06ms, T=102,12ms/P=29,17ms, T=101,41ms/P=29,34ms, T=103,21ms/P=29,25ms, T=102,48ms/P=29,10ms, T=104,47ms/P=30,73ms, T=102,62ms/P=29,13ms, T=103,16ms/P=28,93ms, T=104,83ms/P=29,28ms, T=102,32ms/P=29,05ms
+
+===== 2025-11-30 20:38:17 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 132,133±2,170 ms (min=130,182 / max=138,547)
+Transferência: 102,395 ms  | Processamento: 29,739 ms
+Throughput: 14879518,569 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite GPU) -> 11,099 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=102,92ms/P=35,63ms, T=101,43ms/P=28,79ms, T=102,89ms/P=29,26ms, T=101,93ms/P=29,17ms, T=101,35ms/P=29,18ms, T=101,25ms/P=30,38ms, T=103,07ms/P=29,08ms, T=102,48ms/P=28,96ms, T=102,51ms/P=29,08ms, T=102,76ms/P=29,37ms, T=101,52ms/P=28,66ms, T=104,64ms/P=29,29ms
+
+===== 2025-11-30 20:38:20 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 132,244±1,234 ms (min=130,502 / max=134,715)
+Transferência: 103,102 ms  | Processamento: 29,142 ms
+Throughput: 14867013,341 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: samsung SM-G991B (HW=exynos2100, Board=exynos2100, SDK=35)
+Power saver ativo: false
+SoC: Samsung Exynos 2100
+Notas: FFT TFLite (TFLite NNAPI) -> 11,123 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=102,45ms/P=29,53ms, T=101,57ms/P=28,93ms, T=103,20ms/P=29,05ms, T=101,37ms/P=29,41ms, T=103,15ms/P=28,91ms, T=103,61ms/P=29,74ms, T=102,52ms/P=28,91ms, T=105,73ms/P=28,99ms, T=104,60ms/P=29,29ms, T=104,16ms/P=28,94ms, T=102,17ms/P=28,91ms, T=102,70ms/P=29,09ms
+

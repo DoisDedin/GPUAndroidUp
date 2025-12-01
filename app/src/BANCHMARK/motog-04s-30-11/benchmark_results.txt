@@ -1,0 +1,720 @@
+===== 2025-11-30 20:40:44 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 121,510±109,180 ms (min=37,640 / max=304,754)
+Transferência: 0,000 ms  | Processamento: 121,510 ms
+Throughput: 33709,025 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=304,75ms, T=0,00ms/P=293,18ms, T=0,00ms/P=295,39ms, T=0,00ms/P=181,89ms, T=0,00ms/P=95,97ms, T=0,00ms/P=45,45ms, T=0,00ms/P=45,24ms, T=0,00ms/P=43,69ms, T=0,00ms/P=38,67ms, T=0,00ms/P=38,14ms, T=0,00ms/P=37,64ms, T=0,00ms/P=38,11ms
+
+===== 2025-11-30 20:40:45 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 60,180±5,002 ms (min=54,157 / max=71,662)
+Transferência: 59,550 ms  | Processamento: 0,631 ms
+Throughput: 68062,080 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=69,14ms/P=2,52ms, T=61,99ms/P=0,42ms, T=57,80ms/P=0,42ms, T=53,93ms/P=0,45ms, T=56,61ms/P=0,41ms, T=58,69ms/P=0,50ms, T=58,71ms/P=0,47ms, T=53,69ms/P=0,47ms, T=56,73ms/P=0,47ms, T=57,11ms/P=0,47ms, T=66,44ms/P=0,48ms, T=63,77ms/P=0,49ms
+
+===== 2025-11-30 20:40:46 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 60,775±2,693 ms (min=54,285 / max=64,165)
+Transferência: 60,229 ms  | Processamento: 0,546 ms
+Throughput: 67396,389 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=60,91ms/P=1,47ms, T=58,80ms/P=0,50ms, T=58,07ms/P=0,45ms, T=53,82ms/P=0,46ms, T=58,48ms/P=0,44ms, T=62,74ms/P=0,47ms, T=62,17ms/P=0,47ms, T=62,94ms/P=0,44ms, T=63,68ms/P=0,49ms, T=58,74ms/P=0,50ms, T=61,36ms/P=0,42ms, T=61,04ms/P=0,44ms
+
+===== 2025-11-30 20:40:48 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 4096 amostras) (4096 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 62,415±9,366 ms (min=45,179 / max=75,339)
+Transferência: 47,350 ms  | Processamento: 15,065 ms
+Throughput: 65625,119 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.6404 | Std=771.88635 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=57,22ms/P=11,31ms, T=61,61ms/P=10,82ms, T=59,98ms/P=11,91ms, T=61,48ms/P=11,56ms, T=58,65ms/P=16,69ms, T=44,79ms/P=17,41ms, T=36,70ms/P=15,36ms, T=40,40ms/P=17,75ms, T=31,78ms/P=13,40ms, T=36,79ms/P=15,81ms, T=38,97ms/P=19,91ms, T=39,84ms/P=18,85ms
+
+===== 2025-11-30 20:40:50 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 192,404±114,271 ms (min=122,355 / max=493,464)
+Transferência: 0,000 ms  | Processamento: 192,404 ms
+Throughput: 255462,665 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1843,158 | Std=699,326 | Min=182,759 | Max=2495,836 | Escala 1x | Tempos: T=0,00ms/P=493,46ms, T=0,00ms/P=360,47ms, T=0,00ms/P=248,55ms, T=0,00ms/P=190,58ms, T=0,00ms/P=144,39ms, T=0,00ms/P=129,44ms, T=0,00ms/P=123,19ms, T=0,00ms/P=122,77ms, T=0,00ms/P=128,58ms, T=0,00ms/P=122,35ms, T=0,00ms/P=122,54ms, T=0,00ms/P=122,52ms
+
+===== 2025-11-30 20:40:52 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 120,277±118,127 ms (min=25,340 / max=437,593)
+Transferência: 115,299 ms  | Processamento: 4,978 ms
+Throughput: 408657,264 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=431,56ms/P=6,03ms, T=249,10ms/P=5,60ms, T=154,68ms/P=6,19ms, T=146,72ms/P=5,60ms, T=135,91ms/P=5,61ms, T=85,44ms/P=4,63ms, T=37,87ms/P=4,62ms, T=37,85ms/P=4,35ms, T=37,82ms/P=4,27ms, T=24,34ms/P=4,43ms, T=21,13ms/P=4,21ms, T=21,16ms/P=4,20ms
+
+===== 2025-11-30 20:40:53 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 28,267±1,341 ms (min=26,461 / max=30,547)
+Transferência: 22,953 ms  | Processamento: 5,314 ms
+Throughput: 1738864,377 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.7233 | Std=714.7687 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=21,31ms/P=5,16ms, T=21,76ms/P=5,48ms, T=21,85ms/P=5,13ms, T=21,55ms/P=5,13ms, T=23,62ms/P=5,45ms, T=22,98ms/P=5,84ms, T=23,46ms/P=4,98ms, T=22,60ms/P=5,21ms, T=24,56ms/P=5,24ms, T=21,99ms/P=5,28ms, T=24,83ms/P=5,26ms, T=24,93ms/P=5,62ms
+
+===== 2025-11-30 20:40:57 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 4096 amostras) (49152 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 226,431±18,539 ms (min=185,415 / max=248,602)
+Transferência: 47,669 ms  | Processamento: 178,762 ms
+Throughput: 217072,948 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.7231 | Std=714.76874 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=35,25ms/P=150,16ms, T=44,56ms/P=156,24ms, T=39,10ms/P=182,75ms, T=59,65ms/P=183,25ms, T=47,50ms/P=179,74ms, T=52,24ms/P=196,36ms, T=49,36ms/P=176,92ms, T=52,25ms/P=184,80ms, T=49,14ms/P=197,10ms, T=54,37ms/P=190,38ms, T=47,27ms/P=173,85ms, T=41,34ms/P=173,59ms
+
+===== 2025-11-30 20:40:58 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 82,955±29,516 ms (min=56,688 / max=171,142)
+Transferência: 0,000 ms  | Processamento: 82,955 ms
+Throughput: 493762,976 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 56,688 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=171,14ms, T=0,00ms/P=95,82ms, T=0,00ms/P=98,68ms, T=0,00ms/P=78,92ms, T=0,00ms/P=80,13ms, T=0,00ms/P=83,62ms, T=0,00ms/P=74,32ms, T=0,00ms/P=64,35ms, T=0,00ms/P=63,79ms, T=0,00ms/P=68,65ms, T=0,00ms/P=59,34ms, T=0,00ms/P=56,69ms
+
+===== 2025-11-30 20:40:59 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 12,980±14,155 ms (min=7,929 / max=59,884)
+Transferência: 10,592 ms  | Processamento: 2,388 ms
+Throughput: 3155611,618 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 9,337 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=57,10ms/P=2,78ms, T=6,35ms/P=2,32ms, T=5,93ms/P=2,00ms, T=7,33ms/P=2,05ms, T=5,88ms/P=2,05ms, T=5,90ms/P=2,08ms, T=6,48ms/P=1,98ms, T=7,12ms/P=2,02ms, T=5,95ms/P=2,69ms, T=6,67ms/P=3,29ms, T=6,28ms/P=2,17ms, T=6,11ms/P=3,23ms
+
+===== 2025-11-30 20:41:00 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 8,276±0,360 ms (min=7,939 / max=8,940)
+Transferência: 6,170 ms  | Processamento: 2,106 ms
+Throughput: 4948957,433 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 7,942 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=6,03ms/P=2,22ms, T=5,92ms/P=2,13ms, T=6,01ms/P=2,04ms, T=6,09ms/P=1,98ms, T=6,04ms/P=2,00ms, T=6,42ms/P=2,03ms, T=5,95ms/P=2,83ms, T=6,84ms/P=1,98ms, T=5,99ms/P=1,96ms, T=5,95ms/P=1,99ms, T=6,91ms/P=2,03ms, T=5,88ms/P=2,07ms
+
+===== 2025-11-30 20:41:00 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 4096 amostras) (40960 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 13,579±1,189 ms (min=12,052 / max=15,822)
+Transferência: 6,546 ms  | Processamento: 7,033 ms
+Throughput: 3016506,425 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 13,359 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=6,87ms/P=8,95ms, T=6,70ms/P=6,70ms, T=7,30ms/P=7,26ms, T=5,95ms/P=6,34ms, T=7,08ms/P=7,13ms, T=7,95ms/P=7,53ms, T=6,45ms/P=6,97ms, T=6,35ms/P=7,24ms, T=5,92ms/P=6,54ms, T=5,95ms/P=6,11ms, T=5,91ms/P=6,39ms, T=6,12ms/P=7,24ms
+
+===== 2025-11-30 20:41:04 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 230,785±127,473 ms (min=156,966 / max=559,845)
+Transferência: 0,000 ms  | Processamento: 230,785 ms
+Throughput: 2129774,705 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 12,985 ms
+Σ pesos (4 primeiros): S0=30399214,00 | S1=26605610,00 | S2=20665760,00 | S3=14944628,00
+S0 bins[0..2]: 7300396,00, 1869043,75, 830449,63 | Escala 1x | Tempos: T=0,00ms/P=559,84ms, T=0,00ms/P=422,73ms, T=0,00ms/P=318,56ms, T=0,00ms/P=192,29ms, T=0,00ms/P=159,90ms, T=0,00ms/P=156,97ms, T=0,00ms/P=157,16ms, T=0,00ms/P=162,88ms, T=0,00ms/P=160,29ms, T=0,00ms/P=158,92ms, T=0,00ms/P=157,84ms, T=0,00ms/P=162,04ms
+
+===== 2025-11-30 20:41:08 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 98,179±5,712 ms (min=94,320 / max=110,285)
+Transferência: 73,559 ms  | Processamento: 24,620 ms
+Throughput: 5006349,419 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 7,846 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=72,32ms/P=24,97ms, T=83,91ms/P=25,22ms, T=80,58ms/P=29,71ms, T=77,92ms/P=25,64ms, T=70,70ms/P=23,62ms, T=71,11ms/P=23,94ms, T=70,88ms/P=23,85ms, T=71,05ms/P=23,69ms, T=71,10ms/P=23,76ms, T=70,86ms/P=23,71ms, T=70,79ms/P=23,73ms, T=71,48ms/P=23,62ms
+
+===== 2025-11-30 20:41:11 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 97,641±4,421 ms (min=94,408 / max=106,358)
+Transferência: 73,077 ms  | Processamento: 24,564 ms
+Throughput: 5033943,327 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 7,868 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=73,31ms/P=25,95ms, T=78,96ms/P=26,03ms, T=78,88ms/P=27,47ms, T=78,78ms/P=24,55ms, T=71,02ms/P=24,62ms, T=70,89ms/P=23,96ms, T=70,82ms/P=23,72ms, T=70,86ms/P=23,67ms, T=70,75ms/P=23,71ms, T=70,74ms/P=23,66ms, T=70,77ms/P=23,69ms, T=71,14ms/P=23,73ms
+
+===== 2025-11-30 20:41:15 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 4096 amostras) (491520 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 162,533±4,653 ms (min=154,950 / max=171,173)
+Transferência: 73,075 ms  | Processamento: 89,458 ms
+Throughput: 3024122,474 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 13,368 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=79,27ms/P=75,68ms, T=83,10ms/P=77,03ms, T=77,59ms/P=83,41ms, T=70,82ms/P=97,48ms, T=70,68ms/P=89,76ms, T=70,93ms/P=87,62ms, T=70,77ms/P=93,99ms, T=70,67ms/P=97,91ms, T=70,62ms/P=100,55ms, T=70,83ms/P=92,51ms, T=70,76ms/P=90,64ms, T=70,85ms/P=86,92ms
+
+===== 2025-11-30 20:41:16 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 28,691±2,373 ms (min=26,191 / max=35,988)
+Transferência: 0,000 ms  | Processamento: 28,691 ms
+Throughput: 285522,879 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=35,99ms, T=0,00ms/P=29,15ms, T=0,00ms/P=26,93ms, T=0,00ms/P=27,52ms, T=0,00ms/P=27,71ms, T=0,00ms/P=28,67ms, T=0,00ms/P=28,67ms, T=0,00ms/P=26,19ms, T=0,00ms/P=29,56ms, T=0,00ms/P=27,72ms, T=0,00ms/P=28,15ms, T=0,00ms/P=28,04ms
+
+===== 2025-11-30 20:41:16 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 4,275±0,380 ms (min=4,084 / max=5,514)
+Transferência: 3,584 ms  | Processamento: 0,691 ms
+Throughput: 1916235,794 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=3,91ms/P=1,60ms, T=3,54ms/P=0,60ms, T=3,71ms/P=0,63ms, T=3,53ms/P=0,57ms, T=3,53ms/P=0,58ms, T=3,54ms/P=0,64ms, T=3,52ms/P=0,56ms, T=3,54ms/P=0,66ms, T=3,53ms/P=0,62ms, T=3,54ms/P=0,57ms, T=3,58ms/P=0,67ms, T=3,53ms/P=0,58ms
+
+===== 2025-11-30 20:41:16 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 4,240±0,149 ms (min=4,100 / max=4,684)
+Transferência: 3,602 ms  | Processamento: 0,638 ms
+Throughput: 1932261,064 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=3,63ms/P=0,66ms, T=3,69ms/P=0,62ms, T=3,53ms/P=0,59ms, T=3,68ms/P=0,56ms, T=3,50ms/P=0,60ms, T=3,60ms/P=0,61ms, T=3,55ms/P=0,64ms, T=3,54ms/P=0,58ms, T=3,65ms/P=1,03ms, T=3,57ms/P=0,58ms, T=3,70ms/P=0,57ms, T=3,57ms/P=0,61ms
+
+===== 2025-11-30 20:41:17 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 8192 amostras) (8192 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 20,425±2,196 ms (min=16,887 / max=24,531)
+Transferência: 5,227 ms  | Processamento: 15,198 ms
+Throughput: 401077,993 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=3,60ms/P=14,30ms, T=3,61ms/P=13,28ms, T=5,36ms/P=13,02ms, T=3,69ms/P=14,61ms, T=5,51ms/P=15,45ms, T=6,40ms/P=18,13ms, T=5,50ms/P=14,52ms, T=5,51ms/P=16,74ms, T=5,86ms/P=14,69ms, T=6,34ms/P=16,91ms, T=5,79ms/P=15,90ms, T=5,54ms/P=14,83ms
+
+===== 2025-11-30 20:41:21 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 306,551±17,823 ms (min=291,346 / max=336,916)
+Transferência: 0,000 ms  | Processamento: 306,551 ms
+Throughput: 320677,004 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1839,703 | Std=711,480 | Min=91,072 | Max=2500,821 | Escala 2x | Tempos: T=0,00ms/P=335,87ms, T=0,00ms/P=336,92ms, T=0,00ms/P=335,55ms, T=0,00ms/P=309,50ms, T=0,00ms/P=292,77ms, T=0,00ms/P=300,07ms, T=0,00ms/P=292,60ms, T=0,00ms/P=291,35ms, T=0,00ms/P=301,66ms, T=0,00ms/P=291,70ms, T=0,00ms/P=298,87ms, T=0,00ms/P=291,76ms
+
+===== 2025-11-30 20:41:22 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 54,311±1,688 ms (min=50,031 / max=57,624)
+Transferência: 46,543 ms  | Processamento: 7,768 ms
+Throughput: 1810010,985 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=42,58ms/P=7,45ms, T=45,92ms/P=7,93ms, T=48,59ms/P=7,69ms, T=46,10ms/P=7,96ms, T=45,54ms/P=8,15ms, T=45,92ms/P=8,39ms, T=46,87ms/P=7,81ms, T=46,09ms/P=8,12ms, T=46,53ms/P=7,43ms, T=49,89ms/P=7,73ms, T=47,37ms/P=7,08ms, T=47,11ms/P=7,47ms
+
+===== 2025-11-30 20:41:23 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 54,651±2,011 ms (min=49,445 / max=57,120)
+Transferência: 47,230 ms  | Processamento: 7,421 ms
+Throughput: 1798762,744 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=42,70ms/P=6,75ms, T=47,07ms/P=7,02ms, T=49,53ms/P=7,20ms, T=47,68ms/P=7,48ms, T=45,94ms/P=7,47ms, T=46,50ms/P=7,64ms, T=48,45ms/P=7,71ms, T=48,86ms/P=7,20ms, T=46,11ms/P=8,01ms, T=45,84ms/P=7,42ms, T=48,15ms/P=7,98ms, T=49,93ms/P=7,19ms
+
+===== 2025-11-30 20:41:28 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 8192 amostras) (98304 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 308,094±21,350 ms (min=253,640 / max=323,850)
+Transferência: 71,454 ms  | Processamento: 236,640 ms
+Throughput: 319071,427 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8462 | Std=714.6268 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=64,33ms/P=189,31ms, T=67,24ms/P=209,02ms, T=68,72ms/P=231,13ms, T=69,17ms/P=238,96ms, T=75,14ms/P=244,37ms, T=73,08ms/P=248,39ms, T=73,85ms/P=250,00ms, T=73,24ms/P=248,43ms, T=74,36ms/P=247,48ms, T=75,66ms/P=248,01ms, T=69,55ms/P=234,34ms, T=73,10ms/P=250,24ms
+
+===== 2025-11-30 20:41:29 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 48,001±2,231 ms (min=43,707 / max=52,658)
+Transferência: 0,000 ms  | Processamento: 48,001 ms
+Throughput: 1706624,502 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 47,660 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=49,76ms, T=0,00ms/P=44,38ms, T=0,00ms/P=43,71ms, T=0,00ms/P=47,75ms, T=0,00ms/P=48,36ms, T=0,00ms/P=47,20ms, T=0,00ms/P=49,15ms, T=0,00ms/P=52,66ms, T=0,00ms/P=48,55ms, T=0,00ms/P=48,91ms, T=0,00ms/P=47,94ms, T=0,00ms/P=47,66ms
+
+===== 2025-11-30 20:41:29 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 16,961±0,766 ms (min=15,706 / max=18,164)
+Transferência: 12,672 ms  | Processamento: 4,288 ms
+Throughput: 4829921,173 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 17,348 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=12,64ms/P=4,74ms, T=11,83ms/P=3,88ms, T=11,91ms/P=4,12ms, T=12,93ms/P=3,91ms, T=12,37ms/P=3,91ms, T=13,71ms/P=3,98ms, T=12,06ms/P=5,32ms, T=12,19ms/P=3,92ms, T=12,05ms/P=4,68ms, T=13,76ms/P=4,12ms, T=13,27ms/P=4,89ms, T=13,36ms/P=3,98ms
+
+===== 2025-11-30 20:41:30 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 17,388±1,216 ms (min=15,698 / max=19,674)
+Transferência: 12,972 ms  | Processamento: 4,416 ms
+Throughput: 4711184,849 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 18,802 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=13,48ms/P=4,10ms, T=11,84ms/P=3,86ms, T=11,93ms/P=3,91ms, T=12,27ms/P=4,56ms, T=11,93ms/P=4,76ms, T=12,55ms/P=3,97ms, T=12,70ms/P=4,06ms, T=14,33ms/P=4,67ms, T=13,14ms/P=5,02ms, T=12,30ms/P=4,81ms, T=15,72ms/P=3,95ms, T=13,49ms/P=5,32ms
+
+===== 2025-11-30 20:41:31 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 8192 amostras) (81920 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 23,561±1,556 ms (min=20,751 / max=25,531)
+Transferência: 13,594 ms  | Processamento: 9,966 ms
+Throughput: 3477002,685 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 24,029 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=13,92ms/P=9,34ms, T=13,06ms/P=7,77ms, T=11,96ms/P=8,79ms, T=14,19ms/P=10,99ms, T=15,60ms/P=9,94ms, T=14,21ms/P=9,10ms, T=15,21ms/P=9,86ms, T=11,99ms/P=10,86ms, T=13,91ms/P=11,40ms, T=13,27ms/P=10,70ms, T=13,08ms/P=9,57ms, T=12,73ms/P=11,29ms
+
+===== 2025-11-30 20:41:39 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 591,866±17,119 ms (min=560,781 / max=620,215)
+Transferência: 0,000 ms  | Processamento: 591,866 ms
+Throughput: 1660916,878 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 50,127 ms
+Σ pesos (4 primeiros): S0=81667016,00 | S1=69972568,00 | S2=52348848,00 | S3=35489356,00
+S0 bins[0..2]: 14602055,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=0,00ms/P=572,86ms, T=0,00ms/P=577,47ms, T=0,00ms/P=604,46ms, T=0,00ms/P=600,52ms, T=0,00ms/P=594,80ms, T=0,00ms/P=620,21ms, T=0,00ms/P=591,04ms, T=0,00ms/P=587,19ms, T=0,00ms/P=598,20ms, T=0,00ms/P=577,28ms, T=0,00ms/P=560,78ms, T=0,00ms/P=617,57ms
+
+===== 2025-11-30 20:41:44 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 193,635±8,238 ms (min=187,844 / max=212,383)
+Transferência: 145,860 ms  | Processamento: 47,775 ms
+Throughput: 5076779,018 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 15,644 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=154,69ms/P=50,04ms, T=158,85ms/P=53,54ms, T=154,70ms/P=50,71ms, T=141,66ms/P=46,18ms, T=143,74ms/P=46,95ms, T=142,24ms/P=46,71ms, T=142,11ms/P=46,78ms, T=143,57ms/P=46,64ms, T=141,74ms/P=46,39ms, T=141,98ms/P=46,46ms, T=143,36ms/P=46,60ms, T=141,69ms/P=46,31ms
+
+===== 2025-11-30 20:41:49 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 192,380±6,878 ms (min=187,847 / max=208,388)
+Transferência: 144,510 ms  | Processamento: 47,870 ms
+Throughput: 5109893,073 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 15,678 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=147,86ms/P=50,57ms, T=150,54ms/P=53,71ms, T=156,46ms/P=51,93ms, T=141,87ms/P=46,22ms, T=141,68ms/P=46,17ms, T=143,29ms/P=46,52ms, T=141,66ms/P=46,33ms, T=142,33ms/P=46,57ms, T=141,82ms/P=46,57ms, T=143,31ms/P=46,93ms, T=141,82ms/P=46,51ms, T=141,48ms/P=46,41ms
+
+===== 2025-11-30 20:41:55 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 8192 amostras) (983040 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 285,896±5,485 ms (min=276,405 / max=293,324)
+Transferência: 145,206 ms  | Processamento: 140,689 ms
+Throughput: 3438455,341 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 23,801 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=160,85ms/P=115,55ms, T=159,00ms/P=122,17ms, T=141,74ms/P=142,55ms, T=143,24ms/P=144,96ms, T=141,60ms/P=148,03ms, T=142,08ms/P=140,33ms, T=141,61ms/P=138,03ms, T=143,28ms/P=148,80ms, T=142,11ms/P=147,83ms, T=141,80ms/P=151,53ms, T=143,05ms/P=149,42ms, T=142,11ms/P=139,06ms
+
+===== 2025-11-30 20:41:56 =====
+Teste: MAD CPU Kotlin
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 85,710±1,527 ms (min=82,930 / max=87,797)
+Transferência: 0,000 ms  | Processamento: 85,710 ms
+Throughput: 191155,367 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=86,97ms, T=0,00ms/P=83,85ms, T=0,00ms/P=87,26ms, T=0,00ms/P=87,80ms, T=0,00ms/P=84,39ms, T=0,00ms/P=86,05ms, T=0,00ms/P=87,08ms, T=0,00ms/P=84,74ms, T=0,00ms/P=85,19ms, T=0,00ms/P=87,40ms, T=0,00ms/P=84,87ms, T=0,00ms/P=82,93ms
+
+===== 2025-11-30 20:41:56 =====
+Teste: MAD TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 8,387±0,380 ms (min=7,936 / max=8,970)
+Transferência: 7,299 ms  | Processamento: 1,088 ms
+Throughput: 1953455,462 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=7,39ms/P=1,35ms, T=7,94ms/P=1,00ms, T=7,75ms/P=1,22ms, T=7,00ms/P=0,94ms, T=7,03ms/P=0,91ms, T=7,03ms/P=0,98ms, T=7,36ms/P=0,95ms, T=7,14ms/P=0,96ms, T=7,22ms/P=1,56ms, T=7,57ms/P=1,04ms, T=7,08ms/P=1,12ms, T=7,08ms/P=1,01ms
+
+===== 2025-11-30 20:41:57 =====
+Teste: MAD TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 8,215±0,329 ms (min=7,902 / max=9,055)
+Transferência: 7,271 ms  | Processamento: 0,943 ms
+Throughput: 1994478,299 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=7,37ms/P=0,99ms, T=7,02ms/P=0,88ms, T=7,04ms/P=0,91ms, T=7,17ms/P=1,05ms, T=7,10ms/P=0,94ms, T=7,10ms/P=0,94ms, T=8,12ms/P=0,93ms, T=7,09ms/P=0,97ms, T=7,09ms/P=0,97ms, T=7,18ms/P=0,95ms, T=7,15ms/P=0,89ms, T=7,83ms/P=0,89ms
+
+===== 2025-11-30 20:41:58 =====
+Teste: MAD TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(1 sensor × 16384 amostras) (16384 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 29,735±1,655 ms (min=25,913 / max=32,127)
+Transferência: 8,942 ms  | Processamento: 20,793 ms
+Throughput: 551004,665 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=7,46ms/P=23,03ms, T=7,70ms/P=22,71ms, T=9,31ms/P=22,82ms, T=9,72ms/P=21,44ms, T=9,79ms/P=21,95ms, T=8,95ms/P=21,08ms, T=9,57ms/P=18,10ms, T=8,72ms/P=17,19ms, T=8,61ms/P=21,01ms, T=9,54ms/P=19,74ms, T=8,53ms/P=21,02ms, T=9,40ms/P=19,42ms
+
+===== 2025-11-30 20:42:09 =====
+Teste: MAD CPU Kotlin x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 931,531±36,161 ms (min=912,999 / max=1048,051)
+Transferência: 0,000 ms  | Processamento: 931,531 ms
+Throughput: 211058,912 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1839,596 | Std=711,908 | Min=45,134 | Max=2501,912 | Escala 4x | Tempos: T=0,00ms/P=1048,05ms, T=0,00ms/P=944,15ms, T=0,00ms/P=915,46ms, T=0,00ms/P=923,41ms, T=0,00ms/P=916,73ms, T=0,00ms/P=914,50ms, T=0,00ms/P=925,56ms, T=0,00ms/P=913,11ms, T=0,00ms/P=924,57ms, T=0,00ms/P=913,00ms, T=0,00ms/P=926,44ms, T=0,00ms/P=913,40ms
+
+===== 2025-11-30 20:42:11 =====
+Teste: MAD TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 102,020±4,575 ms (min=94,499 / max=107,203)
+Transferência: 90,464 ms  | Processamento: 11,556 ms
+Throughput: 1927156,260 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=89,00ms/P=11,93ms, T=93,23ms/P=11,40ms, T=93,63ms/P=13,32ms, T=95,63ms/P=11,57ms, T=88,42ms/P=12,23ms, T=86,33ms/P=10,99ms, T=94,70ms/P=12,15ms, T=92,22ms/P=12,17ms, T=94,78ms/P=11,89ms, T=88,88ms/P=10,63ms, T=84,38ms/P=10,12ms, T=84,37ms/P=10,27ms
+
+===== 2025-11-30 20:42:12 =====
+Teste: MAD TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 103,715±5,678 ms (min=95,348 / max=109,499)
+Transferência: 92,031 ms  | Processamento: 11,685 ms
+Throughput: 1895653,151 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=86,74ms/P=11,25ms, T=90,29ms/P=12,30ms, T=96,82ms/P=11,79ms, T=98,43ms/P=11,07ms, T=92,92ms/P=14,65ms, T=97,74ms/P=11,23ms, T=95,69ms/P=11,87ms, T=93,57ms/P=12,32ms, T=97,98ms/P=11,35ms, T=85,17ms/P=10,63ms, T=84,46ms/P=10,93ms, T=84,54ms/P=10,81ms
+
+===== 2025-11-30 20:42:18 =====
+Teste: MAD TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(1 sensor × 16384 amostras) (196608 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 405,347±24,846 ms (min=353,599 / max=429,659)
+Transferência: 107,113 ms  | Processamento: 298,234 ms
+Throughput: 485036,516 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: Mean=1838.8906 | Std=714.5512 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=101,97ms/P=251,63ms, T=106,18ms/P=257,42ms, T=110,71ms/P=315,76ms, T=107,71ms/P=306,91ms, T=109,65ms/P=279,27ms, T=108,16ms/P=279,40ms, T=103,83ms/P=306,77ms, T=107,25ms/P=318,94ms, T=108,18ms/P=321,48ms, T=107,34ms/P=306,26ms, T=107,08ms/P=317,32ms, T=107,31ms/P=317,65ms
+
+===== 2025-11-30 20:42:19 =====
+Teste: FFT CPU
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 51,512±3,670 ms (min=46,071 / max=60,218)
+Transferência: 0,000 ms  | Processamento: 51,512 ms
+Throughput: 3180590,992 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 50,658 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=49,40ms, T=0,00ms/P=60,22ms, T=0,00ms/P=46,07ms, T=0,00ms/P=50,78ms, T=0,00ms/P=54,30ms, T=0,00ms/P=53,33ms, T=0,00ms/P=49,75ms, T=0,00ms/P=48,91ms, T=0,00ms/P=54,89ms, T=0,00ms/P=47,37ms, T=0,00ms/P=52,47ms, T=0,00ms/P=50,66ms
+
+===== 2025-11-30 20:42:20 =====
+Teste: FFT TFLite CPU
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 34,899±1,951 ms (min=32,008 / max=38,138)
+Transferência: 26,065 ms  | Processamento: 8,834 ms
+Throughput: 4694710,268 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 35,579 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=24,53ms/P=9,59ms, T=23,73ms/P=8,32ms, T=24,01ms/P=8,00ms, T=24,56ms/P=9,10ms, T=27,38ms/P=7,96ms, T=25,76ms/P=9,94ms, T=30,04ms/P=8,10ms, T=27,99ms/P=9,26ms, T=25,67ms/P=7,90ms, T=27,34ms/P=10,17ms, T=25,22ms/P=8,62ms, T=26,55ms/P=9,03ms
+
+===== 2025-11-30 20:42:20 =====
+Teste: FFT TFLite GPU
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 33,862±1,301 ms (min=32,309 / max=37,088)
+Transferência: 25,309 ms  | Processamento: 8,553 ms
+Throughput: 4838458,361 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 35,172 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=24,47ms/P=8,14ms, T=24,36ms/P=8,41ms, T=24,19ms/P=8,12ms, T=24,54ms/P=9,30ms, T=25,05ms/P=8,13ms, T=26,43ms/P=10,66ms, T=24,53ms/P=8,95ms, T=24,97ms/P=7,93ms, T=26,06ms/P=8,09ms, T=25,71ms/P=8,11ms, T=26,21ms/P=8,83ms, T=27,20ms/P=7,97ms
+
+===== 2025-11-30 20:42:22 =====
+Teste: FFT TFLite NNAPI
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 1×(10 sensores × 16384 amostras) (163840 amostras)
+Iterações: 12 | Pacotes/batch: 1
+Total: 42,264±1,308 ms (min=39,822 / max=44,405)
+Transferência: 25,918 ms  | Processamento: 16,346 ms
+Throughput: 3876601,746 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 39,822 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=26,03ms/P=18,38ms, T=26,46ms/P=16,81ms, T=27,75ms/P=15,04ms, T=25,93ms/P=14,69ms, T=26,93ms/P=15,10ms, T=24,38ms/P=17,69ms, T=25,57ms/P=18,49ms, T=26,63ms/P=15,68ms, T=25,05ms/P=16,67ms, T=24,86ms/P=16,11ms, T=27,08ms/P=16,01ms, T=24,35ms/P=15,47ms
+
+===== 2025-11-30 20:42:30 =====
+Teste: FFT CPU x10
+Modo: Kotlin | Delegate: CPU Kotlin
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 606,771±5,283 ms (min=599,021 / max=616,093)
+Transferência: 0,000 ms  | Processamento: 606,771 ms
+Throughput: 3240235,705 ops/s
+Impacto energético estimado: Alta (CPU Kotlin)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT CPU -> 49,460 ms
+Σ pesos (4 primeiros): S0=242420496,00 | S1=203492944,00 | S2=146452480,00 | S3=92211616,00
+S0 bins[0..2]: 29205378,00, 7474794,50, 3321052,25 | Escala 4x | Tempos: T=0,00ms/P=616,09ms, T=0,00ms/P=607,83ms, T=0,00ms/P=612,36ms, T=0,00ms/P=606,90ms, T=0,00ms/P=601,60ms, T=0,00ms/P=613,39ms, T=0,00ms/P=605,62ms, T=0,00ms/P=601,52ms, T=0,00ms/P=602,61ms, T=0,00ms/P=602,76ms, T=0,00ms/P=599,02ms, T=0,00ms/P=611,54ms
+
+===== 2025-11-30 20:42:38 =====
+Teste: FFT TFLite CPU x10
+Modo: TensorFlow Lite | Delegate: TFLite CPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 382,881±10,299 ms (min=376,848 / max=407,476)
+Transferência: 287,572 ms  | Processamento: 95,309 ms
+Throughput: 5134962,703 ops/s
+Impacto energético estimado: Média (CPU TFLite)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite CPU) -> 31,473 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=306,44ms/P=101,04ms, T=303,23ms/P=100,73ms, T=285,09ms/P=93,99ms, T=282,65ms/P=94,24ms, T=285,55ms/P=94,29ms, T=283,38ms/P=94,07ms, T=285,08ms/P=94,30ms, T=282,42ms/P=94,42ms, T=285,37ms/P=94,05ms, T=282,86ms/P=94,18ms, T=285,54ms/P=94,31ms, T=283,25ms/P=94,10ms
+
+===== 2025-11-30 20:42:46 =====
+Teste: FFT TFLite GPU x10
+Modo: TensorFlow Lite | Delegate: TFLite GPU
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 383,137±11,224 ms (min=375,672 / max=412,341)
+Transferência: 287,431 ms  | Processamento: 95,706 ms
+Throughput: 5131531,645 ops/s
+Impacto energético estimado: Baixa (GPU Paralela)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite GPU) -> 31,419 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=306,57ms/P=105,77ms, T=300,55ms/P=102,60ms, T=285,35ms/P=94,05ms, T=283,37ms/P=94,21ms, T=285,38ms/P=94,44ms, T=283,13ms/P=93,92ms, T=284,87ms/P=94,21ms, T=283,46ms/P=94,04ms, T=283,76ms/P=93,74ms, T=285,04ms/P=94,13ms, T=282,24ms/P=93,43ms, T=285,45ms/P=93,94ms
+
+===== 2025-11-30 20:42:56 =====
+Teste: FFT TFLite NNAPI x10
+Modo: TensorFlow Lite | Delegate: TFLite NNAPI
+Dados: 12×(10 sensores × 16384 amostras) (1966080 amostras)
+Iterações: 12 | Pacotes/batch: 12
+Total: 518,550±11,730 ms (min=490,755 / max=529,580)
+Transferência: 286,749 ms  | Processamento: 231,801 ms
+Throughput: 3791496,598 ops/s
+Impacto energético estimado: Baixa/Média (NNAPI)
+Dispositivo: motorola moto g04s (HW=lion, Board=lion, SDK=34)
+Power saver ativo: false
+SoC: Spreadtrum T606
+Notas: FFT TFLite (TFLite NNAPI) -> 41,981 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=314,34ms/P=200,22ms, T=289,91ms/P=234,40ms, T=282,82ms/P=243,26ms, T=283,02ms/P=236,88ms, T=285,04ms/P=234,86ms, T=282,29ms/P=247,29ms, T=285,79ms/P=204,96ms, T=283,57ms/P=213,80ms, T=285,19ms/P=241,07ms, T=282,11ms/P=238,18ms, T=284,52ms/P=242,16ms, T=282,40ms/P=244,53ms
+
