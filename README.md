@@ -131,6 +131,18 @@ Ferramentas externas: Android Studio Hedgehog/Koala, SDK 35, NDK 26.1 (quando ne
 - Para atualizar os modelos, entre em `app/libs/pythonmodels`, execute os scripts Python e depois rode `./gradlew :vulkanfft:assemble` para empacotar os novos assets.
 - Inspecione `app/src/BANCHMARK/` para exemplos de execuções reais (cada pasta contém CSV, TXT, gráficos e o script usado). Isso serve como referência de formato para novas campanhas.
 
+## Documentação do TCC
+
+A estrutura completa do Trabalho de Conclusão de Curso está versionada em Markdown sob `docs/tcc`. Cada capítulo corresponde a um arquivo individual:
+
+- `docs/tcc/01_introducao.md`
+- `docs/tcc/02_revisao_bibliografica.md`
+- `docs/tcc/03_metodologia.md`
+- `docs/tcc/04_resultados.md`
+- `docs/tcc/05_conclusoes.md`
+
+Esses arquivos descrevem o projeto em detalhes acadêmicos (contextualização, revisão, metodologia, resultados e considerações finais) e facilitam a navegação de quem deseja compreender o racional dos experimentos sem abrir a IDE. Sempre que novos capítulos ou anexos forem adicionados, mantenha-os neste diretório para preservar o padrão e facilitar o compartilhamento.
+
 
     ## Requisitos
 
@@ -165,7 +177,7 @@ Ferramentas externas: Android Studio Hedgehog/Koala, SDK 35, NDK 26.1 (quando ne
 
 ## Suíte de testes exposta no app
 
-A tela principal agrupa os testes em três blocos. No topo da tela existem dois grupos de chips (iteração e tamanho de lote) com as opções 1/4/8/12. O valor escolhido para **iterações** define quantas vezes cada cenário é repetido sempre que um botão é pressionado ou quando a suíte completa é executada. O valor escolhido para **lote** só é aplicado aos cenários “x10”: cada repetição processa sucessivamente o número selecionado de pacotes (por exemplo, 12 pacotes = 12 × 10 sensores × 4096/8192/16384 pontos). Os cenários “single” continuam processando apenas 1 pacote, porém respeitam o número de iterações configurado.
+A tela principal agrupa os testes em três blocos. No topo da tela existem dois grupos de chips (iteração e tamanho de lote) com as opções 1/4/8/12. O valor escolhido para **iterações** define quantas vezes cada cenário é repetido sempre que um botão é pressionado ou quando a suíte completa é executada. O valor escolhido para **lote** só é aplicado aos cenários “x10”: cada repetição processa sucessivamente o número selecionado de pacotes (por exemplo, 12 pacotes = 12 × 10 sensores × 4096/8192/16384 pontos). Os cenários “single” continuam processando apenas 1 pacote, porém respeitam o número de iterações configurado. Ao utilizar 12 iterações com lote 12 (configuração empregada nos experimentos principais), os tempos coletados formam amostras suficientes para computar médias e desvios com baixa variância, proporcionando resultados mais robustos.
 | Grupo | Botões / Cenários | Descrição |
 |-------|-------------------|-----------|
 | **MAD — Execução individual** | CPU Kotlin, TFLite CPU, TFLite GPU, TFLite NNAPI | Executa MAD em um único pacote (1 sensor × 4096/8192/16384 amostras) e repete conforme o chip de iterações escolhido. |
