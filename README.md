@@ -40,6 +40,8 @@ O objetivo do GPUAndroidUp é medir, de forma reprodutível, como duas tarefas d
 [Logs + benchmark_results.csv/.txt -> scripts generate_charts.py]
 ```
 
+![Pipeline do projeto GPUAndroidUp](docs/tcc/pipeline-project.png)
+
 - `vulkanfft` expõe tudo que é comum aos módulos (geração de inputs, FFT CPU, wrappers TFLite).
 - `app` injeta esses utilitários, renderiza a tela de testes e fornece os botões/logs.
 - `app/src/BANCHMARK` guarda os experimentos e os scripts usados para gerar gráficos/insights.
