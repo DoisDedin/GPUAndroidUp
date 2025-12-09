@@ -1,0 +1,66 @@
+===== 2025-11-30 20:37:56.374 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 32,344±0,759 (min=31,463 | max=34,549)
+Transfer(ms): 25,237±0,567 (min=24,630 | max=26,845)
+Processamento(ms): 7,107±0,203 (min=6,831 | max=7,704)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 2,719 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=24,63ms/P=6,83ms, T=24,63ms/P=7,09ms, T=25,15ms/P=7,07ms, T=24,86ms/P=7,04ms, T=25,44ms/P=7,13ms, T=26,84ms/P=7,70ms, T=24,90ms/P=6,94ms, T=25,42ms/P=7,16ms, T=24,88ms/P=6,99ms, T=25,39ms/P=7,20ms, T=25,46ms/P=7,08ms, T=25,25ms/P=7,05ms
+
+===== 2025-11-30 20:38:04.117 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 66,546±2,150 (min=64,057 | max=72,120)
+Transfer(ms): 51,929±1,572 (min=50,001 | max=56,144)
+Processamento(ms): 14,618±0,684 (min=14,034 | max=15,976)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 5,415 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=56,14ms/P=15,98ms, T=52,36ms/P=14,06ms, T=52,25ms/P=15,91ms, T=50,59ms/P=14,05ms, T=51,96ms/P=14,89ms, T=52,15ms/P=14,66ms, T=53,43ms/P=15,03ms, T=51,30ms/P=14,05ms, T=51,62ms/P=14,55ms, T=50,45ms/P=14,15ms, T=50,88ms/P=14,03ms, T=50,00ms/P=14,06ms
+
+===== 2025-11-30 20:38:20.176 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 12
+Total(ms): 132,244±1,234 (min=130,502 | max=134,715)
+Transfer(ms): 103,102±1,213 (min=101,370 | max=105,726)
+Processamento(ms): 29,142±0,272 (min=28,907 | max=29,739)
+Notas (média dos 12 pacotes): FFT TFLite (TFLite NNAPI) -> 11,123 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=102,45ms/P=29,53ms, T=101,57ms/P=28,93ms, T=103,20ms/P=29,05ms, T=101,37ms/P=29,41ms, T=103,15ms/P=28,91ms, T=103,61ms/P=29,74ms, T=102,52ms/P=28,91ms, T=105,73ms/P=28,99ms, T=104,60ms/P=29,29ms, T=104,16ms/P=28,94ms, T=102,17ms/P=28,91ms, T=102,70ms/P=29,09ms
+
+===== 2025-12-08 21:55:06.301 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 32k (32768 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 234,378±50,147 (min=197,133 | max=320,578)
+Transfer(ms): 132,676±50,965 (min=101,319 | max=220,910)
+Processamento(ms): 101,703±7,728 (min=91,601 | max=113,206)
+Notas (média dos 4 pacotes): FFT TFLite (TFLite NNAPI) -> 49,950 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=220,91ms/P=99,67ms, T=102,94ms/P=102,34ms, T=101,32ms/P=113,21ms, T=105,53ms/P=91,60ms
+
+===== 2025-12-08 21:55:24.913 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 64k (65536 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 347,046±34,805 (min=315,251 | max=401,323)
+Transfer(ms): 204,077±2,231 (min=202,170 | max=207,726)
+Processamento(ms): 142,968±35,049 (min=112,894 | max=199,153)
+Notas (média dos 4 pacotes): FFT TFLite (TFLite NNAPI) -> 79,275 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=207,73ms/P=145,91ms, T=202,17ms/P=199,15ms, T=202,36ms/P=112,89ms, T=204,06ms/P=113,92ms
+
+===== 2025-12-08 21:56:14.769 =====
+Cenário: FFT TFLite NNAPI x10
+Escala: 128k (131072 pts)
+Execuções: 4 | Pacotes: 4
+Total(ms): 714,151±76,869 (min=644,261 | max=844,151)
+Transfer(ms): 419,003±9,114 (min=409,178 | max=432,079)
+Processamento(ms): 295,147±83,077 (min=221,432 | max=434,973)
+Notas (média dos 4 pacotes): FFT TFLite (TFLite NNAPI) -> 169,779 ms
+Σ pesos (4 primeiros): S0=10414285824,00 | S1=8446166016,00 | S2=5677369856,00 | S3=3100791296,00
+S0 bins[0..2]: 233650928,00, 59794812,00, 26566544,00 | Escala 128k | Tempos: T=409,18ms/P=434,97ms, T=422,83ms/P=221,43ms, T=432,08ms/P=247,31ms, T=411,93ms/P=276,87ms
+

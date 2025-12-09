@@ -1,0 +1,609 @@
+===== 2025-11-30 20:46:02.732 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,911±0,059 (min=3,842 | max=4,070)
+Transfer(ms): 2,874±0,048 (min=2,817 | max=2,963)
+Processamento(ms): 1,037±0,039 (min=0,988 | max=1,109)
+Notas: FFT TFLite (TFLite CPU) -> 3,842 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=2,96ms/P=1,11ms, T=2,83ms/P=1,10ms, T=2,89ms/P=1,03ms, T=2,84ms/P=1,03ms, T=2,86ms/P=0,99ms, T=2,90ms/P=1,01ms, T=2,90ms/P=1,01ms, T=2,96ms/P=1,02ms, T=2,82ms/P=1,08ms, T=2,87ms/P=1,01ms, T=2,82ms/P=1,07ms, T=2,84ms/P=1,00ms
+
+===== 2025-11-30 20:46:09.872 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,839±0,180 (min=7,701 | max=8,334)
+Transfer(ms): 5,800±0,092 (min=5,720 | max=6,079)
+Processamento(ms): 2,039±0,131 (min=1,981 | max=2,465)
+Notas: FFT TFLite (TFLite CPU) -> 7,740 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=5,87ms/P=2,47ms, T=5,78ms/P=1,99ms, T=5,75ms/P=1,99ms, T=5,78ms/P=1,99ms, T=5,74ms/P=2,00ms, T=5,72ms/P=1,98ms, T=5,78ms/P=1,98ms, T=5,78ms/P=2,00ms, T=5,75ms/P=1,99ms, T=5,82ms/P=2,09ms, T=6,08ms/P=2,01ms, T=5,76ms/P=1,98ms
+
+===== 2025-11-30 20:46:26.174 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 16,747±1,485 (min=15,422 | max=21,469)
+Transfer(ms): 11,716±1,168 (min=11,309 | max=15,587)
+Processamento(ms): 5,032±0,464 (min=4,113 | max=5,883)
+Notas: FFT TFLite (TFLite CPU) -> 16,589 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=15,59ms/P=5,88ms, T=11,32ms/P=4,52ms, T=11,34ms/P=4,62ms, T=11,35ms/P=5,05ms, T=11,32ms/P=4,84ms, T=11,35ms/P=4,95ms, T=11,36ms/P=5,40ms, T=11,42ms/P=5,06ms, T=11,40ms/P=5,06ms, T=11,49ms/P=5,62ms, T=11,31ms/P=4,11ms, T=11,33ms/P=5,26ms
+
+===== 2025-12-09 13:07:03.405 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,228±0,794 (min=0,751 | max=2,767)
+Transfer(ms): 0,961±0,728 (min=0,534 | max=2,390)
+Processamento(ms): 0,268±0,111 (min=0,217 | max=0,632)
+Notas: FFT TFLite (TFLite CPU) -> 0,754 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=2,14ms/P=0,63ms, T=2,12ms/P=0,25ms, T=2,39ms/P=0,25ms, T=0,54ms/P=0,25ms, T=0,53ms/P=0,23ms, T=0,53ms/P=0,23ms, T=0,55ms/P=0,23ms, T=0,54ms/P=0,22ms, T=0,58ms/P=0,24ms, T=0,53ms/P=0,22ms, T=0,54ms/P=0,24ms, T=0,54ms/P=0,22ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:06.813 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,453±0,046 (min=1,409 | max=1,585)
+Transfer(ms): 1,062±0,019 (min=1,045 | max=1,101)
+Processamento(ms): 0,391±0,031 (min=0,363 | max=0,483)
+Notas: FFT TFLite (TFLite CPU) -> 1,487 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,10ms/P=0,48ms, T=1,05ms/P=0,38ms, T=1,05ms/P=0,40ms, T=1,08ms/P=0,39ms, T=1,09ms/P=0,38ms, T=1,05ms/P=0,41ms, T=1,05ms/P=0,38ms, T=1,05ms/P=0,37ms, T=1,06ms/P=0,37ms, T=1,06ms/P=0,37ms, T=1,05ms/P=0,36ms, T=1,09ms/P=0,40ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:11.113 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,906±0,161 (min=2,777 | max=3,352)
+Transfer(ms): 2,186±0,138 (min=2,084 | max=2,600)
+Processamento(ms): 0,721±0,048 (min=0,679 | max=0,855)
+Notas: FFT TFLite (TFLite CPU) -> 2,853 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,27ms/P=0,86ms, T=2,09ms/P=0,77ms, T=2,08ms/P=0,69ms, T=2,15ms/P=0,70ms, T=2,08ms/P=0,73ms, T=2,13ms/P=0,68ms, T=2,13ms/P=0,69ms, T=2,22ms/P=0,69ms, T=2,60ms/P=0,75ms, T=2,21ms/P=0,70ms, T=2,09ms/P=0,71ms, T=2,17ms/P=0,68ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:18.198 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,558±0,181 (min=5,461 | max=6,142)
+Transfer(ms): 4,224±0,048 (min=4,183 | max=4,329)
+Processamento(ms): 1,333±0,148 (min=1,277 | max=1,822)
+Notas: FFT TFLite (TFLite CPU) -> 5,463 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,32ms/P=1,82ms, T=4,18ms/P=1,29ms, T=4,23ms/P=1,29ms, T=4,24ms/P=1,29ms, T=4,22ms/P=1,29ms, T=4,18ms/P=1,28ms, T=4,21ms/P=1,28ms, T=4,19ms/P=1,29ms, T=4,33ms/P=1,29ms, T=4,19ms/P=1,31ms, T=4,22ms/P=1,29ms, T=4,19ms/P=1,28ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:31.431 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,164±0,379 (min=10,938 | max=12,335)
+Transfer(ms): 8,489±0,159 (min=8,362 | max=8,888)
+Processamento(ms): 2,676±0,272 (min=2,563 | max=3,575)
+Notas: FFT TFLite (TFLite CPU) -> 10,951 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,76ms/P=3,58ms, T=8,45ms/P=2,59ms, T=8,42ms/P=2,60ms, T=8,44ms/P=2,64ms, T=8,89ms/P=2,60ms, T=8,44ms/P=2,61ms, T=8,41ms/P=2,57ms, T=8,36ms/P=2,57ms, T=8,55ms/P=2,56ms, T=8,42ms/P=2,60ms, T=8,37ms/P=2,60ms, T=8,36ms/P=2,59ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:58.683 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 23,722±1,178 (min=22,910 | max=27,361)
+Transfer(ms): 17,115±0,568 (min=16,774 | max=18,956)
+Processamento(ms): 6,607±0,716 (min=5,881 | max=8,405)
+Notas: FFT TFLite (TFLite CPU) -> 23,315 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=18,96ms/P=8,40ms, T=16,92ms/P=7,58ms, T=17,04ms/P=6,54ms, T=17,19ms/P=5,88ms, T=16,89ms/P=6,52ms, T=16,94ms/P=6,47ms, T=16,81ms/P=7,08ms, T=16,93ms/P=6,10ms, T=16,84ms/P=6,07ms, T=16,95ms/P=6,02ms, T=17,15ms/P=6,07ms, T=16,77ms/P=6,54ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:09:11.435 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 47,086±1,546 (min=45,658 | max=51,947)
+Transfer(ms): 33,751±0,330 (min=33,493 | max=34,788)
+Processamento(ms): 13,336±1,235 (min=12,056 | max=17,160)
+Notas: FFT TFLite (TFLite CPU) -> 47,114 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,79ms/P=17,16ms, T=33,49ms/P=12,63ms, T=33,56ms/P=13,48ms, T=33,70ms/P=13,60ms, T=33,79ms/P=12,92ms, T=33,59ms/P=13,03ms, T=33,60ms/P=12,06ms, T=33,53ms/P=12,43ms, T=33,70ms/P=12,81ms, T=33,85ms/P=13,34ms, T=33,78ms/P=13,10ms, T=33,64ms/P=13,48ms | Temperaturas: Bateria 28,5°C -> 28,5°C
+Temperaturas: Bateria 28,5°C -> 28,5°C
+
+===== 2025-12-09 13:11:55.284 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 93,677±2,277 (min=91,023 | max=100,421)
+Transfer(ms): 67,523±0,779 (min=67,083 | max=70,088)
+Processamento(ms): 26,154±1,613 (min=23,738 | max=30,333)
+Notas: FFT TFLite (TFLite CPU) -> 91,316 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=70,09ms/P=30,33ms, T=67,51ms/P=26,16ms, T=67,36ms/P=27,25ms, T=67,30ms/P=26,56ms, T=67,24ms/P=26,77ms, T=67,08ms/P=26,30ms, T=67,31ms/P=25,32ms, T=67,31ms/P=25,87ms, T=67,30ms/P=26,35ms, T=67,28ms/P=23,74ms, T=67,27ms/P=25,11ms, T=67,23ms/P=24,09ms | Temperaturas: Bateria 28,7°C -> 28,7°C
+Temperaturas: Bateria 28,7°C -> 28,7°C
+
+===== 2025-12-09 13:14:36.696 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,760±0,035 (min=0,732 | max=0,870)
+Transfer(ms): 0,528±0,006 (min=0,525 | max=0,547)
+Processamento(ms): 0,233±0,029 (min=0,207 | max=0,322)
+Notas: FFT TFLite (TFLite CPU) -> 0,750 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=0,55ms/P=0,32ms, T=0,53ms/P=0,25ms, T=0,53ms/P=0,23ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,22ms, T=0,53ms/P=0,23ms, T=0,53ms/P=0,23ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,24ms, T=0,52ms/P=0,21ms, T=0,53ms/P=0,22ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:39.449 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,447±0,047 (min=1,402 | max=1,528)
+Transfer(ms): 1,066±0,028 (min=1,044 | max=1,148)
+Processamento(ms): 0,381±0,039 (min=0,353 | max=0,481)
+Notas: FFT TFLite (TFLite CPU) -> 1,458 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,08ms/P=0,45ms, T=1,05ms/P=0,48ms, T=1,05ms/P=0,35ms, T=1,06ms/P=0,37ms, T=1,15ms/P=0,37ms, T=1,08ms/P=0,37ms, T=1,05ms/P=0,36ms, T=1,05ms/P=0,35ms, T=1,05ms/P=0,36ms, T=1,06ms/P=0,37ms, T=1,04ms/P=0,36ms, T=1,09ms/P=0,37ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:43.443 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,815±0,061 (min=2,760 | max=2,979)
+Transfer(ms): 2,122±0,039 (min=2,091 | max=2,213)
+Processamento(ms): 0,693±0,040 (min=0,664 | max=0,803)
+Notas: FFT TFLite (TFLite CPU) -> 2,760 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,18ms/P=0,80ms, T=2,09ms/P=0,70ms, T=2,11ms/P=0,67ms, T=2,10ms/P=0,69ms, T=2,09ms/P=0,67ms, T=2,13ms/P=0,68ms, T=2,09ms/P=0,67ms, T=2,11ms/P=0,66ms, T=2,09ms/P=0,75ms, T=2,16ms/P=0,66ms, T=2,21ms/P=0,67ms, T=2,09ms/P=0,67ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:50.378 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,595±0,154 (min=5,484 | max=6,088)
+Transfer(ms): 4,232±0,030 (min=4,195 | max=4,296)
+Processamento(ms): 1,363±0,136 (min=1,274 | max=1,793)
+Notas: FFT TFLite (TFLite CPU) -> 5,524 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,30ms/P=1,79ms, T=4,28ms/P=1,30ms, T=4,21ms/P=1,42ms, T=4,23ms/P=1,31ms, T=4,20ms/P=1,38ms, T=4,23ms/P=1,29ms, T=4,26ms/P=1,31ms, T=4,21ms/P=1,27ms, T=4,20ms/P=1,35ms, T=4,23ms/P=1,35ms, T=4,21ms/P=1,30ms, T=4,24ms/P=1,28ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:15:04.560 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,371±0,851 (min=11,030 | max=14,188)
+Transfer(ms): 8,567±0,077 (min=8,481 | max=8,759)
+Processamento(ms): 2,804±0,792 (min=2,539 | max=5,430)
+Notas: FFT TFLite (TFLite CPU) -> 11,062 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,76ms/P=5,43ms, T=8,48ms/P=2,62ms, T=8,63ms/P=2,58ms, T=8,59ms/P=2,55ms, T=8,48ms/P=2,57ms, T=8,52ms/P=2,56ms, T=8,60ms/P=2,55ms, T=8,57ms/P=2,60ms, T=8,60ms/P=2,54ms, T=8,56ms/P=2,56ms, T=8,48ms/P=2,55ms, T=8,51ms/P=2,55ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:15:31.849 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 23,501±0,780 (min=22,402 | max=25,305)
+Transfer(ms): 16,890±0,128 (min=16,719 | max=17,187)
+Processamento(ms): 6,612±0,736 (min=5,632 | max=8,118)
+Notas: FFT TFLite (TFLite CPU) -> 24,323 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=17,19ms/P=8,12ms, T=16,87ms/P=6,41ms, T=16,93ms/P=6,26ms, T=16,77ms/P=5,63ms, T=16,81ms/P=7,75ms, T=16,83ms/P=6,41ms, T=17,04ms/P=6,23ms, T=16,76ms/P=6,42ms, T=16,97ms/P=5,98ms, T=16,72ms/P=6,68ms, T=16,94ms/P=5,97ms, T=16,85ms/P=7,48ms | Temperaturas: Bateria 29,0°C -> 29,0°C
+Temperaturas: Bateria 29,0°C -> 29,0°C
+
+===== 2025-12-09 13:16:44.740 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 46,824±1,297 (min=45,589 | max=50,565)
+Transfer(ms): 33,796±0,371 (min=33,551 | max=34,821)
+Processamento(ms): 13,027±1,030 (min=11,964 | max=15,744)
+Notas: FFT TFLite (TFLite CPU) -> 47,321 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,82ms/P=15,74ms, T=33,63ms/P=11,96ms, T=33,58ms/P=12,50ms, T=33,65ms/P=12,41ms, T=33,74ms/P=12,16ms, T=33,58ms/P=12,33ms, T=33,55ms/P=13,47ms, T=34,36ms/P=12,57ms, T=33,59ms/P=12,48ms, T=33,73ms/P=12,91ms, T=33,68ms/P=14,12ms, T=33,65ms/P=13,67ms | Temperaturas: Bateria 29,1°C -> 29,1°C
+Temperaturas: Bateria 29,1°C -> 29,1°C
+
+===== 2025-12-09 13:19:21.686 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 93,720±3,000 (min=91,203 | max=102,976)
+Transfer(ms): 67,609±0,883 (min=66,998 | max=70,380)
+Processamento(ms): 26,111±2,161 (min=24,118 | max=32,596)
+Notas: FFT TFLite (TFLite CPU) -> 91,866 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=70,38ms/P=32,60ms, T=67,35ms/P=26,14ms, T=67,00ms/P=24,39ms, T=67,12ms/P=26,12ms, T=67,26ms/P=25,13ms, T=67,19ms/P=24,98ms, T=67,09ms/P=26,04ms, T=67,09ms/P=24,12ms, T=67,88ms/P=25,97ms, T=67,88ms/P=27,35ms, T=67,53ms/P=26,18ms, T=67,55ms/P=24,32ms | Temperaturas: Bateria 29,3°C -> 29,3°C
+Temperaturas: Bateria 29,3°C -> 29,3°C
+
+===== 2025-12-09 13:22:09.810 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,744±0,016 (min=0,731 | max=0,795)
+Transfer(ms): 0,527±0,004 (min=0,525 | max=0,539)
+Processamento(ms): 0,217±0,013 (min=0,206 | max=0,256)
+Notas: FFT TFLite (TFLite CPU) -> 0,738 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=0,54ms/P=0,26ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,22ms, T=0,52ms/P=0,21ms, T=0,53ms/P=0,21ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:12.540 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,463±0,056 (min=1,399 | max=1,570)
+Transfer(ms): 1,077±0,044 (min=1,045 | max=1,189)
+Processamento(ms): 0,386±0,038 (min=0,353 | max=0,497)
+Notas: FFT TFLite (TFLite CPU) -> 1,416 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,12ms/P=0,42ms, T=1,19ms/P=0,38ms, T=1,07ms/P=0,39ms, T=1,05ms/P=0,37ms, T=1,05ms/P=0,37ms, T=1,05ms/P=0,37ms, T=1,05ms/P=0,50ms, T=1,07ms/P=0,37ms, T=1,13ms/P=0,36ms, T=1,05ms/P=0,39ms, T=1,05ms/P=0,35ms, T=1,05ms/P=0,37ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:16.442 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,792±0,071 (min=2,740 | max=3,017)
+Transfer(ms): 2,113±0,042 (min=2,079 | max=2,234)
+Processamento(ms): 0,679±0,036 (min=0,657 | max=0,783)
+Notas: FFT TFLite (TFLite CPU) -> 2,752 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,23ms/P=0,78ms, T=2,12ms/P=0,67ms, T=2,09ms/P=0,66ms, T=2,11ms/P=0,67ms, T=2,08ms/P=0,66ms, T=2,14ms/P=0,66ms, T=2,08ms/P=0,72ms, T=2,12ms/P=0,67ms, T=2,10ms/P=0,66ms, T=2,08ms/P=0,66ms, T=2,12ms/P=0,66ms, T=2,08ms/P=0,67ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:23.452 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,552±0,170 (min=5,447 | max=6,098)
+Transfer(ms): 4,205±0,034 (min=4,172 | max=4,273)
+Processamento(ms): 1,347±0,146 (min=1,263 | max=1,825)
+Notas: FFT TFLite (TFLite CPU) -> 5,454 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,27ms/P=1,82ms, T=4,20ms/P=1,29ms, T=4,19ms/P=1,31ms, T=4,20ms/P=1,34ms, T=4,18ms/P=1,32ms, T=4,19ms/P=1,30ms, T=4,18ms/P=1,32ms, T=4,26ms/P=1,35ms, T=4,17ms/P=1,29ms, T=4,24ms/P=1,28ms, T=4,18ms/P=1,26ms, T=4,18ms/P=1,27ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:37.353 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,313±0,566 (min=10,924 | max=12,758)
+Transfer(ms): 8,497±0,188 (min=8,357 | max=9,087)
+Processamento(ms): 2,816±0,547 (min=2,535 | max=4,393)
+Notas: FFT TFLite (TFLite CPU) -> 11,045 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,57ms/P=3,55ms, T=8,52ms/P=2,60ms, T=8,45ms/P=2,59ms, T=8,36ms/P=2,57ms, T=8,36ms/P=4,39ms, T=9,09ms/P=2,70ms, T=8,48ms/P=2,59ms, T=8,43ms/P=2,54ms, T=8,44ms/P=2,58ms, T=8,39ms/P=2,54ms, T=8,39ms/P=2,57ms, T=8,48ms/P=2,57ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:23:04.768 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 23,767±0,463 (min=23,114 | max=24,984)
+Transfer(ms): 16,902±0,166 (min=16,688 | max=17,321)
+Processamento(ms): 6,866±0,362 (min=6,427 | max=7,663)
+Notas: FFT TFLite (TFLite CPU) -> 23,800 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=17,32ms/P=7,66ms, T=16,69ms/P=6,43ms, T=16,91ms/P=6,88ms, T=16,90ms/P=6,77ms, T=16,85ms/P=7,27ms, T=16,88ms/P=6,74ms, T=16,77ms/P=6,44ms, T=16,81ms/P=6,67ms, T=16,78ms/P=7,28ms, T=17,15ms/P=6,47ms, T=16,90ms/P=6,84ms, T=16,86ms/P=6,94ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:24:18.094 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 47,363±1,200 (min=46,056 | max=50,773)
+Transfer(ms): 33,832±0,666 (min=33,420 | max=35,602)
+Processamento(ms): 13,531±0,936 (min=12,275 | max=15,825)
+Notas: FFT TFLite (TFLite CPU) -> 46,056 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,95ms/P=15,82ms, T=33,76ms/P=13,77ms, T=33,60ms/P=14,02ms, T=33,66ms/P=12,93ms, T=35,60ms/P=12,27ms, T=33,60ms/P=13,81ms, T=33,49ms/P=12,93ms, T=33,45ms/P=14,47ms, T=33,49ms/P=13,28ms, T=33,44ms/P=13,78ms, T=33,52ms/P=12,65ms, T=33,42ms/P=12,64ms | Temperaturas: Bateria 29,6°C -> 29,6°C
+Temperaturas: Bateria 29,6°C -> 29,6°C
+
+===== 2025-12-09 13:27:04.077 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 92,949±2,368 (min=90,690 | max=100,178)
+Transfer(ms): 67,386±0,714 (min=66,891 | max=69,714)
+Processamento(ms): 25,563±1,710 (min=23,638 | max=30,464)
+Notas: FFT TFLite (TFLite CPU) -> 90,690 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=69,71ms/P=30,46ms, T=67,17ms/P=25,93ms, T=67,13ms/P=24,82ms, T=67,12ms/P=25,41ms, T=67,33ms/P=24,22ms, T=67,31ms/P=25,84ms, T=67,18ms/P=24,58ms, T=67,43ms/P=26,98ms, T=67,13ms/P=24,28ms, T=67,18ms/P=25,36ms, T=66,89ms/P=25,24ms, T=67,05ms/P=23,64ms | Temperaturas: Bateria 29,7°C -> 29,8°C
+Temperaturas: Bateria 29,7°C -> 29,8°C
+
+===== 2025-12-09 13:29:05.405 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,745±0,019 (min=0,732 | max=0,808)
+Transfer(ms): 0,527±0,004 (min=0,524 | max=0,541)
+Processamento(ms): 0,218±0,015 (min=0,206 | max=0,267)
+Notas: FFT TFLite (TFLite CPU) -> 0,738 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=0,54ms/P=0,27ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,21ms, T=0,53ms/P=0,22ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,22ms, T=0,53ms/P=0,21ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:08.064 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,430±0,037 (min=1,397 | max=1,530)
+Transfer(ms): 1,060±0,023 (min=1,040 | max=1,106)
+Processamento(ms): 0,370±0,026 (min=0,355 | max=0,454)
+Notas: FFT TFLite (TFLite CPU) -> 1,466 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,08ms/P=0,45ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,38ms, T=1,05ms/P=0,37ms, T=1,07ms/P=0,35ms, T=1,09ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,37ms, T=1,04ms/P=0,36ms, T=1,09ms/P=0,36ms, T=1,11ms/P=0,36ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:11.991 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,781±0,046 (min=2,735 | max=2,910)
+Transfer(ms): 2,097±0,024 (min=2,073 | max=2,146)
+Processamento(ms): 0,684±0,034 (min=0,659 | max=0,781)
+Notas: FFT TFLite (TFLite CPU) -> 2,767 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,13ms/P=0,78ms, T=2,15ms/P=0,68ms, T=2,08ms/P=0,72ms, T=2,12ms/P=0,67ms, T=2,07ms/P=0,70ms, T=2,07ms/P=0,67ms, T=2,10ms/P=0,66ms, T=2,08ms/P=0,66ms, T=2,12ms/P=0,67ms, T=2,08ms/P=0,66ms, T=2,09ms/P=0,66ms, T=2,08ms/P=0,69ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:18.846 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,557±0,166 (min=5,464 | max=6,098)
+Transfer(ms): 4,238±0,050 (min=4,188 | max=4,371)
+Processamento(ms): 1,320±0,126 (min=1,256 | max=1,727)
+Notas: FFT TFLite (TFLite CPU) -> 5,508 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,37ms/P=1,73ms, T=4,20ms/P=1,28ms, T=4,24ms/P=1,27ms, T=4,26ms/P=1,29ms, T=4,19ms/P=1,27ms, T=4,23ms/P=1,26ms, T=4,19ms/P=1,27ms, T=4,27ms/P=1,26ms, T=4,28ms/P=1,28ms, T=4,21ms/P=1,29ms, T=4,19ms/P=1,36ms, T=4,22ms/P=1,29ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:32.829 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,618±0,599 (min=10,978 | max=12,439)
+Transfer(ms): 8,496±0,124 (min=8,372 | max=8,774)
+Processamento(ms): 3,122±0,619 (min=2,576 | max=4,013)
+Notas: FFT TFLite (TFLite CPU) -> 11,137 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,60ms/P=3,75ms, T=8,39ms/P=3,55ms, T=8,77ms/P=2,70ms, T=8,46ms/P=2,59ms, T=8,37ms/P=3,99ms, T=8,45ms/P=2,58ms, T=8,54ms/P=3,90ms, T=8,42ms/P=2,58ms, T=8,40ms/P=2,58ms, T=8,38ms/P=4,01ms, T=8,68ms/P=2,58ms, T=8,47ms/P=2,66ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:59.958 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 23,541±1,210 (min=22,538 | max=27,223)
+Transfer(ms): 16,938±0,210 (min=16,780 | max=17,599)
+Processamento(ms): 6,602±1,012 (min=5,697 | max=9,624)
+Notas: FFT TFLite (TFLite CPU) -> 23,099 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=17,60ms/P=9,62ms, T=17,01ms/P=7,38ms, T=16,98ms/P=5,98ms, T=16,87ms/P=6,04ms, T=16,81ms/P=6,10ms, T=16,82ms/P=6,48ms, T=16,84ms/P=5,70ms, T=16,78ms/P=5,98ms, T=16,90ms/P=6,35ms, T=16,93ms/P=6,96ms, T=16,85ms/P=6,42ms, T=16,88ms/P=6,22ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:31:13.136 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 47,444±1,334 (min=45,611 | max=50,849)
+Transfer(ms): 33,660±0,407 (min=33,447 | max=34,988)
+Processamento(ms): 13,784±1,071 (min=11,908 | max=15,860)
+Notas: FFT TFLite (TFLite CPU) -> 47,482 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,99ms/P=15,86ms, T=33,70ms/P=11,91ms, T=33,48ms/P=15,01ms, T=33,54ms/P=14,25ms, T=33,59ms/P=14,05ms, T=33,55ms/P=14,31ms, T=33,47ms/P=13,66ms, T=33,48ms/P=12,29ms, T=33,63ms/P=14,12ms, T=33,58ms/P=13,18ms, T=33,47ms/P=12,74ms, T=33,45ms/P=14,03ms | Temperaturas: Bateria 30,1°C -> 30,1°C
+Temperaturas: Bateria 30,1°C -> 30,1°C
+
+===== 2025-12-09 13:33:50.291 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 94,607±2,834 (min=91,459 | max=103,228)
+Transfer(ms): 68,007±0,934 (min=67,384 | max=70,606)
+Processamento(ms): 26,600±2,097 (min=23,864 | max=32,621)
+Notas: FFT TFLite (TFLite CPU) -> 94,254 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=70,61ms/P=32,62ms, T=69,30ms/P=25,60ms, T=68,15ms/P=27,42ms, T=67,79ms/P=25,84ms, T=67,62ms/P=27,41ms, T=67,81ms/P=24,57ms, T=67,60ms/P=23,86ms, T=67,38ms/P=25,25ms, T=67,43ms/P=26,51ms, T=67,42ms/P=26,89ms, T=67,52ms/P=26,41ms, T=67,46ms/P=26,80ms | Temperaturas: Bateria 30,3°C -> 30,4°C
+Temperaturas: Bateria 30,3°C -> 30,4°C
+
+===== 2025-12-09 13:36:01.878 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,799±0,058 (min=0,734 | max=0,962)
+Transfer(ms): 0,565±0,032 (min=0,523 | max=0,629)
+Processamento(ms): 0,234±0,032 (min=0,208 | max=0,333)
+Notas: FFT TFLite (TFLite CPU) -> 0,738 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=0,63ms/P=0,33ms, T=0,56ms/P=0,25ms, T=0,59ms/P=0,24ms, T=0,56ms/P=0,22ms, T=0,61ms/P=0,23ms, T=0,56ms/P=0,23ms, T=0,57ms/P=0,22ms, T=0,52ms/P=0,23ms, T=0,58ms/P=0,22ms, T=0,53ms/P=0,21ms, T=0,55ms/P=0,22ms, T=0,52ms/P=0,21ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:04.692 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,448±0,054 (min=1,397 | max=1,560)
+Transfer(ms): 1,053±0,018 (min=1,041 | max=1,088)
+Processamento(ms): 0,395±0,046 (min=0,356 | max=0,486)
+Notas: FFT TFLite (TFLite CPU) -> 1,560 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,09ms/P=0,42ms, T=1,04ms/P=0,37ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,37ms, T=1,09ms/P=0,37ms, T=1,04ms/P=0,45ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,46ms, T=1,05ms/P=0,37ms, T=1,07ms/P=0,49ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:08.774 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,814±0,061 (min=2,741 | max=2,975)
+Transfer(ms): 2,128±0,042 (min=2,080 | max=2,226)
+Processamento(ms): 0,687±0,048 (min=0,657 | max=0,838)
+Notas: FFT TFLite (TFLite CPU) -> 2,787 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,14ms/P=0,84ms, T=2,13ms/P=0,68ms, T=2,17ms/P=0,68ms, T=2,08ms/P=0,66ms, T=2,12ms/P=0,66ms, T=2,08ms/P=0,69ms, T=2,23ms/P=0,66ms, T=2,08ms/P=0,70ms, T=2,16ms/P=0,67ms, T=2,08ms/P=0,70ms, T=2,14ms/P=0,66ms, T=2,13ms/P=0,66ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:15.691 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,517±0,174 (min=5,420 | max=6,081)
+Transfer(ms): 4,211±0,040 (min=4,162 | max=4,296)
+Processamento(ms): 1,306±0,145 (min=1,249 | max=1,785)
+Notas: FFT TFLite (TFLite CPU) -> 5,424 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,30ms/P=1,78ms, T=4,16ms/P=1,26ms, T=4,19ms/P=1,26ms, T=4,23ms/P=1,27ms, T=4,24ms/P=1,28ms, T=4,24ms/P=1,27ms, T=4,18ms/P=1,26ms, T=4,18ms/P=1,25ms, T=4,25ms/P=1,25ms, T=4,17ms/P=1,26ms, T=4,21ms/P=1,27ms, T=4,17ms/P=1,25ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:29.864 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,842±1,301 (min=10,953 | max=14,799)
+Transfer(ms): 8,560±0,311 (min=8,387 | max=9,560)
+Processamento(ms): 3,282±1,281 (min=2,535 | max=6,372)
+Notas: FFT TFLite (TFLite CPU) -> 14,799 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,66ms/P=5,67ms, T=8,39ms/P=2,60ms, T=8,48ms/P=2,76ms, T=8,59ms/P=2,57ms, T=8,43ms/P=2,63ms, T=9,56ms/P=2,63ms, T=8,43ms/P=2,67ms, T=8,49ms/P=3,85ms, T=8,41ms/P=2,55ms, T=8,44ms/P=2,55ms, T=8,43ms/P=2,54ms, T=8,43ms/P=6,37ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:57.196 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 24,326±1,131 (min=22,993 | max=26,371)
+Transfer(ms): 16,969±0,265 (min=16,736 | max=17,724)
+Processamento(ms): 7,357±1,030 (min=6,098 | max=9,288)
+Notas: FFT TFLite (TFLite CPU) -> 23,450 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=17,72ms/P=8,30ms, T=17,22ms/P=6,94ms, T=16,74ms/P=6,86ms, T=16,89ms/P=6,10ms, T=16,88ms/P=6,13ms, T=16,76ms/P=8,43ms, T=17,08ms/P=9,29ms, T=16,76ms/P=6,87ms, T=16,91ms/P=6,83ms, T=16,99ms/P=7,09ms, T=16,81ms/P=8,87ms, T=16,86ms/P=6,59ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:38:10.062 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 48,028±1,036 (min=46,509 | max=50,598)
+Transfer(ms): 33,803±0,378 (min=33,400 | max=34,823)
+Processamento(ms): 14,225±0,760 (min=12,983 | max=15,775)
+Notas: FFT TFLite (TFLite CPU) -> 48,181 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,82ms/P=15,78ms, T=33,83ms/P=14,29ms, T=33,99ms/P=14,49ms, T=33,58ms/P=13,60ms, T=33,74ms/P=14,31ms, T=33,78ms/P=13,79ms, T=34,22ms/P=14,36ms, T=33,63ms/P=12,98ms, T=33,47ms/P=15,21ms, T=33,40ms/P=13,11ms, T=33,53ms/P=14,24ms, T=33,65ms/P=14,53ms | Temperaturas: Bateria 30,7°C -> 30,7°C
+Temperaturas: Bateria 30,7°C -> 30,7°C
+
+===== 2025-12-09 13:40:52.557 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 93,566±2,613 (min=91,081 | max=101,108)
+Transfer(ms): 67,462±0,650 (min=66,959 | max=69,457)
+Processamento(ms): 26,104±2,135 (min=23,765 | max=31,651)
+Notas: FFT TFLite (TFLite CPU) -> 95,500 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=69,46ms/P=31,65ms, T=67,55ms/P=25,88ms, T=67,22ms/P=26,95ms, T=67,38ms/P=24,21ms, T=66,96ms/P=25,37ms, T=67,05ms/P=24,13ms, T=67,94ms/P=23,77ms, T=67,11ms/P=26,39ms, T=67,18ms/P=26,67ms, T=67,16ms/P=23,92ms, T=67,25ms/P=26,11ms, T=67,28ms/P=28,22ms | Temperaturas: Bateria 31,1°C -> 31,1°C
+Temperaturas: Bateria 31,1°C -> 31,1°C
+
+===== 2025-12-09 13:45:08.915 =====
+Cenário: FFT TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,768±0,036 (min=0,728 | max=0,853)
+Transfer(ms): 0,535±0,014 (min=0,524 | max=0,568)
+Processamento(ms): 0,233±0,036 (min=0,204 | max=0,329)
+Notas: FFT TFLite (TFLite CPU) -> 0,784 ms
+Σ pesos (4 primeiros): S0=2367221,75 | S1=2176562,00 | S2=1830124,63 | S3=1487534,75
+S0 bins[0..2]: 911466,94, 234048,94, 104027,42 | Escala 512 | Tempos: T=0,55ms/P=0,28ms, T=0,53ms/P=0,23ms, T=0,52ms/P=0,22ms, T=0,55ms/P=0,21ms, T=0,52ms/P=0,20ms, T=0,57ms/P=0,21ms, T=0,53ms/P=0,22ms, T=0,55ms/P=0,21ms, T=0,53ms/P=0,21ms, T=0,52ms/P=0,33ms, T=0,53ms/P=0,22ms, T=0,52ms/P=0,26ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:11.764 =====
+Cenário: FFT TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,433±0,052 (min=1,399 | max=1,561)
+Transfer(ms): 1,054±0,022 (min=1,042 | max=1,123)
+Processamento(ms): 0,379±0,039 (min=0,351 | max=0,467)
+Notas: FFT TFLite (TFLite CPU) -> 1,403 ms
+Σ pesos (4 primeiros): S0=5300311,50 | S1=4805516,00 | S2=3955271,00 | S3=3122265,00
+S0 bins[0..2]: 1824179,75, 467599,59, 207796,33 | Escala 1k | Tempos: T=1,12ms/P=0,44ms, T=1,05ms/P=0,47ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,05ms/P=0,36ms, T=1,07ms/P=0,36ms, T=1,05ms/P=0,43ms, T=1,05ms/P=0,35ms, T=1,04ms/P=0,36ms, T=1,04ms/P=0,36ms, T=1,05ms/P=0,35ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:15.791 =====
+Cenário: FFT TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,800±0,049 (min=2,756 | max=2,947)
+Transfer(ms): 2,103±0,024 (min=2,077 | max=2,142)
+Processamento(ms): 0,697±0,037 (min=0,658 | max=0,811)
+Notas: FFT TFLite (TFLite CPU) -> 2,777 ms
+Σ pesos (4 primeiros): S0=12315425,00 | S1=10987879,00 | S2=8812050,00 | S3=6699587,50
+S0 bins[0..2]: 3649620,00, 934763,63, 415338,75 | Escala 2k | Tempos: T=2,14ms/P=0,81ms, T=2,08ms/P=0,71ms, T=2,13ms/P=0,70ms, T=2,08ms/P=0,69ms, T=2,10ms/P=0,68ms, T=2,08ms/P=0,71ms, T=2,14ms/P=0,67ms, T=2,11ms/P=0,69ms, T=2,08ms/P=0,68ms, T=2,10ms/P=0,67ms, T=2,08ms/P=0,69ms, T=2,12ms/P=0,66ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:22.765 =====
+Cenário: FFT TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,534±0,171 (min=5,436 | max=6,087)
+Transfer(ms): 4,220±0,039 (min=4,175 | max=4,293)
+Processamento(ms): 1,314±0,149 (min=1,252 | max=1,806)
+Notas: FFT TFLite (TFLite CPU) -> 5,509 ms
+Σ pesos (4 primeiros): S0=30399226,00 | S1=26605606,00 | S2=20665748,00 | S3=14944631,00
+S0 bins[0..2]: 7300396,50, 1869043,75, 830449,63 | Escala 1x | Tempos: T=4,28ms/P=1,81ms, T=4,20ms/P=1,26ms, T=4,18ms/P=1,26ms, T=4,27ms/P=1,26ms, T=4,19ms/P=1,26ms, T=4,21ms/P=1,25ms, T=4,17ms/P=1,26ms, T=4,19ms/P=1,28ms, T=4,24ms/P=1,27ms, T=4,29ms/P=1,27ms, T=4,21ms/P=1,28ms, T=4,20ms/P=1,31ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:36.738 =====
+Cenário: FFT TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 11,222±0,346 (min=10,935 | max=12,204)
+Transfer(ms): 8,502±0,131 (min=8,382 | max=8,821)
+Processamento(ms): 2,719±0,286 (min=2,550 | max=3,547)
+Notas: FFT TFLite (TFLite CPU) -> 11,076 ms
+Σ pesos (4 primeiros): S0=81667000,00 | S1=69972488,00 | S2=52348812,00 | S3=35489364,00
+S0 bins[0..2]: 14602056,00, 3737650,25, 1660674,88 | Escala 2x | Tempos: T=8,66ms/P=3,55ms, T=8,40ms/P=2,61ms, T=8,39ms/P=2,57ms, T=8,44ms/P=2,65ms, T=8,63ms/P=2,57ms, T=8,38ms/P=2,55ms, T=8,42ms/P=3,09ms, T=8,53ms/P=2,57ms, T=8,41ms/P=2,61ms, T=8,82ms/P=2,67ms, T=8,43ms/P=2,64ms, T=8,53ms/P=2,55ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:46:03.898 =====
+Cenário: FFT TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 24,954±1,499 (min=22,644 | max=27,213)
+Transfer(ms): 16,992±0,246 (min=16,723 | max=17,510)
+Processamento(ms): 7,962±1,467 (min=5,863 | max=10,428)
+Notas: FFT TFLite (TFLite CPU) -> 22,644 ms
+Σ pesos (4 primeiros): S0=242420528,00 | S1=203492736,00 | S2=146452496,00 | S3=92211704,00
+S0 bins[0..2]: 29205378,00, 7474795,00, 3321052,00 | Escala 4x | Tempos: T=17,51ms/P=7,85ms, T=16,87ms/P=7,64ms, T=16,92ms/P=7,89ms, T=16,72ms/P=7,35ms, T=16,86ms/P=7,01ms, T=16,83ms/P=9,20ms, T=17,09ms/P=6,86ms, T=17,15ms/P=5,87ms, T=17,43ms/P=9,61ms, T=16,78ms/P=10,43ms, T=16,96ms/P=9,98ms, T=16,78ms/P=5,86ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:47:17.169 =====
+Cenário: FFT TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 47,700±1,601 (min=45,549 | max=51,372)
+Transfer(ms): 33,736±0,389 (min=33,403 | max=34,936)
+Processamento(ms): 13,964±1,392 (min=11,981 | max=16,680)
+Notas: FFT TFLite (TFLite CPU) -> 46,958 ms
+Σ pesos (4 primeiros): S0=792413952,00 | S1=654190144,00 | S2=455559520,00 | S3=267817920,00
+S0 bins[0..2]: 58412056,00, 14949061,00, 6641865,50 | Escala 32k | Tempos: T=34,94ms/P=16,44ms, T=34,01ms/P=12,66ms, T=33,57ms/P=11,98ms, T=33,70ms/P=13,32ms, T=33,71ms/P=13,22ms, T=33,65ms/P=13,79ms, T=33,58ms/P=15,03ms, T=33,48ms/P=13,25ms, T=33,60ms/P=16,68ms, T=33,40ms/P=13,20ms, T=33,56ms/P=14,67ms, T=33,63ms/P=13,32ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:50:04.765 =====
+Cenário: FFT TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 93,822±2,967 (min=91,396 | max=102,640)
+Transfer(ms): 67,343±0,766 (min=66,891 | max=69,831)
+Processamento(ms): 26,479±2,271 (min=24,334 | max=32,808)
+Notas: FFT TFLite (TFLite CPU) -> 91,501 ms
+Σ pesos (4 primeiros): S0=2797757952,00 | S1=2283698432,00 | S2=1554265856,00 | S3=869149184,00
+S0 bins[0..2]: 116825264,00, 29897806,00, 13283479,00 | Escala 64k | Tempos: T=69,83ms/P=32,81ms, T=66,99ms/P=26,54ms, T=67,09ms/P=24,50ms, T=67,05ms/P=26,00ms, T=66,89ms/P=26,60ms, T=67,02ms/P=25,26ms, T=67,30ms/P=25,62ms, T=67,50ms/P=28,97ms, T=67,14ms/P=26,81ms, T=66,95ms/P=24,45ms, T=67,19ms/P=25,85ms, T=67,17ms/P=24,33ms | Temperaturas: Bateria 31,4°C -> 31,4°C
+Temperaturas: Bateria 31,4°C -> 31,4°C
+

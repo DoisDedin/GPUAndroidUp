@@ -87,6 +87,55 @@ class FftCpuProcessor(
             weightedMagnitudes = weightedMagnitudes
         )
     }
+
+    /**
+     * Versão “streaming” usada em testes instrumentados. Processa um sensor por vez,
+     * reaproveitando buffers para reduzir picos de memória. O callback recebe os
+     * arrays de magnitude/pesos do sensor atual e deve consumi-los imediatamente
+     * (pois serão reutilizados no sensor seguinte).
+     */
+    fun processStreaming(
+        samples: Array<FloatArray>,
+        weights: Array<FloatArray>,
+        consumer: (sensorIndex: Int, magnitudes: FloatArray, weightedMagnitudes: FloatArray) -> Unit
+    ) {
+        require(samples.size == numSensors) {
+            "Esperado $numSensors sensores, recebido ${samples.size}"
+        }
+        require(weights.size == numSensors) {
+            "Esperado vetor de pesos por sensor ($numSensors), recebido ${weights.size}"
+        }
+
+        val scratch = FloatArray(2 * signalLength)
+        val freqBins = signalLength / 2 + 1
+        val magnitudes = FloatArray(freqBins)
+        val weighted = FloatArray(freqBins)
+
+        samples.forEachIndexed { sensorIndex, signal ->
+            require(signal.size == signalLength) {
+                "Sensor #$sensorIndex deveria ter $signalLength amostras, mas tem ${signal.size}"
+            }
+            System.arraycopy(signal, 0, scratch, 0, signalLength)
+            val start = System.nanoTime()
+            fft.realForwardFull(scratch)
+            logInfo("Sensor ${sensorIndex + 1}/$numSensors finalizado em ${"%.1f".format((System.nanoTime() - start) / 1_000_000.0)} ms")
+
+            for (bin in 0 until freqBins) {
+                val real = scratch[bin * 2] * normalizationFactor
+                val imag = scratch[bin * 2 + 1] * normalizationFactor
+                magnitudes[bin] = sqrt(real * real + imag * imag)
+            }
+            val weightVector = weights[sensorIndex]
+            require(weightVector.size == freqBins) {
+                "Vetor de pesos do sensor #$sensorIndex deveria ter $freqBins posições"
+            }
+            for (bin in 0 until freqBins) {
+                weighted[bin] = magnitudes[bin] * weightVector[bin]
+            }
+            consumer(sensorIndex, magnitudes, weighted)
+        }
+    }
+
     companion object {
         private const val TAG = "FftCpuProcessor"
         private fun logInfo(message: String) {

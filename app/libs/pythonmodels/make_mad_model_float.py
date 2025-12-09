@@ -1,7 +1,7 @@
 """
 Gera versões float32 do `mad_model.tflite` compatíveis com delegates GPU/NNAPI.
 O modelo replica o cálculo usado no pipeline Kotlin e pode ser emitido para
-múltiplos comprimentos de vetor (4k, 8k, 16k, etc.).
+múltiplos comprimentos de vetor (4k, 8k, 16k, 32k, 64k, 128k, 526k, etc.).
 """
 
 import argparse
@@ -11,6 +11,8 @@ import tensorflow as tf
 
 os.environ.setdefault("MPLCONFIGDIR", "/tmp/mplcache")
 os.makedirs("/tmp/mplcache", exist_ok=True)
+
+DEFAULT_LENGTHS = (512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288)
 
 
 def build_model(sample_length: int) -> bytes:
@@ -59,7 +61,7 @@ def main():
         "--lengths",
         nargs="+",
         type=int,
-        default=[4096, 8192, 16384],
+        default=list(DEFAULT_LENGTHS),
         help="Comprimentos de vetor a serem exportados.",
     )
     args = parser.parse_args()

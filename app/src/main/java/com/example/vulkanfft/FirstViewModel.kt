@@ -30,6 +30,9 @@ class FirstViewModel : ViewModel() {
     private val _energyInProgress = MutableLiveData(false)
     val energyInProgress: LiveData<Boolean> = _energyInProgress
 
+    private val _sessionRunCount = MutableLiveData(0)
+    val sessionRunCount: LiveData<Int> = _sessionRunCount
+
     init {
         observeEnergyEvents()
     }
@@ -112,14 +115,32 @@ class FirstViewModel : ViewModel() {
                 batchSizeOverride = batchSize
             )
             _benchmarkResult.postValue(summary.summaryText)
+            incrementSessionCounter()
         }
     }
 
     fun runFullBenchmarkSuite(context: Context) {
+        runSuiteAcrossScales(
+            context = context,
+            scales = DataScale.unifiedScales,
+            startMessage = "Iniciando suíte completa (512 → 526k)",
+            completionMessage = "Suíte completa finalizada"
+        )
+    }
+
+    private fun runSuiteAcrossScales(
+        context: Context,
+        scales: List<DataScale>,
+        startMessage: String,
+        completionMessage: String
+    ) {
+        if (scales.isEmpty()) {
+            _benchmarkResult.postValue("Nenhuma escala disponível para execução.")
+            return
+        }
         viewModelScope.launch(Dispatchers.Default) {
             val ctx = context.applicationContext
             val scenarios = BenchmarkScenario.suiteOrder
-            val scales = DataScale.values()
             val iterations = benchmarkIterations
             val batchSize = benchmarkBatchSize
             val totalSteps = scenarios.size * scales.size
@@ -129,7 +150,7 @@ class FirstViewModel : ViewModel() {
                     total = totalSteps,
                     current = 0,
                     running = true,
-                    message = "Iniciando suíte de testes"
+                    message = startMessage
                 )
             )
             scales.forEach { scale ->
@@ -143,6 +164,7 @@ class FirstViewModel : ViewModel() {
                     )
                     currentStep++
                     _benchmarkResult.postValue(summary.summaryText)
+                    incrementSessionCounter()
                     _progress.postValue(
                         BenchmarkProgress(
                             total = totalSteps,
@@ -158,7 +180,7 @@ class FirstViewModel : ViewModel() {
                     total = totalSteps,
                     current = totalSteps,
                     running = false,
-                    message = "Suíte concluída"
+                    message = completionMessage
                 )
             )
         }
@@ -191,6 +213,17 @@ class FirstViewModel : ViewModel() {
     }
 
     fun currentBatchSize(): Int = benchmarkBatchSize
+
+    fun currentSessionCount(): Int = _sessionRunCount.value ?: 0
+
+    fun resetSessionCounter() {
+        _sessionRunCount.postValue(0)
+    }
+
+    private fun incrementSessionCounter(delta: Int = 1) {
+        val current = _sessionRunCount.value ?: 0
+        _sessionRunCount.postValue(current + delta.coerceAtLeast(0))
+    }
 }
 
 data class BenchmarkProgress(
@@ -236,11 +269,37 @@ data class TimingStats(
 enum class DataScale(
     val shortLabel: String,
     val madVectorLength: Int,
-    val fftSignalLength: Int
+    val fftSignalLength: Int,
+    val isDefault: Boolean
 ) {
-    BASE("1x", 4096, 4096),
-    DOUBLE("2x", 8192, 8192),
-    QUADRUPLE("4x", 16384, 16384)
+    BASE("1x", 4096, 4096, true),
+    DOUBLE("2x", 8192, 8192, true),
+    QUADRUPLE("4x", 16384, 16384, true),
+    MICRO_512("512", 512, 512, false),
+    MICRO_1K("1k", 1024, 1024, false),
+    MICRO_2K("2k", 2048, 2048, false),
+    EXTREME_32K("32k", 32_768, 32_768, false),
+    EXTREME_64K("64k", 65_536, 65_536, false),
+    EXTREME_128K("128k", 131_072, 131_072, false),
+    EXTREME_256K("256k", 262_144, 262_144, false),
+    EXTREME_526K("526k", 526_000, 526_000, false);
+
+    companion object {
+        val defaultScales: List<DataScale> = listOf(BASE, DOUBLE, QUADRUPLE)
+        val focusedScales: List<DataScale> = listOf(MICRO_512, MICRO_1K, MICRO_2K, EXTREME_128K)
+        val extremeScales: List<DataScale> = listOf(EXTREME_32K, EXTREME_64K, EXTREME_128K)
+        val experimentalScales: List<DataScale> = listOf(EXTREME_256K, EXTREME_526K)
+        val unifiedScales: List<DataScale> = listOf(
+            MICRO_512,
+            MICRO_1K,
+            MICRO_2K,
+            BASE,
+            DOUBLE,
+            QUADRUPLE,
+            EXTREME_32K,
+            EXTREME_64K
+        )
+    }
 }
 
 enum class Algorithm { MAD, FFT }

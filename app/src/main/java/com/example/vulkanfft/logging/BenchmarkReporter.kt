@@ -30,7 +30,13 @@ data class BenchmarkEntry(
     val batchSize: Int,
     val estimatedEnergyImpact: String,
     val deviceInfo: DeviceInfo,
-    val extraNotes: String
+    val extraNotes: String,
+    val batteryTempStartC: Double?,
+    val batteryTempEndC: Double?,
+    val cpuTempStartC: Double?,
+    val cpuTempEndC: Double?,
+    val gpuTempStartC: Double?,
+    val gpuTempEndC: Double?
 ) {
     fun toCsvRow(): String {
         return listOf(
@@ -63,7 +69,13 @@ data class BenchmarkEntry(
             deviceInfo.soc ?: "",
             deviceInfo.sdkInt.toString(),
             deviceInfo.isPowerSaveMode.toString(),
-            extraNotes.replace("\n", " ")
+            extraNotes.replace("\n", " "),
+            batteryTempStartC?.let { "%.1f".format(Locale.US, it) } ?: "",
+            batteryTempEndC?.let { "%.1f".format(Locale.US, it) } ?: "",
+            cpuTempStartC?.let { "%.1f".format(Locale.US, it) } ?: "",
+            cpuTempEndC?.let { "%.1f".format(Locale.US, it) } ?: "",
+            gpuTempStartC?.let { "%.1f".format(Locale.US, it) } ?: "",
+            gpuTempEndC?.let { "%.1f".format(Locale.US, it) } ?: ""
         ).joinToString(",") { value ->
             if (value.contains(",") || value.contains(" ")) "\"$value\"" else value
         }
@@ -89,6 +101,17 @@ data class BenchmarkEntry(
         builder.appendLine("Impacto energético estimado: $estimatedEnergyImpact")
         builder.appendLine("Dispositivo: ${deviceInfo.manufacturer} ${deviceInfo.model} (HW=${deviceInfo.hardware}, Board=${deviceInfo.board}, SDK=${deviceInfo.sdkInt})")
         builder.appendLine("Power saver ativo: ${deviceInfo.isPowerSaveMode}")
+        if (
+            batteryTempStartC != null || batteryTempEndC != null ||
+            cpuTempStartC != null || cpuTempEndC != null ||
+            gpuTempStartC != null || gpuTempEndC != null
+        ) {
+            builder.appendLine(
+                "Temp Bateria: ${formatTemp(batteryTempStartC)} → ${formatTemp(batteryTempEndC)} | " +
+                    "CPU: ${formatTemp(cpuTempStartC)} → ${formatTemp(cpuTempEndC)} | " +
+                    "GPU: ${formatTemp(gpuTempStartC)} → ${formatTemp(gpuTempEndC)}"
+            )
+        }
         if (deviceInfo.soc != null) {
             builder.appendLine("SoC: ${deviceInfo.soc}")
         }
@@ -96,6 +119,9 @@ data class BenchmarkEntry(
         builder.appendLine()
         return builder.toString()
     }
+
+    private fun formatTemp(value: Double?): String =
+        value?.let { "%.1f°C".format(it) } ?: "-"
 }
 
 object BenchmarkReporter {
@@ -132,7 +158,13 @@ object BenchmarkReporter {
         "soc",
         "sdk_int",
         "power_save",
-        "notes"
+        "notes",
+        "battery_temp_start_c",
+        "battery_temp_end_c",
+        "cpu_temp_start_c",
+        "cpu_temp_end_c",
+        "gpu_temp_start_c",
+        "gpu_temp_end_c"
     ).joinToString(",")
 
     fun append(context: Context, entry: BenchmarkEntry) {

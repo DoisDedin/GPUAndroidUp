@@ -1,0 +1,507 @@
+===== 2025-11-30 20:46:01.357 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,012±0,039 (min=0,970 | max=1,124)
+Transfer(ms): 0,857±0,017 (min=0,844 | max=0,897)
+Processamento(ms): 0,155±0,025 (min=0,125 | max=0,226)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,90ms/P=0,23ms, T=0,85ms/P=0,16ms, T=0,85ms/P=0,17ms, T=0,87ms/P=0,15ms, T=0,85ms/P=0,13ms, T=0,85ms/P=0,13ms, T=0,87ms/P=0,15ms, T=0,85ms/P=0,15ms, T=0,84ms/P=0,15ms, T=0,87ms/P=0,16ms, T=0,85ms/P=0,16ms, T=0,85ms/P=0,12ms
+
+===== 2025-11-30 20:46:06.870 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,959±0,091 (min=1,879 | max=2,197)
+Transfer(ms): 1,719±0,046 (min=1,683 | max=1,851)
+Processamento(ms): 0,241±0,064 (min=0,191 | max=0,441)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,76ms/P=0,44ms, T=1,72ms/P=0,25ms, T=1,69ms/P=0,25ms, T=1,69ms/P=0,22ms, T=1,85ms/P=0,26ms, T=1,69ms/P=0,21ms, T=1,74ms/P=0,21ms, T=1,69ms/P=0,19ms, T=1,72ms/P=0,20ms, T=1,68ms/P=0,21ms, T=1,72ms/P=0,22ms, T=1,69ms/P=0,22ms
+
+===== 2025-11-30 20:46:18.090 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,808±0,157 (min=3,729 | max=4,324)
+Transfer(ms): 3,408±0,023 (min=3,378 | max=3,460)
+Processamento(ms): 0,400±0,140 (min=0,332 | max=0,864)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,46ms/P=0,86ms, T=3,39ms/P=0,37ms, T=3,40ms/P=0,37ms, T=3,38ms/P=0,35ms, T=3,41ms/P=0,35ms, T=3,44ms/P=0,33ms, T=3,41ms/P=0,37ms, T=3,38ms/P=0,36ms, T=3,41ms/P=0,35ms, T=3,40ms/P=0,34ms, T=3,43ms/P=0,37ms, T=3,38ms/P=0,37ms
+
+===== 2025-12-09 13:07:02.634 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 2,690±0,527 (min=2,424 | max=4,397)
+Transfer(ms): 2,390±0,106 (min=2,303 | max=2,695)
+Processamento(ms): 0,299±0,517 (min=0,121 | max=2,013)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=2,38ms/P=2,01ms, T=2,34ms/P=0,19ms, T=2,34ms/P=0,15ms, T=2,34ms/P=0,16ms, T=2,52ms/P=0,15ms, T=2,70ms/P=0,15ms, T=2,39ms/P=0,14ms, T=2,34ms/P=0,13ms, T=2,31ms/P=0,13ms, T=2,38ms/P=0,13ms, T=2,34ms/P=0,13ms, T=2,30ms/P=0,12ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:06.115 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,322±0,026 (min=0,294 | max=0,391)
+Transfer(ms): 0,220±0,009 (min=0,215 | max=0,244)
+Processamento(ms): 0,102±0,021 (min=0,078 | max=0,157)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,23ms/P=0,16ms, T=0,22ms/P=0,09ms, T=0,22ms/P=0,08ms, T=0,22ms/P=0,10ms, T=0,22ms/P=0,10ms, T=0,22ms/P=0,11ms, T=0,22ms/P=0,13ms, T=0,22ms/P=0,11ms, T=0,22ms/P=0,09ms, T=0,22ms/P=0,08ms, T=0,22ms/P=0,08ms, T=0,24ms/P=0,09ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:10.035 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,543±0,055 (min=0,502 | max=0,707)
+Transfer(ms): 0,422±0,010 (min=0,416 | max=0,447)
+Processamento(ms): 0,121±0,048 (min=0,087 | max=0,263)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,44ms/P=0,26ms, T=0,42ms/P=0,17ms, T=0,42ms/P=0,14ms, T=0,42ms/P=0,12ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,11ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,45ms/P=0,10ms, T=0,42ms/P=0,09ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:16.165 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,989±0,038 (min=0,952 | max=1,086)
+Transfer(ms): 0,843±0,018 (min=0,829 | max=0,877)
+Processamento(ms): 0,145±0,026 (min=0,123 | max=0,222)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,86ms/P=0,22ms, T=0,83ms/P=0,14ms, T=0,83ms/P=0,13ms, T=0,87ms/P=0,14ms, T=0,83ms/P=0,13ms, T=0,83ms/P=0,13ms, T=0,86ms/P=0,13ms, T=0,83ms/P=0,16ms, T=0,83ms/P=0,15ms, T=0,88ms/P=0,16ms, T=0,83ms/P=0,12ms, T=0,83ms/P=0,12ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:27.190 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,906±0,077 (min=1,851 | max=2,122)
+Transfer(ms): 1,681±0,036 (min=1,653 | max=1,782)
+Processamento(ms): 0,226±0,055 (min=0,198 | max=0,405)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,72ms/P=0,41ms, T=1,78ms/P=0,23ms, T=1,65ms/P=0,20ms, T=1,67ms/P=0,20ms, T=1,65ms/P=0,20ms, T=1,69ms/P=0,21ms, T=1,65ms/P=0,23ms, T=1,67ms/P=0,22ms, T=1,65ms/P=0,20ms, T=1,69ms/P=0,20ms, T=1,65ms/P=0,20ms, T=1,67ms/P=0,21ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:07:48.550 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,741±0,095 (min=3,687 | max=4,047)
+Transfer(ms): 3,355±0,029 (min=3,330 | max=3,432)
+Processamento(ms): 0,386±0,070 (min=0,355 | max=0,616)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,43ms/P=0,62ms, T=3,34ms/P=0,38ms, T=3,39ms/P=0,38ms, T=3,35ms/P=0,37ms, T=3,33ms/P=0,36ms, T=3,35ms/P=0,36ms, T=3,34ms/P=0,36ms, T=3,38ms/P=0,36ms, T=3,33ms/P=0,36ms, T=3,34ms/P=0,37ms, T=3,33ms/P=0,37ms, T=3,34ms/P=0,36ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:08:43.503 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,504±0,493 (min=7,244 | max=9,035)
+Transfer(ms): 6,838±0,467 (min=6,623 | max=8,374)
+Processamento(ms): 0,666±0,131 (min=0,612 | max=1,099)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=6,81ms/P=1,10ms, T=6,67ms/P=0,62ms, T=6,62ms/P=0,62ms, T=6,67ms/P=0,62ms, T=6,69ms/P=0,62ms, T=6,69ms/P=0,63ms, T=6,79ms/P=0,62ms, T=6,66ms/P=0,63ms, T=6,67ms/P=0,61ms, T=8,37ms/P=0,66ms, T=6,65ms/P=0,63ms, T=6,77ms/P=0,63ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:10:30.780 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,393±0,716 (min=14,534 | max=17,480)
+Transfer(ms): 13,420±0,114 (min=13,303 | max=13,726)
+Processamento(ms): 1,972±0,627 (min=1,231 | max=3,754)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=13,73ms/P=3,75ms, T=13,30ms/P=1,23ms, T=13,42ms/P=1,62ms, T=13,31ms/P=1,46ms, T=13,53ms/P=1,66ms, T=13,38ms/P=1,74ms, T=13,40ms/P=1,83ms, T=13,33ms/P=1,92ms, T=13,32ms/P=2,10ms, T=13,48ms/P=1,86ms, T=13,42ms/P=1,90ms, T=13,41ms/P=2,60ms | Temperaturas: Bateria 28,6°C -> 28,6°C
+Temperaturas: Bateria 28,6°C -> 28,6°C
+
+===== 2025-12-09 13:14:36.227 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,174±0,028 (min=0,154 | max=0,250)
+Transfer(ms): 0,111±0,009 (min=0,106 | max=0,141)
+Processamento(ms): 0,063±0,025 (min=0,046 | max=0,140)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=0,11ms/P=0,14ms, T=0,11ms/P=0,08ms, T=0,11ms/P=0,06ms, T=0,14ms/P=0,07ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,06ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:38.779 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,288±0,032 (min=0,268 | max=0,389)
+Transfer(ms): 0,218±0,005 (min=0,214 | max=0,232)
+Processamento(ms): 0,070±0,028 (min=0,051 | max=0,157)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,23ms/P=0,16ms, T=0,22ms/P=0,08ms, T=0,22ms/P=0,07ms, T=0,22ms/P=0,06ms, T=0,22ms/P=0,06ms, T=0,22ms/P=0,07ms, T=0,21ms/P=0,05ms, T=0,22ms/P=0,07ms, T=0,21ms/P=0,06ms, T=0,22ms/P=0,05ms, T=0,21ms/P=0,06ms, T=0,22ms/P=0,05ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:42.375 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,514±0,040 (min=0,488 | max=0,636)
+Transfer(ms): 0,428±0,015 (min=0,419 | max=0,464)
+Processamento(ms): 0,086±0,028 (min=0,068 | max=0,172)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,46ms/P=0,17ms, T=0,42ms/P=0,11ms, T=0,42ms/P=0,08ms, T=0,42ms/P=0,08ms, T=0,46ms/P=0,08ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,44ms/P=0,07ms, T=0,42ms/P=0,07ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:14:48.340 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,974±0,048 (min=0,937 | max=1,120)
+Transfer(ms): 0,844±0,025 (min=0,828 | max=0,915)
+Processamento(ms): 0,130±0,025 (min=0,107 | max=0,205)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,92ms/P=0,20ms, T=0,83ms/P=0,13ms, T=0,83ms/P=0,12ms, T=0,87ms/P=0,14ms, T=0,83ms/P=0,14ms, T=0,83ms/P=0,13ms, T=0,85ms/P=0,13ms, T=0,83ms/P=0,12ms, T=0,83ms/P=0,11ms, T=0,83ms/P=0,11ms, T=0,87ms/P=0,11ms, T=0,83ms/P=0,11ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:15:00.320 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,903±0,048 (min=1,856 | max=2,020)
+Transfer(ms): 1,692±0,031 (min=1,657 | max=1,763)
+Processamento(ms): 0,212±0,025 (min=0,188 | max=0,267)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,76ms/P=0,26ms, T=1,69ms/P=0,21ms, T=1,68ms/P=0,22ms, T=1,72ms/P=0,21ms, T=1,68ms/P=0,27ms, T=1,66ms/P=0,19ms, T=1,71ms/P=0,19ms, T=1,67ms/P=0,19ms, T=1,68ms/P=0,19ms, T=1,66ms/P=0,20ms, T=1,73ms/P=0,22ms, T=1,66ms/P=0,20ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:15:21.827 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,822±0,437 (min=3,662 | max=5,269)
+Transfer(ms): 3,380±0,113 (min=3,327 | max=3,749)
+Processamento(ms): 0,443±0,325 (min=0,332 | max=1,521)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,75ms/P=1,52ms, T=3,35ms/P=0,35ms, T=3,34ms/P=0,35ms, T=3,35ms/P=0,33ms, T=3,34ms/P=0,33ms, T=3,34ms/P=0,35ms, T=3,33ms/P=0,34ms, T=3,42ms/P=0,34ms, T=3,33ms/P=0,33ms, T=3,34ms/P=0,33ms, T=3,33ms/P=0,39ms, T=3,35ms/P=0,34ms | Temperaturas: Bateria 28,9°C -> 28,9°C
+Temperaturas: Bateria 28,9°C -> 28,9°C
+
+===== 2025-12-09 13:16:17.027 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,357±0,198 (min=7,257 | max=8,005)
+Transfer(ms): 6,695±0,060 (min=6,646 | max=6,877)
+Processamento(ms): 0,662±0,141 (min=0,602 | max=1,128)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=6,88ms/P=1,13ms, T=6,70ms/P=0,66ms, T=6,66ms/P=0,61ms, T=6,65ms/P=0,63ms, T=6,66ms/P=0,62ms, T=6,65ms/P=0,60ms, T=6,73ms/P=0,61ms, T=6,68ms/P=0,61ms, T=6,71ms/P=0,61ms, T=6,66ms/P=0,61ms, T=6,69ms/P=0,62ms, T=6,68ms/P=0,62ms | Temperaturas: Bateria 29,1°C -> 29,1°C
+Temperaturas: Bateria 29,1°C -> 29,1°C
+
+===== 2025-12-09 13:17:57.737 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,429±0,397 (min=15,119 | max=16,694)
+Transfer(ms): 13,431±0,106 (min=13,350 | max=13,754)
+Processamento(ms): 1,998±0,310 (min=1,726 | max=2,940)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=13,75ms/P=2,94ms, T=13,39ms/P=1,73ms, T=13,41ms/P=1,88ms, T=13,43ms/P=1,83ms, T=13,40ms/P=1,81ms, T=13,35ms/P=2,16ms, T=13,37ms/P=1,86ms, T=13,52ms/P=1,87ms, T=13,40ms/P=1,80ms, T=13,39ms/P=2,04ms, T=13,37ms/P=1,99ms, T=13,37ms/P=2,08ms | Temperaturas: Bateria 29,2°C -> 29,2°C
+Temperaturas: Bateria 29,2°C -> 29,2°C
+
+===== 2025-12-09 13:22:09.347 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,193±0,055 (min=0,153 | max=0,352)
+Transfer(ms): 0,121±0,037 (min=0,107 | max=0,244)
+Processamento(ms): 0,073±0,027 (min=0,046 | max=0,144)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=0,11ms/P=0,14ms, T=0,11ms/P=0,08ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,06ms, T=0,24ms/P=0,11ms, T=0,11ms/P=0,09ms, T=0,11ms/P=0,07ms, T=0,11ms/P=0,06ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:11.857 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,338±0,063 (min=0,264 | max=0,487)
+Transfer(ms): 0,233±0,034 (min=0,212 | max=0,304)
+Processamento(ms): 0,105±0,041 (min=0,053 | max=0,193)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,30ms/P=0,18ms, T=0,29ms/P=0,11ms, T=0,28ms/P=0,10ms, T=0,21ms/P=0,09ms, T=0,21ms/P=0,19ms, T=0,22ms/P=0,10ms, T=0,21ms/P=0,10ms, T=0,21ms/P=0,10ms, T=0,21ms/P=0,08ms, T=0,21ms/P=0,08ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,05ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:15.387 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,505±0,027 (min=0,488 | max=0,587)
+Transfer(ms): 0,424±0,007 (min=0,419 | max=0,442)
+Processamento(ms): 0,082±0,022 (min=0,068 | max=0,152)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,43ms/P=0,15ms, T=0,44ms/P=0,09ms, T=0,42ms/P=0,08ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,08ms, T=0,43ms/P=0,08ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,09ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:21.398 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,984±0,050 (min=0,946 | max=1,103)
+Transfer(ms): 0,857±0,033 (min=0,834 | max=0,942)
+Processamento(ms): 0,128±0,023 (min=0,108 | max=0,193)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,91ms/P=0,19ms, T=0,84ms/P=0,13ms, T=0,83ms/P=0,12ms, T=0,86ms/P=0,13ms, T=0,84ms/P=0,15ms, T=0,84ms/P=0,13ms, T=0,94ms/P=0,13ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,11ms, T=0,86ms/P=0,11ms, T=0,84ms/P=0,11ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:33.174 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,894±0,048 (min=1,857 | max=2,027)
+Transfer(ms): 1,685±0,031 (min=1,661 | max=1,759)
+Processamento(ms): 0,209±0,021 (min=0,190 | max=0,268)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,76ms/P=0,27ms, T=1,66ms/P=0,22ms, T=1,68ms/P=0,22ms, T=1,66ms/P=0,20ms, T=1,70ms/P=0,20ms, T=1,67ms/P=0,19ms, T=1,66ms/P=0,19ms, T=1,66ms/P=0,22ms, T=1,67ms/P=0,19ms, T=1,68ms/P=0,20ms, T=1,66ms/P=0,20ms, T=1,74ms/P=0,21ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:22:54.735 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,755±0,101 (min=3,687 | max=4,064)
+Transfer(ms): 3,401±0,040 (min=3,360 | max=3,488)
+Processamento(ms): 0,354±0,076 (min=0,323 | max=0,604)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,46ms/P=0,60ms, T=3,49ms/P=0,33ms, T=3,38ms/P=0,33ms, T=3,36ms/P=0,33ms, T=3,38ms/P=0,34ms, T=3,36ms/P=0,32ms, T=3,43ms/P=0,33ms, T=3,36ms/P=0,33ms, T=3,41ms/P=0,35ms, T=3,37ms/P=0,32ms, T=3,38ms/P=0,33ms, T=3,42ms/P=0,33ms | Temperaturas: Bateria 29,5°C -> 29,5°C
+Temperaturas: Bateria 29,5°C -> 29,5°C
+
+===== 2025-12-09 13:23:49.983 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,376±0,206 (min=7,272 | max=8,055)
+Transfer(ms): 6,725±0,092 (min=6,663 | max=7,019)
+Processamento(ms): 0,651±0,118 (min=0,590 | max=1,036)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=7,02ms/P=1,04ms, T=6,70ms/P=0,63ms, T=6,70ms/P=0,62ms, T=6,68ms/P=0,64ms, T=6,68ms/P=0,66ms, T=6,67ms/P=0,60ms, T=6,66ms/P=0,61ms, T=6,71ms/P=0,61ms, T=6,75ms/P=0,60ms, T=6,70ms/P=0,63ms, T=6,69ms/P=0,60ms, T=6,75ms/P=0,59ms | Temperaturas: Bateria 29,6°C -> 29,6°C
+Temperaturas: Bateria 29,6°C -> 29,6°C
+
+===== 2025-12-09 13:25:41.092 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,281±0,455 (min=14,739 | max=16,554)
+Transfer(ms): 13,491±0,125 (min=13,378 | max=13,862)
+Processamento(ms): 1,790±0,346 (min=1,343 | max=2,692)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=13,86ms/P=2,69ms, T=13,51ms/P=2,12ms, T=13,44ms/P=1,90ms, T=13,56ms/P=1,79ms, T=13,44ms/P=1,34ms, T=13,42ms/P=1,49ms, T=13,39ms/P=1,35ms, T=13,38ms/P=1,68ms, T=13,56ms/P=1,73ms, T=13,46ms/P=1,76ms, T=13,46ms/P=1,83ms, T=13,42ms/P=1,80ms | Temperaturas: Bateria 29,7°C -> 29,7°C
+Temperaturas: Bateria 29,7°C -> 29,7°C
+
+===== 2025-12-09 13:29:04.908 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,186±0,032 (min=0,155 | max=0,274)
+Transfer(ms): 0,116±0,004 (min=0,110 | max=0,122)
+Processamento(ms): 0,071±0,033 (min=0,038 | max=0,163)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=0,11ms/P=0,16ms, T=0,12ms/P=0,11ms, T=0,11ms/P=0,08ms, T=0,11ms/P=0,07ms, T=0,11ms/P=0,07ms, T=0,12ms/P=0,07ms, T=0,12ms/P=0,07ms, T=0,12ms/P=0,06ms, T=0,12ms/P=0,04ms, T=0,12ms/P=0,05ms, T=0,12ms/P=0,04ms, T=0,12ms/P=0,04ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:07.417 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,280±0,032 (min=0,261 | max=0,380)
+Transfer(ms): 0,216±0,009 (min=0,211 | max=0,242)
+Processamento(ms): 0,064±0,028 (min=0,050 | max=0,154)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,23ms/P=0,15ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,05ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,05ms, T=0,24ms/P=0,05ms, T=0,21ms/P=0,05ms, T=0,21ms/P=0,05ms, T=0,21ms/P=0,05ms, T=0,21ms/P=0,06ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:10.953 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,514±0,032 (min=0,481 | max=0,611)
+Transfer(ms): 0,426±0,008 (min=0,418 | max=0,442)
+Processamento(ms): 0,088±0,027 (min=0,063 | max=0,168)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,44ms/P=0,17ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,09ms, T=0,44ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,08ms, T=0,43ms/P=0,07ms, T=0,43ms/P=0,07ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,06ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:16.859 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,971±0,050 (min=0,932 | max=1,104)
+Transfer(ms): 0,847±0,020 (min=0,833 | max=0,886)
+Processamento(ms): 0,124±0,032 (min=0,098 | max=0,218)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,89ms/P=0,22ms, T=0,88ms/P=0,15ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,10ms, T=0,83ms/P=0,10ms, T=0,83ms/P=0,10ms, T=0,88ms/P=0,11ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,10ms, T=0,83ms/P=0,11ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:28.679 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,891±0,052 (min=1,850 | max=2,017)
+Transfer(ms): 1,691±0,040 (min=1,656 | max=1,807)
+Processamento(ms): 0,200±0,020 (min=0,185 | max=0,263)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,72ms/P=0,26ms, T=1,66ms/P=0,20ms, T=1,69ms/P=0,19ms, T=1,66ms/P=0,20ms, T=1,69ms/P=0,20ms, T=1,66ms/P=0,20ms, T=1,81ms/P=0,21ms, T=1,67ms/P=0,19ms, T=1,70ms/P=0,19ms, T=1,66ms/P=0,19ms, T=1,70ms/P=0,19ms, T=1,67ms/P=0,19ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:29:49.893 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,760±0,113 (min=3,697 | max=4,128)
+Transfer(ms): 3,396±0,029 (min=3,367 | max=3,463)
+Processamento(ms): 0,364±0,091 (min=0,328 | max=0,665)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,46ms/P=0,67ms, T=3,38ms/P=0,36ms, T=3,37ms/P=0,34ms, T=3,40ms/P=0,33ms, T=3,37ms/P=0,33ms, T=3,44ms/P=0,34ms, T=3,37ms/P=0,34ms, T=3,39ms/P=0,33ms, T=3,37ms/P=0,33ms, T=3,40ms/P=0,34ms, T=3,42ms/P=0,33ms, T=3,40ms/P=0,34ms | Temperaturas: Bateria 30,0°C -> 30,0°C
+Temperaturas: Bateria 30,0°C -> 30,0°C
+
+===== 2025-12-09 13:30:45.329 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,464±0,186 (min=7,340 | max=8,057)
+Transfer(ms): 6,819±0,072 (min=6,740 | max=6,987)
+Processamento(ms): 0,646±0,128 (min=0,600 | max=1,070)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=6,99ms/P=1,07ms, T=6,81ms/P=0,61ms, T=6,77ms/P=0,61ms, T=6,77ms/P=0,60ms, T=6,90ms/P=0,60ms, T=6,83ms/P=0,61ms, T=6,76ms/P=0,63ms, T=6,84ms/P=0,61ms, T=6,77ms/P=0,60ms, T=6,89ms/P=0,60ms, T=6,75ms/P=0,61ms, T=6,74ms/P=0,60ms | Temperaturas: Bateria 30,1°C -> 30,1°C
+Temperaturas: Bateria 30,1°C -> 30,1°C
+
+===== 2025-12-09 13:32:27.308 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,866±0,529 (min=15,162 | max=17,299)
+Transfer(ms): 13,735±0,533 (min=13,444 | max=15,289)
+Processamento(ms): 2,131±0,422 (min=1,274 | max=2,951)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=15,29ms/P=2,01ms, T=14,42ms/P=1,27ms, T=13,51ms/P=1,98ms, T=13,56ms/P=2,03ms, T=13,46ms/P=2,43ms, T=13,52ms/P=1,99ms, T=13,61ms/P=2,00ms, T=13,53ms/P=2,20ms, T=13,52ms/P=2,62ms, T=13,44ms/P=2,95ms, T=13,45ms/P=2,42ms, T=13,51ms/P=1,65ms | Temperaturas: Bateria 30,3°C -> 30,3°C
+Temperaturas: Bateria 30,3°C -> 30,3°C
+
+===== 2025-12-09 13:36:01.415 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,186±0,032 (min=0,165 | max=0,281)
+Transfer(ms): 0,110±0,002 (min=0,109 | max=0,116)
+Processamento(ms): 0,076±0,031 (min=0,056 | max=0,170)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=0,11ms/P=0,17ms, T=0,12ms/P=0,10ms, T=0,11ms/P=0,09ms, T=0,11ms/P=0,07ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:04.015 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,294±0,027 (min=0,274 | max=0,379)
+Transfer(ms): 0,215±0,006 (min=0,211 | max=0,230)
+Processamento(ms): 0,078±0,023 (min=0,061 | max=0,151)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,23ms/P=0,15ms, T=0,21ms/P=0,08ms, T=0,23ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,09ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,22ms/P=0,08ms, T=0,21ms/P=0,06ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:07.649 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,523±0,037 (min=0,486 | max=0,609)
+Transfer(ms): 0,429±0,018 (min=0,419 | max=0,481)
+Processamento(ms): 0,094±0,026 (min=0,067 | max=0,170)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,44ms/P=0,17ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,09ms, T=0,48ms/P=0,11ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,08ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,08ms, T=0,44ms/P=0,08ms, T=0,42ms/P=0,08ms, T=0,42ms/P=0,07ms, T=0,42ms/P=0,07ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:13.617 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,991±0,041 (min=0,955 | max=1,079)
+Transfer(ms): 0,859±0,032 (min=0,838 | max=0,950)
+Processamento(ms): 0,133±0,023 (min=0,114 | max=0,204)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,88ms/P=0,20ms, T=0,84ms/P=0,13ms, T=0,85ms/P=0,13ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,12ms, T=0,95ms/P=0,12ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,15ms, T=0,89ms/P=0,13ms, T=0,84ms/P=0,14ms, T=0,84ms/P=0,12ms, T=0,87ms/P=0,12ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:25.566 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,893±0,035 (min=1,865 | max=1,998)
+Transfer(ms): 1,680±0,020 (min=1,662 | max=1,713)
+Processamento(ms): 0,213±0,023 (min=0,193 | max=0,284)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,71ms/P=0,28ms, T=1,66ms/P=0,22ms, T=1,71ms/P=0,21ms, T=1,66ms/P=0,20ms, T=1,69ms/P=0,21ms, T=1,66ms/P=0,20ms, T=1,71ms/P=0,19ms, T=1,66ms/P=0,20ms, T=1,68ms/P=0,21ms, T=1,66ms/P=0,20ms, T=1,67ms/P=0,20ms, T=1,66ms/P=0,23ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:36:47.116 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,825±0,223 (min=3,668 | max=4,467)
+Transfer(ms): 3,396±0,049 (min=3,330 | max=3,467)
+Processamento(ms): 0,429±0,197 (min=0,338 | max=1,029)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,47ms/P=0,63ms, T=3,36ms/P=0,35ms, T=3,36ms/P=0,34ms, T=3,44ms/P=1,03ms, T=3,45ms/P=0,37ms, T=3,36ms/P=0,34ms, T=3,37ms/P=0,35ms, T=3,39ms/P=0,35ms, T=3,45ms/P=0,35ms, T=3,45ms/P=0,35ms, T=3,33ms/P=0,35ms, T=3,33ms/P=0,34ms | Temperaturas: Bateria 30,5°C -> 30,5°C
+Temperaturas: Bateria 30,5°C -> 30,5°C
+
+===== 2025-12-09 13:37:42.408 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,385±0,166 (min=7,267 | max=7,912)
+Transfer(ms): 6,728±0,057 (min=6,659 | max=6,863)
+Processamento(ms): 0,657±0,120 (min=0,597 | max=1,049)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=6,86ms/P=1,05ms, T=6,75ms/P=0,61ms, T=6,69ms/P=0,61ms, T=6,78ms/P=0,63ms, T=6,69ms/P=0,61ms, T=6,67ms/P=0,66ms, T=6,74ms/P=0,67ms, T=6,66ms/P=0,61ms, T=6,67ms/P=0,61ms, T=6,76ms/P=0,62ms, T=6,71ms/P=0,60ms, T=6,75ms/P=0,61ms | Temperaturas: Bateria 30,7°C -> 30,7°C
+Temperaturas: Bateria 30,7°C -> 30,7°C
+
+===== 2025-12-09 13:39:28.271 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,590±0,596 (min=14,503 | max=17,196)
+Transfer(ms): 13,508±0,105 (min=13,341 | max=13,792)
+Processamento(ms): 2,082±0,512 (min=1,162 | max=3,404)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=13,79ms/P=3,40ms, T=13,56ms/P=1,81ms, T=13,54ms/P=1,85ms, T=13,50ms/P=1,98ms, T=13,53ms/P=1,95ms, T=13,47ms/P=2,45ms, T=13,45ms/P=1,86ms, T=13,34ms/P=1,16ms, T=13,54ms/P=1,91ms, T=13,48ms/P=2,51ms, T=13,40ms/P=2,05ms, T=13,49ms/P=2,05ms | Temperaturas: Bateria 30,9°C -> 30,9°C
+Temperaturas: Bateria 30,9°C -> 30,9°C
+
+===== 2025-12-09 13:45:08.454 =====
+Cenário: MAD TFLite CPU
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,173±0,025 (min=0,145 | max=0,238)
+Transfer(ms): 0,111±0,001 (min=0,109 | max=0,112)
+Processamento(ms): 0,063±0,024 (min=0,036 | max=0,126)
+Notas: Mean=1749.598 | Std=773.35956 | Min=0.0 | Max=2502.3801 | Escala 512 | Tempos: T=0,11ms/P=0,13ms, T=0,11ms/P=0,08ms, T=0,11ms/P=0,08ms, T=0,11ms/P=0,09ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,06ms, T=0,11ms/P=0,05ms, T=0,11ms/P=0,04ms, T=0,11ms/P=0,04ms, T=0,11ms/P=0,04ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:11.103 =====
+Cenário: MAD TFLite CPU
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,290±0,035 (min=0,264 | max=0,403)
+Transfer(ms): 0,217±0,009 (min=0,213 | max=0,246)
+Processamento(ms): 0,073±0,027 (min=0,051 | max=0,157)
+Notas: Mean=1750.773 | Std=772.49274 | Min=0.0 | Max=2502.3801 | Escala 1k | Tempos: T=0,25ms/P=0,16ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,21ms/P=0,07ms, T=0,22ms/P=0,07ms, T=0,21ms/P=0,06ms, T=0,21ms/P=0,07ms, T=0,22ms/P=0,06ms, T=0,21ms/P=0,05ms, T=0,22ms/P=0,05ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:14.699 =====
+Cenário: MAD TFLite CPU
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,535±0,040 (min=0,500 | max=0,657)
+Transfer(ms): 0,427±0,018 (min=0,419 | max=0,488)
+Processamento(ms): 0,108±0,023 (min=0,080 | max=0,169)
+Notas: Mean=1751.3708 | Std=772.08826 | Min=0.0 | Max=2502.3801 | Escala 2k | Tempos: T=0,49ms/P=0,17ms, T=0,42ms/P=0,12ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,11ms, T=0,42ms/P=0,14ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,09ms, T=0,42ms/P=0,10ms, T=0,42ms/P=0,08ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:20.636 =====
+Cenário: MAD TFLite CPU
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,990±0,052 (min=0,942 | max=1,099)
+Transfer(ms): 0,856±0,031 (min=0,836 | max=0,949)
+Processamento(ms): 0,134±0,032 (min=0,105 | max=0,218)
+Notas: Mean=1751.6404 | Std=771.8863 | Min=0.0 | Max=2502.3801 | Escala 1x | Tempos: T=0,88ms/P=0,22ms, T=0,85ms/P=0,18ms, T=0,95ms/P=0,14ms, T=0,84ms/P=0,13ms, T=0,84ms/P=0,12ms, T=0,86ms/P=0,14ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,12ms, T=0,84ms/P=0,11ms, T=0,87ms/P=0,13ms, T=0,84ms/P=0,11ms, T=0,84ms/P=0,10ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:32.502 =====
+Cenário: MAD TFLite CPU
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,916±0,080 (min=1,858 | max=2,165)
+Transfer(ms): 1,704±0,058 (min=1,664 | max=1,871)
+Processamento(ms): 0,212±0,026 (min=0,191 | max=0,294)
+Notas: Mean=1751.7931 | Std=771.7946 | Min=0.0 | Max=2502.3801 | Escala 2x | Tempos: T=1,87ms/P=0,29ms, T=1,67ms/P=0,22ms, T=1,69ms/P=0,21ms, T=1,67ms/P=0,21ms, T=1,66ms/P=0,20ms, T=1,69ms/P=0,20ms, T=1,66ms/P=0,20ms, T=1,71ms/P=0,20ms, T=1,67ms/P=0,21ms, T=1,76ms/P=0,20ms, T=1,67ms/P=0,19ms, T=1,73ms/P=0,20ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:45:53.857 =====
+Cenário: MAD TFLite CPU
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,744±0,103 (min=3,674 | max=4,076)
+Transfer(ms): 3,347±0,037 (min=3,332 | max=3,468)
+Processamento(ms): 0,397±0,068 (min=0,340 | max=0,608)
+Notas: Mean=1751.848 | Std=771.7286 | Min=0.0 | Max=2502.3801 | Escala 4x | Tempos: T=3,47ms/P=0,61ms, T=3,33ms/P=0,34ms, T=3,34ms/P=0,39ms, T=3,34ms/P=0,45ms, T=3,33ms/P=0,38ms, T=3,34ms/P=0,36ms, T=3,34ms/P=0,38ms, T=3,34ms/P=0,37ms, T=3,34ms/P=0,39ms, T=3,34ms/P=0,35ms, T=3,33ms/P=0,37ms, T=3,33ms/P=0,38ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:46:49.210 =====
+Cenário: MAD TFLite CPU
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 7,459±0,207 (min=7,312 | max=8,104)
+Transfer(ms): 6,788±0,094 (min=6,691 | max=7,052)
+Processamento(ms): 0,670±0,135 (min=0,590 | max=1,051)
+Notas: Mean=1751.8978 | Std=771.70557 | Min=0.0 | Max=2502.3801 | Escala 32k | Tempos: T=7,05ms/P=1,05ms, T=6,88ms/P=0,63ms, T=6,81ms/P=0,63ms, T=6,78ms/P=0,60ms, T=6,72ms/P=0,59ms, T=6,81ms/P=0,60ms, T=6,74ms/P=0,60ms, T=6,80ms/P=0,60ms, T=6,72ms/P=0,59ms, T=6,72ms/P=0,63ms, T=6,75ms/P=0,67ms, T=6,69ms/P=0,86ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+
+===== 2025-12-09 13:48:40.466 =====
+Cenário: MAD TFLite CPU
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 15,127±0,846 (min=14,637 | max=17,831)
+Transfer(ms): 13,653±0,505 (min=13,404 | max=15,319)
+Processamento(ms): 1,474±0,373 (min=1,157 | max=2,513)
+Notas: Mean=1751.9742 | Std=771.70135 | Min=0.0 | Max=2502.3801 | Escala 64k | Tempos: T=15,32ms/P=2,51ms, T=13,58ms/P=1,39ms, T=13,55ms/P=1,31ms, T=13,50ms/P=1,35ms, T=13,43ms/P=1,36ms, T=13,42ms/P=1,30ms, T=13,54ms/P=1,23ms, T=13,53ms/P=1,21ms, T=13,40ms/P=1,28ms, T=13,48ms/P=1,16ms, T=13,57ms/P=1,86ms, T=13,52ms/P=1,74ms | Temperaturas: Bateria 31,3°C -> 31,3°C
+Temperaturas: Bateria 31,3°C -> 31,3°C
+

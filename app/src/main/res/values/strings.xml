@@ -37,6 +37,8 @@
     <string name="btn_run_energy_test">Iniciar ciclo energético (4 cenários)</string>
     <string name="btn_cancel_energy_test">Cancelar teste energético</string>
     <string name="benchmark_output_placeholder">Aguardando execuções de benchmark.</string>
+    <string name="session_runs_placeholder">Execuções acumuladas nesta sessão: 0</string>
+    <string name="session_runs_value">Execuções acumuladas nesta sessão: %1$d</string>
     <string name="energy_output_placeholder">Sem dados recentes do teste energético.</string>
     <string name="energy_status_idle">Teste energético parado.</string>
     <string name="energy_status_running">Teste energético em execução... (posso levar alguns minutos)</string>
@@ -46,7 +48,8 @@
     <string name="energy_status_permission_denied">Permita notificações para manter o serviço de teste energético em primeiro plano.</string>
     <string name="btn_share_logs">Compartilhar logs</string>
     <string name="btn_clear_logs">Apagar logs</string>
-    <string name="btn_run_all">Executar suíte completa</string>
+    <string name="btn_run_all">Executar suíte completa (512 → 526k)</string>
+    <string name="section_unified_desc">Percorre todos os comprimentos suportados: 512, 1k, 2k, 4k, 8k, 16k, 32k, 64k, 128k e os experimentais 256k/526k. Esses dois últimos podem demorar mais e gerar alertas de memória em aparelhos modestos.</string>
     <string name="progress_idle">Aguardando testes</string>
     <string name="energy_test_notification_title">Testes energéticos</string>
     <string name="energy_test_notification_desc">Executando benchmarks para medir consumo</string>

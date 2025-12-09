@@ -15,8 +15,9 @@ from __future__ import annotations
 
 import argparse
 import os
+from itertools import cycle
 from pathlib import Path
-from typing import Iterable
+from typing import Dict, Iterable, List
 
 import matplotlib
 
@@ -32,11 +33,33 @@ import seaborn as sns
 
 DELEGATES = ["TFLite CPU", "TFLite GPU", "TFLite NNAPI"]
 ALGORITHMS = ["MAD", "FFT"]
-DEVICE_COLORS = {
+KNOWN_DEVICE_COLORS = {
     "Galaxy S21 (30-11)": "#1f77b4",
+    "Galaxy S21 (09-12)": "#1f77b4",
     "Moto G04s (30-11)": "#ff7f0e",
+    "Moto G04s (09-12)": "#ff7f0e",
     "Moto G84 (30-11)": "#2ca02c",
+    "Moto G84 (09-12)": "#2ca02c",
 }
+FALLBACK_COLORS = [
+    "#9467bd",
+    "#8c564b",
+    "#e377c2",
+    "#7f7f7f",
+    "#17becf",
+    "#bcbd22",
+    "#d62728",
+]
+TITLE_FONTSIZE = 12
+TITLE_PAD = 14
+
+
+def format_vector_label(length: int) -> str:
+    if length >= 1024:
+        if length % 1024 == 0:
+            return f"{int(length // 1024)}k"
+        return f"{length / 1024:.1f}k"
+    return str(int(length))
 
 
 def detect_algorithm(name: str) -> str:
@@ -59,9 +82,51 @@ def derive_vector_length(row: pd.Series) -> int:
     return int(input_size / batch) if batch else int(input_size)
 
 
+def _fallback_device_series(df: pd.DataFrame) -> pd.Series:
+    if "deviceModel" in df.columns:
+        return df["deviceModel"]
+    if "deviceInfo" in df.columns:
+        return df["deviceInfo"]
+    if "model" in df.columns:
+        return df["model"]
+    return pd.Series(["Dispositivo"] * len(df))
+
+
+def ensure_device_labels(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    if "device_model" in df.columns:
+        df["device_model"] = df["device_model"].astype(str).str.strip()
+        empties = df["device_model"] == ""
+        if empties.any():
+            fallback = _fallback_device_series(df)
+            df.loc[empties, "device_model"] = (
+                fallback.fillna("Dispositivo").astype(str).str.strip().where(lambda s: s != "", "Dispositivo")
+            )
+        return df
+
+    fallback = _fallback_device_series(df)
+    df["device_model"] = fallback.fillna("Dispositivo").astype(str).str.strip()
+    df.loc[df["device_model"] == "", "device_model"] = "Dispositivo"
+    return df
+
+
+def build_device_palette(devices: List[str]) -> Dict[str, str]:
+    palette: Dict[str, str] = {}
+    extra_colors = cycle(FALLBACK_COLORS)
+    for device in devices:
+        if device in KNOWN_DEVICE_COLORS:
+            palette[device] = KNOWN_DEVICE_COLORS[device]
+        else:
+            color = next(extra_colors)
+            while color in palette.values():
+                color = next(extra_colors)
+            palette[device] = color
+    return palette
+
+
 def prepare_data(csv_path: Path) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
-    df["device_model"] = df["device_model"].astype(str).str.strip()
+    df = ensure_device_labels(df)
     df["delegate"] = df["delegate"].astype(str).str.strip()
     df["algorithm"] = df["test_name"].apply(detect_algorithm)
     df["is_batch"] = df["batch_size"].fillna(1).astype(int) > 1
@@ -78,6 +143,20 @@ def ensure_output_dirs(base: Path, algorithms: Iterable[str], delegates: Iterabl
             (base / algo / delegate.replace(" ", "_")).mkdir(parents=True, exist_ok=True)
 
 
+def apply_vector_ticks(ax, values: Iterable[int]) -> None:
+    ordered = sorted(values)
+    ax.set_xticks(ordered)
+    ax.set_xticklabels([format_vector_label(v) for v in ordered])
+
+
+def apply_title(ax, text: str) -> None:
+    ax.set_title(text, fontsize=TITLE_FONTSIZE, pad=TITLE_PAD)
+
+
+def finalize_plot() -> None:
+    plt.tight_layout(rect=[0, 0.02, 1, 0.98])
+
+
 def plot_transfer_lines(
     data: pd.DataFrame,
     algorithm: str,
@@ -85,6 +164,7 @@ def plot_transfer_lines(
     *,
     batch_mode: bool,
     output_dir: Path,
+    palette: Dict[str, str],
 ) -> None:
     title_mode = "Batch (xN pacotes)" if batch_mode else "Single (1 pacote)"
     filename_mode = "batch" if batch_mode else "single"
@@ -104,14 +184,14 @@ def plot_transfer_lines(
         y="transfer_ms",
         hue="device_model",
         marker="o",
-        palette=DEVICE_COLORS,
+        palette=palette,
     )
     ax.set_xlabel("Tamanho efetivo do vetor (amostras)")
     ax.set_ylabel("Tempo médio de transferência (ms)")
-    ax.set_title(f"{algorithm} — {delegate} — {title_mode}")
-    ax.set_xticks(sorted(subset["vector_length"].unique()))
-    ax.legend(title="Dispositivo", loc="best")
-    plt.tight_layout()
+    apply_title(ax, f"{algorithm} — {delegate} — {title_mode}")
+    apply_vector_ticks(ax, subset["vector_length"].unique())
+    ax.legend(title="Dispositivo", loc="best", fontsize=9, title_fontsize=10)
+    finalize_plot()
     filename = f"{algorithm.lower()}_{delegate.replace(' ', '_').lower()}_{filename_mode}.png"
     plt.savefig(output_dir / algorithm / delegate.replace(" ", "_") / filename, dpi=300)
     plt.close()
@@ -138,12 +218,14 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     data = prepare_data(csv_path)
+    devices = sorted(data["device_model"].unique())
+    palette = build_device_palette(devices)
     ensure_output_dirs(output_dir, ALGORITHMS, DELEGATES)
 
     for algo in ALGORITHMS:
         for delegate in DELEGATES:
-            plot_transfer_lines(data, algo, delegate, batch_mode=False, output_dir=output_dir)
-            plot_transfer_lines(data, algo, delegate, batch_mode=True, output_dir=output_dir)
+            plot_transfer_lines(data, algo, delegate, batch_mode=False, output_dir=output_dir, palette=palette)
+            plot_transfer_lines(data, algo, delegate, batch_mode=True, output_dir=output_dir, palette=palette)
 
     print(f"Gráficos de transferência salvos em {output_dir}")
 

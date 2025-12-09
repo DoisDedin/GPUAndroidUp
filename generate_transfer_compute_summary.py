@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import os
 from pathlib import Path
+from typing import List
 
 import matplotlib
 
@@ -28,11 +29,14 @@ from matplotlib.patches import Patch
 
 DELEGATES = ["CPU Kotlin", "TFLite CPU", "TFLite GPU", "TFLite NNAPI"]
 ALGORITHMS = ["MAD", "FFT"]
-DEVICE_COLORS = {
-    "Galaxy S21 (30-11)": "#1f77b4",
-    "Moto G04s (30-11)": "#ff7f0e",
-    "Moto G84 (30-11)": "#2ca02c",
-}
+KNOWN_DEVICE_ORDER = [
+    "Galaxy S21 (09-12)",
+    "Moto G04s (09-12)",
+    "Moto G84 (09-12)",
+    "Galaxy S21 (30-11)",
+    "Moto G04s (30-11)",
+    "Moto G84 (30-11)",
+]
 BATCH_MODES = [True]  # apenas x10
 DELEGATE_COLORS = {
     "CPU Kotlin": "#4a5568",
@@ -41,6 +45,45 @@ DELEGATE_COLORS = {
     "TFLite NNAPI": "#d69e2e",
 }
 TRANSFER_COLOR = "#CBD5E0"
+
+
+def _fallback_device_series(df: pd.DataFrame) -> pd.Series:
+    if "deviceModel" in df.columns:
+        return df["deviceModel"]
+    if "deviceInfo" in df.columns:
+        return df["deviceInfo"]
+    if "model" in df.columns:
+        return df["model"]
+    return pd.Series(["Dispositivo"] * len(df))
+
+
+def ensure_device_labels(df: pd.DataFrame) -> pd.DataFrame:
+    df = df.copy()
+    if "device_model" in df.columns:
+        df["device_model"] = df["device_model"].astype(str).str.strip()
+        empties = df["device_model"] == ""
+        if empties.any():
+            fallback = _fallback_device_series(df)
+            df.loc[empties, "device_model"] = (
+                fallback.fillna("Dispositivo").astype(str).str.strip().where(lambda s: s != "", "Dispositivo")
+            )
+        return df
+
+    fallback = _fallback_device_series(df)
+    df["device_model"] = fallback.fillna("Dispositivo").astype(str).str.strip()
+    df.loc[df["device_model"] == "", "device_model"] = "Dispositivo"
+    return df
+
+
+def determine_device_order(devices: List[str]) -> List[str]:
+    order: List[str] = []
+    for known in KNOWN_DEVICE_ORDER:
+        if known in devices:
+            order.append(known)
+    for device in sorted(devices):
+        if device not in order:
+            order.append(device)
+    return order
 
 
 def detect_algorithm(name: str) -> str:
@@ -63,7 +106,7 @@ def derive_vector_length(row: pd.Series) -> int:
 
 def prepare_data(csv_path: Path) -> pd.DataFrame:
     df = pd.read_csv(csv_path)
-    df["device_model"] = df["device_model"].astype(str).str.strip()
+    df = ensure_device_labels(df)
     df["delegate"] = df["delegate"].astype(str).str.strip()
     df["algorithm"] = df["test_name"].apply(detect_algorithm)
     df["is_batch"] = df["batch_size"].fillna(1).astype(int) > 1
@@ -90,7 +133,7 @@ def aggregate_metrics(df: pd.DataFrame) -> pd.DataFrame:
     return agg
 
 
-def plot_summary(df: pd.DataFrame, algorithm: str, output_path: Path) -> None:
+def plot_summary(df: pd.DataFrame, algorithm: str, output_path: Path, device_order: List[str]) -> None:
     sns.set_theme(style="whitegrid")
     fig, axes = plt.subplots(
         nrows=1,
@@ -111,7 +154,7 @@ def plot_summary(df: pd.DataFrame, algorithm: str, output_path: Path) -> None:
             ax.set_axis_off()
             continue
 
-        devices = list(DEVICE_COLORS.keys())
+        devices = device_order
         x = np.arange(len(devices))
         width = 0.22
 
@@ -189,11 +232,12 @@ def main() -> None:
     csv_path = Path(args.csv)
     data = prepare_data(csv_path)
     agg = aggregate_metrics(data)
+    device_order = determine_device_order(list(data["device_model"].unique()))
     output_dir = Path(args.output)
     output_dir.mkdir(parents=True, exist_ok=True)
     for algo in ALGORITHMS:
         target = output_dir / f"transfer_compute_{algo.lower()}.png"
-        plot_summary(agg, algo, target)
+        plot_summary(agg, algo, target, device_order)
         print(f"Gráfico salvo em {target}")
 
 

@@ -131,6 +131,9 @@ class FirstFragment : Fragment() {
                 val success = ResultLogger.clearAll(context)
                 val message = if (success) "Logs apagados." else "Não foi possível apagar todos os logs."
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                if (success) {
+                    viewModel.resetSessionCounter()
+                }
             }
         }
 
@@ -147,6 +150,10 @@ class FirstFragment : Fragment() {
             binding.buttonCancelEnergyTest.isEnabled = running == true
             binding.buttonCancelEnergyTest.alpha = if (running == true) 1f else 0.7f
             updateEnergyStatus(running == true)
+        }
+
+        viewModel.sessionRunCount.observe(viewLifecycleOwner) { count ->
+            binding.textSessionRuns.text = getString(R.string.session_runs_value, count)
         }
 
         viewModel.progress.observe(viewLifecycleOwner) { state ->

@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
+import android.os.Build
+import android.os.HardwarePropertiesManager
 import android.os.PowerManager
 import android.util.Log
 import com.example.vulkanfft.logging.BenchmarkEntry
@@ -35,6 +37,23 @@ class BenchmarkExecutor {
     private val fftInputsCache =
         mutableMapOf<Int, FftInputBuilder.FftProcessorInput>()
     private val fftCpuProcessors = mutableMapOf<Int, FftCpuProcessor>()
+
+    private fun resetScenarioCaches() {
+        accelerometerBatches.clear()
+        madInputsCache.clear()
+        fftInputsCache.clear()
+        fftCpuProcessors.clear()
+    }
+
+    private fun warnIfMemoryHeavy(algorithm: Algorithm, vectorLength: Int) {
+        if (vectorLength >= 262_144) {
+            Log.w(
+                TAG,
+                "Executando ${algorithm.name} com ${vectorLength} pontos. Esse tamanho exige muita" +
+                    " memória e pode disparar OOM em alguns dispositivos."
+            )
+        }
+    }
 
     suspend fun runScenario(
         context: Context,
@@ -81,7 +100,7 @@ class BenchmarkExecutor {
             val endSnapshot = captureBatterySnapshot(ctx)
             val dropPercent = startSnapshot.levelPercent - endSnapshot.levelPercent
                     val totalStatsText = formatStats(runSummary.timings.total)
-                    val tempSummary = formatTemperatureRange(startSnapshot.temperatureC, endSnapshot.temperatureC)
+                    val tempSummary = buildTemperatureSummary(startSnapshot, endSnapshot)
                     val dataLength = formatDataLength(scenario.algorithm, scale)
                     val scenarioLine = buildString {
                         append("${scenario.displayLabel} (${scale.shortLabel})")
@@ -104,7 +123,12 @@ class BenchmarkExecutor {
                         percentComplete = percentComplete,
                         scale = scale,
                         temperatureStartC = startSnapshot.temperatureC,
-                        temperatureEndC = endSnapshot.temperatureC
+                        temperatureEndC = endSnapshot.temperatureC,
+                        cpuTemperatureStartC = startSnapshot.cpuTemperatureC,
+                        cpuTemperatureEndC = endSnapshot.cpuTemperatureC,
+                        gpuTemperatureStartC = startSnapshot.gpuTemperatureC,
+                        gpuTemperatureEndC = endSnapshot.gpuTemperatureC,
+                        temperatureSummary = tempSummary
                     )
                     onScenarioComplete(energySnapshot)
                     logEnergyResult(
@@ -137,6 +161,7 @@ class BenchmarkExecutor {
         batchSizeOverride: Int,
         logResults: Boolean = true
     ): ScenarioRunSummary {
+        resetScenarioCaches()
         return when (scenario.algorithm) {
             Algorithm.MAD -> runMadScenario(context, scenario, iterations, scale, batchSizeOverride, logResults)
             Algorithm.FFT -> runFftScenario(context, scenario, iterations, scale, batchSizeOverride, logResults)
@@ -152,6 +177,8 @@ class BenchmarkExecutor {
         logResults: Boolean
     ): ScenarioRunSummary {
         val vectorLength = scale.madVectorLength
+        warnIfMemoryHeavy(Algorithm.MAD, vectorLength)
+        val startSnapshot = captureBatterySnapshot(context)
         val inputs = buildMadInputs(scenario.batchMode, vectorLength, batchSizeOverride)
         val readings = inputs.map { buildMadReadings(it) }
         val timingSamples = mutableListOf<InferenceTiming>()
@@ -214,12 +241,20 @@ class BenchmarkExecutor {
             durationMs = timingStats.total.mean
         )
         val dataDescription = "${batchSize}×(1 sensor × $vectorLength amostras)"
+        val endSnapshot = captureBatterySnapshot(context)
+        val temperatureSummary = buildTemperatureSummary(startSnapshot, endSnapshot)
         val summaryText = buildString {
             appendLine("${scenario.displayLabel} (${scenario.batchMode.displayName}, ${scale.shortLabel})")
             appendLine("Total: ${formatStats(timingStats.total)} | Transfer: ${formatStats(timingStats.transfer)} | Proc: ${formatStats(timingStats.compute)}")
             appendLine("Último resultado: $lastResult$fallbackNote")
+            temperatureSummary?.let { appendLine(it) }
         }
         Log.i(TAG, summaryText)
+
+        val notesText = buildString {
+            append("$lastResult$fallbackNote | Escala ${scale.shortLabel} | Tempos: ${formatTimingSamples(timingSamples)}")
+            temperatureSummary?.let { append(" | $it") }
+        }
 
         if (logResults) {
             logScenario(
@@ -231,9 +266,12 @@ class BenchmarkExecutor {
                 inputSize = vectorLength * batchSize,
                 throughput = throughput,
                 timingStats = timingStats,
-                notes = "$lastResult$fallbackNote | Escala ${scale.shortLabel} | Tempos: ${formatTimingSamples(timingSamples)}",
+                notes = notesText,
                 scale = scale,
-                dataLength = vectorLength
+                dataLength = vectorLength,
+                temperatureSummary = temperatureSummary,
+                startSnapshot = startSnapshot,
+                endSnapshot = endSnapshot
             )
         }
 
@@ -256,6 +294,8 @@ class BenchmarkExecutor {
         logResults: Boolean
     ): ScenarioRunSummary {
         val signalLength = scale.fftSignalLength
+        warnIfMemoryHeavy(Algorithm.FFT, signalLength)
+        val startSnapshot = captureBatterySnapshot(context)
         val inputs = buildFftInputs(scenario.batchMode, signalLength, batchSizeOverride)
         val timingSamples = mutableListOf<InferenceTiming>()
         var lastSummary = "-"
@@ -325,12 +365,20 @@ class BenchmarkExecutor {
         val operations = signalLength.toDouble() * FFT_NUM_SENSORS * batchSize
         val throughput = computeThroughput(operations, timingStats.total.mean)
         val dataDescription = "${batchSize}×($FFT_NUM_SENSORS sensores × $signalLength amostras)"
+        val endSnapshot = captureBatterySnapshot(context)
+        val temperatureSummary = buildTemperatureSummary(startSnapshot, endSnapshot)
         val summaryText = buildString {
             appendLine("${scenario.displayLabel} (${scenario.batchMode.displayName}, ${scale.shortLabel})")
             appendLine("Total: ${formatStats(timingStats.total)} | Transfer: ${formatStats(timingStats.transfer)} | Proc: ${formatStats(timingStats.compute)}")
             appendLine("Highlights: $lastSummary$fallbackNote")
+            temperatureSummary?.let { appendLine(it) }
         }
         Log.i(TAG, summaryText)
+
+        val notesText = buildString {
+            append("$lastSummary$fallbackNote | Escala ${scale.shortLabel} | Tempos: ${formatTimingSamples(timingSamples)}")
+            temperatureSummary?.let { append(" | $it") }
+        }
 
         if (logResults) {
             logScenario(
@@ -342,9 +390,12 @@ class BenchmarkExecutor {
                 inputSize = FFT_NUM_SENSORS * signalLength * batchSize,
                 throughput = throughput,
                 timingStats = timingStats,
-                notes = "$lastSummary$fallbackNote | Escala ${scale.shortLabel} | Tempos: ${formatTimingSamples(timingSamples)}",
+                notes = notesText,
                 scale = scale,
-                dataLength = signalLength
+                dataLength = signalLength,
+                temperatureSummary = temperatureSummary,
+                startSnapshot = startSnapshot,
+                endSnapshot = endSnapshot
             )
         }
 
@@ -369,26 +420,31 @@ class BenchmarkExecutor {
         timingStats: TimingStats,
         notes: String,
         scale: DataScale,
-        dataLength: Int
+        dataLength: Int,
+        temperatureSummary: String?,
+        startSnapshot: BatterySnapshot?,
+        endSnapshot: BatterySnapshot?
     ) {
         val noteHeader = if (batchSize > 1) {
             "Notas (média dos $batchSize pacotes): $notes"
         } else {
             "Notas: $notes"
         }
+        val logLines = mutableListOf(
+            "Cenário: ${scenario.displayLabel}",
+            "Escala: ${scale.shortLabel} ($dataLength pts)",
+            "Execuções: $iterations | Pacotes: $batchSize",
+            "Total(ms): ${formatStats(timingStats.total)}",
+            "Transfer(ms): ${formatStats(timingStats.transfer)}",
+            "Processamento(ms): ${formatStats(timingStats.compute)}",
+            noteHeader
+        )
+        temperatureSummary?.let { logLines += it }
 
         ResultLogger.append(
             context,
             scenario.logFileName,
-            listOf(
-                "Cenário: ${scenario.displayLabel}",
-                "Escala: ${scale.shortLabel} ($dataLength pts)",
-                "Execuções: $iterations | Pacotes: $batchSize",
-                "Total(ms): ${formatStats(timingStats.total)}",
-                "Transfer(ms): ${formatStats(timingStats.transfer)}",
-                "Processamento(ms): ${formatStats(timingStats.compute)}",
-                noteHeader
-            )
+            logLines
         )
 
         val deviceInfo = DeviceInfoProvider.collect(context)
@@ -418,7 +474,13 @@ class BenchmarkExecutor {
                 batchSize = batchSize,
                 estimatedEnergyImpact = describeEnergy(scenario.delegateMode),
                 deviceInfo = deviceInfo,
-                extraNotes = notes
+                extraNotes = notes,
+                batteryTempStartC = startSnapshot?.temperatureC,
+                batteryTempEndC = endSnapshot?.temperatureC,
+                cpuTempStartC = startSnapshot?.cpuTemperatureC,
+                cpuTempEndC = endSnapshot?.cpuTemperatureC,
+                gpuTempStartC = startSnapshot?.gpuTemperatureC,
+                gpuTempEndC = endSnapshot?.gpuTemperatureC
             )
         )
     }
@@ -515,6 +577,21 @@ class BenchmarkExecutor {
         dataLength: String,
         temperatureSummary: String?
     ) {
+        val chargeDropMah = if (startSnapshot.chargeMah != null && endSnapshot.chargeMah != null) {
+            startSnapshot.chargeMah - endSnapshot.chargeMah
+        } else {
+            null
+        }
+        val energyDropWh = if (startSnapshot.energyNwh != null && endSnapshot.energyNwh != null) {
+            startSnapshot.energyNwh - endSnapshot.energyNwh
+        } else {
+            null
+        }
+        val energyDropMwh = energyDropWh?.times(1000.0)
+        val elapsedHours = elapsed / 3_600_000.0
+        val avgCurrentMa = chargeDropMah?.takeIf { elapsedHours > 0 }?.div(elapsedHours)
+        val avgPowerMw = energyDropWh?.takeIf { elapsedHours > 0 }?.let { (it / elapsedHours) * 1000.0 }
+
         val energyLogLines = mutableListOf(
             "Cenário energético: ${scenario.displayLabel}",
             "Escala: ${scale.shortLabel} ($dataLength)",
@@ -523,6 +600,19 @@ class BenchmarkExecutor {
             "Bateria: ${"%.2f".format(startSnapshot.levelPercent)}% -> ${"%.2f".format(endSnapshot.levelPercent)}% (Δ ${"%.2f".format(dropPercent)}%)"
         )
         temperatureSummary?.let { energyLogLines += it }
+        val energyStatsLine = buildList {
+            chargeDropMah?.let { drop ->
+                val formatted = "ΔQ=${"%.3f".format(drop)} mAh" +
+                    (avgCurrentMa?.let { avg -> " (Ī=${"%.1f".format(avg)} mA)" } ?: "")
+                add(formatted)
+            }
+            energyDropMwh?.let { drop ->
+                val formatted = "ΔE=${"%.3f".format(drop)} mWh" +
+                    (avgPowerMw?.let { avg -> " (P̄=${"%.1f".format(avg)} mW)" } ?: "")
+                add(formatted)
+            }
+        }.takeIf { it.isNotEmpty() }?.joinToString(" | ", prefix = "Energia: ")
+        energyStatsLine?.let { energyLogLines += it }
         val perfLines = runSummary.summaryText
             .lines()
             .map { it.trim() }
@@ -551,15 +641,26 @@ class BenchmarkExecutor {
                 batteryDropPercent = dropPercent,
                 batteryStartChargeMah = startSnapshot.chargeMah,
                 batteryEndChargeMah = endSnapshot.chargeMah,
+                batteryDropChargeMah = chargeDropMah,
                 energyStartNwh = startSnapshot.energyNwh,
                 energyEndNwh = endSnapshot.energyNwh,
+                energyDropMwh = energyDropMwh,
+                avgPowerMw = avgPowerMw,
+                avgCurrentMa = avgCurrentMa,
                 temperatureStartC = startSnapshot.temperatureC,
                 temperatureEndC = endSnapshot.temperatureC,
+                cpuTemperatureStartC = startSnapshot.cpuTemperatureC,
+                cpuTemperatureEndC = endSnapshot.cpuTemperatureC,
+                gpuTemperatureStartC = startSnapshot.gpuTemperatureC,
+                gpuTemperatureEndC = endSnapshot.gpuTemperatureC,
                 isChargingStart = startSnapshot.isCharging,
                 isChargingEnd = endSnapshot.isCharging,
                 powerSaveStart = startSnapshot.powerSave,
                 powerSaveEnd = endSnapshot.powerSave,
-                notes = "Tempo ${formatDuration(elapsed)} | Escala ${scale.shortLabel} ($dataLength) | Δ ${"%.2f".format(dropPercent)}% | Total $totalStatsText"
+                notes = buildString {
+                    append("Tempo ${formatDuration(elapsed)} | Escala ${scale.shortLabel} ($dataLength) | Δ ${"%.2f".format(dropPercent)}% | Total $totalStatsText")
+                    energyStatsLine?.let { append(" | $it") }
+                }
             )
         )
     }
@@ -575,6 +676,8 @@ class BenchmarkExecutor {
         val isCharging = plugged != 0
         val temp = intent?.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, Int.MIN_VALUE)
         val temperatureC = temp?.takeIf { it != Int.MIN_VALUE }?.div(10.0)
+        val cpuTemperature = readDeviceTemperature(context, HardwarePropertiesManager.DEVICE_TEMPERATURE_CPU)
+        val gpuTemperature = readDeviceTemperature(context, HardwarePropertiesManager.DEVICE_TEMPERATURE_GPU)
         val energyCounter = bm.getLongProperty(BatteryManager.BATTERY_PROPERTY_ENERGY_COUNTER)
             .takeIf { it != Long.MIN_VALUE }
             ?.div(1_000_000_000.0)
@@ -586,10 +689,25 @@ class BenchmarkExecutor {
             levelPercent = percent,
             isCharging = isCharging,
             temperatureC = temperatureC,
+            cpuTemperatureC = cpuTemperature,
+            gpuTemperatureC = gpuTemperature,
             energyNwh = energyCounter,
             chargeMah = chargeCounter,
             powerSave = pm.isPowerSaveMode
         )
+    }
+
+    private fun readDeviceTemperature(
+        context: Context,
+        deviceType: Int
+    ): Double? {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) return null
+        val manager = context.getSystemService(Context.HARDWARE_PROPERTIES_SERVICE) as? HardwarePropertiesManager
+            ?: return null
+        return runCatching {
+            val temps = manager.getDeviceTemperatures(deviceType, HardwarePropertiesManager.TEMPERATURE_CURRENT)
+            temps.firstOrNull()?.takeIf { !it.isNaN() }?.toDouble()
+        }.getOrNull()
     }
 
     private fun buildTimingStats(samples: List<InferenceTiming>): TimingStats {
@@ -717,11 +835,21 @@ class BenchmarkExecutor {
         }
     }
 
-    private fun formatTemperatureRange(start: Double?, end: Double?): String? {
+    private fun buildTemperatureSummary(
+        start: BatterySnapshot?,
+        end: BatterySnapshot?
+    ): String? {
         if (start == null && end == null) return null
-        val formattedStart = formatTemperatureValue(start)
-        val formattedEnd = formatTemperatureValue(end)
-        return "Temperatura: $formattedStart -> $formattedEnd"
+        val segments = mutableListOf<String>()
+        fun appendSegment(label: String, startValue: Double?, endValue: Double?) {
+            if (startValue == null && endValue == null) return
+            segments += "$label ${formatTemperatureValue(startValue)} -> ${formatTemperatureValue(endValue)}"
+        }
+        appendSegment("Bateria", start?.temperatureC, end?.temperatureC)
+        appendSegment("CPU", start?.cpuTemperatureC, end?.cpuTemperatureC)
+        appendSegment("GPU", start?.gpuTemperatureC, end?.gpuTemperatureC)
+        if (segments.isEmpty()) return null
+        return "Temperaturas: ${segments.joinToString(" | ")}"
     }
 
     private fun formatTemperatureValue(value: Double?): String =
@@ -738,6 +866,8 @@ class BenchmarkExecutor {
         val levelPercent: Double,
         val isCharging: Boolean,
         val temperatureC: Double?,
+        val cpuTemperatureC: Double?,
+        val gpuTemperatureC: Double?,
         val energyNwh: Double?,
         val chargeMah: Double?,
         val powerSave: Boolean
@@ -754,7 +884,12 @@ class BenchmarkExecutor {
         val percentComplete: Int,
         val scale: DataScale,
         val temperatureStartC: Double?,
-        val temperatureEndC: Double?
+        val temperatureEndC: Double?,
+        val cpuTemperatureStartC: Double?,
+        val cpuTemperatureEndC: Double?,
+        val gpuTemperatureStartC: Double?,
+        val gpuTemperatureEndC: Double?,
+        val temperatureSummary: String?
     )
 
     companion object {

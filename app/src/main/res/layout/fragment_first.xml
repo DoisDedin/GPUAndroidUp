@@ -110,6 +110,14 @@
             android:textColor="@color/white"
             android:textAllCaps="false" />
 
+        <TextView
+            android:id="@+id/text_unified_suite_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/section_unified_desc"
+            android:textAppearance="?attr/textAppearanceBody2" />
+
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/progress_indicator"
             android:layout_width="match_parent"
@@ -134,6 +142,14 @@
             android:layout_marginTop="12dp"
             android:text="@string/benchmark_output_placeholder"
             android:textAppearance="?attr/textAppearanceBody2" />
+
+        <TextView
+            android:id="@+id/text_session_runs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/session_runs_placeholder"
+            android:textAppearance="?attr/textAppearanceCaption" />
 
         <TextView
             android:id="@+id/text_mad_single"

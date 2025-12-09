@@ -1,102 +1,182 @@
-    # GPUAndroidUp / VulkanFFT
+# GPUAndroidUp / VulkanFFT
 
-    Aplicativo Android (API 31+) usado no TCC para comparar diferentes estratégias de processamento estatístico/FFT em dispositivos móveis. Ele expõe pipelines CPU e TensorFlow Lite para duas tarefas principais:
+Aplicativo Android (API 31+) usado no TCC para comparar estratégias de processamento MAD/FFT em dispositivos móveis. O projeto reúne geradores sintéticos de sensores, modelos TensorFlow Lite, execuções Kotlin puras e scripts que consolidam benchmarks multi-dispositivo.
 
-    - **MAD (Mean Absolute Deviation) + estatísticas de magnitude**: versão clássica em Kotlin e versão acelerada via modelo `mad_model.tflite`, executável com delegates CPU/GPU/NNAPI.
-    - **FFT com pesos dinâmicos**: baseline CPU (DFT direto) e modelo TFLite (`fft_model.tflite`) que aplica `tf.signal.rfft` em blocos de 10 sensores × 4096 amostras simultâneas (mesmos vetores usados no MAD).
+## Sumário
 
-## Estrutura rápida
+- [Visão geral](#visão-geral)
+- [Estrutura do repositório](#estrutura-do-repositório)
+- [Pré-requisitos e toolchain](#pré-requisitos-e-toolchain)
+- [Primeiros passos](#primeiros-passos)
+- [Arquitetura e fluxo de dados](#arquitetura-e-fluxo-de-dados)
+- [App e benchmarks](#app-e-benchmarks)
+- [Scripts e reprodutibilidade](#scripts-e-reprodutibilidade)
+- [Resultados e insights](#resultados-e-insights)
+- [Teste energético e figuras](#teste-energético-e-figuras)
+- [Testes automatizados](#testes-automatizados)
+- [Documentação acadêmica](#documentação-acadêmica)
+
+## Visão geral
+
+- **Algoritmos**: MAD clássico (Mean Absolute Deviation + estatísticas de magnitude) e FFT com pesos dinâmicos aplicados a lotes de 10 sensores × 4096/8192/16384 amostras.
+- **Delegates avaliados**: CPU Kotlin puro e TensorFlow Lite CPU, GPU e NNAPI, nos modos single e batch (`x10`).
+- **Instrumentação**: registro de tempos (transferência/processamento), throughput, desvio padrão e notas dos resultados através de `BenchmarkReporter`.
+- **Reprodutibilidade**: scripts Python que regeneram modelos e convertem CSVs de benchmarks em gráficos comparativos ou relatórios textuais.
+- **Escopo**: pensado para sensores fisiológicos (acelerômetro, PPG, ECG), mas o pipeline aceita qualquer série temporal bastando adaptar o gerador de entradas.
+
+## Estrutura do repositório
 
 | Pasta | Descrição |
 |-------|-----------|
-| `app/` | App Android (UI + ViewModels) que aciona benchmarks e mostra os resultados. |
-| `vulkanfft/` | Biblioteca com utilitários Kotlin, assets `.tflite`, geradores de dados e processadores FFT/MAD. |
-| `app/libs/pythonmodels/` | Scripts Python que constroem/atualizam os modelos TFLite (MAD e FFT). |
-| `app/src/BANCHMARK/` | Resultados coletados no campo (CSV, TXT, gráficos e scripts de visualização). |
-| `scripts/` | Ferramentas auxiliares em Python (ex.: `generate_fft_rfft_models.py`). |
-| `tests/` | Artefatos de automação/validação extra. |
-| `docs/fft_pipeline.md` | Descrição detalhada do pipeline FFT e notas de projeto. |
+| `app/` | App Android (UI + ViewModels), botões de benchmark, suíte completa e teste energético. |
+| `vulkanfft/` | Biblioteca com utilitários Kotlin, assets `.tflite`, geradores e processadores FFT/MAD. |
+| `app/libs/pythonmodels/` | Scripts que constroem `mad_model.tflite` e `fft_model.tflite`. |
+| `app/src/BANCHMARK/` | Campanhas reais (CSV, TXT, gráficos e scripts auxiliares) por dispositivo/data. |
+| `scripts/` | Ferramentas extras (modelagem FFT/RFFT, gráficos multi-dispositivo, análises de transferência). |
+| `docs/` | Diagramas, relatórios e capítulos do TCC (`docs/tcc/`). |
+| `Figuras/` | PNGs consolidados dos testes energéticos (heatmaps e comparativos). |
+| `tests/` | Espaço reservado para automações adicionais (shell/python). |
 
-## Visão geral do projeto
+## Pré-requisitos e toolchain
 
-O objetivo do GPUAndroidUp é medir, de forma reprodutível, como duas tarefas de processamento de sinais (MAD e FFT) se comportam em dispositivos Android reais. A aplicação combina:
+| Componente | Versão/Observação |
+|-----------|-------------------|
+| Android Gradle Plugin | 8.6.0 |
+| Kotlin | 1.9.0 (JVM 17) |
+| Compile/Target SDK | 35 / 34 (minSdk 31) |
+| Dependências principais | Core KTX 1.16.0, AppCompat 1.7.0, Material 1.12.0, Navigation 2.8.9, ConstraintLayout 2.2.1 |
+| TensorFlow Lite | 2.16.1 (`tensorflow-lite`, `tensorflow-lite-gpu`, `tensorflow-lite-gpu-api`) |
+| FFT CPU extra | `com.github.wendykierp:JTransforms:3.1` |
+| Ferramentas | Android Studio Hedgehog/Koala, SDK 35, NDK 26.1, JDK 17 |
+| Python | 3.9+ com TensorFlow 2.16.1, NumPy, SciPy, matplotlib, seaborn, pandas (usar `python3 -m venv .venv && source .venv/bin/activate`). |
 
-- dados sintéticos derivados de acelerômetros (mesmo esquema dos sensores fisiológicos do TCC);
-- modelos TFLite especializados para MAD/FFT (gerados em Python e embarcados nos assets);
-- um app Android que permite orquestrar cenários (CPU Kotlin, TFLite CPU/GPU/NNAPI, batches x10) e registrar métricas;
-- scripts que consolidam os resultados em gráficos comparativos.
+Se o Gradle não puder escrever em `~/.gradle`, exporte `GRADLE_USER_HOME` para uma pasta acessível antes de rodar o wrapper.
 
-## Arquitetura em alto nível
+## Primeiros passos
+
+1. **Clonar e abrir**: importe a raiz no Android Studio e aguarde o Sync (o wrapper baixa Gradle 8.7 automaticamente).
+2. **Preparar dispositivo/emulador**: Android 12+ (API 31) com os delegates desejados. GPU/NNAPI dependem do hardware.
+3. **Executar o módulo `app`**: a tela inicial já expõe os blocos MAD, FFT, “Suíte completa” e “Teste energético”.
+4. **Controlar iterações/lote**: os dois grupos de chips no topo definem `iterations` (1/4/8/12) e `batchSize` (1/4/8/12) usados em qualquer botão.
+5. **Rodar benchmarks**: cada clique gera registros `benchmark_results.csv`/`.txt` em `Android/data/.../files/benchmarks/` e exibe o resumo na tela.
+6. **Exportar/limpar logs**: botões dedicados chamam `ResultLogger` para compartilhar tudo via intent padrão ou apagar os arquivos.
+
+### Regenerando modelos TFLite
+
+```bash
+cd app/libs/pythonmodels
+python3 make_mad_model_float.py   # gera mad_model.tflite (float32, compatível com GPU/NNAPI)
+python3 make_fft_model.py         # gera fft_model.tflite com tf.signal.rfft
+cd ../../..
+./gradlew :vulkanfft:assemble     # empacota os novos assets
+```
+
+Os scripts configuram `MPLCONFIGDIR` automaticamente (cache em `.matplotlib/`), evitando dependências externas. Para experimentar variantes (FP16, pesos alternativos), utilize `scripts/generate_fft_rfft_models.py`.
+
+### Comprimentos disponíveis e cobertura recente
+
+- `make_mad_model_float.py` e `make_fft_model.py` exportam, por padrão, **apenas potências de 2** de 512 até 524.288 pontos (`DEFAULT_LENGTHS`). Todos os arquivos ficam em `vulkanfft/src/main/assets/` com o padrão `mad_model_<len>.tflite` / `fft_model_<len>.tflite`, e o app seleciona o sufixo correto automaticamente.
+- O botão “Suíte completa (512 → 64k)” percorre todas as escalas suportadas na UI sem precisar alternar cards. Os comprimentos 128k, 256k e 526k continuam disponíveis via scripts/CLI ou cenários individuais, mas não são disparados automaticamente porque extrapolam a RAM da maioria dos aparelhos.
+- Resultados completos da campanha **Galaxy S21 — 08/12** estão em `app/src/BANCHMARK/s21-08-12/benchmark_results.csv`; eles incluem todas as escalas padrão (4k/8k/16k), focada (512/1k/2k/128k), EXTREME (32k/64k/128k) e os testes experimentais até 262 144 pts. As tentativas em 526k falharam por memória (ver seção abaixo) e foram registradas só para MAD.
+- O merge com os dados de 30/11 fica em `app/src/BANCHMARK/merge-30-11-08-12/benchmark_results.csv`, com os gráficos consolidados em `docs/charts/merge-30-11-08-12/overview|transfer|summary/`.
+- Os modelos FFT são traçados com `NUM_SENSORS=10`. O grafo repete o mesmo `tf.signal.rfft` para cada linha da matriz (10 sensores) e o `tf.stack`/`reshape` final apenas reorganiza `[real, imag, magnitude, weighted]`. O cálculo é idêntico em cada sensor; mudar o número de linhas exige regenerar o modelo Python (não basta fazer `resizeInput` no TFLite).
+
+| Comprimento (pts) | Potência | Assets disponíveis | Status nos benchmarks |
+|-------------------|----------|--------------------|-----------------------|
+| 512               | 2^9      | `mad_model_512.tflite`, `fft_model_512.tflite`       | Rodado na suíte completa (08/12) |
+| 1024              | 2^10     | `mad_model_1024.tflite`, `fft_model_1024.tflite`     | Rodado na suíte completa (08/12) |
+| 2048              | 2^11     | `mad_model_2048.tflite`, `fft_model_2048.tflite`     | Rodado na suíte completa (08/12) |
+| 4096              | 2^12     | `mad_model.tflite`/`mad_model_4096.tflite`, `fft_model.tflite`/`fft_model_4096.tflite` | Escala base dos botões padrão |
+| 8192              | 2^13     | `mad_model_8192.tflite`, `fft_model_8192.tflite`     | Escala “2x” dos chips padrão |
+| 16384             | 2^14     | `mad_model_16384.tflite`, `fft_model_16384.tflite`   | Escala “4x” dos chips padrão |
+| 32768             | 2^15     | `mad_model_32768.tflite`, `fft_model_32768.tflite`   | Bloco “EXTREME (32k+)” |
+| 65536             | 2^16     | `mad_model_65536.tflite`, `fft_model_65536.tflite`   | Bloco “EXTREME (32k+)” |
+| 131072            | 2^17     | `mad_model_131072.tflite`, `fft_model_131072.tflite` | Rodado na suíte completa (08/12) |
+| 262144            | 2^18     | `mad_model_262144.tflite`, `fft_model_262144.tflite` | Experimental (rodar via scripts/CLI; não incluído na suíte da UI) |
+| 524288            | 2^19     | `mad_model_524288.tflite`, `fft_model_524288.tflite` | Experimental (rodar via scripts/CLI; não incluído na suíte da UI) |
+
+## Arquitetura e fluxo de dados
 
 ```
-[Dados base (AccelerometerBatchGenerator)]
+[Gerador sintético: AccelerometerBatchGenerator]
         |
-[Scripts Python -> modelos mad_model.tflite / fft_model.tflite]
+[Scripts Python -> mad_model.tflite / fft_model.tflite]
         |
 [Módulo vulkanfft: FftInputBuilder, StatModelProcessor, FftTfliteProcessor]
         |
 [App (FirstFragment/FirstViewModel/BenchmarkExecutor)]
         |
-[Logs + benchmark_results.csv/.txt -> scripts generate_charts.py]
+[Logs CSV/TXT + gráficos: generate_charts.py, overview/transfer scripts]
 ```
 
 ![Pipeline do projeto GPUAndroidUp](docs/tcc/pipeline-project.png)
 
-- `vulkanfft` expõe tudo que é comum aos módulos (geração de inputs, FFT CPU, wrappers TFLite).
-- `app` injeta esses utilitários, renderiza a tela de testes e fornece os botões/logs.
-- `app/src/BANCHMARK` guarda os experimentos e os scripts usados para gerar gráficos/insights.
+- `AccelerometerBatchGenerator` produz pacotes determinísticos com 10 sensores × 4096 amostras (base para MAD e FFT).
+- `BenchmarkExecutor` decide single vs `x10`, monta entradas com `buildMadInputs`/`buildFftInputs` e executa CPU puro ou delegates TFLite.
+- `StatModelProcessor` e `FftTfliteProcessor` preparam `ByteBuffer`s diretos, medem transferência/processamento e devolvem `InferenceTiming`.
+- `BenchmarkReporter` e `ResultLogger` consolidam métricas e metadados (modelo do dispositivo, modo economia, etc.).
 
-## Principais classes Kotlin
+### Principais classes Kotlin
 
-- `vulkanfft/src/main/java/com/example/vulkanfft/util/AccelerometerBatchGenerator.kt`: gera lotes de 10 sensores × 4096 amostras com ruído controlado, usado tanto por MAD quanto por FFT.
-- `vulkanfft/src/main/java/com/example/vulkanfft/util/FftInputBuilder.kt`: converte o lote bruto em tensores float32 (magnitudes, pesos dinâmicos, janelas) compatíveis com os modelos TFLite.
-- `vulkanfft/src/main/java/com/example/vulkanfft/util/FftCpuProcessor.kt`: implementação de referência (DFT) usada para validar resultados e como fallback.
-- `vulkanfft/src/main/java/com/example/vulkanfft/util/StatModelProcessor.kt`: carrega `mad_model.tflite` e provê inferências com delegates CPU/GPU/NNAPI.
-- `vulkanfft/src/main/java/com/example/vulkanfft/util/FftTfliteProcessor.kt`: wrapper sobre o interpreter FFT, cuidando de buffers diretos e contabilidade de transferência/compute.
-- `app/src/main/java/com/example/vulkanfft/BenchmarkExecutor.kt`: orquestra cada cenário, mede tempos, calcula estatísticas e salva logs.
-- `app/src/main/java/com/example/vulkanfft/FirstViewModel.kt`: guarda as preferências de iteração/lote, expõe progresso e chama o executor.
-- `app/src/main/java/com/example/vulkanfft/FirstFragment.kt`: tela com todos os botões (MAD, FFT, suíte completa, testes energéticos, compartilhamento/limpeza de logs).
-- `app/src/main/res/layout/fragment_first.xml`: layout com os grupos de chips, botões, indicadores e seções de log que aparecem na tela inicial.
+- `AccelerometerBatchGenerator.kt`: gera lotes 10×4096 com ruído controlado.
+- `FftInputBuilder.kt`: converte para tensores Float32 (real/imag/magnitude/pesos dinâmicos).
+- `FftCpuProcessor.kt`: baseline DFT usado em testes unitários e como fallback.
+- `StatModelProcessor.kt`: envolve `mad_model.tflite` com delegates CPU/GPU/NNAPI.
+- `FftTfliteProcessor.kt`: controla buffers diretos, assinaturas do interpreter e coleta de tempos.
+- `BenchmarkExecutor.kt`: orquestra cenários, calcula estatísticas (`TimingStats`) e chama `BenchmarkReporter`.
+- `FirstViewModel`/`FirstFragment`: cuidam do estado da UI, barra de progresso, compartilhamento/limpeza e teste energético.
 
-## Pipeline de dados (acelerômetro ➜ entrada do modelo)
+### Pipeline detalhado
 
-1. `AccelerometerBatchGenerator` cria pacotes determinísticos de acelerômetro (10 sensores × N amostras) replicando padrões de sinais fisiológicos.
-2. `BenchmarkExecutor` decide se o cenário é single ou x10 e chama:
-   - `buildMadInputs`, que converte o lote em leituras discretas para `getMAD` (CPU) ou tensores `[timestamps, x, y, z]` para o `StatModelProcessor`;
-   - `buildFftInputs`, que usa `FftInputBuilder` para montar os tensores (real, imag, magnitude ponderada).
-3. Durante a execução:
-   - CPU Kotlin roda `getMAD`/`FftCpuProcessor.process()` e mede apenas `compute_ms`;
-   - TFLite mede transferência e processamento separadamente via `StatModelProcessor`/`FftTfliteProcessor` e salva cada amostra em `InferenceTiming`.
-4. O executor consolida as estatísticas (`TimingStats`) e chama `BenchmarkReporter`/`ResultLogger` para registrar CSV/TXT e logs human-readable.
+1. `AccelerometerBatchGenerator` cria pacotes com padrões dos sensores fisiológicos do TCC.
+2. `BenchmarkExecutor` consulta `DataScale` (4096/8192/16384) e o modo (`single` ou `x10`).
+3. CPU Kotlin executa `getMAD()`/`FftCpuProcessor.process()` e mede apenas `compute_ms`.
+4. Delegates TFLite medem transferência (cópia de buffers diretos) e processamento (`Interpreter.run()` ou `runForMultipleInputsOutputs`).
+5. As métricas são agregadas em `benchmark_results.csv` e `benchmark_results.txt`; scripts Python convertem em gráficos/relatórios.
 
-Os vetores usados nos experimentos são derivados de acelerômetro, mas o mesmo pipeline funciona para PPG/ECG bastando adaptar o gerador de entradas (há pontos de extensão documentados em `docs/fft_pipeline.md`).
+Mais detalhes estão em `docs/fft_pipeline.md`.
 
-## Modelos TFLite e scripts Python
+## App e benchmarks
 
-- Scripts principais: `app/libs/pythonmodels/make_mad_model_float.py`, `app/libs/pythonmodels/make_fft_model.py` e `scripts/generate_fft_rfft_models.py`.
-- Requisitos: Python 3.9+, TensorFlow 2.16.1, NumPy, SciPy, matplotlib, seaborn.
-- `make_mad_model_float.py` lê amostras de acelerômetro, constrói um modelo TFLite com a mesma lógica do MAD Kotlin (sem quantização para manter compatibilidade com GPU/NNAPI) e exporta para `vulkanfft/src/main/assets/mad_model.tflite`.
-- `make_fft_model.py` usa `tf.signal.rfft` para calcular FFT de 10 sensores simultâneos, adiciona camadas de normalização/aplicação de pesos e exporta `fft_model.tflite` com as assinaturas esperadas pelo app.
-- `scripts/generate_fft_rfft_models.py` serve como laboratório para recalibrar pesos, testar quantização e gerar múltiplas variantes (útil quando se quer comparar FP32 vs FP16).
-- Sempre que atualizar os modelos, rode `./gradlew :vulkanfft:assemble` para garantir que os assets sejam empacotados corretamente.
+### Blocos da UI
 
-## Interface e automação dos testes
+| Grupo | Botões | Observações |
+|-------|--------|-------------|
+| **MAD – Single** | CPU Kotlin, TFLite CPU/GPU/NNAPI | Processa 1 sensor × 4096/8192/16384 pontos por iteração. |
+| **MAD – x10** | Versões `x10` dos botões acima | Cada repetição percorre `batchSize` pacotes consecutivos (default 12). |
+| **FFT – Single/x10** | CPU Kotlin + TFLite delegates | Sempre 10 sensores × escala selecionada; `x10` respeita `batchSize`. |
+| **Suíte completa (512 → 64k)** | Botão principal logo abaixo dos chips | Percorre os 16 cenários para todas as escalas suportadas na UI (512, 1k, 2k, 4k, 8k, 16k, 32k e 64k). Comprimentos maiores (128k+) continuam disponíveis manualmente. |
+| **Teste energético** | Iniciar/Cancelar ciclo | Executa 4 cenários MAD com 100 execuções cada. |
 
-- **Chips superiores**: controlam `iterations` e `batchSize`. Qualquer clique nos botões usa exatamente esses valores, e a suíte completa percorre 16 cenários × 3 escalas com as mesmas configurações.
-- **Botões MAD/FFT**: chamam `BenchmarkExecutor.runScenario` com o `DataScale` selecionado (1x, 2x ou 4x) e salvam os logs em `app/src/main/assets/benchmarks`.
-- **Botão “Executar suíte completa”**: percorre todos os cenários e alimenta a barra de progresso (`FirstViewModel.BenchmarkProgress`). Resultado recente aparece em `textBenchmarkResult`.
-- **Teste energético**: `EnergyTestService` executa quatro cenários MAD (CPU, TFLite CPU/GPU/NNAPI) com 100 execuções cada, capturando bateria, energia, temperatura e modo de economia. Os logs vão para `energy_tests.txt` e `energy_results.csv`.
-- **Compartilhar/Apagar logs**: `ResultLogger` gerencia os arquivos em `Android/data/.../files/benchmarks/`, permitindo exportar ou limpar tudo direto da UI.
+O botão de suíte completa reaproveita os chips de iterações/lotes selecionados no topo. Um contador (“Execuções acumuladas nesta sessão”) acompanha quantas execuções foram persistidas desde a última limpeza de logs, facilitando campanhas com 10+ repetições por dispositivo.
 
-## Scripts de análise e reprodutibilidade
+### Métricas coletadas
 
-- Cada pasta em `app/src/BANCHMARK/<device>-<data>/` contém o CSV bruto + `generate_benchmarks_charts.py` (versão standalone que gera gráficos específicos do dispositivo).
-- `generate_charts.py` na raiz aceita qualquer CSV consolidado (como `comparativo-30-11/benchmark_results.csv`) e produz:
-  - gráficos por dispositivo (`global`, `tflite`, `speedup`);
-  - comparativos (`summary/tempo_*` e `summary/speedup_*`);
-  - relatórios textuais com as tabelas consolidadas por vetor/tamanho.
-- `generate_overview_charts.py` cria gráficos “densos” multi-dispositivo, comparando simultaneamente Galaxy S21, Moto G04s e Moto G84 para cada algoritmo/delegate (versões single e batch). Esses PNGs ficam em `docs/charts/comparativo-30-11/overview/<ALG>/<DELEGATE>/`.
-- Para reproduzir os gráficos da campanha de 30/11:
+- **Tempos (total/transferência/processamento)**: média, desvio, mínimo e máximo por cenário.
+- **Throughput**: amostras processadas por segundo considerando sensores × vetor × lote.
+- **Iterações/lote efetivos**: iguais aos chips selecionados (batch=1 para single; `batchSize` real nos modos `x10`).
+- **Notas do algoritmo**: último MAD (mean/std/min/max) ou resumo FFT (soma dos quatro primeiros sensores + bins iniciais).
+- **Temperaturas**: antes/depois de cada cenário coletamos bateria (intent padrão) e consultamos `HardwarePropertiesManager` para CPU/GPU quando o dispositivo expõe esses sensores. As leituras são persistidas nos CSVs (`battery_temp_start_c`, `cpu_temp_start_c`, etc.) e anexadas às notas para acompanhar impacto térmico.
+- **Metadados**: modelo/fabricante do dispositivo, hardware, SDK, estado do modo economia, delegate escolhido.
+
+Os arquivos são gravados em `benchmark_results.csv` (planilhas) e `benchmark_results.txt` (legível). Cada pasta em `app/src/BANCHMARK/<device>-<data>/` guarda cópias desses arquivos, gráficos (`charts/`) e scripts específicos (`generate_benchmarks_charts.py`).
+
+## Scripts e reprodutibilidade
+
+| Script | Descrição |
+|--------|-----------|
+| `app/libs/pythonmodels/make_mad_model_float.py` | Reconstrói `mad_model.tflite` (float32) para 512/1k/2k até 526k pontos, compatível com GPU/NNAPI. |
+| `app/libs/pythonmodels/make_fft_model.py` | Gera `fft_model_<len>.tflite` com `tf.signal.rfft` (512 → 526k), mantendo o alias legacy `fft_model.tflite` em 4096. |
+| `scripts/generate_fft_rfft_models.py` | Laboratório para calibrar pesos, testar quantização e criar variantes FFT/RFFT. |
+| `generate_charts.py` | Lê qualquer `benchmark_results.csv` e produz gráficos por dispositivo + pastas `summary/tempo_*` e `summary/speedup_*`. |
+| `generate_overview_charts.py` | Cria grids multi-dispositivo (Galaxy S21, Moto G04s, Moto G84) organizados por algoritmo/delegate; saída em `docs/charts/.../overview/<ALG>/<DELEGATE>/`. |
+| `generate_transfer_overview.py` | Plota linhas destacando apenas o tempo de transferência (single e batch), separando algoritmos/delegates; arquivos em `<output>/<ALG>/<DELEGATE>/fft_tflite_gpu_batch.png` etc. |
+| `generate_transfer_compute_summary.py` | Gera um pôster resumido combinando MAD/FFT, com barras empilhadas (transferência + compute) por dispositivo/delegate. Ideal para anexar em apresentações. |
+| `merge_benchmarks.py` | Junta múltiplos `benchmark_results.csv` e injeta `device_model` para cada fonte (`python3 merge_benchmarks.py --device \"S21=.../benchmark_results.csv\" ... --output comparativo-09-12/benchmark_results.csv`). |
+| `generate_thermal_energy_charts.py` | Cria painéis com início/fim de temperatura e deltas médios, além de heatmaps das etiquetas energéticas (`Baixa/Média/Alta`). Saída padrão: `docs/charts/<campanha>/thermal_energy/`. |
+| `generate_transfer_compute_summary.py --csv ... --output ...` | Recomenda-se usar o CSV consolidado `app/src/BANCHMARK/comparativo-30-11/benchmark_results.csv`. |
+
+Exemplo para reproduzir os gráficos da campanha de 30/11:
 
 ```bash
 python3 generate_charts.py \
@@ -106,213 +186,161 @@ python3 generate_charts.py \
 python3 generate_overview_charts.py \
   --csv app/src/BANCHMARK/comparativo-30-11/benchmark_results.csv \
   --output docs/charts/comparativo-30-11/overview
+
+python3 generate_transfer_overview.py \
+  --csv app/src/BANCHMARK/comparativo-30-11/benchmark_results.csv \
+  --output docs/charts/comparativo-30-11/transfer
+
+python3 generate_transfer_compute_summary.py \
+  --csv app/src/BANCHMARK/comparativo-30-11/benchmark_results.csv \
+  --output docs/charts/comparativo-30-11/summary_transfer_compute.png
 ```
 
-Os scripts configuram `MPLCONFIGDIR` localmente para não depender de `~/.matplotlib`, permitindo rodar em ambientes restritos. Para facilitar a navegação, uma cópia dos gráficos comparativos entre os três dispositivos está em `docs/charts/comparativo-30-11/summary/` (mesmos arquivos `tempo_*` e `speedup_*` produzidos pelo script), prontos para referência no TCC.
+Todos os scripts configuram `MPLCONFIGDIR` localmente para funcionar em ambientes restritos (CI, servidores, WSL). Caso precise personalizar cores ou dispositivos, ajuste os dicionários no topo de cada script.
 
-## Dependências e toolchain
+## Resultados e insights
 
-| Componente | Versão |
-|-----------|--------|
-| Gradle Plugin Android | 8.6.0 |
-| Kotlin | 1.9.0 |
-| Compile/Target SDK | 35 / 34 (minSdk 31) |
-| Java / Kotlin JVM | 17 |
-| Jetpack | Core KTX 1.16.0, AppCompat 1.7.0, Material 1.12.0, ConstraintLayout 2.2.1, Navigation 2.8.9 |
-| Testes | JUnit 4.13.2, AndroidX Test 1.2.1, Espresso 3.6.1 |
-| TensorFlow Lite | 2.16.1 (`tensorflow-lite`, `-gpu`, `-gpu-api`) |
-| FFT CPU extra | `com.github.wendykierp:JTransforms:3.1` |
+Os diretórios `app/src/BANCHMARK/comparativo-30-11/` e `docs/charts/comparativo-30-11/` reúnem os dados coletados em 30/11 (Galaxy S21, Moto G04s, Moto G84). Configuração padrão:
 
-Ferramentas externas: Android Studio Hedgehog/Koala, SDK 35, NDK 26.1 (quando necessário). Para Python, recomenda-se criar um ambiente virtual (`python3 -m venv .venv && source .venv/bin/activate`) e instalar `tensorflow==2.16.1 numpy scipy matplotlib seaborn pandas`.
+- Chips superiores: **12 iterações** e **12 pacotes**.
+- Botão “Executar suíte completa”: percorre 16 cenários × escalas 1×/2×/4× ⇒ 48 passos × 12 repetições.
+- Nos cenários `x10`, cada repetição processa 12 pacotes consecutivos (registrado como `batch_size=12` no CSV).
 
-## Visão prática para novos colaboradores
+**Galaxy S21 (Exynos 2100)**  
+MAD single 4096 pts: TFLite CPU/GPU ≈0,64 ms vs CPU Kotlin 2,70 ms (NNAPI 2,53 ms). FFT single 10×4096: delegates ≈2,46 ms vs CPU 4,09 ms. Com batch `x10`, GPU/CPU mantêm 31–33 ms enquanto o CPU cresce acima de 50 ms.
 
-- Clone o repositório, abra na IDE e execute o módulo `app`.
-- Use os chips para controlar iterações/lote e clique nos botões desejados; os logs aparecem na própria tela e são salvos automaticamente.
-- Rode `generate_charts.py` ou os scripts específicos de cada pasta para transformar os CSVs em gráficos (PNG) e tabelas para relatórios.
-- Para atualizar os modelos, entre em `app/libs/pythonmodels`, execute os scripts Python e depois rode `./gradlew :vulkanfft:assemble` para empacotar os novos assets.
-- Inspecione `app/src/BANCHMARK/` para exemplos de execuções reais (cada pasta contém CSV, TXT, gráficos e o script usado). Isso serve como referência de formato para novas campanhas.
+**Moto G04s (Spreadtrum T606)**  
+MAD single chega a 121 ms na CPU e ~60 ms nos delegates. Em `x10`, GPU entrega 28,3 ms contra 192 ms no CPU Kotlin. FFT single: GPU = 8,28 ms, CPU = 82,96 ms, NNAPI = 13,58 ms; batches continuam favorecendo delegates (97–163 ms) enquanto a CPU passa de 230 ms.
 
-## Documentação do TCC
+**Moto G84 5G (Snapdragon 695)**  
+MAD single: delegates entre 0,95–1,05 ms vs CPU 4,12 ms. FFT single: delegates ≈3,9 ms vs CPU 7,95 ms. Com 12 pacotes consecutivos, delegates permanecem na faixa de 46 ms, metade do CPU (86 ms).
 
-A estrutura completa do Trabalho de Conclusão de Curso está versionada em Markdown sob `docs/tcc`. Cada capítulo corresponde a um arquivo individual:
+### Insights consolidados
 
-- `docs/tcc/01_introducao.md`
-- `docs/tcc/02_revisao_bibliografica.md`
-- `docs/tcc/03_metodologia.md`
-- `docs/tcc/04_resultados.md`
-- `docs/tcc/05_conclusoes.md`
+- **Transferência domina**: 70–85 % do tempo dos delegates TFLite é gasto preenchendo buffers (`generate_transfer_overview.py` evidencia isso). GPU/NNAPI só trazem ganhos reais quando a transferência é amortizada.
+- **Batching é chave**: `summary/tempo_FFT_TFLite GPU_49152.png` mostra tempo quase constante por pacote em lotes x10, enquanto CPU cresce linearmente.
+- **Economia em hardware modesto**: `summary/speedup_FFT_TFLite GPU.png` indica mais de 10× de speedup no Moto G04s, enquanto o Galaxy S21 fica em ~1,6×, reforçando que o delegate deve ser escolhido por perfil do dispositivo.
+- **Resultados estáveis**: desvios padrão abaixo de 0,2 ms e 12 repetições configuradas nos chips superiores garantem análise com baixa variância, útil para relatórios acadêmicos e serviços em produção.
+- **Aplicável a outros sensores**: basta trocar o gerador de entradas (documentado em `docs/fft_pipeline.md`) para reutilizar o pipeline com PPG/ECG.
 
-Esses arquivos descrevem o projeto em detalhes acadêmicos (contextualização, revisão, metodologia, resultados e considerações finais) e facilitam a navegação de quem deseja compreender o racional dos experimentos sem abrir a IDE. Sempre que novos capítulos ou anexos forem adicionados, mantenha-os neste diretório para preservar o padrão e facilitar o compartilhamento.
+Os gráficos (`tempo_*`, `speedup_*`, `tflite_transfer_*`, overview e summary) estão em `app/src/BANCHMARK/comparativo-30-11/charts/` e `docs/charts/comparativo-30-11/`.
 
+### Campanha 09/12 – Galaxy S21 × Moto G04s × Moto G84
 
-    ## Requisitos
-
-    1. **Android Studio (Hedgehog/Koala)** com SDK 35 e NDK 26.1 (já referenciado em `vulkanfft/build.gradle.kts`).
-    2. **JDK 17** (o projeto usa `compileOptions`/`kotlinOptions` compatíveis com Java 17).
-    3. **Python 3.9+** com TensorFlow Lite 2.16 (ou superior) para regenerar os modelos.
-    4. **Dispositivo ou emulador** com API 31+ e suporte aos delegates desejados (GPU/NNAPI podem variar por hardware).
-
-    ## Primeira execução
-
-    1. Clone o repositório e abra a pasta raiz no Android Studio.
-    2. Aguarde o Sync do Gradle (o wrapper baixa Gradle 8.7 automaticamente).
-    3. Conecte um dispositivo ou inicie um emulador com API 31+.
-    4. Execute o app (`app` module) normalmente; a tela inicial contém os botões para MAD (CPU, CPU-Optimized, GPU, NNAPI) e FFT (CPU, TFLite CPU/GPU/NNAPI).
-
-    ### Caso o Gradle falhe por permissão
-
-    Alguns ambientes (ex.: macOS com restrições) podem negar escrita em `~/.gradle`. Garanta que o usuário tenha permissão de escrita ou configure `GRADLE_USER_HOME` para uma pasta acessível antes de rodar `./gradlew`.
-
-    ## Gerando/atualizando os modelos TFLite
-
-    Os arquivos são versionados em `vulkanfft/src/main/assets`, mas se quiser regenerar:
-
-    ```bash
-    cd app/libs/pythonmodels
-    python3 make_mad_model_float.py # cria/atualiza mad_model.tflite (versão float32 compatível com GPU/NNAPI)
-    python3 make_fft_model.py      # cria/atualiza fft_model.tflite
-    # scripts equivalentes para MAD podem ser adicionados aqui (ver notebooks).
-    ```
-
-    Dica: se ocorrerem avisos do Matplotlib/fontconfig, defina `MPLCONFIGDIR=/tmp/mplcache` antes de rodar o script (já suportado no arquivo).
-
-## Suíte de testes exposta no app
-
-A tela principal agrupa os testes em três blocos. No topo da tela existem dois grupos de chips (iteração e tamanho de lote) com as opções 1/4/8/12. O valor escolhido para **iterações** define quantas vezes cada cenário é repetido sempre que um botão é pressionado ou quando a suíte completa é executada. O valor escolhido para **lote** só é aplicado aos cenários “x10”: cada repetição processa sucessivamente o número selecionado de pacotes (por exemplo, 12 pacotes = 12 × 10 sensores × 4096/8192/16384 pontos). Os cenários “single” continuam processando apenas 1 pacote, porém respeitam o número de iterações configurado. Ao utilizar 12 iterações com lote 12 (configuração empregada nos experimentos principais), os tempos coletados formam amostras suficientes para computar médias e desvios com baixa variância, proporcionando resultados mais robustos.
-| Grupo | Botões / Cenários | Descrição |
-|-------|-------------------|-----------|
-| **MAD — Execução individual** | CPU Kotlin, TFLite CPU, TFLite GPU, TFLite NNAPI | Executa MAD em um único pacote (1 sensor × 4096/8192/16384 amostras) e repete conforme o chip de iterações escolhido. |
-| **MAD — Processar N pacotes** | CPU Kotlin x10, TFLite CPU x10, TFLite GPU x10, TFLite NNAPI x10 | Mesmo algoritmo, porém cada repetição percorre N pacotes sequenciais (N definido no chip superior). Útil para medir amortização de transferência. |
-| **FFT — Execução individual / Processar N pacotes** | FFT CPU, FFT TFLite CPU/GPU/NNAPI e equivalentes `x10` | FFT sempre usa 10 sensores × 4096/8192/16384 amostras e repete o cenário conforme o chip de iterações. Nos botões x10 o app processa N pacotes consecutivos usando o delegate selecionado. |
-
-Há ainda o botão **“Executar suíte completa”** que percorre todos os 16 cenários acima combinados com os 3 tamanhos de vetor (1x/2x/4x). Assim, com os chips ajustados para 12 iterações e 12 pacotes, o app executa 48 cenários diferentes e cada um deles roda 12 vezes. O resultado mais recente aparece no texto “Benchmark” logo abaixo da barra de progresso, acompanhado da barra/label de progresso.
-
-## Métricas coletadas em cada benchmark
-
-A cada execução (manual ou pela suíte) são gravados:
-
-- **Tempo total (média, desvio padrão, min, max)**: tempo agregado por repetição.
-- **Tempo de transferência (média, desvio, min, max)**: medido ao copiar amostras/pesos do host para os `ByteBuffer`s de cada delegate.
-- **Tempo de processamento (média, desvio, min, max)**: tempo interno da inferência/DFT após a transferência.
-- **Throughput**: operações processadas por segundo (considerando 4096 amostras × nº de sensores × tamanho do lote).
-- **Iterações e tamanho do lote**: `iterations` recebe exatamente o valor escolhido no chip superior (1/4/8/12). `batchSize` vale 1 para os cenários individuais e passa a refletir o número de pacotes selecionado quando o cenário é “x10” (ex.: 12 pacotes ⇒ `batchSize=12`).
-- **Notas**: último resultado do MAD (mean/std/min/max) ou resumo do FFT (somatório dos pesos dos quatro primeiros sensores + bins iniciais).
-
-Todas essas métricas são armazenadas em `benchmark_results.csv` (para consumo em planilhas) e em `benchmark_results.txt` (versão legível). A API usa `BenchmarkReporter` para anexar os metadados de dispositivo (fabricante/modelo, hardware, SoC, SDK, estado do modo economia).
-
-## Resultados dos benchmarks de 30-11
-
-Os arquivos em `app/src/BANCHMARK/comparativo-30-11/` consolidam a campanha rodando em 30/11 nos dispositivos Galaxy S21 (Exynos 2100), Moto G04s (Spreadtrum T606) e Moto G84 5G (Snapdragon 695/SM6375). Para esta rodada:
-
-- Os chips superiores foram configurados com **12 iterações** e **12 pacotes**.
-- O botão “Executar suíte completa” percorreu todos os 16 cenários combinados com as escalas 1x, 2x e 4x, resultando em 48 passos × 12 repetições por dispositivo.
-- Nos cenários `x10`, cada repetição processou 12 pacotes consecutivos; isso aparece como `batch_size=12` e nas descrições (`12×(...)`) dentro do CSV.
-
-### Galaxy S21 (30-11)
-
-- **MAD 1× (4096 pts, batch=1)**: TFLite CPU e GPU ficaram em ~0,64 ms enquanto o CPU Kotlin levou 2,70 ms e o NNAPI 2,53 ms (`iterations=12` em todos os casos). Ao escalar para 16 384 pontos (4×) o TFLite GPU manteve 2,56 ms contra 24,56 ms do CPU puro.
-- **MAD 1× x10 (12 pacotes)**: TFLite CPU/GPU ≈7,6 ms por repetição versus 25,5 ms no CPU Kotlin e 45,2 ms no NNAPI, evidenciando o ganho de amortização no delegate.
-- **FFT 1× (10 sensores × 4096 pts)**: todos os delegates TFLite ficaram entre 2,46 ms e 2,46 ms, metade do CPU Kotlin (4,09 ms). Com batches de 12 pacotes os tempos cresceram para ~31–33 ms, porém os delegates mantiveram leve vantagem sobre a CPU nativa.
-
-### Moto G04s (30-11)
-
-- **MAD 1× single**: CPU Kotlin demorou 121,5 ms, enquanto TFLite CPU/GPU ficaram em ~60 ms e o NNAPI em 62 ms. Nos tamanhos maiores os delegates escalam melhor (por exemplo, 4×: GPU 8,2 ms vs CPU 85,7 ms).
-- **MAD 1× x10**: o GPU entrega 28,3 ms, superando CPU (192 ms) e NNAPI (226 ms). O TFLite CPU apresentou 120 ms neste modo, mostrando forte impacto do custo de transferência nesse hardware.
-- **FFT**: no tamanho base, GPU = 8,28 ms, CPU Kotlin = 82,96 ms e NNAPI = 13,58 ms. Com batches de 12 pacotes os delegates variam entre 97–163 ms, ainda assim muito abaixo do CPU (230 ms), reforçando que o SoC é limitado por CPU escalar.
-
-### Moto G84 5G (30-11)
-
-- **MAD 1× single**: GPU/CPU/NNAPI TFLite ficaram praticamente empatados perto de 1,0 ms contra 4,12 ms do CPU Kotlin. Em 4×, os delegates ficaram em ~3,9 ms enquanto a CPU subiu para 35,7 ms.
-- **MAD 1× x10**: cerca de 12 ms em qualquer delegate TFLite, frente a 49 ms no CPU Kotlin.
-- **FFT**: o cenário base registrou 3,88–3,91 ms para os delegates e 7,95 ms na CPU; com 12 pacotes os delegates ficaram em ~46,7 ms versus 86,3 ms no CPU Kotlin.
-
-Todos os gráficos (.png) gerados automaticamente estão em `app/src/BANCHMARK/comparativo-30-11/charts/` (por dispositivo e na pasta `summary/`), mostrando as curvas completas de tempo, transferência e speedup usados para produzir os números acima.
-
-### Principais insights experimentais
-
-- **Transferência domina o custo**: em todos os dispositivos, 70–85 % do tempo dos delegates TFLite é gasto transferindo os buffers do acelerômetro (ver `tflite_transfer_*.png`). Isso explica por que GPU e NNAPI nem sempre superam o TFLite CPU – o gargalo não é o cálculo da FFT, mas o I/O.
-- **Batching amortiza o gargalo**: gráficos como `summary/tempo_FFT_TFLite GPU_49152.png` mostram que processar 12 pacotes sequenciais mantém o tempo por pacote praticamente constante, enquanto o CPU Kotlin cresce linearmente. Estratégias de batching passam a ser o principal “ganho” quando o delegate já é limitado por transferência.
-- **Dispositivos low-cost lucram mais**: `summary/speedup_FFT_TFLite GPU.png` evidencia que o Moto G04s atinge >10× de speedup contra CPU, enquanto o Galaxy S21 fica próximo de 1,6×. Ou seja, a escolha do delegate deve considerar o perfil de hardware e não apenas “usar GPU porque é melhor”.
-- **Estabilidade estatística**: os desvios padrão (<0,2 ms para delegates) e as 12 repetições configuradas nos chips superiores garantem dados reprodutíveis. Isso é importante para serviços contínuos (JourneyService) e para evidenciar que os resultados não são outliers.
-- **Base em acelerômetro, aplicável a outros sensores**: todos os pacotes usados vêm do `AccelerometerBatchGenerator` (10 sensores × 4096 amostras), mas a mesma metodologia se aplica a PPG, ECG ou quaisquer fluxos de séries temporais, bastando ajustar o gerador de entradas.
-
-Essas conclusões sustentam o texto do TCC: o ganho real vem de amortizar transferência e escolher delegates compatíveis com o hardware-alvo. Em aplicações médicas, wearables ou safety (detecção de quedas, ruídos industriais), isso se traduz em menor latência e menor consumo energético no edge, permitindo executar análises FFT em tempo real sem depender da nuvem.
-
-## Teste energético automatizado
-
-O bloco “Teste de gasto energético” possui:
-
-1. **Botão “Iniciar ciclo energético (4 cenários)”**: dispara um job em background que executa, nessa ordem, os cenários MAD CPU Kotlin, MAD TFLite CPU, MAD TFLite GPU e MAD TFLite NNAPI. Cada cenário roda **100 execuções**. Antes e depois de cada bloco são capturados:
-   - `% de bateria`, energia em nWh (`BATTERY_PROPERTY_ENERGY_COUNTER`), carga em mAh (`BATTERY_PROPERTY_CHARGE_COUNTER`), temperatura e estado de carregamento.
-   - Modo economia de bateria (ligado/desligado) via `PowerManager`.
-2. **Botão “Cancelar teste energético”**: cancela imediatamente o job (caso esteja rodando). A UI mostra “Teste energético em execução/parado” e desabilita/habilita os botões automaticamente.
-3. **Área de status**: apresenta o texto instrutivo + estado atual, permitindo que o usuário rode uma vez sem modo economia e depois repita com o modo ativado.
-
-Saídas do teste energético:
-
-- `energy_tests.txt`: resumo textual por cenário (100 execuções) com tempo total e queda de bateria.
-- `energy_results.csv`: registro estruturado contendo todos os campos coletados (início/fim de bateria, variação, energia, temperatura, se estava carregando, notas, etc.).
-
-Esses arquivos são totalmente separados dos benchmarks normais. O botão “Apagar logs” (via `ResultLogger.clearAll`) limpa ambos os conjuntos, garantindo que o professor possa inspecionar apenas os dados mais recentes.
-
-## Fluxos internos
-
-- **Geração de dados**: `AccelerometerBatchGenerator` cria 10 sensores × 4096 amostras; `FftInputBuilder` converte para magnitudes float e produz pesos dinâmicos.
-- **MAD Kotlin**: `getMAD()` calcula magnitude, agrupa em janelas de 5 s (`TimeUnit.SECONDS.toMillis(5)`) e devolve média/desvio/mín/máx.
-- **MAD TFLite**: `StatModelProcessor` carrega `mad_model.tflite` e injeta os delegates CPU/GPU/NNAPI; os tempos são obtidos preenchendo `ByteBuffer`s diretos (transferência) e medindo `interpreter.run()` (processamento).
-- **FFT CPU**: `FftCpuProcessor.process()` roda o DFT direto e retorna `FftResult`.
-- **FFT TFLite**: `FftTfliteProcessor.process()` usa `runForMultipleInputsOutputs` com buffers diretos para mapear real/imag/magnitude/magnitude ponderada.
-- **Registro**: `BenchmarkReporter.append()` escreve CSV/TXT das execuções normais; `EnergyReporter.append()` grava as medições energéticas.
-
-Mais detalhes conceituais do pipeline FFT (geração dos pesos, ordem dos tensores, etc.) estão em `docs/fft_pipeline.md`.
-
-## Como operar os testes no app
-
-1. Abra o aplicativo e use os botões dos blocos “MAD” ou “FFT” para rodar testes individuais. Antes de começar, escolha no topo quantas iterações (1/4/8/12) e, se desejar testar as versões `x10`, quantos pacotes consecutivos cada repetição deve processar. Cada clique usa exatamente essas configurações e atualiza o texto “Benchmark”.
-2. Clique em “Executar suíte completa” para percorrer todos os cenários sequencialmente; acompanhe a barra/label de progresso e lembre-se de que a suíte executa 16 cenários × 3 tamanhos (48 passos) respeitando as opções de iteração/lote selecionadas.
-3. Para o teste energético, certifique-se de que o celular não está carregando, ajuste o modo economia conforme o cenário desejado e toque em “Iniciar ciclo energético”. O processo leva alguns minutos (400 execuções ao todo). Use “Cancelar” se precisar interromper.
-4. Compartilhe os resultados via “Compartilhar logs”; o app junta todos os arquivos CSV/TXT da pasta `benchmarks/`.
-5. Caso queira recomeçar, use “Apagar logs” para limpar completamente tanto os benchmarks quanto os registros energéticos.
-
-## Testes automatizados e tolerâncias
-
-### Unit tests (Gradle)
-
-Rode `./gradlew :app:testDebugUnitTest` para validar:
-
-| Arquivo | O que valida |
-|---------|--------------|
-| `FftValidationUnitTest` | FFT CPU vs DFT manual, aplicação de pesos e todos os modos de normalização (`NONE`, `/N`, `/√N`). |
-| `FftInputBuilderTest` | Conversão de sensores para magnitudes/weights e validação de erros quando faltam amostras. |
-| `MadValidationUnitTest` | `BenchmarkExecutor.getMAD` contra uma implementação manual com janelas de 5 s e determinismo por semente. |
-
-Todos esses testes rodam em JVM pura; logs do `FftCpuProcessor` caem no console (fallback de `println`) para evitar dependência de `android.util.Log`.
-
-### Instrumented tests (device)
-
-`./gradlew :app:connectedAndroidTest` executa `TfliteDelegatesInstrumentedTest`, que compara FFT CPU × FFT TFLite com métricas detalhadas:
-
-- **Métricas logadas**: `maxRelativeDiff`, `meanRelativeDiff`, `maxAbsoluteDiff`, `meanAbsoluteDiff` e `rmse`, além dos oito primeiros bins e suas razões.
-- **Tolerâncias**:
-  - CPU vs CPU: 1,5 %
-  - GPU: 4 % (aceita FP16/FPmix)
-  - NNAPI: 3 %
-
-Os logs aparecem na tag `FFT_TEST`; use qualquer leitor de logcat ou `adb logcat | grep FFT_TEST` para capturá-los e anexar aos relatórios.
-
-#### Reduzindo o tempo dos testes
-
-As execuções FFT CPU podem ser demoradas em dispositivos mais lentos. Por padrão, os testes instrumentados usam 4 sensores e apenas o tamanho 4096. Para rodar a suíte completa (10 sensores e tamanhos 4096/8192/16384), passe o argumento `fftExtended=true`:
+- Novas coletas completas estão em `app/src/BANCHMARK/s21-09-12/`, `app/src/BANCHMARK/motog04-09-12/` e `app/src/BANCHMARK/motog84-09-12/`. Todos os gráficos “09-12” agora contemplam **Galaxy S21, Moto G04s e Moto G84**.
+- Use `merge_benchmarks.py` para gerar `app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv` com os três CSVs do dia e rode os scripts de gráficos apontando para `docs/charts/comparativo-09-12/`. O comando utilizado foi:
 
 ```bash
-# Via Gradle
-./gradlew :app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.fftExtended=true
+python3 merge_benchmarks.py \
+  --device "Galaxy S21 (09-12)=app/src/BANCHMARK/s21-09-12/benchmark_results.csv" \
+  --device "Moto G04s (09-12)=app/src/BANCHMARK/motog04-09-12/benchmark_results.csv" \
+  --device "Moto G84 (09-12)=app/src/BANCHMARK/motog84-09-12/benchmark_results.csv" \
+  --output app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv
 
-# Ou direto via adb
-adb shell am instrument -w \
-  -e fftExtended true \
-  com.example.vulkanfft.test/androidx.test.runner.AndroidJUnitRunner
+python3 generate_charts.py --csv app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv \
+  --output app/src/BANCHMARK/comparativo-09-12/charts
+python3 generate_overview_charts.py --csv app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv \
+  --output docs/charts/comparativo-09-12/overview
+python3 generate_transfer_overview.py --csv app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv \
+  --output docs/charts/comparativo-09-12/transfer
+python3 generate_transfer_compute_summary.py --csv app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv \
+  --output docs/charts/comparativo-09-12/summary
+python3 generate_thermal_energy_charts.py --csv app/src/BANCHMARK/comparativo-09-12/benchmark_results.csv \
+  --output docs/charts/comparativo-09-12/thermal_energy
 ```
 
-A primeira execução do teste imprime a configuração escolhida em `FFT_TEST`. Documente nos relatórios qual modo foi utilizado.
+Os PNGs individuais por dispositivo ficam em `app/src/BANCHMARK/comparativo-09-12/charts/<device>/...` e os comparativos em `docs/charts/comparativo-09-12/{overview,overview/combined,transfer,summary,thermal_energy}`.
+
+**Destaques rápidos**
+
+- Escalas extras de **512, 1024 e 2048 pontos** foram incluídas nas suites single/x10, com 5 cliques consecutivos (os CSVs apenas acumulam, nunca sobrescrevem).
+- Em 65 536 pontos, o Galaxy S21 entregou `MAD GPU single ≈14,9 ms` e `FFT GPU single ≈100 ms`, com os modos `x10` mantendo-se em 182 ms e 1,18 s respectivamente. O Moto G04s, mesmo bem mais modesto, registrou `33,5 ms` (MAD) e `249 ms` (FFT) no single, chegando a 401 ms/2,97 s nos batches — o speedup do delegate ainda passa de 6× sobre o CPU Kotlin.
+- Os gráficos `docs/charts/comparativo-09-12/overview/FFT/TFLite_GPU/fft_tflite_gpu_batch.png` e equivalentes mostram que o Moto G04s continua escalonando quase linearmente com o tamanho do vetor, enquanto o S21 estabiliza acima de 32 k graças ao clock alto e à largura de banda de memória.
+- O Moto G84 5G passa a figurar com os mesmos comprimentos (512 → 65k). Os gráficos `overview/combined/` e `overview/FFT/TFLite_GPU/` deixam claro o ganho adicional de throughput que ele apresenta quando comparado aos outros dois aparelhos, especialmente acima de 32 k.
+
+**Cobertura térmica e energética**
+
+- As novas colunas `battery_temp_start_c`/`battery_temp_end_c` são exploradas pelo script `generate_thermal_energy_charts.py`. Os painéis `thermal_energy/thermal/*.png` mostram que, mesmo empilhando 5 execuções por clique, a variação média de temperatura ficou abaixo de **0,5 °C** nos dois aparelhos (ex.: `deltas_battery.png`), e não houve leituras confiáveis de CPU/GPU no hardware da campanha (sensores fechados pelo vendor).
+- Os heatmaps `thermal_energy/energy/energy_mad.png` e `energy_fft.png` deixam explícito o label energético atribuído pela UI: CPU Kotlin segue marcado como “Alta”, TFLite CPU como “Média”, GPU como “Baixa” e NNAPI como “Baixa/Média”. Isso facilita referenciar rapidamente o perfil esperado em cada delegate mesmo antes de termos leituras diretas de mWh.
+- Sempre que vier uma nova campanha basta repetir o `merge_benchmarks.py` incluindo o CSV adicional e regenerar os gráficos — os scripts agora tratam automaticamente headers com ou sem as colunas térmicas.
+
+## Teste energético e figuras
+
+O bloco “Teste de gasto energético” da UI executa automaticamente:
+
+1. MAD CPU Kotlin
+2. MAD TFLite CPU
+3. MAD TFLite GPU
+4. MAD TFLite NNAPI
+
+Cada cenário roda **100 execuções**. Antes/depois são coletados:
+
+- `% de bateria`, `BATTERY_PROPERTY_ENERGY_COUNTER` (nWh) e `BATTERY_PROPERTY_CHARGE_COUNTER` (mAh)
+- Temperaturas da bateria (intent) e, quando disponíveis, CPU/GPU via `HardwarePropertiesManager`, além do estado de carregamento e modo economia (`PowerManager`)
+- Tempo acumulado do cenário
+
+Saídas:
+
+- `energy_tests.txt`: resumo textual por cenário, incluindo as temperaturas combinadas e a estimativa de consumo.
+- `energy_results.csv`: dataset estruturado usado nos gráficos em `Figuras/` (`mad_energia_consolidada_tres_dispositivos*.png`). Agora adiciona `battery_drop_mah`, `energy_drop_mwh`, `avg_power_mw`, `avg_current_ma` e as colunas térmicas individuais (bateria/CPU/GPU).
+
+O botão “Cancelar teste energético” interrompe o ciclo imediatamente; “Apagar logs” limpa tanto benchmarks quanto medições energéticas. Use esses dados para comparar eficiência energética com e sem modo economia em diferentes dispositivos.
+
+## Testes automatizados
+
+### Unitários (JVM)
+
+```bash
+./gradlew :app:testDebugUnitTest
+```
+
+| Arquivo | Cobertura |
+|---------|-----------|
+| `FftValidationUnitTest` | FFT CPU vs DFT manual, pesos e normalizações (`NONE`, `/N`, `/√N`). |
+| `FftInputBuilderTest` | Conversão de sensores para tensores, tamanhos mínimos e erros de entrada. |
+| `MadValidationUnitTest` | Valida `BenchmarkExecutor.getMAD` contra implementação manual (janelas de 5 s). |
+
+Logs FFT usam `println`, evitando dependência de `android.util.Log`.
+
+### Instrumentados (device/emulador)
+
+```bash
+./gradlew :app:connectedAndroidTest
+```
+
+Executa `TfliteDelegatesInstrumentedTest`, comparando FFT CPU × TFLite com métricas:
+
+- `maxRelativeDiff`, `meanRelativeDiff`, `maxAbsoluteDiff`, `meanAbsoluteDiff`, `rmse`
+- Dump dos oito primeiros bins e razões entre CPU × delegate
+- Cada execução gera `precision/precision_fft.csv` e `precision/precision_mad.csv` em `Android/data/<package>/files/precision/`. Esses CSVs trazem os erros relativos/absolutos por comprimento. Os testes automatizados rodam até 131.072 pontos; comprimentos maiores são marcados como experimentais e não são executados automaticamente porque demandam >250 MB de heap e frequentemente causam OOM em devices reais (documente esses casos manualmente quando rodar campanhas extremas).
+- Precisão típica: 512 → 64k ficam abaixo de 3 % de erro relativo; 128k/256k/524k podem alcançar 5–8 % (e, em aparelhos com pouca RAM, ocasionais picos maiores). Os CSVs de precisão ajudam a documentar a faixa real de erro por comprimento/dispositivo.
+- Limitações de memória: as matrizes FFT com 10 sensores × 524k pontos exigem dezenas de MB. O baseline CPU dos testes instrumentados usa buffers em fluxo para reduzir o pico, mas o sucesso continua dependente da RAM do aparelho. Caso falte memória, registre o fato no relatório e cite os CSVs de precisão como evidência.
+
+Tolerâncias:
+
+- CPU vs CPU (baseline): 1,5 %
+- GPU: 4 % (aceita FP16/FPmix)
+- NNAPI: 3 %
+
+Para rodar com 10 sensores e tamanhos 4096/8192/16384, habilite `fftExtended=true`:
+
+```bash
+./gradlew :app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.fftExtended=true
+# ou
+adb shell am instrument -w -e fftExtended true com.example.vulkanfft.test/androidx.test.runner.AndroidJUnitRunner
+```
+
+Os logs utilizam a tag `FFT_TEST`. Documente qual modo foi executado nos relatórios.
+
+## Documentação acadêmica
+
+Todo o TCC está em `docs/tcc/`:
+
+- `01_introducao.md`
+- `02_revisao_bibliografica.md`
+- `03_metodologia.md`
+- `04_resultados.md`
+- `05_conclusoes.md`
+
+Use esses capítulos para contextualizar o projeto, replicar gráficos em LaTeX ou exportar trechos para apresentações. Sempre que novos anexos forem criados, mantenha o padrão Markdown dentro desse diretório.
+- **Limitações de memória**: mesmo com o “reset” completo do pipeline a cada cenário (cache de batches, entradas e FFT CPU esvaziados automaticamente), observamos que vetores **≥128k** começam a exigir centenas de MB e frequentemente saturam a RAM dos smartphones testados (Galaxy S21, Moto G04s, Moto G84). Por isso a UI roda, no máximo, 64k pontos por clique. Os comprimentos **128k**, **256k** e **526k** permanecem disponíveis via scripts/CLI, mas precisam ser executados manualmente e documentados como experimentais (há risco real de OOM). Os CSVs continuam registrando todas as execuções bem-sucedidas sequencialmente — basta acompanhar o contador incrementando ao final de cada clique.

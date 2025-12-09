@@ -133,7 +133,14 @@ class EnergyTestService : Service() {
     private fun formatCompletionText(snapshot: BenchmarkExecutor.EnergyScenarioSnapshot): String {
         val base =
             "Concluído ${snapshot.scenarioIndex}/${snapshot.totalScenarios} (${snapshot.percentComplete}% · ${snapshot.scale.shortLabel}) - ${snapshot.scenario.displayLabel}"
-        val temp = formatTemperatureSummary(snapshot.temperatureStartC, snapshot.temperatureEndC)
+        val temp = snapshot.temperatureSummary ?: formatTemperatureSummary(
+            snapshot.temperatureStartC,
+            snapshot.temperatureEndC,
+            snapshot.cpuTemperatureStartC,
+            snapshot.cpuTemperatureEndC,
+            snapshot.gpuTemperatureStartC,
+            snapshot.gpuTemperatureEndC
+        )
         return if (temp != null) "$base | $temp" else base
     }
 
@@ -200,12 +207,30 @@ class EnergyTestService : Service() {
         return runCatching { DataScale.valueOf(this) }.getOrDefault(default)
     }
 
-    private fun formatTemperatureSummary(start: Double?, end: Double?): String? {
-        if (start == null && end == null) return null
-        val startText = start?.let { "%.1f°C".format(it) } ?: "-"
-        val endText = end?.let { "%.1f°C".format(it) } ?: "-"
-        return "Temp $startText -> $endText"
+    private fun formatTemperatureSummary(
+        batteryStart: Double?,
+        batteryEnd: Double?,
+        cpuStart: Double?,
+        cpuEnd: Double?,
+        gpuStart: Double?,
+        gpuEnd: Double?
+    ): String? {
+        val segments = buildList {
+            if (batteryStart != null || batteryEnd != null) {
+                add("Bateria ${formatTemp(batteryStart)} -> ${formatTemp(batteryEnd)}")
+            }
+            if (cpuStart != null || cpuEnd != null) {
+                add("CPU ${formatTemp(cpuStart)} -> ${formatTemp(cpuEnd)}")
+            }
+            if (gpuStart != null || gpuEnd != null) {
+                add("GPU ${formatTemp(gpuStart)} -> ${formatTemp(gpuEnd)}")
+            }
+        }
+        if (segments.isEmpty()) return null
+        return "Temp ${segments.joinToString(" | ")}"
     }
+
+    private fun formatTemp(value: Double?): String = value?.let { "%.1f°C".format(it) } ?: "-"
 
     companion object {
         private const val CHANNEL_ID = "energy_tests_channel"

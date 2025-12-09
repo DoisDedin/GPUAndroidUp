@@ -13,6 +13,15 @@ import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import java.nio.channels.FileChannel
 
+/**
+ * Wrapper para os modelos `fft_model_*.tflite`.
+ *
+ * Cada asset foi gerado com 10 sensores fixos: o grafo executa o mesmo pipeline
+ * (RFFT, magnitude e pesos) para cada linha e o reshape apenas organiza
+ * `[real, imag, magnitude, weighted]`. Para usar outra contagem de sensores é
+ * necessário regenerar o modelo em Python (carregar aqui com `resizeInput`
+ * diferente quebra a topologia original).
+ */
 class FftTfliteProcessor(
     context: Context,
     delegateType: DelegateType,
@@ -39,6 +48,10 @@ class FftTfliteProcessor(
     private val inputArray: Array<Any>
 
     init {
+        require(numSensors == MODEL_SENSOR_COUNT) {
+            "fft_model_* foi exportado para $MODEL_SENSOR_COUNT sensores; recebi $numSensors. " +
+                "Regere o modelo Python para alterar essa dimensão."
+        }
         val options = Interpreter.Options()
         var localGpuDelegate: Delegate? = null
         var localNnapiDelegate: Delegate? = null
@@ -257,6 +270,7 @@ class FftTfliteProcessor(
     companion object {
         private const val FLOAT_BYTES = 4
         private const val OUTPUT_FIELDS = 4
+        private const val MODEL_SENSOR_COUNT = 10
     }
 
     private enum class ModelVariant {

@@ -26,6 +26,6 @@ class FftInputBuilderTest {
         val weights = input.weights[0]
         assertEquals(5, weights.size)
         assertTrue(weights.all { it > 1f })
-        assertTrue(weights.zipWithNext().all { (a, b) -> b >= a })
+        assertTrue(weights.asList().zipWithNext().all { (a, b) -> b >= a })
     }
 }

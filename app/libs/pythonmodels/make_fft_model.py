@@ -2,7 +2,7 @@
 Gera modelos TFLite que executam FFT real + aplicação de pesos dinâmicos por sensor.
 
 Uso:
-    python3 make_fft_model.py --lengths 4096 8192 16384
+    python3 make_fft_model.py --lengths 4096 8192 16384 32768 65536 131072 526000
 
 Cada modelo será salvo em `vulkanfft/src/main/assets/fft_model_<len>.tflite`. Para 4096
 mantemos também o nome histórico `fft_model.tflite`.
@@ -13,7 +13,11 @@ import os
 from pathlib import Path
 import tensorflow as tf
 
+# O grafo é traçado com 10 sensores fixos: todas as operações (RFFT, magnitude,
+# pesos) são as mesmas por linha e o reshape final só empilha as quatro saídas.
+# Para usar outra quantidade de sensores é preciso reexportar o modelo.
 NUM_SENSORS = 10
+DEFAULT_LENGTHS = (512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072, 262144, 524288)
 
 # Evita warnings da Matplotlib/fontconfig em ambientes restritos
 os.environ.setdefault("MPLCONFIGDIR", "/tmp/mplcache")
@@ -77,7 +81,7 @@ def main():
         "--lengths",
         nargs="+",
         type=int,
-        default=[4096, 8192, 16384],
+        default=list(DEFAULT_LENGTHS),
         help="Tamanhos de janela a exportar.",
     )
     args = parser.parse_args()

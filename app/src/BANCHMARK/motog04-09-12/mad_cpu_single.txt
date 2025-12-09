@@ -1,0 +1,400 @@
+===== 2025-12-09 10:59:11.284 =====
+Cenário: MAD CPU Kotlin
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 5,163±3,137 (min=2,804 | max=10,010)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 5,163±3,137 (min=2,804 | max=10,010)
+Notas: Mean=1959,918 | Std=616,390 | Min=1088,425 | Max=2412,372 | Escala 512 | Tempos: T=0,00ms/P=9,90ms, T=0,00ms/P=10,01ms, T=0,00ms/P=8,99ms, T=0,00ms/P=9,44ms, T=0,00ms/P=3,07ms, T=0,00ms/P=2,82ms, T=0,00ms/P=3,05ms, T=0,00ms/P=2,80ms, T=0,00ms/P=3,01ms, T=0,00ms/P=3,07ms, T=0,00ms/P=2,86ms, T=0,00ms/P=2,93ms | Temperaturas: Bateria 25,9°C -> 25,9°C
+Temperaturas: Bateria 25,9°C -> 25,9°C
+
+===== 2025-12-09 10:59:20.803 =====
+Cenário: MAD CPU Kotlin
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,745±0,125 (min=1,600 | max=1,990)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1,745±0,125 (min=1,600 | max=1,990)
+Notas: Mean=1870,294 | Std=717,868 | Min=576,546 | Max=2481,014 | Escala 1k | Tempos: T=0,00ms/P=1,90ms, T=0,00ms/P=1,66ms, T=0,00ms/P=1,61ms, T=0,00ms/P=1,86ms, T=0,00ms/P=1,71ms, T=0,00ms/P=1,85ms, T=0,00ms/P=1,64ms, T=0,00ms/P=1,72ms, T=0,00ms/P=1,60ms, T=0,00ms/P=1,60ms, T=0,00ms/P=1,79ms, T=0,00ms/P=1,99ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 10:59:35.095 =====
+Cenário: MAD CPU Kotlin
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,741±0,255 (min=3,416 | max=4,242)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 3,741±0,255 (min=3,416 | max=4,242)
+Notas: Mean=1810,641 | Std=753,342 | Min=292,150 | Max=2490,556 | Escala 2k | Tempos: T=0,00ms/P=3,79ms, T=0,00ms/P=3,42ms, T=0,00ms/P=3,76ms, T=0,00ms/P=3,77ms, T=0,00ms/P=3,51ms, T=0,00ms/P=3,61ms, T=0,00ms/P=3,90ms, T=0,00ms/P=3,56ms, T=0,00ms/P=3,55ms, T=0,00ms/P=4,21ms, T=0,00ms/P=3,58ms, T=0,00ms/P=4,24ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 10:59:53.864 =====
+Cenário: MAD CPU Kotlin
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 9,371±0,976 (min=8,509 | max=11,463)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 9,371±0,976 (min=8,509 | max=11,463)
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=8,53ms, T=0,00ms/P=8,54ms, T=0,00ms/P=8,51ms, T=0,00ms/P=9,33ms, T=0,00ms/P=9,50ms, T=0,00ms/P=8,63ms, T=0,00ms/P=9,02ms, T=0,00ms/P=8,92ms, T=0,00ms/P=10,31ms, T=0,00ms/P=11,01ms, T=0,00ms/P=11,46ms, T=0,00ms/P=8,70ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 11:00:23.925 =====
+Cenário: MAD CPU Kotlin
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 26,533±2,593 (min=24,685 | max=34,585)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 26,533±2,593 (min=24,685 | max=34,585)
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=24,68ms, T=0,00ms/P=25,73ms, T=0,00ms/P=27,81ms, T=0,00ms/P=26,30ms, T=0,00ms/P=24,74ms, T=0,00ms/P=26,22ms, T=0,00ms/P=34,59ms, T=0,00ms/P=26,48ms, T=0,00ms/P=25,26ms, T=0,00ms/P=24,95ms, T=0,00ms/P=24,92ms, T=0,00ms/P=26,71ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 11:01:16.339 =====
+Cenário: MAD CPU Kotlin
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 84,336±4,958 (min=77,530 | max=93,841)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 84,336±4,958 (min=77,530 | max=93,841)
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=82,33ms, T=0,00ms/P=89,80ms, T=0,00ms/P=93,84ms, T=0,00ms/P=83,59ms, T=0,00ms/P=89,06ms, T=0,00ms/P=85,25ms, T=0,00ms/P=85,85ms, T=0,00ms/P=87,45ms, T=0,00ms/P=81,24ms, T=0,00ms/P=77,53ms, T=0,00ms/P=77,96ms, T=0,00ms/P=78,14ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 11:02:59.045 =====
+Cenário: MAD CPU Kotlin
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 276,450±12,130 (min=268,911 | max=315,596)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 276,450±12,130 (min=268,911 | max=315,596)
+Notas: Mean=1756,446 | Std=770,852 | Min=17,562 | Max=2502,373 | Escala 32k | Tempos: T=0,00ms/P=315,60ms, T=0,00ms/P=275,57ms, T=0,00ms/P=270,85ms, T=0,00ms/P=272,64ms, T=0,00ms/P=272,60ms, T=0,00ms/P=272,68ms, T=0,00ms/P=271,66ms, T=0,00ms/P=272,40ms, T=0,00ms/P=272,69ms, T=0,00ms/P=280,73ms, T=0,00ms/P=268,91ms, T=0,00ms/P=271,06ms | Temperaturas: Bateria 26,1°C -> 26,1°C
+Temperaturas: Bateria 26,1°C -> 26,1°C
+
+===== 2025-12-09 11:06:24.784 =====
+Cenário: MAD CPU Kotlin
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1003,107±4,462 (min=998,946 | max=1013,719)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1003,107±4,462 (min=998,946 | max=1013,719)
+Notas: Mean=1754,022 | Std=771,310 | Min=8,395 | Max=2502,380 | Escala 64k | Tempos: T=0,00ms/P=1000,05ms, T=0,00ms/P=1000,60ms, T=0,00ms/P=1000,24ms, T=0,00ms/P=1001,03ms, T=0,00ms/P=1011,81ms, T=0,00ms/P=1002,15ms, T=0,00ms/P=998,95ms, T=0,00ms/P=1001,52ms, T=0,00ms/P=1002,44ms, T=0,00ms/P=1002,62ms, T=0,00ms/P=1002,15ms, T=0,00ms/P=1013,72ms | Temperaturas: Bateria 26,2°C -> 26,2°C
+Temperaturas: Bateria 26,2°C -> 26,2°C
+
+===== 2025-12-09 11:15:23.970 =====
+Cenário: MAD CPU Kotlin
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,830±0,113 (min=0,742 | max=1,180)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 0,830±0,113 (min=0,742 | max=1,180)
+Notas: Mean=1959,918 | Std=616,390 | Min=1088,425 | Max=2412,372 | Escala 512 | Tempos: T=0,00ms/P=1,18ms, T=0,00ms/P=0,81ms, T=0,00ms/P=0,80ms, T=0,00ms/P=0,80ms, T=0,00ms/P=0,78ms, T=0,00ms/P=0,77ms, T=0,00ms/P=0,74ms, T=0,00ms/P=0,74ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,90ms, T=0,00ms/P=0,81ms, T=0,00ms/P=0,83ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:15:34.615 =====
+Cenário: MAD CPU Kotlin
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,618±0,153 (min=1,471 | max=2,077)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1,618±0,153 (min=1,471 | max=2,077)
+Notas: Mean=1870,294 | Std=717,868 | Min=576,546 | Max=2481,014 | Escala 1k | Tempos: T=0,00ms/P=1,63ms, T=0,00ms/P=1,56ms, T=0,00ms/P=1,53ms, T=0,00ms/P=2,08ms, T=0,00ms/P=1,59ms, T=0,00ms/P=1,47ms, T=0,00ms/P=1,48ms, T=0,00ms/P=1,53ms, T=0,00ms/P=1,60ms, T=0,00ms/P=1,65ms, T=0,00ms/P=1,70ms, T=0,00ms/P=1,58ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:15:47.819 =====
+Cenário: MAD CPU Kotlin
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,462±0,138 (min=3,275 | max=3,696)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 3,462±0,138 (min=3,275 | max=3,696)
+Notas: Mean=1810,641 | Std=753,342 | Min=292,150 | Max=2490,556 | Escala 2k | Tempos: T=0,00ms/P=3,70ms, T=0,00ms/P=3,29ms, T=0,00ms/P=3,54ms, T=0,00ms/P=3,49ms, T=0,00ms/P=3,36ms, T=0,00ms/P=3,57ms, T=0,00ms/P=3,65ms, T=0,00ms/P=3,35ms, T=0,00ms/P=3,48ms, T=0,00ms/P=3,53ms, T=0,00ms/P=3,30ms, T=0,00ms/P=3,28ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:16:06.496 =====
+Cenário: MAD CPU Kotlin
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 8,972±0,817 (min=8,358 | max=11,401)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 8,972±0,817 (min=8,358 | max=11,401)
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=8,50ms, T=0,00ms/P=8,50ms, T=0,00ms/P=8,58ms, T=0,00ms/P=8,59ms, T=0,00ms/P=9,17ms, T=0,00ms/P=8,44ms, T=0,00ms/P=8,92ms, T=0,00ms/P=9,69ms, T=0,00ms/P=8,61ms, T=0,00ms/P=8,36ms, T=0,00ms/P=8,93ms, T=0,00ms/P=11,40ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:16:36.565 =====
+Cenário: MAD CPU Kotlin
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 26,037±1,135 (min=23,807 | max=27,885)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 26,037±1,135 (min=23,807 | max=27,885)
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=23,81ms, T=0,00ms/P=27,08ms, T=0,00ms/P=26,35ms, T=0,00ms/P=25,75ms, T=0,00ms/P=26,56ms, T=0,00ms/P=25,77ms, T=0,00ms/P=24,79ms, T=0,00ms/P=27,12ms, T=0,00ms/P=24,61ms, T=0,00ms/P=26,85ms, T=0,00ms/P=25,86ms, T=0,00ms/P=27,89ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:17:28.354 =====
+Cenário: MAD CPU Kotlin
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 83,146±3,771 (min=77,356 | max=89,260)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 83,146±3,771 (min=77,356 | max=89,260)
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=84,03ms, T=0,00ms/P=83,88ms, T=0,00ms/P=84,99ms, T=0,00ms/P=81,57ms, T=0,00ms/P=82,97ms, T=0,00ms/P=89,26ms, T=0,00ms/P=89,15ms, T=0,00ms/P=85,10ms, T=0,00ms/P=78,12ms, T=0,00ms/P=83,41ms, T=0,00ms/P=77,36ms, T=0,00ms/P=77,92ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:19:10.490 =====
+Cenário: MAD CPU Kotlin
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 273,096±8,647 (min=267,193 | max=298,938)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 273,096±8,647 (min=267,193 | max=298,938)
+Notas: Mean=1756,446 | Std=770,852 | Min=17,562 | Max=2502,373 | Escala 32k | Tempos: T=0,00ms/P=298,94ms, T=0,00ms/P=267,56ms, T=0,00ms/P=267,73ms, T=0,00ms/P=272,71ms, T=0,00ms/P=271,09ms, T=0,00ms/P=272,07ms, T=0,00ms/P=272,83ms, T=0,00ms/P=281,33ms, T=0,00ms/P=268,83ms, T=0,00ms/P=268,98ms, T=0,00ms/P=267,91ms, T=0,00ms/P=267,19ms | Temperaturas: Bateria 27,2°C -> 27,2°C
+Temperaturas: Bateria 27,2°C -> 27,2°C
+
+===== 2025-12-09 11:22:35.101 =====
+Cenário: MAD CPU Kotlin
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 996,485±4,245 (min=992,040 | max=1004,759)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 996,485±4,245 (min=992,040 | max=1004,759)
+Notas: Mean=1754,022 | Std=771,310 | Min=8,395 | Max=2502,380 | Escala 64k | Tempos: T=0,00ms/P=995,87ms, T=0,00ms/P=1002,12ms, T=0,00ms/P=994,92ms, T=0,00ms/P=993,73ms, T=0,00ms/P=992,13ms, T=0,00ms/P=1004,76ms, T=0,00ms/P=992,57ms, T=0,00ms/P=992,22ms, T=0,00ms/P=992,04ms, T=0,00ms/P=996,75ms, T=0,00ms/P=999,08ms, T=0,00ms/P=1001,63ms | Temperaturas: Bateria 27,6°C -> 27,6°C
+Temperaturas: Bateria 27,6°C -> 27,6°C
+
+===== 2025-12-09 11:29:57.439 =====
+Cenário: MAD CPU Kotlin
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,806±0,048 (min=0,768 | max=0,942)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 0,806±0,048 (min=0,768 | max=0,942)
+Notas: Mean=1959,918 | Std=616,390 | Min=1088,425 | Max=2412,372 | Escala 512 | Tempos: T=0,00ms/P=0,94ms, T=0,00ms/P=0,87ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,77ms, T=0,00ms/P=0,80ms, T=0,00ms/P=0,77ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,78ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,81ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:30:07.763 =====
+Cenário: MAD CPU Kotlin
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,646±0,227 (min=1,451 | max=2,168)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1,646±0,227 (min=1,451 | max=2,168)
+Notas: Mean=1870,294 | Std=717,868 | Min=576,546 | Max=2481,014 | Escala 1k | Tempos: T=0,00ms/P=1,72ms, T=0,00ms/P=2,17ms, T=0,00ms/P=1,52ms, T=0,00ms/P=1,56ms, T=0,00ms/P=1,51ms, T=0,00ms/P=1,50ms, T=0,00ms/P=1,54ms, T=0,00ms/P=2,09ms, T=0,00ms/P=1,63ms, T=0,00ms/P=1,50ms, T=0,00ms/P=1,56ms, T=0,00ms/P=1,45ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:30:20.874 =====
+Cenário: MAD CPU Kotlin
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,708±0,460 (min=3,231 | max=4,827)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 3,708±0,460 (min=3,231 | max=4,827)
+Notas: Mean=1810,641 | Std=753,342 | Min=292,150 | Max=2490,556 | Escala 2k | Tempos: T=0,00ms/P=3,42ms, T=0,00ms/P=3,57ms, T=0,00ms/P=4,32ms, T=0,00ms/P=3,45ms, T=0,00ms/P=3,23ms, T=0,00ms/P=3,52ms, T=0,00ms/P=3,34ms, T=0,00ms/P=4,03ms, T=0,00ms/P=3,45ms, T=0,00ms/P=3,38ms, T=0,00ms/P=3,96ms, T=0,00ms/P=4,83ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:30:39.275 =====
+Cenário: MAD CPU Kotlin
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 9,123±0,812 (min=8,215 | max=10,799)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 9,123±0,812 (min=8,215 | max=10,799)
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=9,23ms, T=0,00ms/P=8,67ms, T=0,00ms/P=8,22ms, T=0,00ms/P=8,46ms, T=0,00ms/P=9,49ms, T=0,00ms/P=8,40ms, T=0,00ms/P=8,47ms, T=0,00ms/P=8,40ms, T=0,00ms/P=9,16ms, T=0,00ms/P=9,85ms, T=0,00ms/P=10,34ms, T=0,00ms/P=10,80ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:31:09.089 =====
+Cenário: MAD CPU Kotlin
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 25,508±0,900 (min=23,952 | max=27,423)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 25,508±0,900 (min=23,952 | max=27,423)
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=23,95ms, T=0,00ms/P=25,29ms, T=0,00ms/P=26,55ms, T=0,00ms/P=24,63ms, T=0,00ms/P=25,99ms, T=0,00ms/P=25,11ms, T=0,00ms/P=25,27ms, T=0,00ms/P=24,72ms, T=0,00ms/P=27,42ms, T=0,00ms/P=25,45ms, T=0,00ms/P=25,39ms, T=0,00ms/P=26,32ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:32:00.661 =====
+Cenário: MAD CPU Kotlin
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 81,932±4,161 (min=76,108 | max=91,393)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 81,932±4,161 (min=76,108 | max=91,393)
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=82,19ms, T=0,00ms/P=83,98ms, T=0,00ms/P=85,60ms, T=0,00ms/P=83,68ms, T=0,00ms/P=84,21ms, T=0,00ms/P=91,39ms, T=0,00ms/P=81,36ms, T=0,00ms/P=82,06ms, T=0,00ms/P=76,11ms, T=0,00ms/P=77,49ms, T=0,00ms/P=77,63ms, T=0,00ms/P=77,48ms | Temperaturas: Bateria 26,6°C -> 26,6°C
+Temperaturas: Bateria 26,6°C -> 26,6°C
+
+===== 2025-12-09 11:33:42.654 =====
+Cenário: MAD CPU Kotlin
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 272,011±8,709 (min=268,024 | max=300,016)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 272,011±8,709 (min=268,024 | max=300,016)
+Notas: Mean=1756,446 | Std=770,852 | Min=17,562 | Max=2502,373 | Escala 32k | Tempos: T=0,00ms/P=300,02ms, T=0,00ms/P=268,96ms, T=0,00ms/P=268,02ms, T=0,00ms/P=268,76ms, T=0,00ms/P=268,97ms, T=0,00ms/P=269,17ms, T=0,00ms/P=276,42ms, T=0,00ms/P=268,56ms, T=0,00ms/P=269,17ms, T=0,00ms/P=269,09ms, T=0,00ms/P=268,52ms, T=0,00ms/P=268,47ms | Temperaturas: Bateria 27,0°C -> 27,0°C
+Temperaturas: Bateria 27,0°C -> 27,0°C
+
+===== 2025-12-09 11:37:07.601 =====
+Cenário: MAD CPU Kotlin
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1001,372±4,210 (min=994,765 | max=1010,478)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1001,372±4,210 (min=994,765 | max=1010,478)
+Notas: Mean=1754,022 | Std=771,310 | Min=8,395 | Max=2502,380 | Escala 64k | Tempos: T=0,00ms/P=995,09ms, T=0,00ms/P=1002,55ms, T=0,00ms/P=1001,98ms, T=0,00ms/P=1003,10ms, T=0,00ms/P=1002,91ms, T=0,00ms/P=1006,09ms, T=0,00ms/P=997,42ms, T=0,00ms/P=1000,35ms, T=0,00ms/P=1001,08ms, T=0,00ms/P=1000,63ms, T=0,00ms/P=1010,48ms, T=0,00ms/P=994,77ms | Temperaturas: Bateria 27,0°C -> 27,0°C
+Temperaturas: Bateria 27,0°C -> 27,0°C
+
+===== 2025-12-09 11:44:25.890 =====
+Cenário: MAD CPU Kotlin
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,810±0,039 (min=0,758 | max=0,891)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 0,810±0,039 (min=0,758 | max=0,891)
+Notas: Mean=1959,918 | Std=616,390 | Min=1088,425 | Max=2412,372 | Escala 512 | Tempos: T=0,00ms/P=0,89ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,81ms, T=0,00ms/P=0,76ms, T=0,00ms/P=0,78ms, T=0,00ms/P=0,87ms, T=0,00ms/P=0,79ms, T=0,00ms/P=0,82ms, T=0,00ms/P=0,77ms, T=0,00ms/P=0,82ms, T=0,00ms/P=0,83ms, T=0,00ms/P=0,80ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:44:36.601 =====
+Cenário: MAD CPU Kotlin
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,575±0,095 (min=1,462 | max=1,756)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1,575±0,095 (min=1,462 | max=1,756)
+Notas: Mean=1870,294 | Std=717,868 | Min=576,546 | Max=2481,014 | Escala 1k | Tempos: T=0,00ms/P=1,69ms, T=0,00ms/P=1,62ms, T=0,00ms/P=1,56ms, T=0,00ms/P=1,48ms, T=0,00ms/P=1,46ms, T=0,00ms/P=1,52ms, T=0,00ms/P=1,72ms, T=0,00ms/P=1,76ms, T=0,00ms/P=1,55ms, T=0,00ms/P=1,52ms, T=0,00ms/P=1,52ms, T=0,00ms/P=1,50ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:44:49.810 =====
+Cenário: MAD CPU Kotlin
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,456±0,234 (min=3,224 | max=4,183)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 3,456±0,234 (min=3,224 | max=4,183)
+Notas: Mean=1810,641 | Std=753,342 | Min=292,150 | Max=2490,556 | Escala 2k | Tempos: T=0,00ms/P=3,34ms, T=0,00ms/P=3,36ms, T=0,00ms/P=3,47ms, T=0,00ms/P=3,40ms, T=0,00ms/P=3,50ms, T=0,00ms/P=3,49ms, T=0,00ms/P=3,27ms, T=0,00ms/P=3,36ms, T=0,00ms/P=3,22ms, T=0,00ms/P=4,18ms, T=0,00ms/P=3,39ms, T=0,00ms/P=3,48ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:45:08.147 =====
+Cenário: MAD CPU Kotlin
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 9,641±0,981 (min=8,512 | max=11,235)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 9,641±0,981 (min=8,512 | max=11,235)
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=8,53ms, T=0,00ms/P=9,13ms, T=0,00ms/P=8,66ms, T=0,00ms/P=8,51ms, T=0,00ms/P=8,60ms, T=0,00ms/P=11,24ms, T=0,00ms/P=9,17ms, T=0,00ms/P=10,70ms, T=0,00ms/P=10,67ms, T=0,00ms/P=10,97ms, T=0,00ms/P=9,79ms, T=0,00ms/P=9,72ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:45:38.240 =====
+Cenário: MAD CPU Kotlin
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 25,588±1,114 (min=23,991 | max=27,540)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 25,588±1,114 (min=23,991 | max=27,540)
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=23,99ms, T=0,00ms/P=26,92ms, T=0,00ms/P=24,95ms, T=0,00ms/P=24,36ms, T=0,00ms/P=26,13ms, T=0,00ms/P=24,83ms, T=0,00ms/P=26,75ms, T=0,00ms/P=25,72ms, T=0,00ms/P=26,44ms, T=0,00ms/P=24,30ms, T=0,00ms/P=27,54ms, T=0,00ms/P=25,13ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:46:30.166 =====
+Cenário: MAD CPU Kotlin
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 82,024±3,090 (min=76,701 | max=85,788)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 82,024±3,090 (min=76,701 | max=85,788)
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=83,96ms, T=0,00ms/P=82,61ms, T=0,00ms/P=85,54ms, T=0,00ms/P=83,16ms, T=0,00ms/P=81,53ms, T=0,00ms/P=85,12ms, T=0,00ms/P=85,79ms, T=0,00ms/P=81,43ms, T=0,00ms/P=77,22ms, T=0,00ms/P=77,69ms, T=0,00ms/P=83,53ms, T=0,00ms/P=76,70ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:48:12.258 =====
+Cenário: MAD CPU Kotlin
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 271,887±6,987 (min=267,945 | max=293,749)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 271,887±6,987 (min=267,945 | max=293,749)
+Notas: Mean=1756,446 | Std=770,852 | Min=17,562 | Max=2502,373 | Escala 32k | Tempos: T=0,00ms/P=293,75ms, T=0,00ms/P=270,91ms, T=0,00ms/P=267,94ms, T=0,00ms/P=269,70ms, T=0,00ms/P=269,20ms, T=0,00ms/P=269,15ms, T=0,00ms/P=277,21ms, T=0,00ms/P=268,78ms, T=0,00ms/P=268,95ms, T=0,00ms/P=269,33ms, T=0,00ms/P=269,25ms, T=0,00ms/P=268,47ms | Temperaturas: Bateria 25,8°C -> 25,8°C
+Temperaturas: Bateria 25,8°C -> 25,8°C
+
+===== 2025-12-09 11:51:37.312 =====
+Cenário: MAD CPU Kotlin
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 999,044±4,979 (min=991,548 | max=1004,922)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 999,044±4,979 (min=991,548 | max=1004,922)
+Notas: Mean=1754,022 | Std=771,310 | Min=8,395 | Max=2502,380 | Escala 64k | Tempos: T=0,00ms/P=991,96ms, T=0,00ms/P=1000,15ms, T=0,00ms/P=1000,88ms, T=0,00ms/P=1004,67ms, T=0,00ms/P=1004,39ms, T=0,00ms/P=1004,92ms, T=0,00ms/P=992,42ms, T=0,00ms/P=991,55ms, T=0,00ms/P=993,67ms, T=0,00ms/P=1001,10ms, T=0,00ms/P=1000,09ms, T=0,00ms/P=1002,73ms | Temperaturas: Bateria 25,4°C -> 25,4°C
+Temperaturas: Bateria 25,4°C -> 25,4°C
+
+===== 2025-12-09 11:59:04.979 =====
+Cenário: MAD CPU Kotlin
+Escala: 512 (512 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 0,786±0,113 (min=0,644 | max=1,014)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 0,786±0,113 (min=0,644 | max=1,014)
+Notas: Mean=1959,918 | Std=616,390 | Min=1088,425 | Max=2412,372 | Escala 512 | Tempos: T=0,00ms/P=1,01ms, T=0,00ms/P=0,93ms, T=0,00ms/P=0,96ms, T=0,00ms/P=0,77ms, T=0,00ms/P=0,71ms, T=0,00ms/P=0,71ms, T=0,00ms/P=0,72ms, T=0,00ms/P=0,78ms, T=0,00ms/P=0,71ms, T=0,00ms/P=0,64ms, T=0,00ms/P=0,70ms, T=0,00ms/P=0,77ms | Temperaturas: Bateria 25,4°C -> 25,4°C
+Temperaturas: Bateria 25,4°C -> 25,4°C
+
+===== 2025-12-09 11:59:15.577 =====
+Cenário: MAD CPU Kotlin
+Escala: 1k (1024 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 1,787±0,436 (min=1,414 | max=2,723)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 1,787±0,436 (min=1,414 | max=2,723)
+Notas: Mean=1870,294 | Std=717,868 | Min=576,546 | Max=2481,014 | Escala 1k | Tempos: T=0,00ms/P=2,72ms, T=0,00ms/P=1,54ms, T=0,00ms/P=1,50ms, T=0,00ms/P=1,41ms, T=0,00ms/P=1,45ms, T=0,00ms/P=2,19ms, T=0,00ms/P=1,57ms, T=0,00ms/P=2,40ms, T=0,00ms/P=1,53ms, T=0,00ms/P=1,50ms, T=0,00ms/P=1,45ms, T=0,00ms/P=2,18ms | Temperaturas: Bateria 25,4°C -> 25,4°C
+Temperaturas: Bateria 25,4°C -> 25,4°C
+
+===== 2025-12-09 11:59:28.542 =====
+Cenário: MAD CPU Kotlin
+Escala: 2k (2048 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 3,457±0,097 (min=3,317 | max=3,652)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 3,457±0,097 (min=3,317 | max=3,652)
+Notas: Mean=1810,641 | Std=753,342 | Min=292,150 | Max=2490,556 | Escala 2k | Tempos: T=0,00ms/P=3,41ms, T=0,00ms/P=3,32ms, T=0,00ms/P=3,43ms, T=0,00ms/P=3,65ms, T=0,00ms/P=3,39ms, T=0,00ms/P=3,39ms, T=0,00ms/P=3,64ms, T=0,00ms/P=3,51ms, T=0,00ms/P=3,44ms, T=0,00ms/P=3,48ms, T=0,00ms/P=3,40ms, T=0,00ms/P=3,43ms | Temperaturas: Bateria 25,2°C -> 25,2°C
+Temperaturas: Bateria 25,2°C -> 25,2°C
+
+===== 2025-12-09 11:59:46.721 =====
+Cenário: MAD CPU Kotlin
+Escala: 1x (4096 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 9,259±0,881 (min=8,272 | max=11,131)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 9,259±0,881 (min=8,272 | max=11,131)
+Notas: Mean=1775,549 | Std=765,889 | Min=146,156 | Max=2500,408 | Escala 1x | Tempos: T=0,00ms/P=11,13ms, T=0,00ms/P=9,65ms, T=0,00ms/P=8,47ms, T=0,00ms/P=8,27ms, T=0,00ms/P=8,80ms, T=0,00ms/P=9,86ms, T=0,00ms/P=10,63ms, T=0,00ms/P=9,53ms, T=0,00ms/P=8,79ms, T=0,00ms/P=8,52ms, T=0,00ms/P=8,42ms, T=0,00ms/P=9,03ms | Temperaturas: Bateria 25,2°C -> 25,2°C
+Temperaturas: Bateria 25,2°C -> 25,2°C
+
+===== 2025-12-09 12:00:16.815 =====
+Cenário: MAD CPU Kotlin
+Escala: 2x (8192 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 25,827±1,336 (min=23,890 | max=28,240)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 25,827±1,336 (min=23,890 | max=28,240)
+Notas: Mean=1756,427 | Std=770,572 | Min=72,716 | Max=2501,732 | Escala 2x | Tempos: T=0,00ms/P=23,89ms, T=0,00ms/P=25,58ms, T=0,00ms/P=26,46ms, T=0,00ms/P=24,40ms, T=0,00ms/P=28,24ms, T=0,00ms/P=25,67ms, T=0,00ms/P=24,41ms, T=0,00ms/P=25,60ms, T=0,00ms/P=28,08ms, T=0,00ms/P=24,76ms, T=0,00ms/P=26,82ms, T=0,00ms/P=26,01ms | Temperaturas: Bateria 25,2°C -> 25,2°C
+Temperaturas: Bateria 25,2°C -> 25,2°C
+
+===== 2025-12-09 12:01:08.202 =====
+Cenário: MAD CPU Kotlin
+Escala: 4x (16384 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 81,471±2,801 (min=76,105 | max=84,666)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 81,471±2,801 (min=76,105 | max=84,666)
+Notas: Mean=1756,440 | Std=770,817 | Min=35,957 | Max=2502,316 | Escala 4x | Tempos: T=0,00ms/P=84,67ms, T=0,00ms/P=82,96ms, T=0,00ms/P=83,74ms, T=0,00ms/P=83,04ms, T=0,00ms/P=82,26ms, T=0,00ms/P=83,21ms, T=0,00ms/P=81,39ms, T=0,00ms/P=81,98ms, T=0,00ms/P=83,75ms, T=0,00ms/P=78,01ms, T=0,00ms/P=76,11ms, T=0,00ms/P=76,55ms | Temperaturas: Bateria 25,2°C -> 25,2°C
+Temperaturas: Bateria 25,2°C -> 25,2°C
+
+===== 2025-12-09 12:02:49.853 =====
+Cenário: MAD CPU Kotlin
+Escala: 32k (32768 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 272,953±6,434 (min=267,725 | max=291,244)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 272,953±6,434 (min=267,725 | max=291,244)
+Notas: Mean=1756,446 | Std=770,852 | Min=17,562 | Max=2502,373 | Escala 32k | Tempos: T=0,00ms/P=291,24ms, T=0,00ms/P=274,48ms, T=0,00ms/P=267,73ms, T=0,00ms/P=269,61ms, T=0,00ms/P=271,57ms, T=0,00ms/P=272,25ms, T=0,00ms/P=272,77ms, T=0,00ms/P=280,01ms, T=0,00ms/P=268,85ms, T=0,00ms/P=268,45ms, T=0,00ms/P=267,77ms, T=0,00ms/P=270,69ms | Temperaturas: Bateria 25,3°C -> 25,3°C
+Temperaturas: Bateria 25,3°C -> 25,3°C
+
+===== 2025-12-09 12:06:15.068 =====
+Cenário: MAD CPU Kotlin
+Escala: 64k (65536 pts)
+Execuções: 12 | Pacotes: 1
+Total(ms): 999,650±5,362 (min=992,796 | max=1011,941)
+Transfer(ms): 0,000±0,000 (min=0,000 | max=0,000)
+Processamento(ms): 999,650±5,362 (min=992,796 | max=1011,941)
+Notas: Mean=1754,022 | Std=771,310 | Min=8,395 | Max=2502,380 | Escala 64k | Tempos: T=0,00ms/P=1011,94ms, T=0,00ms/P=994,58ms, T=0,00ms/P=994,90ms, T=0,00ms/P=1000,36ms, T=0,00ms/P=999,27ms, T=0,00ms/P=999,91ms, T=0,00ms/P=1001,54ms, T=0,00ms/P=1001,54ms, T=0,00ms/P=1006,74ms, T=0,00ms/P=992,80ms, T=0,00ms/P=993,32ms, T=0,00ms/P=998,90ms | Temperaturas: Bateria 25,3°C -> 25,3°C
+Temperaturas: Bateria 25,3°C -> 25,3°C
+

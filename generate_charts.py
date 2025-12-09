@@ -39,8 +39,19 @@ PALETTE = {
     "TFLite NNAPI": "#ff7f0e",  # laranja
 }
 
+TITLE_FONTSIZE = 12
+TITLE_PAD = 14
+
 # Texto fixo que aparece nos gráficos
-SUBTITLE_BATCH_INFO = "Média de 4 execuções sequenciais (batch ≠ paralelismo)"
+SUBTITLE_BATCH_INFO = "Média das execuções sequenciais (batch ≠ paralelismo)"
+
+
+def format_vector_label(length: int) -> str:
+    if length >= 1024:
+        if length % 1024 == 0:
+            return f"{int(length // 1024)}k"
+        return f"{length / 1024:.1f}k"
+    return str(int(length))
 
 
 def load_data(csv_path: Path) -> pd.DataFrame:
@@ -124,20 +135,27 @@ def add_normalized_columns(df: pd.DataFrame) -> pd.DataFrame:
 def derive_vector_size(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
 
-    def normalize_size(value) -> int:
+    def normalize_row(row: pd.Series) -> int:
         try:
-            base = int(float(value))
-        except Exception:
+            base = float(row.get("input_size", 0) or 0)
+        except Exception:  # noqa: BLE001
             return 0
 
-        # trata casos x10 onde input_size vem multiplicado
-        while base > 16384 and base % 10 == 0:
-            base //= 10
+        batch = int(row.get("batch_size", 1) or 1)
+        if batch > 0:
+            base /= batch
 
-        mapping = {4096: 4096, 8192: 8192, 16384: 16384}
-        return mapping.get(base, base)
+        algoritmo = row.get("algoritmo")
+        if isinstance(algoritmo, str) and algoritmo.upper() == "FFT":
+            sensors = 10
+            if sensors > 0:
+                base /= sensors
 
-    df["tamanho_do_vetor"] = df["input_size"].apply(normalize_size)
+        if base <= 0:
+            return 0
+        return int(round(base))
+
+    df["tamanho_do_vetor"] = df.apply(normalize_row, axis=1)
     return df
 
 
@@ -201,10 +219,24 @@ def add_common_formatting(ax, ylabel: str, xlabel: str = "Tamanho do vetor (amos
     ax.grid(True, axis="y", linestyle="--", alpha=0.4)
 
 
+def apply_title(ax, text: str) -> None:
+    ax.set_title(text, fontsize=TITLE_FONTSIZE, pad=TITLE_PAD)
+
+
+def finalize_figure(fig: plt.Figure) -> None:
+    fig.tight_layout(rect=[0, 0.04, 1, 0.97])
+
+
+def apply_vector_ticks(ax, values: Iterable[int]) -> None:
+    ordered = sorted(values)
+    ax.set_xticks(ordered)
+    ax.set_xticklabels([format_vector_label(v) for v in ordered])
+
+
 def plot_global_comparison(
     data: pd.DataFrame, device: str, algoritmo: str, out_dir: Path
 ) -> None:
-    fig, ax = plt.subplots(figsize=(8, 4.5))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
     subset = data[
         (data["device_model"] == device)
         & (data["algoritmo"] == algoritmo)
@@ -231,11 +263,12 @@ def plot_global_comparison(
                 alpha=0.4,
             )
 
-    title = f"Comparação Global – CPU vs Delegates TFLite ({algoritmo}) – {device}"
-    ax.set_title(title)
+    title = f"{device} · {algoritmo} – CPU vs Delegates"
+    apply_title(ax, title)
     add_common_formatting(ax, "Tempo (ms)")
-    fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
-    fig.tight_layout()
+    apply_vector_ticks(ax, subset["tamanho_do_vetor"].unique())
+    fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+    finalize_figure(fig)
     fig.savefig(out_dir / f"global_{algoritmo}.png", dpi=300)
     plt.close(fig)
 
@@ -261,10 +294,11 @@ def plot_tflite_comparison(
         marker="o",
         ax=ax,
     )
-    ax.set_title(f"Desempenho Total – Delegates TFLite ({algoritmo}) – {device}")
+    apply_title(ax, f"{device} · {algoritmo} – Delegates TFLite (tempo total)")
     add_common_formatting(ax, "Tempo (ms)")
-    fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
-    fig.tight_layout()
+    apply_vector_ticks(ax, subset["tamanho_do_vetor"].unique())
+    fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+    finalize_figure(fig)
     fig.savefig(out_dir / f"tflite_total_{algoritmo}.png", dpi=300)
     plt.close(fig)
 
@@ -310,19 +344,19 @@ def plot_tflite_comparison(
                     f"{overhead:.1f}%",
                     ha="center",
                     va="bottom",
-                    fontsize=8,
+                    fontsize=7,
                 )
 
-    ax.set_xticks(
-        [x + width for x in x_positions], [str(s) for s in size_order]
-    )
-    ax.set_title(
-        f"Overhead de Transferência x Processamento – Delegates TFLite ({algoritmo}) – {device}"
+    xtick_positions = [x + width for x in x_positions]
+    ax.set_xticks(xtick_positions)
+    ax.set_xticklabels([format_vector_label(s) for s in size_order])
+    apply_title(
+        ax, f"{device} · {algoritmo} – Transferência vs Processamento"
     )
     add_common_formatting(ax, "Tempo (ms)")
-    fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+    fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
     ax.legend()
-    fig.tight_layout()
+    finalize_figure(fig)
     fig.savefig(out_dir / f"tflite_transfer_{algoritmo}.png", dpi=300)
     plt.close(fig)
 
@@ -346,10 +380,11 @@ def plot_speedup(
         marker="o",
         ax=ax,
     )
-    ax.set_title(f"Speedup em relação ao CPU Kotlin puro ({algoritmo}) – {device}")
+    apply_title(ax, f"{device} · {algoritmo} – Speedup vs CPU Kotlin")
     add_common_formatting(ax, "Speedup (×)")
-    fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
-    fig.tight_layout()
+    apply_vector_ticks(ax, subset["tamanho_do_vetor"].unique())
+    fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+    finalize_figure(fig)
     fig.savefig(out_dir / f"speedup_{algoritmo}.png", dpi=300)
     plt.close(fig)
 
@@ -417,15 +452,16 @@ def generate_summary_plots(
                     data=subset,
                     x="device_model",
                     y="duration_mean",
-                    palette=[PALETTE[delegate]] * len(subset),
+                    color=PALETTE[delegate],
                     ax=ax,
                 )
-                ax.set_title(
-                    f"Tempo Total – {algoritmo} – {delegate} – por dispositivo (vetor {size})"
+                apply_title(
+                    ax,
+                    f"{algoritmo} – {delegate} – vetor {format_vector_label(size)}",
                 )
                 add_common_formatting(ax, "Tempo (ms)", "Dispositivo")
-                fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
-                fig.tight_layout()
+                fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+                finalize_figure(fig)
                 fig.savefig(
                     summary_dir
                     / f"tempo_{algoritmo}_{delegate}_{size}.png",
@@ -448,12 +484,12 @@ def generate_summary_plots(
                 hue="tamanho_do_vetor",
                 ax=ax,
             )
-            ax.set_title(
-                f"Speedup em relação ao CPU Kotlin puro – {algoritmo} – {delegate}"
+            apply_title(
+                ax, f"{algoritmo} – {delegate} – Speedup vs CPU Kotlin"
             )
             add_common_formatting(ax, "Speedup (×)", "Dispositivo")
-            fig.text(0.5, 0.01, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
-            fig.tight_layout()
+            fig.text(0.5, 0.005, SUBTITLE_BATCH_INFO, ha="center", fontsize=9)
+            finalize_figure(fig)
             fig.savefig(
                 summary_dir / f"speedup_{algoritmo}_{delegate}.png",
                 dpi=300,
