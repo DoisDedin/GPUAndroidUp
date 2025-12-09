@@ -11,6 +11,7 @@ import com.example.vulkanfft.util.FftCpuProcessor
 import com.example.vulkanfft.util.FftInputBuilder
 import com.example.vulkanfft.util.FftTfliteProcessor
 import com.example.vulkanfft.util.StatModelProcessor
+import java.util.Locale
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -147,56 +148,14 @@ class TfliteDelegatesInstrumentedTest {
     }
 
     private fun runFftCpuVsTfliteCpu(signalLength: Int, numSensors: Int) {
-        val batch = AccelerometerBatchGenerator.generate(
+        val metrics = measureFftAgainstCpu(
+            signalLength = signalLength,
             numSensors = numSensors,
-            samplesPerSensor = signalLength,
-            seed = seed
-        )
-        val input = FftInputBuilder.fromAccelerometer(batch, signalLength)
-
-        val tfliteProcessor = try {
-            FftTfliteProcessor(
-                context = context,
-                delegateType = DelegateType.CPU,
-                numSensors = numSensors,
-                signalLength = signalLength
-            )
-        } catch (e: Exception) {
-            throw AssertionError("Falha ao criar FftTfliteProcessor CPU: ${e.message}", e)
-        }.also { fftProcessors += it }
-        val tflite = tfliteProcessor.process(input.samples, input.weights).output
-
-        val previewTake = minOf(
-            8,
-            tflite.weightedMagnitudes.firstOrNull()?.size ?: 0
-        )
-        val tflitePreview = tflite.weightedMagnitudes.firstOrNull()
-            ?.take(previewTake)
-            ?.toFloatArray()
-            ?: FloatArray(0)
-        val previewHolder = PreviewHolder(previewTake)
-        val metrics = computeFftErrorMetricsStreaming(
-            tfliteWeighted = tflite.weightedMagnitudes,
-            cpuProcessor = FftCpuProcessor(numSensors, signalLength),
-            samples = input.samples,
-            weights = input.weights,
-            preview = previewHolder
-        )
-        logFftComparison(
-            cpuPreview = previewHolder.cpuPreview ?: FloatArray(0),
-            tflitePreview = tflitePreview,
-            label = "CPU",
-            metrics = metrics
+            delegateType = DelegateType.CPU,
+            runIndex = 0
         )
         val relDiff = metrics.maxRelativeDiff
         Log.i("FFT_TEST", "FFT CPU vs TFLite CPU -> maxRelDiff=$relDiff")
-        PrecisionReporter.appendFft(
-            context = context,
-            signalLength = signalLength,
-            numSensors = numSensors,
-            delegate = DelegateType.CPU.displayName,
-            metrics = metrics
-        )
 
         if (isExperimentalLength(signalLength)) {
             Log.w("FFT_TEST", "Diferença FFT CPU ($relDiff) em $signalLength pts registrada apenas para acompanhamento (experimental).")
@@ -214,50 +173,21 @@ class TfliteDelegatesInstrumentedTest {
     fun fft_tflite_gpu_and_nnapi_close_to_cpu_when_available() {
         val signalLength = 4096 // manter alinhado ao modelo fft_model_4096.tflite
         val numSensors = 10
-        val batch = AccelerometerBatchGenerator.generate(
-            numSensors = numSensors,
-            samplesPerSensor = signalLength,
-            seed = seed
-        )
-        val input = FftInputBuilder.fromAccelerometer(batch, signalLength)
-        val cpu = FftCpuProcessor(numSensors, signalLength).process(
-            samples = input.samples,
-            weights = input.weights
-        )
-
         listOf(DelegateType.GPU, DelegateType.NNAPI).forEach { delegate ->
-            val processor = try {
-                FftTfliteProcessor(
-                    context = context,
-                    delegateType = delegate,
+            val metrics = try {
+                measureFftAgainstCpu(
+                    signalLength = signalLength,
                     numSensors = numSensors,
-                    signalLength = signalLength
+                    delegateType = delegate,
+                    runIndex = 0
                 )
-            } catch (e: Exception) {
-                // Delegate indisponivel ou modelo incompatível
+            } catch (e: IllegalStateException) {
                 assumeTrue("Delegate $delegate indisponivel: ${e.message}", false)
                 return@forEach
             }
-            fftProcessors += processor
-            val tflite = processor.process(input.samples, input.weights).output
-            val metrics = computeFftErrorMetrics(cpu.weightedMagnitudes, tflite.weightedMagnitudes)
             val relDiff = metrics.maxRelativeDiff
-            logFftComparison(
-                cpuPreview = cpu.weightedMagnitudes.firstOrNull()?.take(8)?.toFloatArray() ?: FloatArray(0),
-                tflitePreview = tflite.weightedMagnitudes.firstOrNull()?.take(8)?.toFloatArray() ?: FloatArray(0),
-                label = delegate.name,
-                metrics = metrics
-            )
             Log.i("FFT_TEST", "FFT CPU vs TFLite $delegate -> maxRelDiff=$relDiff")
             val tolerance = fftToleranceByDelegate[delegate] ?: (fftToleranceByDelegate[DelegateType.CPU] ?: 0.02)
-            PrecisionReporter.appendFft(
-                context = context,
-                signalLength = signalLength,
-                numSensors = numSensors,
-                delegate = delegate.displayName,
-                metrics = metrics
-            )
-
             if (isExperimentalLength(signalLength)) {
                 Log.w("FFT_TEST", "Diferença FFT $delegate ($relDiff) em $signalLength pts registrada apenas para acompanhamento (experimental).")
                 return@forEach
@@ -270,55 +200,29 @@ class TfliteDelegatesInstrumentedTest {
         }
     }
 
+    @Test
+    fun fft_precision_statistics_suite() {
+        val repeats = instrumentationArgs.getString("precisionRepeats")?.toIntOrNull()?.coerceAtLeast(1) ?: 5
+        val lengths = listOf(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536)
+        lengths.forEach { length ->
+            val metricsList = (0 until repeats).map { runIndex ->
+                measureFftAgainstCpu(
+                    signalLength = length,
+                    numSensors = cpuBaselineSensorCount,
+                    delegateType = DelegateType.CPU,
+                    runIndex = runIndex
+                )
+            }
+            reportPrecisionStats(length, repeats, metricsList)
+        }
+    }
+
     private fun invokeMadBaseline(samples: List<AccelerometerSample>): BenchmarkExecutor.MADResult {
         val method = BenchmarkExecutor::class.declaredFunctions.first { it.name == "getMAD" }
         method.isAccessible = true
         val executor = BenchmarkExecutor()
         @Suppress("UNCHECKED_CAST")
         return method.call(executor, samples) as BenchmarkExecutor.MADResult
-    }
-
-    private fun computeFftErrorMetrics(
-        cpu: Array<FloatArray>,
-        tflite: Array<FloatArray>
-    ): FftErrorMetrics {
-        var maxRel = 0.0
-        var sumRel = 0.0
-        var maxAbs = 0.0
-        var sumAbs = 0.0
-        var sumSq = 0.0
-        var count = 0
-        var relCount = 0
-        for (sensor in cpu.indices) {
-            for (bin in cpu[sensor].indices) {
-                val a = cpu[sensor][bin].toDouble()
-                val b = tflite[sensor][bin].toDouble()
-                val diff = abs(a - b)
-                val useRelative = abs(a) >= FFT_RELATIVE_GUARD
-                if (useRelative) {
-                    val denom = max(abs(a), 1e-9)
-                    val rel = diff / denom
-                    if (rel > maxRel) maxRel = rel
-                    sumRel += rel
-                    relCount++
-                }
-                if (diff > maxAbs) maxAbs = diff
-                sumAbs += diff
-                sumSq += diff * diff
-                count++
-            }
-        }
-        if (count == 0) return FftErrorMetrics()
-        val meanRel = if (relCount > 0) sumRel / relCount else 0.0
-        val meanAbs = sumAbs / count
-        val rmse = sqrt(sumSq / count)
-        return FftErrorMetrics(
-            maxRelativeDiff = maxRel,
-            meanRelativeDiff = meanRel,
-            maxAbsoluteDiff = maxAbs,
-            meanAbsoluteDiff = meanAbs,
-            rmse = rmse
-        )
     }
 
     private fun logMadComparison(
@@ -359,6 +263,95 @@ class TfliteDelegatesInstrumentedTest {
         }
         Log.i("FFT_TEST", summary)
     }
+
+    private fun measureFftAgainstCpu(
+        signalLength: Int,
+        numSensors: Int,
+        delegateType: DelegateType,
+        runIndex: Int
+    ): FftErrorMetrics {
+        val batch = AccelerometerBatchGenerator.generate(
+            numSensors = numSensors,
+            samplesPerSensor = signalLength,
+            seed = seed + runIndex
+        )
+        val input = FftInputBuilder.fromAccelerometer(batch, signalLength)
+        val processor = try {
+            FftTfliteProcessor(
+                context = context,
+                delegateType = delegateType,
+                numSensors = numSensors,
+                signalLength = signalLength
+            )
+        } catch (e: Exception) {
+            throw IllegalStateException("Falha ao criar FftTfliteProcessor ${delegateType.name}: ${e.message}", e)
+        }.also { fftProcessors += it }
+        val tflite = processor.process(input.samples, input.weights).output
+        val previewTake = minOf(8, tflite.weightedMagnitudes.firstOrNull()?.size ?: 0)
+        val previewHolder = PreviewHolder(previewTake)
+        val metrics = computeFftErrorMetricsStreaming(
+            tfliteWeighted = tflite.weightedMagnitudes,
+            cpuProcessor = FftCpuProcessor(numSensors, signalLength),
+            samples = input.samples,
+            weights = input.weights,
+            preview = previewHolder
+        )
+        val tflitePreview = tflite.weightedMagnitudes.firstOrNull()
+            ?.take(previewTake)
+            ?.toFloatArray()
+            ?: FloatArray(0)
+        logFftComparison(
+            cpuPreview = previewHolder.cpuPreview ?: FloatArray(0),
+            tflitePreview = tflitePreview,
+            label = delegateType.displayName,
+            metrics = metrics
+        )
+        PrecisionReporter.appendFft(
+            context = context,
+            signalLength = signalLength,
+            numSensors = numSensors,
+            delegate = delegateType.displayName,
+            metrics = metrics
+        )
+        return metrics
+    }
+
+    private fun reportPrecisionStats(
+        signalLength: Int,
+        repeats: Int,
+        metricsList: List<FftErrorMetrics>
+    ) {
+        if (metricsList.isEmpty()) return
+        val maxRelSeries = metricsList.map { it.maxRelativeDiff }
+        val meanRelSeries = metricsList.map { it.meanRelativeDiff }
+        val rmseSeries = metricsList.map { it.rmse }
+        val avgMaxRel = maxRelSeries.averageOrZero()
+        val stdMaxRel = maxRelSeries.stddev(avgMaxRel)
+        val avgMeanRel = meanRelSeries.averageOrZero()
+        val avgRmse = rmseSeries.averageOrZero()
+        val summary = buildString {
+            append("FFT stats len=$signalLength (${repeats}x)")
+            append(" | maxRel avg=${avgMaxRel.toPct()} std=${stdMaxRel.toPct()} min=${maxRelSeries.minOrNull()?.toPct()} max=${maxRelSeries.maxOrNull()?.toPct()}")
+            append(" | meanRel avg=${avgMeanRel.toPct()} | rmse avg=${String.format(Locale.US, "%.6f", avgRmse)}")
+        }
+        Log.i("FFT_PRECISION_STATS", summary)
+    }
+
+    private fun List<Double>.averageOrZero(): Double =
+        if (isEmpty()) 0.0 else sum() / size
+
+    private fun List<Double>.stddev(mean: Double = averageOrZero()): Double {
+        if (isEmpty()) return 0.0
+        var acc = 0.0
+        for (value in this) {
+            val diff = value - mean
+            acc += diff * diff
+        }
+        return sqrt(acc / size)
+    }
+
+    private fun Double?.toPct(): String =
+        this?.let { String.format(Locale.US, "%.3f%%", it * 100.0) } ?: "-"
 
     private fun computeFftErrorMetricsStreaming(
         tfliteWeighted: Array<FloatArray>,

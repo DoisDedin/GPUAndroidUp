@@ -249,7 +249,10 @@ python3 generate_thermal_energy_charts.py --csv app/src/BANCHMARK/comparativo-09
   --output docs/charts/comparativo-09-12/thermal_energy
 ```
 
-Os PNGs individuais por dispositivo ficam em `app/src/BANCHMARK/comparativo-09-12/charts/<device>/...` e os comparativos em `docs/charts/comparativo-09-12/{overview,overview/combined,transfer,summary,thermal_energy}`.
+- **Cenário oficial (botão “Suíte completa”)**: os chips de iteração/lote foram fixados em `12` e o botão foi disparado **cinco vezes consecutivas** em cada dispositivo. Cada clique percorre `16` cenários × `8` escalas = `128` execuções, portanto observamos `640` linhas em `app/src/BANCHMARK/s21-09-12/benchmark_results.csv` e `app/src/BANCHMARK/motog04-09-12/benchmark_results.csv` (20 registros por comprimento/delegate). O `app/src/BANCHMARK/motog84-09-12/benchmark_results.csv` possui `816` linhas porque, além dos cinco ciclos oficiais, mantivemos as tentativas extras com vetores **128k → 7,8M** para registrar as falhas de memória citadas adiante.
+- Os CSVs continuam em modo append: cada clique incrementa o contador exibido no app e acrescenta novas linhas ao arquivo; nada é sobrescrito. Isso garante que o consolidado (2096 linhas) corresponda fielmente ao que foi executado em campo.
+- Os PNGs individuais por dispositivo ficam em `app/src/BANCHMARK/comparativo-09-12/charts/<device>/...` e os comparativos em `docs/charts/comparativo-09-12/{overview,overview/combined,transfer,summary,thermal_energy}`.
+- **Limites de memória**: durante as campanhas de 09/12 todos os dispositivos conseguiram rodar com segurança até 65 536 pontos. Tentativas acima disso (128k, 256k, 524k e experimentos como 7,8M no Moto G84) foram bloqueadas por OOMs ou quedas agressivas de throughput; por isso a UI mantém apenas as escalas até 64k e qualquer análise acima disso é classificada como experimental.
 
 **Destaques rápidos**
 
@@ -263,6 +266,17 @@ Os PNGs individuais por dispositivo ficam em `app/src/BANCHMARK/comparativo-09-1
 - As novas colunas `battery_temp_start_c`/`battery_temp_end_c` são exploradas pelo script `generate_thermal_energy_charts.py`. Os painéis `thermal_energy/thermal/*.png` mostram que, mesmo empilhando 5 execuções por clique, a variação média de temperatura ficou abaixo de **0,5 °C** nos dois aparelhos (ex.: `deltas_battery.png`), e não houve leituras confiáveis de CPU/GPU no hardware da campanha (sensores fechados pelo vendor).
 - Os heatmaps `thermal_energy/energy/energy_mad.png` e `energy_fft.png` deixam explícito o label energético atribuído pela UI: CPU Kotlin segue marcado como “Alta”, TFLite CPU como “Média”, GPU como “Baixa” e NNAPI como “Baixa/Média”. Isso facilita referenciar rapidamente o perfil esperado em cada delegate mesmo antes de termos leituras diretas de mWh.
 - Sempre que vier uma nova campanha basta repetir o `merge_benchmarks.py` incluindo o CSV adicional e regenerar os gráficos — os scripts agora tratam automaticamente headers com ou sem as colunas térmicas.
+
+**Precisão e execução FFT**
+
+- `./gradlew :app:connectedAndroidTest` continua sendo o gate oficial. O teste `TfliteDelegatesInstrumentedTest` gera `precision/precision_fft.csv` e `precision/precision_mad.csv` a cada rodada com os erros relativos/absolutos por comprimento. Os resultados de 09/12 reforçam o comportamento já conhecido: **512 → 65k** permanecem abaixo de **3 %** de erro relativo; **128k/256k/524k** podem chegar a **5–8 %** (e foram justamente esses cenários que drenaram a RAM dos aparelhos e motivaram as medições extras no Moto G84). Esses números são citados nas planilhas e servem como referência direta nos relatórios.
+- Criamos a suíte `fft_precision_statistics_suite`, que pode ser acionada via `./gradlew :app:connectedAndroidTest -Pandroid.testInstrumentationRunnerArguments.precisionRepeats=10`. Ela executa cada comprimento N vezes, registra as métricas individuais (`precision_fft.csv`) e imprime linhas como `FFT_PRECISION_STATS: len=65536 (5x) | maxRel avg=11.104% std=12.779% min=3.605% max=36.572% | meanRel avg=0.007% | rmse avg=2.004928`. Use esses logs para alimentar o TCC com médias, desvios e picos reais por comprimento.
+- O pipeline FFT oficial mantém duas camadas: `FftCpuProcessor` (Kotlin puro com buffers reaproveitados) e `FftTfliteProcessor`. Mesmo quando selecionamos “GPU” ou “NNAPI” na UI, o grafo `tf.signal.rfft` é executado **inteiramente no CPU** — a versão 2.16 do TensorFlow Lite não possui kernels GPU para esses ops, então o delegate encaminha tudo para o backend XNNPACK. Por isso os CSVs mostram diferenças essencialmente ligadas às cópias de buffer (transfer_ms) e não a um kernel FFT rodando na GPU. Esse detalhe fica registrado no documento para evitar interpretações equivocadas dos gráficos e explica porque o baseline Kotlin otimizado continua indispensável.
+
+**Por que os delegates retornam precisões diferentes?**
+
+- Todos os botões carregam exatamente o mesmo `.tflite`, mas cada delegate implementa o grafo com características próprias: o CPU usa XNNPACK FP32, o GPU mistura FP16/FP32 conforme o driver, e o NNAPI depende do fornecedor (às vezes rebaixa para FP16 ou executa partes no CPU). Isso significa que, embora o modelo seja idêntico, o resultado final pode variar em 1–4 % nas escalas pequenas e chegar a picos maiores quando o delegate força quantizações ou percursos alternativos.
+- Além disso, nenhum delegate suporta ainda kernels FFT puros para GPU/NNAPI; o TensorFlow Lite faz fallback para XNNPACK assim que encontra `tf.signal.rfft`. Esse fallback preserva o resultado, mas reforça que todo o cálculo realmente acontece no CPU — a diferença entre CPU/GPU/NNAPI está apenas na forma como cada backend aloca buffers e executa o `Interpreter`, o que explica porque os tempos convergem e por que o GPU pode introduzir arredondamentos extras ao copiar FP16 para FP32.
 
 ## Teste energético e figuras
 
