@@ -146,7 +146,7 @@ Mais detalhes estão em `docs/fft_pipeline.md`.
 | **MAD – x10** | Versões `x10` dos botões acima | Cada repetição percorre `batchSize` pacotes consecutivos (default 12). |
 | **FFT – Single/x10** | CPU Kotlin + TFLite delegates | Sempre 10 sensores × escala selecionada; `x10` respeita `batchSize`. |
 | **Suíte completa (512 → 64k)** | Botão principal logo abaixo dos chips | Percorre os 16 cenários para todas as escalas suportadas na UI (512, 1k, 2k, 4k, 8k, 16k, 32k e 64k). Comprimentos maiores (128k+) continuam disponíveis manualmente. |
-| **Teste energético** | Iniciar/Cancelar ciclo | Executa 4 cenários MAD com 100 execuções cada. |
+| **Teste energético** | Iniciar/Cancelar ciclo | Executa opcionalmente 4 cenários MAD com 100 execuções cada (não utilizado na campanha 09/12). |
 
 O botão de suíte completa reaproveita os chips de iterações/lotes selecionados no topo. Um contador (“Execuções acumuladas nesta sessão”) acompanha quantas execuções foram persistidas desde a última limpeza de logs, facilitando campanhas com 10+ repetições por dispositivo.
 
@@ -264,7 +264,7 @@ python3 generate_thermal_energy_charts.py --csv app/src/BANCHMARK/comparativo-09
 **Cobertura térmica e energética**
 
 - As novas colunas `battery_temp_start_c`/`battery_temp_end_c` são exploradas pelo script `generate_thermal_energy_charts.py`. Os painéis `thermal_energy/thermal/*.png` mostram que, mesmo empilhando 5 execuções por clique, a variação média de temperatura ficou abaixo de **0,5 °C** nos dois aparelhos (ex.: `deltas_battery.png`), e não houve leituras confiáveis de CPU/GPU no hardware da campanha (sensores fechados pelo vendor).
-- Os heatmaps `thermal_energy/energy/energy_mad.png` e `energy_fft.png` deixam explícito o label energético atribuído pela UI: CPU Kotlin segue marcado como “Alta”, TFLite CPU como “Média”, GPU como “Baixa” e NNAPI como “Baixa/Média”. Isso facilita referenciar rapidamente o perfil esperado em cada delegate mesmo antes de termos leituras diretas de mWh.
+- Os heatmaps `thermal_energy/energy/energy_mad.png` e `energy_fft.png` deixam explícito o label energético atribuído pela UI: CPU Kotlin segue marcado como “Alta”, TFLite CPU como “Média”, GPU como “Baixa” e NNAPI como “Baixa/Média”. Essas etiquetas foram derivadas das leituras registradas junto a cada benchmark (12 execuções por cenário), já que o ciclo dedicado de 100 execuções do “Teste energético” não foi disparado nesta campanha.
 - Sempre que vier uma nova campanha basta repetir o `merge_benchmarks.py` incluindo o CSV adicional e regenerar os gráficos — os scripts agora tratam automaticamente headers com ou sem as colunas térmicas.
 
 **Precisão e execução FFT**
@@ -280,14 +280,14 @@ python3 generate_thermal_energy_charts.py --csv app/src/BANCHMARK/comparativo-09
 
 ## Teste energético e figuras
 
-O bloco “Teste de gasto energético” da UI executa automaticamente:
+O bloco “Teste de gasto energético” da UI pode executar automaticamente (quando solicitado):
 
 1. MAD CPU Kotlin
 2. MAD TFLite CPU
 3. MAD TFLite GPU
 4. MAD TFLite NNAPI
 
-Cada cenário roda **100 execuções**. Antes/depois são coletados:
+Quando ativado, cada cenário roda **100 execuções** em sequência. Antes/depois são coletados:
 
 - `% de bateria`, `BATTERY_PROPERTY_ENERGY_COUNTER` (nWh) e `BATTERY_PROPERTY_CHARGE_COUNTER` (mAh)
 - Temperaturas da bateria (intent) e, quando disponíveis, CPU/GPU via `HardwarePropertiesManager`, além do estado de carregamento e modo economia (`PowerManager`)
@@ -296,7 +296,7 @@ Cada cenário roda **100 execuções**. Antes/depois são coletados:
 Saídas:
 
 - `energy_tests.txt`: resumo textual por cenário, incluindo as temperaturas combinadas e a estimativa de consumo.
-- `energy_results.csv`: dataset estruturado usado nos gráficos em `Figuras/` (`mad_energia_consolidada_tres_dispositivos*.png`). Agora adiciona `battery_drop_mah`, `energy_drop_mwh`, `avg_power_mw`, `avg_current_ma` e as colunas térmicas individuais (bateria/CPU/GPU).
+- `energy_results.csv`: dataset estruturado usado nos gráficos em `Figuras/` (`mad_energia_consolidada_tres_dispositivos*.png`). Agora adiciona `battery_drop_mah`, `energy_drop_mwh`, `avg_power_mw`, `avg_current_ma` e as colunas térmicas individuais (bateria/CPU/GPU). Na campanha 09/12 as etiquetas energéticas foram obtidas das leituras anexadas a cada benchmark (12 execuções por cenário); o ciclo dedicado ficou reservado para experimentos futuros.
 
 O botão “Cancelar teste energético” interrompe o ciclo imediatamente; “Apagar logs” limpa tanto benchmarks quanto medições energéticas. Use esses dados para comparar eficiência energética com e sem modo economia em diferentes dispositivos.
 
